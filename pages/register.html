@@ -3,6 +3,8 @@
   <head>
     <!-- CSS -->
     <link rel="stylesheet" href="../styles.css" />
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="../responsive.css" />
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,12 +21,14 @@
   </head>
   <body>
     <header>
-      <img
-        class="gov-logo"
-        src="../images/logo.png"
-        alt="youth welfare department logo"
-        style="width: 120px"
-      />
+      <a class="gov-logo-link" href="../index.html">
+        <img
+          class="gov-logo"
+          src="../images/logo.png"
+          alt="youth welfare department logo"
+          style="width: 120px"
+        />
+      </a>
       <div class="main-text">
         <h1>Department of Youth Welfare and PRD</h1>
         <h3>Uttarakhand Government</h3>
@@ -35,7 +39,7 @@
           <i class="fas fa-search"></i>
           <input type="text" placeholder="Search..." />
         </div>
-        <a href="#" class="header-login">Login</a>
+        <a href="login.html" class="header-login">Login</a>
       </div>
 
       <img
@@ -45,6 +49,9 @@
       />
     </header>
     <nav class="navbar">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
         <li><a href="#">About Us</a></li>

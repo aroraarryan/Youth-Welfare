@@ -1,0 +1,199 @@
+/* Responsive styles for header and navigation */
+
+/* Hide hamburger menu by default for all screen sizes */
+.menu-toggle {
+  display: none;
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 992px) {
+  header {
+    flex-wrap: wrap;
+    padding: 15px 20px;
+  }
+  
+  .main-text {
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .main-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .main-text h3 {
+    font-size: 1rem;
+  }
+  
+  .header-actions {
+    margin-left: auto;
+  }
+}
+
+/* Small screens (mobile phones) */
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .gov-logo-link {
+    margin-bottom: 10px;
+  }
+  
+  .main-text {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+  header img.gov-logo {
+    margin-top: 10px;
+  }
+  
+  /* Navigation menu for mobile - centered hamburger */
+  .navbar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0; /* Reduced padding to remove space */
+  }
+  
+  /* Show hamburger menu on small screens and center it */
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    color: #333;
+    z-index: 100;
+    margin: 0 auto;
+  }
+  
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f8f8f8;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .navbar .nav-links.active {
+    display: flex;
+  }
+  
+  .navbar .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .navbar .nav-links li a {
+    display: block;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+}
+
+/* Restore horizontal nav and hide hamburger on larger screens */
+@media screen and (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+  
+  .navbar {
+    flex-direction: row;
+  }
+  
+  .navbar .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    width: auto;
+    background: none;
+    box-shadow: none;
+  }
+  
+  .navbar .nav-links li a {
+    border-bottom: none;
+  }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 480px) {
+  .main-text h1 {
+    font-size: 1.2rem;
+  }
+  
+  .main-text h3 {
+    font-size: 0.9rem;
+  }
+  
+  .header-search input {
+    max-width: 120px;
+  }
+  
+  /* Ensure hamburger remains centered on very small screens */
+  .navbar {
+    padding: 0; /* Removed vertical padding to eliminate space */
+  }
+  
+  .menu-toggle {
+    padding: 8px;
+  }
+  
+  /* Ensure hamburger remains centered on very small screens */
+  .navbar {
+    padding: 5px 0;
+  }
+  
+  .menu-toggle {
+    padding: 8px;
+  }
+}
+
+/* Responsive carousel styles for smaller screens */
+@media (max-width: 768px) {
+  .carousel {
+    padding-bottom: 56.25%; /* 16:9 aspect ratio for smaller screens */
+  }
+  
+  .carousel-arrow {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel {
+    padding-bottom: 66.67%; /* 3:2 aspect ratio for mobile */
+  }
+  
+  .carousel-arrow {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+}
+
+/* Additional fix for large screens to prevent white space */
+@media (min-width: 1200px) {
+  .carousel {
+    padding-bottom: 35%; /* Slightly reduced ratio for very large screens */
+  }
+}
+
+

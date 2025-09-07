@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body{
   margin: 0;
   padding: 0;
@@ -22,6 +26,13 @@ header {
 .gov-logo {
   width: 90px;
   height: auto;
+}
+
+.gov-logo-link {
+  display: inline-flex;
+  text-decoration: none;
+  line-height: 0;
+  vertical-align: middle;
 }
 
 .main-text {
@@ -178,64 +189,71 @@ nav {
 
 .carousel-container {
   width: 100%;
-  height: 500px;
-  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
   overflow: hidden;
-  margin-bottom: 0;
+  position: relative;
 }
 
 .carousel {
   width: 100%;
-  height: 100%;
   position: relative;
+  height: 0;
+  padding-bottom: 40%; /* Using padding instead of height for responsive aspect ratio */
+  overflow: hidden;
+  contain: layout size;
 }
 
 .carousel-slide {
-  width: 100%;
-  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+  display: none;
 }
 
 .carousel-slide.active {
   opacity: 1;
+  display: block;
 }
 
 .carousel-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  object-position: center;
+  display: block; /* Ensures no extra space below images */
 }
 
 .carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  font-size: 30px;
+  font-size: 24px;
   padding: 10px 15px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
   z-index: 10;
+  border-radius: 50%;
+  opacity: 0.7;
+  transition: opacity 0.3s;
 }
 
 .carousel-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
 }
 
 .carousel-arrow.prev {
-  left: 20px;
+  left: 15px;
 }
 
 .carousel-arrow.next {
-  right: 20px;
+  right: 15px;
 }
 
 /* Moving Text */
@@ -253,14 +271,15 @@ nav {
   color: black;
   padding-left: 100%;
   animation: marquee 15s linear infinite;
+  will-change: transform;
 }
 
 @keyframes marquee {
   0% {
-    transform: translate(0, 0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate(-100%, 0);
+    transform: translate3d(-100%, 0, 0);
   }
 }
 
@@ -273,6 +292,8 @@ nav {
   margin: 0;
   padding: 40px 20px;
   background: none;
+  overflow: hidden;
+  contain: layout;
 }
 
 .schemes-search-flex {
@@ -1574,6 +1595,89 @@ nav {
   color: #666;
   font-size: 14px;
   white-space: nowrap;
+}
+
+/* Performance Optimization */
+/* Add these rules at the end of your CSS file */
+
+/* Use hardware acceleration for animations and transitions */
+.carousel-slide,
+.registration-card,
+.scheme-card,
+.infrastructure-card,
+.social-icon,
+.social-icon-contact,
+.send-message-btn,
+.create-account-btn,
+.header-login,
+.schemes-search-btn,
+.register-btn {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Optimize marquee animation to use transform instead of left positioning */
+.moving-text p {
+  display: inline-block;
+  color: black;
+  padding-left: 100%;
+  animation: marquee 15s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+/* Fix carousel to prevent layout shifts during resizing */
+.carousel {
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding-bottom: 40%; /* Using padding instead of height for responsive aspect ratio */
+  overflow: hidden;
+  contain: layout size;
+}
+
+/* Optimize reflow for grid layouts */
+.schemes-grid,
+.infrastructure-grid,
+.registration-grid {
+  contain: layout style;
+}
+
+/* Improve performance on elements that change on hover */
+.infrastructure-card:hover,
+.scheme-card:hover,
+.registration-card:hover {
+  transform: translateZ(0) translateY(-5px);
+}
+
+/* Add containment for long lists */
+.nav-links,
+.footer-links,
+.accordion {
+  contain: content;
+}
+
+
+
+/* Prevent unnecessary repaints for fixed elements */
+header,
+nav {
+  will-change: transform;
+}
+
+/* Fix for schemes-search-main section that might be causing layout shifts */
+.schemes-search-main {
+  overflow: hidden;
+  contain: layout;
 }
 
 

@@ -3,6 +3,8 @@
   <head>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css" />
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="responsive.css" />
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,12 +21,14 @@
   </head>
   <body>
     <header>
-      <img
-        class="gov-logo"
-        src="images/logo.png"
-        alt="youth welfare department logo"
-        style="width: 120px"
-      />
+      <a class="gov-logo-link" href="index.html">
+        <img
+          class="gov-logo"
+          src="images/logo.png"
+          alt="youth welfare department logo"
+          style="width: 120px"
+        />
+      </a>
       <div class="main-text">
         <h1>Department of Youth Welfare and PRD</h1>
         <h3>Uttarakhand Government</h3>
@@ -45,8 +49,11 @@
       />
     </header>
     <nav class="navbar">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
       <ul class="nav-links">
-        <li><a href="#">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Schemes/Services</a></li>
         <li><a href="#">Gallery</a></li>
@@ -543,5 +550,13 @@
     </footer>
     <!-- JavaScript -->
     <script src="script.js"></script>
+    <script>
+      // Toggle mobile menu
+      document
+        .getElementById("menuToggle")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-links").classList.toggle("active");
+        });
+    </script>
   </body>
 </html>

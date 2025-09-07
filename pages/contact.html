@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Css -->
+    <!-- CSS -->
     <link rel="stylesheet" href="../styles.css" />
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="../responsive.css" />
     <!-- Icon -->
     <link
       rel="stylesheet"
@@ -19,11 +21,14 @@
   </head>
   <body>
     <header>
-      <img
-        class="gov-logo"
-        src="../images/logo.png"
-        alt="youth welfare department logo"
-      />
+      <a class="gov-logo-link" href="../index.html">
+        <img
+          class="gov-logo"
+          src="../images/logo.png"
+          alt="youth welfare department logo"
+          style="width: 120px"
+        />
+      </a>
       <div class="main-text">
         <h1>Department of Youth Welfare and PRD</h1>
         <h3>Uttarakhand Government</h3>
@@ -34,7 +39,7 @@
           <i class="fas fa-search"></i>
           <input type="text" placeholder="Search..." />
         </div>
-        <button class="header-login">Login</button>
+        <a href="login.html" class="header-login">Login</a>
       </div>
 
       <img
@@ -44,12 +49,15 @@
       />
     </header>
     <nav class="navbar">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Schemes/Services</a></li>
         <li><a href="#">Gallery</a></li>
-        <li><a href="pages/contact.html">Contact Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
       </ul>
     </nav>
 
