@@ -131,45 +131,63 @@
   .navbar .nav-links li a {
     border-bottom: none;
   }
-}
-
-/* Extra small screens */
-@media screen and (max-width: 480px) {
-  .main-text h1 {
-    font-size: 1.2rem;
-  }
   
-  .main-text h3 {
-    font-size: 0.9rem;
-  }
-  
-  .header-search input {
-    max-width: 120px;
-  }
-  
-  /* Ensure hamburger remains centered on very small screens */
+  /* Fix navbar layout with header-actions */
   .navbar {
-    padding: 0; /* Removed vertical padding to eliminate space */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
   }
   
-  .menu-toggle {
-    padding: 8px;
+  .navbar .nav-links {
+    flex: 1;
+    display: flex !important;
+    justify-content: center;
+    margin: 0;
   }
   
-  /* Ensure hamburger remains centered on very small screens */
-  .navbar {
-    padding: 5px 0;
-  }
-  
-  .menu-toggle {
-    padding: 8px;
+  .navbar .header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
 }
 
-/* Responsive carousel styles for smaller screens */
+/* Mobile navbar adjustments */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px 20px;
+  }
+  
+  .navbar .header-actions {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+    order: 3;
+  }
+  
+  .menu-toggle {
+    order: 1;
+    align-self: center;
+  }
+  
+  .navbar .nav-links {
+    order: 2;
+    width: 100%;
+  }
+  
+  .navbar .nav-links.active {
+    display: flex;
+    margin-bottom: 10px;
+  }
+}
+
 @media (max-width: 768px) {
   .carousel {
-    padding-bottom: 56.25%; /* 16:9 aspect ratio for smaller screens */
+    padding-bottom: 40%; /* Reduced height for smaller screens */
   }
   
   .carousel-arrow {
@@ -180,7 +198,7 @@
 
 @media (max-width: 480px) {
   .carousel {
-    padding-bottom: 66.67%; /* 3:2 aspect ratio for mobile */
+    padding-bottom: 45%; /* Reduced height for mobile */
   }
   
   .carousel-arrow {
@@ -192,7 +210,7 @@
 /* Additional fix for large screens to prevent white space */
 @media (min-width: 1200px) {
   .carousel {
-    padding-bottom: 35%; /* Slightly reduced ratio for very large screens */
+    padding-bottom: 25%; /* Further reduced ratio for very large screens */
   }
 }
 
@@ -527,6 +545,37 @@
   
   .contact-info {
     text-align: center;
+  }
+}
+
+/* Make header main text bigger */
+@media screen and (min-width: 769px) {
+  header .main-text h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+  
+  header .main-text h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header .main-text h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+  
+  header .main-text h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 0;
   }
 }
 
