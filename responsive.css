@@ -196,4 +196,338 @@
   }
 }
 
+/* Responsive styles for moving text */
+@media screen and (max-width: 768px) {
+  .moving-text {
+    padding: 15px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Responsive styles for schemes search section */
+@media screen and (max-width: 992px) {
+  .schemes-search-flex {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .schemes-search-left, .schemes-search-right {
+    width: 100%;
+  }
+  
+  .schemes-search-video iframe {
+    width: 100%;
+    max-width: 500px;
+    height: 280px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .schemes-search-main {
+    padding: 30px 20px;
+  }
+  
+  .schemes-search-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .schemes-search-desc {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .schemes-search-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .schemes-search-field {
+    width: 100%;
+  }
+  
+  .schemes-search-btn {
+    width: 100%;
+    padding: 15px;
+  }
+  
+  .schemes-search-video iframe {
+    height: 200px;
+  }
+}
+
+/* Responsive styles for stats section */
+@media screen and (max-width: 768px) {
+  .search-section {
+    padding: 20px;
+  }
+  
+  .stats-box {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .stat {
+    padding: 20px 0;
+  }
+  
+  .divider {
+    display: none;
+  }
+  
+  .stat-value {
+    font-size: 2rem;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+  }
+}
+
+/* Responsive styles for infrastructure section */
+@media screen and (max-width: 992px) {
+  .infrastructure-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .infrastructure-section {
+    padding: 40px 20px;
+  }
+  
+  .infrastructure-section h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .infrastructure-section p {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .infrastructure-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .infrastructure-card {
+    padding: 30px 20px;
+  }
+  
+  .infrastructure-icon {
+    font-size: 3rem;
+  }
+}
+
+/* Responsive styles for registration section */
+@media screen and (max-width: 992px) {
+  .registration-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .registration-section {
+    padding: 40px 20px;
+  }
+  
+  .registration-section h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .registration-section p {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .registration-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .registration-card {
+    padding: 30px 20px;
+  }
+  
+  .registration-icon {
+    font-size: 3rem;
+  }
+}
+
+/* Responsive styles for schemes section */
+@media screen and (max-width: 1200px) {
+  .schemes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .schemes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .schemes-section {
+    padding: 40px 20px;
+  }
+  
+  .schemes-section h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .schemes-section p {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .schemes-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .scheme-card {
+    padding: 25px 20px;
+  }
+  
+  .scheme-icon {
+    font-size: 2.5rem;
+  }
+  
+  .scheme-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsive styles for FAQ section */
+@media screen and (max-width: 768px) {
+  .faq-section {
+    padding: 40px 20px;
+  }
+  
+  .faq-section h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .faq-section p {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .accordion-header {
+    padding: 15px;
+    font-size: 14px;
+    text-align: left;
+  }
+  
+  .accordion-body {
+    padding: 15px;
+  }
+}
+
+/* Responsive styles for support section */
+@media screen and (max-width: 768px) {
+  .support-section {
+    padding: 40px 20px;
+  }
+  
+  .support-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .support-text {
+    margin-bottom: 30px;
+  }
+  
+  .support-text h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .help-button {
+    font-size: 14px;
+    padding: 12px 20px;
+    width: 100%;
+  }
+  
+  .support-image {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  
+  .support-image img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Responsive styles for footer */
+@media screen and (max-width: 992px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .logo-section {
+    grid-column: span 2;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 40px 20px 20px;
+  }
+  
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .logo-section {
+    grid-column: span 1;
+  }
+  
+  .yuva-sathi-logo {
+    justify-content: center;
+  }
+  
+  .description {
+    text-align: center;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .email-input {
+    width: 100%;
+  }
+  
+  .send-btn {
+    width: 100%;
+  }
+  
+  .footer-links {
+    text-align: center;
+  }
+  
+  .social-media {
+    justify-content: center;
+  }
+  
+  .contact-info {
+    text-align: center;
+  }
+}
+
 
