@@ -5,6 +5,190 @@
   display: none;
 }
 
+/* Government Header Bar Responsive */
+@media screen and (max-width: 768px) {
+  .gov-header-bar {
+    padding: 6px 15px;
+    font-size: 12px;
+  }
+  
+  .gov-header-right {
+    gap: 8px;
+  }
+  
+  .header-icon-btn {
+    font-size: 14px;
+    padding: 2px;
+  }
+}
+
+/* Main Header Responsive */
+@media screen and (max-width: 992px) {
+  .main-header {
+    padding: 15px 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .header-left {
+    gap: 15px;
+  }
+  
+  .ashoka-chakra {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .main-logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .logo-text h1 {
+    font-size: 20px;
+  }
+  
+  .logo-text p {
+    font-size: 12px;
+  }
+  
+  .header-right {
+    gap: 20px;
+  }
+  
+  .main-nav {
+    gap: 15px;
+  }
+  
+  .nav-link {
+    font-size: 13px;
+  }
+  
+  .header-actions {
+    gap: 10px;
+  }
+  
+  .login-btn, .join-btn, .lang-toggle {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+  
+  .header-left {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .header-right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .main-nav {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .header-actions {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Hero Section Responsive */
+@media screen and (max-width: 992px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .hero-left {
+    order: 2;
+  }
+  
+  .hero-center {
+    order: 1;
+  }
+  
+  .hero-search {
+    order: 3;
+  }
+  
+  .hero-title {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-content {
+    padding: 40px 20px;
+  }
+  
+  .hero-section {
+    gap: 20px;
+  }
+  
+  .hero-title {
+    font-size: 28px;
+  }
+  
+  .hero-ashoka {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .hero-logo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .search-container {
+    max-width: 100%;
+  }
+  
+  .search-input {
+    font-size: 14px;
+    padding: 12px 40px 12px 40px;
+  }
+  
+  .search-icon {
+    left: 15px;
+    font-size: 16px;
+  }
+  
+  .search-action-btn {
+    width: 32px;
+    height: 32px;
+    right: 6px;
+  }
+}
+
+/* Floating Assistant Responsive */
+@media screen and (max-width: 768px) {
+  .floating-assistant {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .assistant-avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
 /* Medium screens (tablets) */
 @media screen and (max-width: 992px) {
   header {
@@ -116,26 +300,8 @@
   }
   
   .navbar {
-    flex-direction: row;
-  }
-  
-  .navbar .nav-links {
-    display: flex !important;
-    flex-direction: row;
-    position: static;
-    width: auto;
-    background: none;
-    box-shadow: none;
-  }
-  
-  .navbar .nav-links li a {
-    border-bottom: none;
-  }
-  
-  /* Fix navbar layout with header-actions */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     padding: 10px 20px;
   }
@@ -143,7 +309,7 @@
   .navbar .nav-links {
     flex: 1;
     display: flex !important;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0;
   }
   
@@ -151,7 +317,8 @@
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
+    justify-self: end;
   }
 }
 
@@ -187,30 +354,47 @@
 
 @media (max-width: 768px) {
   .carousel {
-    padding-bottom: 40%; /* Reduced height for smaller screens */
+    height: 300px; /* Reduced height for smaller screens */
   }
   
   .carousel-arrow {
     font-size: 18px;
-    padding: 8px 12px;
+    padding: 10px 14px;
+  }
+  
+  .carousel-indicators {
+    bottom: 15px;
+  }
+  
+  .carousel-indicator {
+    width: 6px;
+    height: 6px;
   }
 }
 
 @media (max-width: 480px) {
   .carousel {
-    padding-bottom: 45%; /* Reduced height for mobile */
+    height: 250px; /* Reduced height for mobile */
   }
   
   .carousel-arrow {
     font-size: 16px;
-    padding: 6px 10px;
+    padding: 8px 12px;
+  }
+  
+  .carousel-arrow.prev {
+    left: 10px;
+  }
+  
+  .carousel-arrow.next {
+    right: 10px;
   }
 }
 
-/* Additional fix for large screens to prevent white space */
+/* Additional fix for large screens */
 @media (min-width: 1200px) {
   .carousel {
-    padding-bottom: 25%; /* Further reduced ratio for very large screens */
+    height: 600px; /* Larger height for very large screens */
   }
 }
 
@@ -222,55 +406,83 @@
   }
 }
 
-/* Responsive styles for schemes search section */
+/* Government Schemes Section Responsive */
 @media screen and (max-width: 992px) {
-  .schemes-search-flex {
-    flex-direction: column;
-    gap: 30px;
+  .schemes-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
   
-  .schemes-search-left, .schemes-search-right {
-    width: 100%;
+  .video-container {
+    height: 250px;
   }
   
-  .schemes-search-video iframe {
-    width: 100%;
-    max-width: 500px;
-    height: 280px;
+  .schemes-main-title {
+    font-size: 36px;
+  }
+  
+  .schemes-container {
+    padding: 0 30px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .schemes-search-main {
+  .government-schemes-section {
+    padding: 60px 0;
+  }
+  
+  .schemes-container {
+    padding: 0 20px;
+  }
+  
+  .schemes-header {
+    margin-bottom: 40px;
+  }
+  
+  .schemes-main-title {
+    font-size: 28px;
+  }
+  
+  .schemes-subtitle {
+    font-size: 16px;
+  }
+  
+  .filter-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .filter-group {
+    min-width: 100%;
+  }
+  
+  .search-button {
+    width: 100%;
+    height: 52px;
+  }
+  
+  .video-container {
+    height: 200px;
+  }
+  
+  .stats-box {
+    flex-direction: column;
+    gap: 30px;
     padding: 30px 20px;
   }
   
-  .schemes-search-title {
-    font-size: 1.5rem;
-    text-align: center;
+  .stat {
+    padding: 0;
   }
   
-  .schemes-search-desc {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .schemes-search-row {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .schemes-search-field {
+  .divider {
     width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #cbd5e1, transparent);
   }
   
-  .schemes-search-btn {
-    width: 100%;
-    padding: 15px;
-  }
-  
-  .schemes-search-video iframe {
-    height: 200px;
+  .stat-value {
+    font-size: 28px;
   }
 }
 
@@ -520,19 +732,33 @@
   
   .description {
     text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .newsletter-section {
+    text-align: center;
+  }
+  
+  .newsletter-section h4 {
+    text-align: center;
   }
   
   .newsletter-form {
     flex-direction: column;
     gap: 10px;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
   }
   
   .email-input {
     width: 100%;
+    border-radius: 8px;
   }
   
   .send-btn {
     width: 100%;
+    border-radius: 8px;
   }
   
   .footer-links {
@@ -541,6 +767,7 @@
   
   .social-media {
     justify-content: center;
+    width: 100%;
   }
   
   .contact-info {
@@ -579,4 +806,220 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .floating-container {
+    max-width: 95%;
+    padding: 14px 18px;
+  }
+  
+  .stats-card {
+    max-width: 280px;
+    gap: 12px;
+    padding: 10px 14px;
+  }
+  
+  .stat-number {
+    font-size: 16px;
+  }
+  
+  .search-options {
+    gap: 5px;
+  }
+  
+  .white-btn {
+    min-width: 140px;
+    padding: 5px 10px;
+  }
+  
+  .orange-btn {
+    min-width: 100px;
+    padding: 8px 12px;
+  }
+}
 
+@media (max-width: 768px) {
+  .floating-search-ui {
+    padding: 15px 8px;
+  }
+  
+  .floating-container {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  
+  .top-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  
+  .search-options {
+    justify-content: center;
+    gap: 6px;
+  }
+  
+  .running-text-container {
+    margin-left: 0;
+  }
+  
+  .marquee-text {
+    font-size: 11px;
+  }
+  
+  .bottom-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .stats-card {
+    max-width: none;
+    width: 100%;
+    justify-content: space-around;
+    gap: 10px;
+  }
+  
+  .search-option-btn {
+    height: 35px;
+  }
+  
+  .white-btn {
+    min-width: 120px;
+  }
+  
+  .orange-btn {
+    min-width: 90px;
+  }
+  
+  .search-input-container {
+    height: 38px;
+  }
+  
+  .search-icon-btn {
+    width: 38px;
+  }
+  
+  .marquee-box {
+    height: 35px;
+  }
+
+  /* Advanced search responsive */
+  .advanced-search-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .advanced-options {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .filter-group {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .filter-select {
+    height: 38px;
+    font-size: 12px;
+  }
+  
+  .advanced-search-btn {
+    width: 100%;
+    height: 38px;
+    margin-top: 8px;
+  }
+  
+  .advanced-search-row .stats-card {
+    order: 2;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-options {
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+  }
+  
+  .search-option-btn {
+    width: 100%;
+    justify-content: center;
+    height: 32px;
+  }
+  
+  .btn-content {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .stats-card {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+  }
+  
+  .stat-item {
+    width: 100%;
+  }
+  
+  .stat-number {
+    font-size: 14px;
+  }
+  
+  .stat-label {
+    font-size: 9px;
+  }
+  
+  .marquee-box {
+    height: 32px;
+  }
+  
+  .marquee-text {
+    font-size: 10px;
+  }
+  
+  .search-input-container {
+    height: 35px;
+  }
+  
+  .search-icon-btn {
+    width: 35px;
+  }
+}
+
+/* Responsive Design for Infrastructure Section */
+@media (max-width: 768px) {
+  .infrastructure-section {
+    padding: 60px 15px;
+    margin: 60px 15px;
+  }
+  
+  .infrastructure-section h2 {
+    font-size: 32px;
+  }
+  
+  .infrastructure-section p {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  
+  .infrastructure-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+  }
+  
+  .infrastructure-card {
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.98);
+  }
+  
+  .infrastructure-icon {
+    font-size: 48px;
+  }
+  
+  .infrastructure-card h3 {
+    font-size: 18px;
+  }
+}

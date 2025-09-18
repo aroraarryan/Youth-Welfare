@@ -22,45 +22,64 @@
     <title>Document</title>
   </head>
   <body>
-    <header>
-      <a class="gov-logo-link" href="../index.html">
+    <!-- Government Header Bar -->
+    <div class="gov-header-bar">
+      <div class="gov-header-left">
+        <span class="flag-icon">🇮🇳</span>
+        <span class="gov-text">Government of India</span>
+      </div>
+      <div class="gov-header-right">
+        <button class="header-icon-btn" title="Share">
+          <i class="fas fa-share-alt"></i>
+        </button>
+        <button class="header-icon-btn" title="Theme Toggle">
+          <i class="fas fa-sun"></i>
+        </button>
+        <button class="header-icon-btn" title="Accessibility">
+          <i class="fas fa-universal-access"></i>
+        </button>
+        <button class="lang-toggle">EN</button>
+      </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+      <div class="header-left">
         <img
-          class="gov-logo"
-          src="../images/logo.png"
-          alt="youth welfare department logo"
-          style="width: 120px"
+          class="ashoka-chakra"
+          src="../images/gov-logo.png"
+          alt="Ashoka Chakra"
         />
-      </a>
-      <div class="main-text">
-        <h1>Department of Youth Welfare and PRD</h1>
-        <h3>Uttarakhand Government</h3>
+        <div class="logo-section">
+          <img
+            class="main-logo"
+            src="../images/logo.png"
+            alt="Youth Welfare Logo"
+          />
+          <div class="logo-text">
+            <h1>Department of Youth Welfare <br />and PRD</h1>
+            <p>Uttarakhand Government</p>
+          </div>
+        </div>
       </div>
 
-      <img
-        class="gov-logo"
-        src="../images/gov-logo.png"
-        alt="Uttarakhand Government Logo"
-      />
-    </header>
-    <nav class="navbar">
-      <button class="menu-toggle" id="menuToggle">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Schemes/Services</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="pages/contact.html">Contact Us</a></li>
-      </ul>
-      <div class="header-actions">
-        <div class="header-search">
-          <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search..." />
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Schemes/Services</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="pages/contact.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="login.html" class="login-btn">Login</a>
+          <a href="register.html" class="join-btn">Join the Community</a>
+          <button class="search-btn"><i class="fas fa-search"></i></button>
         </div>
-        <a href="pages/login.html" class="header-login">Login</a>
       </div>
-    </nav>
+    </header>
 
     <main class="register-main">
       <div class="register-card">
@@ -239,14 +258,34 @@
         </div>
 
         <!-- Contact Us Section -->
-        <div class="footer-section contact-section">
+        <div class="footer-section">
           <h3>Contact Us</h3>
-          <div class="contact-info">
-            <p>Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</p>
-            <p><strong>Phone :</strong>+91-05946-297051</p>
-            <p><strong>Email :</strong>directorsocialwelfare@gmail.com</p>
-          </div>
+          <ul class="footer-links">
+            <li>
+              <a href="#"
+                >Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a
+              >
+            </li>
+            <li>
+              <a href="tel:+919634312465"
+                ><strong>Phone :</strong>+91-9634312465</a
+              >
+            </li>
+            <li>
+              <a href="mailto:ywprd.uk@gmail.com"
+                ><strong>Email :</strong>ywprd.uk@gmail.com</a
+              >
+            </li>
+          </ul>
         </div>
+      </div>
+
+      <!-- Copyright Section -->
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
+          Government. All rights reserved.
+        </p>
       </div>
     </footer>
   </body>

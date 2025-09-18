@@ -19,99 +19,150 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <!-- Twitter Widget Configuration -->
+    <meta name="twitter:widgets:theme" content="light" />
+    <meta name="twitter:widgets:border-color" content="#e1e8ed" />
     <title>Youth Welfare</title>
   </head>
   <body>
-    <header>
-      <a class="gov-logo-link" href="index.html">
-        <img
-          class="gov-logo"
-          src="images/logo.png"
-          alt="youth welfare department logo"
-          style="width: 120px"
-        />
-      </a>
-      <div class="main-text">
-        <h1>Department of Youth Welfare and PRD</h1>
-        <h3>Uttarakhand Government</h3>
+    <!-- Government Header Bar -->
+    <div class="gov-header-bar">
+      <div class="gov-header-left">
+        <span class="flag-icon">🇮🇳</span>
+        <span class="gov-text">Government of India</span>
+      </div>
+      <div class="gov-header-right">
+        <button class="header-icon-btn" title="Share">
+          <i class="fas fa-share-alt"></i>
+        </button>
+        <button class="header-icon-btn" title="Theme Toggle">
+          <i class="fas fa-sun"></i>
+        </button>
+        <button class="header-icon-btn" title="Accessibility">
+          <i class="fas fa-universal-access"></i>
+        </button>
+        <button class="lang-toggle">EN</button>
+      </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+      <div class="header-left">
+        <div class="logos-container">
+          <img
+            class="ashoka-chakra"
+            src="images/gov-logo.png"
+            alt="Ashoka Chakra"
+          />
+          <img
+            class="main-logo"
+            src="images/logo.png"
+            alt="Youth Welfare Logo"
+          />
+        </div>
+        <div class="logo-text">
+          <h1>Department of Youth Welfare <br />and PRD</h1>
+          <p>Uttarakhand Government</p>
+        </div>
       </div>
 
-      <img
-        class="gov-logo"
-        src="images/gov-logo.png"
-        alt="Uttarakhand Government Logo"
-      />
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Schemes/Services</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="pages/contact.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="pages/login.html" class="login-btn">Login</a>
+          <a href="pages/register.html" class="join-btn">Join the Community</a>
+          <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
     </header>
-    <nav class="navbar">
-      <button class="menu-toggle" id="menuToggle">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Schemes/Services</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="pages/contact.html">Contact Us</a></li>
-      </ul>
-      <div class="header-actions">
-        <div class="header-search">
-          <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search..." />
-        </div>
-        <a href="pages/login.html" class="header-login">Login</a>
-      </div>
-    </nav>
 
-    <!-- Image Carousel -->
-    <div class="carousel-container">
-      <div class="carousel">
-        <div class="carousel-slide active">
-          <img src="images/startup.jpg" alt="Youth Welfare Slide 1" />
-        </div>
-        <div class="carousel-slide">
-          <img src="images/youth1.jpg" alt="Youth Welfare Slide 2" />
-        </div>
-        <div class="carousel-slide">
-          <img src="images/youth3.jpg" alt="Youth Welfare Slide 3" />
-        </div>
-        <div class="carousel-slide">
-          <img src="images/youth2.jpg" alt="Youth Welfare Slide 4" />
-        </div>
+    <!-- Content Sections -->
+    <div class="content-section">
+      <!-- Image Carousel -->
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-slide active">
+            <img src="images/startup.jpg" alt="Youth Welfare Slide 1" />
+          </div>
+          <div class="carousel-slide">
+            <img src="images/youth1.jpg" alt="Youth Welfare Slide 2" />
+          </div>
+          <div class="carousel-slide">
+            <img src="images/youth3.jpg" alt="Youth Welfare Slide 3" />
+          </div>
+          <div class="carousel-slide">
+            <img src="images/youth2.jpg" alt="Youth Welfare Slide 4" />
+          </div>
 
-        <!-- Navigation Arrows -->
-        <button class="carousel-arrow prev" onclick="changeSlide(-1)">
-          &#8249;
-        </button>
-        <button class="carousel-arrow next" onclick="changeSlide(1)">
-          &#8250;
-        </button>
+          <!-- Navigation Arrows -->
+          <button class="carousel-arrow prev" onclick="changeSlide(-1)">
+            &#8249;
+          </button>
+          <button class="carousel-arrow next" onclick="changeSlide(1)">
+            &#8250;
+          </button>
+
+          <!-- Carousel Indicators -->
+          <div class="carousel-indicators">
+            <button
+              class="carousel-indicator active"
+              onclick="goToSlide(0)"
+            ></button>
+            <button class="carousel-indicator" onclick="goToSlide(1)"></button>
+            <button class="carousel-indicator" onclick="goToSlide(2)"></button>
+            <button class="carousel-indicator" onclick="goToSlide(3)"></button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="moving-text">
-      <p>
-        To maintain communal harmony, peace, self-reliance, discipline,
-        self-security, and prevent crime in rural areas, the Prantiya Rakshak
-        Dal was organized in 1947.
-      </p>
-    </div>
+    <!-- Floating Search UI Section -->
+    <div class="floating-search-ui">
+      <div class="floating-container">
+        <!-- Top Row: Search Options & Running Text -->
+        <div class="top-row">
+          <div class="search-options">
+            <button class="search-option-btn white-btn" id="schemeNameBtn">
+              <div class="btn-content">
+                <span class="btn-title">Search with Scheme Name</span>
+              </div>
+            </button>
+            <button class="search-option-btn orange-btn" id="advanceSearchBtn">
+              <span class="btn-text">Advance Search</span>
+            </button>
+          </div>
+          <div class="running-text-container">
+            <div class="marquee-box">
+              <div class="marquee-text">
+                Single Platform for Youth of Uttarakhand to get information
+                related to Jobs, Skill development, Vocational Training,
+                Employment, Self-Employment, Higher Education, Competitive
+                Examination, Carrier Counselling, Sports, Health, Secondary
+                Education, Start-Up, Sewayojan etc.
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Search + Video Section (as per image) -->
-    <section class="schemes-search-main">
-      <div class="schemes-search-flex">
-        <!-- Left: Search Form -->
-        <div class="schemes-search-left">
-          <h2 class="schemes-search-title">
-            Goverment Department Schemes for youth
-          </h2>
-          <p class="schemes-search-desc">
-            Explore the goverment schemes/services
-          </p>
-          <form class="schemes-search-form">
-            <div class="schemes-search-row">
-              <div class="schemes-search-field">
-                <label>Scheme Category</label>
-                <select>
+        <!-- Advanced Search Options (Initially Hidden) -->
+        <div
+          class="advanced-search-row"
+          id="advancedSearchRow"
+          style="display: none"
+        >
+          <div class="advanced-options">
+            <div class="filter-group">
+              <label class="filter-label">Scheme Categories</label>
+              <div class="select-wrapper">
+                <select class="filter-select">
                   <option>Select Scheme Category</option>
                   <option>Education & Scholarship</option>
                   <option>Business & Entrepreneurship</option>
@@ -119,70 +170,168 @@
                   <option>Employment</option>
                   <option>Health & Wellness</option>
                 </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
               </div>
-              <div class="schemes-search-field">
-                <label>By Government</label>
-                <select>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">Age</label>
+              <div class="select-wrapper">
+                <select class="filter-select">
+                  <option>Select Age</option>
+                  <option>18-25</option>
+                  <option>26-35</option>
+                  <option>36-45</option>
+                  <option>Above 45</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">Select State</label>
+              <div class="select-wrapper">
+                <select class="filter-select">
                   <option>Select Government</option>
                   <option>Central Government</option>
                   <option>State Government</option>
                   <option>Local Government</option>
                 </select>
-              </div>
-              <div class="schemes-search-field">
-                <label>Department</label>
-                <select>
-                  <option>Select Department</option>
-                  <option>Youth Welfare</option>
-                  <option>Education</option>
-                  <option>Health</option>
-                  <option>Employment</option>
-                </select>
-              </div>
-              <div class="schemes-search-field search-btn-field">
-                <button type="submit" class="schemes-search-btn">
-                  <i class="fas fa-search"></i> Search
-                </button>
+                <i class="fas fa-chevron-down select-arrow"></i>
               </div>
             </div>
-          </form>
+            <button class="search-icon-btn advanced-search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <div class="stats-card">
+            <div class="stat-item">
+              <div class="stat-label">Youth Registered</div>
+              <div class="stat-number">1258635</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Listed Youth Schemes</div>
+              <div class="stat-number">118</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Student Schemes</div>
+              <div class="stat-number">26</div>
+            </div>
+          </div>
         </div>
-        <!-- Right: YouTube Video (matches image) -->
-        <div class="schemes-search-right">
-          <div class="schemes-search-video">
-            <iframe
-              width="420"
-              height="240"
-              src="https://www.youtube.com/embed/aunnzhuQgLY?autoplay=1&loop=1&playlist=aunnzhuQgLY&mute=1"
-              title="Yuva Sathi | Empowering Youth"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+
+        <!-- Bottom Row: Search Bar & Stats -->
+        <div class="bottom-row" id="normalSearchRow">
+          <div class="search-bar-section">
+            <div class="search-input-container">
+              <input
+                type="text"
+                class="main-search-input"
+                placeholder="Search with Scheme Name"
+              />
+              <button class="search-icon-btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="stats-card">
+            <div class="stat-item">
+              <div class="stat-label">Youth Registered</div>
+              <div class="stat-number">1258635</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Listed Youth Schemes</div>
+              <div class="stat-number">118</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Student Schemes</div>
+              <div class="stat-number">26</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Government Schemes Section -->
+    <section class="government-schemes-section">
+      <div class="schemes-container">
+        <!-- Search and Video Layout -->
+        <div class="schemes-content">
+          <!-- Left: Video Player -->
+          <div class="video-section">
+            <div class="video-container">
+              <iframe
+                src="https://www.youtube.com/embed/aunnzhuQgLY?autoplay=0&loop=1&playlist=aunnzhuQgLY&mute=1"
+                title="Youth Welfare Schemes"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Right: Header and Search Filters -->
+          <div class="search-filters">
+            <!-- Header -->
+            <div class="schemes-header">
+              <h2 class="schemes-main-title">
+                Government Department Schemes for youth
+              </h2>
+              <p class="schemes-subtitle">
+                Explore the government schemes/services
+              </p>
+            </div>
+
+            <div class="filter-row">
+              <div class="filter-group">
+                <label class="filter-label">Scheme Category</label>
+                <div class="select-wrapper">
+                  <select class="filter-select">
+                    <option>Select Scheme Category</option>
+                    <option>Education & Scholarship</option>
+                    <option>Business & Entrepreneurship</option>
+                    <option>Skill Development</option>
+                    <option>Employment</option>
+                    <option>Health & Wellness</option>
+                  </select>
+                  <i class="fas fa-chevron-down select-arrow"></i>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <label class="filter-label">By Government</label>
+                <div class="select-wrapper">
+                  <select class="filter-select">
+                    <option>Select Government</option>
+                    <option>Central Government</option>
+                    <option>State Government</option>
+                    <option>Local Government</option>
+                  </select>
+                  <i class="fas fa-chevron-down select-arrow"></i>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <label class="filter-label">Department</label>
+                <div class="select-wrapper">
+                  <select class="filter-select">
+                    <option>Select Department</option>
+                    <option>Youth Welfare</option>
+                    <option>Education</option>
+                    <option>Health</option>
+                    <option>Employment</option>
+                  </select>
+                  <i class="fas fa-chevron-down select-arrow"></i>
+                </div>
+              </div>
+
+              <button class="search-button">
+                <i class="fas fa-search"></i>
+                Search
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Search Section with Statistics -->
-    <div class="search-section">
-      <div class="stats-box">
-        <div class="stat">
-          <div class="stat-label">Youth Registered</div>
-          <div class="stat-value">1223674</div>
-        </div>
-        <div class="divider"></div>
-        <div class="stat">
-          <div class="stat-label">Listed Youth Schemes</div>
-          <div class="stat-value">118</div>
-        </div>
-        <div class="divider"></div>
-        <div class="stat">
-          <div class="stat-label">Student Schemes</div>
-          <div class="stat-value">26</div>
-        </div>
-      </div>
-    </div>
 
     <section class="infrastructure-section">
       <h2>Infrastructure</h2>
@@ -539,21 +688,50 @@
         </div>
 
         <!-- Contact Us Section -->
-        <div class="footer-section contact-section">
+        <div class="footer-section">
           <h3>Contact Us</h3>
-          <div class="contact-info">
-            <p>Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</p>
-            <p><strong>Phone :</strong>+91-9634312465</p>
-            <p><strong>Email :</strong>ywprd.uk@gmail.com</p>
-          </div>
+          <ul class="footer-links">
+            <li>
+              <a href="#"
+                >Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a
+              >
+            </li>
+            <li>
+              <a href="tel:+919634312465"
+                ><strong>Phone :</strong>+91-9634312465</a
+              >
+            </li>
+            <li>
+              <a href="mailto:ywprd.uk@gmail.com"
+                ><strong>Email :</strong>ywprd.uk@gmail.com</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
+
+      <!-- Copyright Section -->
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
+          Government. All rights reserved.
+        </p>
+      </div>
     </footer>
+
+    <!-- Floating Assistant -->
+    <div class="floating-assistant">
+      <div class="assistant-avatar">
+        <i class="fas fa-user-tie"></i>
+      </div>
+    </div>
+
+    <!-- Fixed Social Media Links -->
     <div class="fixed-social-media">
       <a
         href="https://facebook.com"
         target="_blank"
-        class="fixed-social-icon facebook"
+        class="social-icon facebook"
         title="Facebook"
       >
         <i class="fab fa-facebook-f"></i>
@@ -561,7 +739,7 @@
       <a
         href="https://twitter.com"
         target="_blank"
-        class="fixed-social-icon twitter"
+        class="social-icon twitter"
         title="Twitter"
       >
         <i class="fab fa-twitter"></i>
@@ -569,7 +747,7 @@
       <a
         href="https://instagram.com"
         target="_blank"
-        class="fixed-social-icon instagram"
+        class="social-icon instagram"
         title="Instagram"
       >
         <i class="fab fa-instagram"></i>
@@ -577,7 +755,7 @@
       <a
         href="https://youtube.com"
         target="_blank"
-        class="fixed-social-icon youtube"
+        class="social-icon youtube"
         title="YouTube"
       >
         <i class="fab fa-youtube"></i>
@@ -585,21 +763,14 @@
       <a
         href="https://linkedin.com"
         target="_blank"
-        class="fixed-social-icon linkedin"
+        class="social-icon linkedin"
         title="LinkedIn"
       >
         <i class="fab fa-linkedin-in"></i>
       </a>
     </div>
+
     <!-- JavaScript -->
     <script src="script.js"></script>
-    <script>
-      // Toggle mobile menu
-      document
-        .getElementById("menuToggle")
-        .addEventListener("click", function () {
-          document.querySelector(".nav-links").classList.toggle("active");
-        });
-    </script>
   </body>
 </html>
