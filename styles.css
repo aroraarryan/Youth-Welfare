@@ -610,6 +610,126 @@ body {
   font-size: 11.5px;
 }
 
+/* ── Page Hero Banner (About Us / Contact Us / Downloads) ───── */
+
+.page-hero {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2d52b8 55%, #0ea5e9 100%);
+  padding: 36px 60px 40px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.page-hero-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Breadcrumb */
+.page-hero-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.page-hero-breadcrumb a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.page-hero-breadcrumb a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.page-hero-breadcrumb .bc-sep {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+}
+
+.page-hero-breadcrumb .bc-current {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 500;
+}
+
+/* Hindi title */
+.page-hero-hindi {
+  font-size: 26px;
+  font-weight: 800;
+  color: #f7941d;
+  margin: 0 0 6px;
+  letter-spacing: 0.5px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* English title */
+.page-hero-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+}
+
+/* Subtitle */
+.page-hero-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 22px;
+  line-height: 1.65;
+}
+
+.page-hero-subtitle .ph-dot {
+  margin: 0 6px;
+  opacity: 0.5;
+}
+
+/* Stats row */
+.page-hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.ph-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ph-stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: #f7941d;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.ph-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 /* ── Downloads Page ─────────────────────────────────────────── */
 
 /* Hero banner */

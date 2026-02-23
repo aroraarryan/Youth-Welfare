@@ -51,10 +51,10 @@
             <nav class="main-nav">
                 <ul class="nav-links">
                     <li><a href="../index.html">Home</a></li>
-                    <li><a href="aboutUs.html">About Us</a></li>
+                    <li><a href="aboutUs.html?from=downloads">About Us</a></li>
                     <li><a href="#">Schemes/Services</a></li>
                     <li><a href="#">Gallery</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="contact.html?from=downloads">Contact Us</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -66,15 +66,42 @@
     </header>
 
     <!-- Page Hero Banner -->
-    <div class="dl-hero">
-        <div class="dl-hero-inner">
-            <div class="dl-hero-icon"><i class="fas fa-download"></i></div>
-            <h2>Downloads</h2>
-            <p>Access and download official forms, circulars, scheme documents and reports issued by the Department of
-                Youth Welfare and PRD, Uttarakhand.</p>
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <!-- Breadcrumb (dynamic – reads ?from= URL param) -->
+            <nav class="page-hero-breadcrumb" aria-label="Breadcrumb" id="dl-breadcrumb"></nav>
+
+            <!-- Hindi Title -->
+            <p class="page-hero-hindi">डाउनलोड</p>
+
+            <!-- English Title -->
+            <h1 class="page-hero-title">Downloads — Youth Welfare &amp; PRD Department</h1>
+
+            <!-- Subtitle -->
+            <p class="page-hero-subtitle">
+                Access official forms, circulars, scheme documents &amp; reports
+                <span class="ph-dot">·</span>
+                Department of Youth Welfare and PRD, Uttarakhand
+            </p>
+
+            <!-- Stats -->
+            <div class="page-hero-stats">
+                <div class="ph-stat">
+                    <span class="ph-stat-value">13</span>
+                    <span class="ph-stat-label">Districts</span>
+                </div>
+                <div class="ph-stat">
+                    <span class="ph-stat-value">40+</span>
+                    <span class="ph-stat-label">Documents</span>
+                </div>
+                <div class="ph-stat">
+                    <span class="ph-stat-value">2026</span>
+                    <span class="ph-stat-label">Edition</span>
+                </div>
+            </div>
 
             <!-- Search bar -->
-            <div class="dl-search-bar">
+            <div class="dl-search-bar" style="margin-top: 22px;">
                 <i class="fas fa-search"></i>
                 <input type="text" id="dlSearch" placeholder="Search documents…" oninput="filterDocs()" />
             </div>
@@ -512,6 +539,34 @@
     <!-- JavaScript -->
     <script src="../script.js"></script>
     <script>
+        // ── Dynamic breadcrumb based on ?from= URL parameter ──────────
+        (function () {
+            var from = new URLSearchParams(window.location.search).get('from');
+            var bc = document.getElementById('dl-breadcrumb');
+            if (!bc) return;
+
+            var homeLink = '<a href="../index.html">Home</a>';
+            var sep = '<span class="bc-sep">›</span>';
+            var current = '<span class="bc-current">Downloads</span>';
+
+            if (from === 'contact') {
+                bc.innerHTML = homeLink + sep +
+                    '<a href="contact.html">Contact Us</a>' + sep + current;
+            } else if (from === 'about') {
+                bc.innerHTML = homeLink + sep +
+                    '<a href="aboutUs.html">About Us</a>' + sep + current;
+            } else if (from === 'register') {
+                bc.innerHTML = homeLink + sep +
+                    '<a href="register.html">Register</a>' + sep + current;
+            } else if (from === 'login') {
+                bc.innerHTML = homeLink + sep +
+                    '<a href="login.html">Login</a>' + sep + current;
+            } else {
+                bc.innerHTML = homeLink + sep + current;
+            }
+        })();
+
+        // ── Document search filter ─────────────────────────────────────
         function filterDocs() {
             const query = document.getElementById('dlSearch').value.toLowerCase();
             document.querySelectorAll('.dl-card').forEach(card => {
