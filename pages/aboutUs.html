@@ -59,17 +59,53 @@
                     <li><a href="aboutUs.html">About Us</a></li>
                     <li><a href="#">Schemes/Services</a></li>
                     <li><a href="#">Gallery</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="contact.html?from=about">Contact Us</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="downlods.html" class="login-btn">Downloads</a>
+                <a href="downlods.html?from=about" class="login-btn">Downloads</a>
                 <a href="register.html" class="join-btn">Join the Community</a>
                 <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </header>
 
+    <!-- Page Hero Banner -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <!-- Breadcrumb (dynamic – reads ?from= URL param) -->
+            <nav class="page-hero-breadcrumb" aria-label="Breadcrumb" id="about-breadcrumb"></nav>
+
+            <!-- Hindi Title -->
+            <p class="page-hero-hindi">हमारे बारे में</p>
+
+            <!-- English Title -->
+            <h1 class="page-hero-title">About Us — Department of Youth Welfare &amp; PRD</h1>
+
+            <!-- Subtitle -->
+            <p class="page-hero-subtitle">
+                Uttarakhand's Premier Youth Development Department
+                <span class="ph-dot">·</span>
+                Serving Youth Across All 13 Districts
+            </p>
+
+            <!-- Stats -->
+            <div class="page-hero-stats">
+                <div class="ph-stat">
+                    <span class="ph-stat-value">13</span>
+                    <span class="ph-stat-label">Districts</span>
+                </div>
+                <div class="ph-stat">
+                    <span class="ph-stat-value">118+</span>
+                    <span class="ph-stat-label">Schemes</span>
+                </div>
+                <div class="ph-stat">
+                    <span class="ph-stat-value">12.5L+</span>
+                    <span class="ph-stat-label">Youth Registered</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Officials Section -->
     <main class="officials-page">
@@ -751,6 +787,30 @@
 
     <!-- JavaScript -->
     <script src="../script.js"></script>
+    <script>
+        // ── Dynamic breadcrumb for About Us page ──────────────────────
+        (function () {
+            var from = new URLSearchParams(window.location.search).get('from');
+            var bc = document.getElementById('about-breadcrumb');
+            if (!bc) return;
+
+            var homeLink = '<a href="../index.html">Home</a>';
+            var sep = '<span class="bc-sep">›</span>';
+            var current = '<span class="bc-current">About Us</span>';
+
+            if (from === 'contact') {
+                bc.innerHTML = homeLink + sep + '<a href="contact.html">Contact Us</a>' + sep + current;
+            } else if (from === 'downloads') {
+                bc.innerHTML = homeLink + sep + '<a href="downlods.html">Downloads</a>' + sep + current;
+            } else if (from === 'register') {
+                bc.innerHTML = homeLink + sep + '<a href="register.html">Register</a>' + sep + current;
+            } else if (from === 'login') {
+                bc.innerHTML = homeLink + sep + '<a href="login.html">Login</a>' + sep + current;
+            } else {
+                bc.innerHTML = homeLink + sep + current;
+            }
+        })();
+    </script>
 </body>
 
 </html>
