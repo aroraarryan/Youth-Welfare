@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles.css" />
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="../responsive.css" />
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <title>Gallery — Youth Welfare</title>
+</head>
+
+<body>
+    <!-- Government Header Bar -->
+    <div class="gov-header-bar">
+        <div class="gov-header-left">
+            <span class="flag-icon">🇮🇳</span>
+            <span class="gov-text" data-i18n="gov.text">Government of Uttarakhand</span>
+        </div>
+        <div class="gov-header-right">
+            <button class="header-icon-btn" title="Share">
+                <i class="fas fa-share-alt"></i>
+            </button>
+            <button class="header-icon-btn" title="Theme Toggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="header-icon-btn" title="Accessibility">
+                <i class="fas fa-universal-access"></i>
+            </button>
+            <button class="lang-toggle">EN</button>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logos-container">
+                <img class="ashoka-chakra" src="../images/gov-logo.png" alt="Ashoka Chakra" />
+                <img class="main-logo" src="../images/logo.png" alt="Youth Welfare Logo" />
+            </div>
+            <div class="logo-text">
+                <h1>Department of Youth Welfare <br />and PRD</h1>
+                <p>Uttarakhand Government</p>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="aboutUs.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="#" data-i18n="nav.schemes">Schemes/Services</a></li>
+                    <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+                    <li><a href="contact.html?from=gallery" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="downlods.html?from=gallery" data-i18n="nav.downloads">Downloads</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="register.html" class="join-btn" data-i18n="nav.join">Join the Community</a>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <!-- Breadcrumb (dynamic – reads ?from= URL param) -->
+            <nav class="page-hero-breadcrumb" aria-label="Breadcrumb" id="gallery-breadcrumb"></nav>
+
+            <!-- Hindi Title -->
+            <p class="page-hero-hindi">फोटो और वीडियो गैलरी</p>
+
+            <!-- English Title -->
+            <h1 class="page-hero-title">Photo &amp; Video Gallery — Youth Welfare &amp; PRD Department</h1>
+
+            <!-- Subtitle -->
+            <p class="page-hero-subtitle">
+                Capturing moments from various activities, sports, and training programs across the state.
+            </p>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <main class="gallery-page">
+        <!-- Filter Tabs -->
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="sports">Sports &amp; Khel Mahakumbh</button>
+            <button class="filter-btn" data-filter="training">Vocational Training</button>
+            <button class="filter-btn" data-filter="events">Events &amp; Ceremonies</button>
+            <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="gallery-grid">
+            <!-- Item 1 -->
+            <div class="gallery-item sports">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.26 (1).jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Sports</span>
+                    <h3 class="gallery-title">Youth Event</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="gallery-item training">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.26.jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Training</span>
+                    <h3 class="gallery-title">Youth Training</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="gallery-item events">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.27 (1).jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Events</span>
+                    <h3 class="gallery-title">Department Event</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="gallery-item infrastructure">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.27 (2).jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Infrastructure</span>
+                    <h3 class="gallery-title">Department Action</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="gallery-item sports">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.27.jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Sports</span>
+                    <h3 class="gallery-title">Youth Activities</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="gallery-item training">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.28 (1).jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Training</span>
+                    <h3 class="gallery-title">Youth Action</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="gallery-item events">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.28 (2).jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Events</span>
+                    <h3 class="gallery-title">Event Highlights</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="gallery-item infrastructure">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.28.jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Infrastructure</span>
+                    <h3 class="gallery-title">Community Growth</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 9 -->
+            <div class="gallery-item sports">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.29 (1).jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Sports</span>
+                    <h3 class="gallery-title">Team Spirit</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 10 -->
+            <div class="gallery-item training">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.29 (2).jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Training</span>
+                    <h3 class="gallery-title">Skill Building</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 11 -->
+            <div class="gallery-item events">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.29.jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Events</span>
+                    <h3 class="gallery-title">Ceremony Moments</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 12 -->
+            <div class="gallery-item infrastructure">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.30 (1).jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Infrastructure</span>
+                    <h3 class="gallery-title">Building Future</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+
+            <!-- Item 13 -->
+            <div class="gallery-item sports">
+                <img src="../images/gallery/WhatsApp Image 2026-02-24 at 18.07.30.jpeg" alt="Event photo" />
+                <div class="gallery-overlay">
+                    <span class="gallery-category">Sports</span>
+                    <h3 class="gallery-title">Active Youth</h3>
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="gallery-load-more">
+            <button id="loadMoreBtn" class="primary-btn">Load More <i class="fas fa-spinner"></i></button>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+        <div id="lightboxCaption"></div>
+        <a class="lightbox-prev">&#10094;</a>
+        <a class="lightbox-next">&#10095;</a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Left Section with Logo and Description -->
+            <div class="footer-section logo-section">
+                <div class="logo-container">
+                    <div class="yuva-sathi-logo">
+                        <img src="../images/logo.png" alt="Yuva Sathi Logo" class="logo-icon" />
+                        <div class="logo-text">
+                            <span class="yuva">Youth</span>
+                            <span class="sathi">Welfare And PRD Department</span>
+                            <div class="tagline">Uttarakhand</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="description">
+                    A Single Platform for Youth of Uttarakhand to get information
+                    related to Jobs, Skill development, Vocational Training, Employment,
+                    Self-Employment, Higher Education, Competitive Examination, Carrier
+                    Counselling, Sports, Health, Secondary Education, Start-Up,
+                    Sewayojan etc.
+                </p>
+
+                <!-- Newsletter Signup -->
+                <div class="newsletter-section">
+                    <h4 data-i18n="ft.newsletter">Stay Informed with the Latest Updates!</h4>
+                    <div class="newsletter-social-row">
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Enter your email id" class="email-input"
+                                data-i18n-placeholder="ft.email.placeholder" />
+                            <button class="send-btn" data-i18n="ft.send">Send</button>
+                        </div>
+                        <!-- Social Media Icons -->
+                        <div class="social-media">
+                            <a href="https://facebook.com" target="_blank" class="social-icon facebook"
+                                title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com" target="_blank" class="social-icon twitter" title="Twitter"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="https://instagram.com" target="_blank" class="social-icon instagram"
+                                title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com" target="_blank" class="social-icon youtube" title="YouTube"><i
+                                    class="fab fa-youtube"></i></a>
+                            <a href="https://linkedin.com" target="_blank" class="social-icon linkedin"
+                                title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="footer-section">
+                <h3 data-i18n="ft.quicklinks">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="aboutUs.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="#" data-i18n="ft.register">How To Register With Us </a></li>
+                    <li><a href="#" data-i18n="ft.who">Who We Are</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="#" data-i18n="ft.faq">FAQ</a></li>
+                </ul>
+
+            </div>
+            <!-- Policies Section -->
+            <div class="footer-section">
+                <h3 data-i18n="ft.policies">Policies</h3>
+                <ul class="footer-links">
+                    <li><a href="#" data-i18n="ft.press">Press Release</a></li>
+                    <li><a href="gallery.html" data-i18n="ft.gallery">Photo Gallery</a></li>
+                    <li><a href="#" data-i18n="ft.terms">Terms & Conditions</a></li>
+                    <li><a href="#" data-i18n="ft.disclaimer">Disclaimer</a></li>
+                    <li><a href="#" data-i18n="ft.privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Us Section -->
+            <div class="footer-section">
+                <h3 data-i18n="ft.contact">Contact Us</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
+                    </li>
+                    <li>
+                        <a href="tel:+919634312465"><strong>Phone :</strong>+91-9634312465</a>
+                    </li>
+                    <li>
+                        <a href="mailto:ywprd.uk@gmail.com"><strong>Email :</strong>ywprd.uk@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright Section -->
+        <div class="footer-bottom">
+            <p>
+                &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
+                Government. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../script.js"></script>
+    <script>
+        // ── Dynamic breadcrumb for Gallery page ──────────────────────
+        (function () {
+            var from = new URLSearchParams(window.location.search).get('from');
+            var bc = document.getElementById('gallery-breadcrumb');
+            if (!bc) return;
+
+            var homeLink = '<a href="../index.html" data-i18n="nav.home">Home</a>';
+            var sep = '<span class="bc-sep">›</span>';
+            var current = '<span class="bc-current">Gallery</span>';
+
+            if (from === 'contact') {
+                bc.innerHTML = homeLink + sep + '<a href="contact.html" data-i18n="nav.contact">Contact Us</a>' + sep + current;
+            } else if (from === 'downloads') {
+                bc.innerHTML = homeLink + sep + '<a href="downlods.html" data-i18n="nav.downloads">Downloads</a>' + sep + current;
+            } else if (from === 'about') {
+                bc.innerHTML = homeLink + sep + '<a href="aboutUs.html">About Us</a>' + sep + current;
+            } else {
+                bc.innerHTML = homeLink + sep + current;
+            }
+        })();
+    </script>
+</body>
+
+</html>
