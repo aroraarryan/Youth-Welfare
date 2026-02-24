@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../../responsive.css" />
+    <link rel="stylesheet" href="../reg-shared.css" />
+    <!-- Page accent: deep teal-green tones for volunteering/community -->
+    <style>
+      :root {
+        --page-accent-1: #064e3b;
+        --page-accent-2: #065f46;
+        --page-accent-3: #047857;
+      }
+      .km-legend__num,
+      .km-sec-link:hover .km-sec-num,
+      .km-sec-link.active .km-sec-num {
+        background: #065f46;
+      }
+      .km-sec-link:hover,
+      .km-sec-link.active {
+        color: #065f46;
+      }
+      .km-input:focus,
+      .km-select:focus,
+      .km-textarea:focus {
+        border-color: #065f46;
+        box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.12);
+      }
+      .km-phone-wrap:focus-within {
+        border-color: #065f46;
+        box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.12);
+      }
+      .km-cb:has(input:checked) {
+        border-color: #065f46;
+        background: rgba(6, 95, 70, 0.06);
+      }
+      .km-cb:has(input:checked) .km-cb__box {
+        background: #065f46;
+        border-color: #065f46;
+      }
+      .km-btn-submit {
+        background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+        box-shadow: 0 4px 14px rgba(6, 95, 70, 0.35);
+      }
+      .km-btn-submit:hover {
+        box-shadow: 0 6px 20px rgba(6, 95, 70, 0.45);
+      }
+      .km-radio:hover,
+      .km-radio:has(input:checked) {
+        border-color: #065f46;
+        color: #065f46;
+      }
+      .km-radio:has(input:checked) .km-radio__dot {
+        border-color: #065f46;
+      }
+      .km-radio:has(input:checked) .km-radio__dot::after {
+        background: #065f46;
+      }
+      .km-progress__fill {
+        background: linear-gradient(90deg, #064e3b, #34d399);
+      }
+      .km-helpline {
+        color: #065f46;
+      }
+      .km-sidebar__card h3,
+      .km-reg-id,
+      .km-legend {
+        color: #065f46;
+      }
+      .km-reg-id-box {
+        border-color: #065f46;
+      }
+      .km-btn-secondary {
+        color: #065f46;
+        border-color: #065f46;
+      }
+      .km-btn-secondary:hover {
+        background: rgba(6, 95, 70, 0.06);
+      }
+    </style>
+    <title>Youth Volunteering – Registration | Youth Welfare Department</title>
+  </head>
+  <body>
+    <!-- GOVERNMENT HEADER BAR -->
+    <div class="gov-header-bar">
+      <div class="gov-header-left">
+        <span class="flag-icon">🇮🇳</span>
+        <span class="gov-text">Government of Uttarakhand</span>
+      </div>
+      <div class="gov-header-right">
+        <button class="header-icon-btn" title="Share">
+          <i class="fas fa-share-alt"></i>
+        </button>
+        <button class="header-icon-btn" title="Theme Toggle">
+          <i class="fas fa-sun"></i>
+        </button>
+        <button class="header-icon-btn" title="Accessibility">
+          <i class="fas fa-universal-access"></i>
+        </button>
+        <button class="lang-toggle">EN</button>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+      <div class="header-left">
+        <div class="logos-container">
+          <img
+            class="ashoka-chakra"
+            src="../../images/gov-logo.png"
+            alt="Ashoka Chakra"
+          />
+          <img
+            class="main-logo"
+            src="../../images/logo.png"
+            alt="Youth Welfare Logo"
+          />
+        </div>
+        <div class="logo-text">
+          <h1>Department of Youth Welfare <br />and PRD</h1>
+          <p>Uttarakhand Government</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul class="nav-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../aboutUs.html">About Us</a></li>
+            <li><a href="#">Schemes/Services</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="#" class="login-btn">Download</a>
+          <a href="../register.html" class="join-btn">Join the Community</a>
+          <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <div class="km-hero">
+      <div class="km-hero__inner">
+        <div class="km-hero__breadcrumb">
+          <a href="../../index.html">Home</a><span>›</span>
+          <a href="../../index.html#registration-section">Registration</a
+          ><span>›</span>
+          <span>Youth Volunteering</span>
+        </div>
+        <h2 class="km-hero__title">
+          <span class="km-hero__hindi">युवा स्वयंसेवा</span>
+          Youth Volunteering Program — Registration
+        </h2>
+        <p class="km-hero__sub">
+          Join Volunteer Programs &amp; Community Service · Aligned with NYKS
+          &amp; MY Bharat Mission
+        </p>
+        <div class="km-hero__stats">
+          <div class="km-stat">
+            <span class="km-stat__n">13</span
+            ><span class="km-stat__l">Districts</span>
+          </div>
+          <div class="km-stat">
+            <span class="km-stat__n">6+</span
+            ><span class="km-stat__l">Service Areas</span>
+          </div>
+          <div class="km-stat">
+            <span class="km-stat__n">18–29</span
+            ><span class="km-stat__l">Age Group</span>
+          </div>
+          <div class="km-stat">
+            <span class="km-stat__n">₹5,000</span
+            ><span class="km-stat__l">Monthly Honorarium</span>
+          </div>
+        </div>
+      </div>
+      <div class="km-hero__deco" aria-hidden="true"></div>
+    </div>
+
+    <main class="km-main" id="km-main">
+      <!-- Draft restore banner -->
+      <div class="km-draft-banner" id="regDraftBanner" hidden>
+        <i class="fas fa-clock-rotate-left"></i>
+        <span>We found a saved draft. Would you like to restore it?</span>
+        <button
+          class="moreinfo-btn"
+          id="regRestoreBtn"
+          style="margin-top: 0; padding: 8px 18px; font-size: 13px"
+        >
+          Restore Draft
+        </button>
+        <button class="km-btn-ghost" id="regDiscardBtn">Discard</button>
+      </div>
+
+      <div class="km-layout">
+        <!-- SIDEBAR -->
+        <aside class="km-sidebar" aria-label="Registration guide">
+          <div class="km-sidebar__card">
+            <h3><i class="fas fa-circle-info"></i> About the Program</h3>
+            <p
+              style="
+                font-size: 13px;
+                color: #475569;
+                line-height: 1.6;
+                margin: 0;
+              "
+            >
+              The Youth Volunteering Program is aligned with India's
+              <strong>Nehru Yuva Kendra Sangathan (NYKS)</strong> and the
+              <strong>MY Bharat</strong> mission. Volunteers serve in areas such
+              as literacy, health awareness, environmental conservation, women
+              empowerment, and disaster relief for up to 2 years, receiving a
+              monthly honorarium of ₹5,000 and a national certificate.
+            </p>
+          </div>
+          <div class="km-sidebar__card km-sidebar__sections">
+            <h3><i class="fas fa-list-check"></i> Sections</h3>
+            <a href="#reg-sec-personal" class="km-sec-link active"
+              ><span class="km-sec-num">01</span> Personal Info</a
+            >
+            <a href="#reg-sec-volunteer" class="km-sec-link"
+              ><span class="km-sec-num">02</span> Volunteer Preference</a
+            >
+            <a href="#reg-sec-edu" class="km-sec-link"
+              ><span class="km-sec-num">03</span> Education &amp; Experience</a
+            >
+            <a href="#reg-sec-photo" class="km-sec-link"
+              ><span class="km-sec-num">04</span> Photo Upload</a
+            >
+            <a href="#reg-sec-emergency" class="km-sec-link"
+              ><span class="km-sec-num">05</span> Emergency Contact</a
+            >
+            <a href="#reg-sec-consent" class="km-sec-link"
+              ><span class="km-sec-num">06</span> Consent</a
+            >
+          </div>
+          <div class="km-sidebar__card">
+            <h3><i class="fas fa-award"></i> What You Get</h3>
+            <ul class="km-steps">
+              <li>₹5,000/month honorarium (via DBT)</li>
+              <li>12 days casual leave per year</li>
+              <li>National certificate from NYKS/MY Bharat</li>
+              <li>Skill development training</li>
+              <li>Uniform and identity card</li>
+              <li>Opportunity to serve your district</li>
+            </ul>
+          </div>
+          <div class="km-sidebar__card km-sidebar__help">
+            <h3><i class="fas fa-headset"></i> Need Help?</h3>
+            <p>Call our help desk:</p>
+            <a href="tel:+919634312465" class="km-helpline">+91-9634312465</a>
+            <p style="margin-top: 8px">Email:</p>
+            <a
+              href="mailto:ywprd.uk@gmail.com"
+              class="km-helpline"
+              style="font-size: 12px"
+              >ywprd.uk@gmail.com</a
+            >
+          </div>
+        </aside>
+
+        <!-- FORM CARD -->
+        <div class="km-form-wrap">
+          <div
+            class="km-progress"
+            role="progressbar"
+            aria-valuenow="0"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-label="Form completion"
+            id="kmProgress"
+          >
+            <div
+              class="km-progress__fill"
+              id="kmProgressFill"
+              style="width: 0%"
+            ></div>
+            <span class="km-progress__label" id="kmProgressLabel"
+              >0% complete</span
+            >
+          </div>
+          <div
+            aria-live="assertive"
+            aria-atomic="true"
+            class="km-sr-only"
+            id="kmLiveAnnouncer"
+          ></div>
+
+          <form id="kmForm" class="km-form" novalidate autocomplete="on">
+            <!-- S1: PERSONAL INFO -->
+            <fieldset class="km-fieldset" id="reg-sec-personal">
+              <legend class="km-legend">
+                <span class="km-legend__num">01</span>Personal Information
+              </legend>
+              <div class="km-field">
+                <label class="km-label" for="regFullName"
+                  >Full Name <span class="km-req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="regFullName"
+                  name="fullName"
+                  class="km-input"
+                  placeholder="As per Aadhaar"
+                  autocomplete="name"
+                  required
+                  aria-required="true"
+                  aria-describedby="regFullName-err"
+                />
+                <span class="km-error" id="regFullName-err" role="alert"></span>
+              </div>
+              <div class="km-field-row">
+                <div class="km-field">
+                  <label class="km-label" for="regDob"
+                    >Date of Birth <span class="km-req">*</span></label
+                  >
+                  <input
+                    type="date"
+                    id="regDob"
+                    name="dob"
+                    class="km-input"
+                    required
+                    aria-required="true"
+                    aria-describedby="regDob-err regDob-hint"
+                  />
+                  <span class="km-hint" id="regDob-hint"
+                    >Must be 18–29 years old (NYKS eligibility)</span
+                  >
+                  <span class="km-error" id="regDob-err" role="alert"></span>
+                </div>
+                <div class="km-field">
+                  <label class="km-label">Age &amp; Eligibility</label>
+                  <div class="km-age-box" id="regAgeBox" aria-live="polite">
+                    <span id="regCalcAge">—</span>
+                    <span class="km-age-badge" id="regCalcCat"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="km-field">
+                <fieldset class="km-inner-fs">
+                  <legend class="km-label">
+                    Gender <span class="km-req">*</span>
+                  </legend>
+                  <div class="km-radio-group" aria-describedby="regGender-err">
+                    <label class="km-radio"
+                      ><input
+                        type="radio"
+                        name="gender"
+                        value="male"
+                        required
+                      /><span class="km-radio__dot"></span>Male</label
+                    >
+                    <label class="km-radio"
+                      ><input type="radio" name="gender" value="female" /><span
+                        class="km-radio__dot"
+                      ></span
+                      >Female</label
+                    >
+                    <label class="km-radio"
+                      ><input type="radio" name="gender" value="other" /><span
+                        class="km-radio__dot"
+                      ></span
+                      >Other</label
+                    >
+                    <label class="km-radio"
+                      ><input
+                        type="radio"
+                        name="gender"
+                        value="prefer_not"
+                      /><span class="km-radio__dot"></span>Prefer not to
+                      say</label
+                    >
+                  </div>
+                  <span class="km-error" id="regGender-err" role="alert"></span>
+                </fieldset>
+              </div>
+              <div class="km-field-row">
+                <div class="km-field">
+                  <label class="km-label" for="regMobile"
+                    >Mobile Number <span class="km-req">*</span></label
+                  >
+                  <div class="km-phone-wrap">
+                    <span class="km-phone-code">+91</span>
+                    <input
+                      type="tel"
+                      id="regMobile"
+                      name="mobile"
+                      class="km-input km-phone-input"
+                      placeholder="10-digit mobile"
+                      maxlength="10"
+                      pattern="[6-9][0-9]{9}"
+                      required
+                      aria-required="true"
+                      aria-describedby="regMobile-err"
+                      inputmode="numeric"
+                      autocomplete="tel"
+                    />
+                  </div>
+                  <span class="km-error" id="regMobile-err" role="alert"></span>
+                </div>
+                <div class="km-field">
+                  <label class="km-label" for="regEmail"
+                    >Email <span class="km-optional">(Optional)</span></label
+                  >
+                  <input
+                    type="email"
+                    id="regEmail"
+                    name="email"
+                    class="km-input"
+                    placeholder="your@email.com"
+                    autocomplete="email"
+                    aria-describedby="regEmail-err"
+                  />
+                  <span class="km-error" id="regEmail-err" role="alert"></span>
+                </div>
+              </div>
+              <div class="km-field">
+                <label class="km-label" for="regDistrict"
+                  >District <span class="km-req">*</span></label
+                >
+                <div class="km-select-wrap">
+                  <select
+                    id="regDistrict"
+                    name="district"
+                    class="km-select"
+                    required
+                    aria-required="true"
+                    aria-describedby="regDistrict-err"
+                  >
+                    <option value="">— Select your district —</option>
+                    <option>Almora</option>
+                    <option>Bageshwar</option>
+                    <option>Chamoli</option>
+                    <option>Champawat</option>
+                    <option>Dehradun</option>
+                    <option>Haridwar</option>
+                    <option>Nainital</option>
+                    <option>Pauri Garhwal</option>
+                    <option>Pithoragarh</option>
+                    <option>Rudraprayag</option>
+                    <option>Tehri Garhwal</option>
+                    <option>Udham Singh Nagar</option>
+                    <option>Uttarkashi</option>
+                  </select>
+                  <i
+                    class="fas fa-chevron-down select-arrow"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <span class="km-error" id="regDistrict-err" role="alert"></span>
+              </div>
+            </fieldset>
+
+            <!-- S2: VOLUNTEER PREFERENCE -->
+            <fieldset class="km-fieldset" id="reg-sec-volunteer">
+              <legend class="km-legend">
+                <span class="km-legend__num">02</span>Volunteer Area &amp;
+                Preference
+              </legend>
+              <div class="km-field">
+                <fieldset class="km-inner-fs">
+                  <legend class="km-label">
+                    Service Area(s) of Interest <span class="km-req">*</span>
+                    <span class="km-optional">(Select up to 3)</span>
+                  </legend>
+                  <div
+                    class="km-sports-grid"
+                    aria-describedby="regServiceArea-err"
+                  >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="literacy_education"
+                      /><span class="km-cb__box"></span>📚 Literacy &amp;
+                      Education</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="health_family_welfare"
+                      /><span class="km-cb__box"></span>🏥 Health &amp; Family
+                      Welfare</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="environment"
+                      /><span class="km-cb__box"></span>🌿 Environment
+                      Conservation</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="women_empowerment"
+                      /><span class="km-cb__box"></span>👩 Women
+                      Empowerment</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="rural_development"
+                      /><span class="km-cb__box"></span>🏘 Rural
+                      Development</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="disaster_relief"
+                      /><span class="km-cb__box"></span>🚨 Disaster
+                      Relief</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="skill_development"
+                      /><span class="km-cb__box"></span>🔧 Skill
+                      Development</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="digital_literacy"
+                      /><span class="km-cb__box"></span>💻 Digital
+                      Literacy</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="sanitation"
+                      /><span class="km-cb__box"></span>🧹 Sanitation &amp;
+                      Swachhata</label
+                    >
+                    <label class="km-cb"
+                      ><input
+                        type="checkbox"
+                        name="serviceArea"
+                        value="social_awareness"
+                      /><span class="km-cb__box"></span>📢 Social
+                      Awareness</label
+                    >
+                  </div>
+                  <span
+                    class="km-error"
+                    id="regServiceArea-err"
+                    role="alert"
+                  ></span>
+                </fieldset>
+              </div>
+              <div class="km-field">
+                <label class="km-label" for="regAvailability"
+                  >Availability <span class="km-req">*</span></label
+                >
+                <div class="km-select-wrap">
+                  <select
+                    id="regAvailability"
+                    name="availability"
+                    class="km-select"
+                    required
+                    aria-required="true"
+                    aria-describedby="regAvailability-err"
+                  >
+                    <option value="">— Select availability —</option>
+                    <option value="full_time">Full Time (6 days/week)</option>
+                    <option value="part_time_morning">
+                      Part Time – Morning (3–4 hrs/day)
+                    </option>
+                    <option value="part_time_evening">
+                      Part Time – Evening (3–4 hrs/day)
+                    </option>
+                    <option value="weekends">Weekends Only</option>
+                  </select>
+                  <i
+                    class="fas fa-chevron-down select-arrow"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <span class="km-hint"
+                  >Full-time volunteers are given priority per NYKS NYC
+                  guidelines</span
+                >
+                <span
+                  class="km-error"
+                  id="regAvailability-err"
+                  role="alert"
+                ></span>
+              </div>
+              <div class="km-field">
+                <label class="km-label" for="regMotivation"
+                  >Why do you want to volunteer?
+                  <span class="km-optional">(Optional)</span></label
+                >
+                <textarea
+                  id="regMotivation"
+                  name="motivation"
+                  class="km-textarea"
+                  rows="3"
+                  placeholder="Briefly describe your motivation for joining this program (max 300 characters)"
+                  maxlength="300"
+                ></textarea>
+              </div>
+            </fieldset>
+
+            <!-- S3: EDUCATION & EXPERIENCE -->
+            <fieldset class="km-fieldset" id="reg-sec-edu">
+              <legend class="km-legend">
+                <span class="km-legend__num">03</span>Education &amp; Prior
+                Experience
+              </legend>
+              <div class="km-field-row">
+                <div class="km-field">
+                  <label class="km-label" for="regQualification"
+                    >Highest Qualification <span class="km-req">*</span></label
+                  >
+                  <div class="km-select-wrap">
+                    <select
+                      id="regQualification"
+                      name="qualification"
+                      class="km-select"
+                      required
+                      aria-required="true"
+                      aria-describedby="regQualification-err"
+                    >
+                      <option value="">— Select —</option>
+                      <option value="below_10th">Below 10th</option>
+                      <option value="10th">10th Pass</option>
+                      <option value="12th">12th Pass</option>
+                      <option value="diploma">Diploma / ITI</option>
+                      <option value="graduate">
+                        Graduate (B.A./B.Sc./B.Com. etc.)
+                      </option>
+                      <option value="postgraduate">Post Graduate</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <i
+                      class="fas fa-chevron-down select-arrow"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                  <span
+                    class="km-error"
+                    id="regQualification-err"
+                    role="alert"
+                  ></span>
+                </div>
+                <div class="km-field">
+                  <label class="km-label" for="regYearPassed"
+                    >Year of Passing
+                    <span class="km-optional">(Optional)</span></label
+                  >
+                  <input
+                    type="number"
+                    id="regYearPassed"
+                    name="yearPassed"
+                    class="km-input"
+                    min="2000"
+                    max="2025"
+                    placeholder="e.g. 2023"
+                  />
+                </div>
+              </div>
+              <div class="km-field">
+                <label class="km-label" for="regPriorExperience"
+                  >Prior Volunteering / NSS / NYKS Experience
+                  <span class="km-optional">(Optional)</span></label
+                >
+                <textarea
+                  id="regPriorExperience"
+                  name="priorExperience"
+                  class="km-textarea"
+                  rows="3"
+                  placeholder="e.g. NSS volunteer at XYZ College, 2022–23 — flood relief work in Chamoli"
+                  maxlength="400"
+                ></textarea>
+                <span class="km-hint"
+                  >Mention any NSS / NYKS / MY Bharat / NCC / community service
+                  experience</span
+                >
+              </div>
+              <div class="km-field">
+                <label class="km-label"
+                  >Languages Known
+                  <span class="km-optional"
+                    >(Select all that apply)</span
+                  ></label
+                >
+                <div class="km-radio-group" style="flex-wrap: wrap; gap: 8px">
+                  <label class="km-cb"
+                    ><input
+                      type="checkbox"
+                      name="language"
+                      value="hindi"
+                    /><span class="km-cb__box"></span>हिन्दी</label
+                  >
+                  <label class="km-cb"
+                    ><input
+                      type="checkbox"
+                      name="language"
+                      value="english"
+                    /><span class="km-cb__box"></span>English</label
+                  >
+                  <label class="km-cb"
+                    ><input
+                      type="checkbox"
+                      name="language"
+                      value="garhwali"
+                    /><span class="km-cb__box"></span>Garhwali</label
+                  >
+                  <label class="km-cb"
+                    ><input
+                      type="checkbox"
+                      name="language"
+                      value="kumaoni"
+                    /><span class="km-cb__box"></span>Kumaoni</label
+                  >
+                  <label class="km-cb"
+                    ><input
+                      type="checkbox"
+                      name="language"
+                      value="other"
+                    /><span class="km-cb__box"></span>Other</label
+                  >
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- S4: PHOTO -->
+            <fieldset class="km-fieldset" id="reg-sec-photo">
+              <legend class="km-legend">
+                <span class="km-legend__num">04</span>Photo Upload
+              </legend>
+              <div class="km-field">
+                <label class="km-label"
+                  >Passport-size Photo <span class="km-req">*</span></label
+                >
+                <div
+                  class="km-photo-zone"
+                  id="regPhotoZone"
+                  tabindex="0"
+                  role="button"
+                  aria-label="Upload photo"
+                  aria-describedby="regPhoto-hint regPhoto-err"
+                >
+                  <div
+                    class="km-photo-preview-wrap"
+                    id="regPhotoPreviewWrap"
+                    hidden
+                  >
+                    <img
+                      id="regPhotoPreview"
+                      class="km-photo-preview"
+                      alt="Uploaded photo"
+                    />
+                    <button
+                      type="button"
+                      class="km-photo-remove"
+                      id="regPhotoRemove"
+                      aria-label="Remove photo"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <div class="km-photo-placeholder" id="regPhotoPlaceholder">
+                    <div class="km-photo-icon">📷</div>
+                    <p>Click to upload or drag &amp; drop</p>
+                    <p class="km-hint" style="margin: 0">
+                      JPEG or PNG · Max 2 MB
+                    </p>
+                  </div>
+                  <input
+                    type="file"
+                    id="regPhotoInput"
+                    name="photo"
+                    accept="image/jpeg,image/png"
+                    class="km-photo-hidden-input"
+                    aria-hidden="true"
+                    tabindex="-1"
+                  />
+                </div>
+                <span class="km-hint" id="regPhoto-hint"
+                  >Clear front-facing photo with white or plain background</span
+                >
+                <span class="km-error" id="regPhoto-err" role="alert"></span>
+              </div>
+            </fieldset>
+
+            <!-- S5: EMERGENCY CONTACT -->
+            <fieldset class="km-fieldset" id="reg-sec-emergency">
+              <legend class="km-legend">
+                <span class="km-legend__num">05</span>Emergency Contact &amp;
+                Medical
+              </legend>
+              <div class="km-field-row">
+                <div class="km-field">
+                  <label class="km-label" for="regEmergName"
+                    >Contact Name <span class="km-req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="regEmergName"
+                    name="emergencyName"
+                    class="km-input"
+                    placeholder="Full name"
+                    required
+                    aria-required="true"
+                    aria-describedby="regEmergName-err"
+                    autocomplete="off"
+                  />
+                  <span
+                    class="km-error"
+                    id="regEmergName-err"
+                    role="alert"
+                  ></span>
+                </div>
+                <div class="km-field">
+                  <label class="km-label" for="regEmergPhone"
+                    >Contact Phone <span class="km-req">*</span></label
+                  >
+                  <div class="km-phone-wrap">
+                    <span class="km-phone-code">+91</span>
+                    <input
+                      type="tel"
+                      id="regEmergPhone"
+                      name="emergencyPhone"
+                      class="km-input km-phone-input"
+                      placeholder="10-digit number"
+                      maxlength="10"
+                      required
+                      aria-required="true"
+                      aria-describedby="regEmergPhone-err"
+                      inputmode="numeric"
+                    />
+                  </div>
+                  <span
+                    class="km-error"
+                    id="regEmergPhone-err"
+                    role="alert"
+                  ></span>
+                </div>
+              </div>
+              <div class="km-field">
+                <label class="km-label" for="regEmergRelation"
+                  >Relation <span class="km-req">*</span></label
+                >
+                <div class="km-select-wrap">
+                  <select
+                    id="regEmergRelation"
+                    name="emergencyRelation"
+                    class="km-select"
+                    required
+                    aria-required="true"
+                    aria-describedby="regEmergRelation-err"
+                  >
+                    <option value="">— Select —</option>
+                    <option value="parent">Parent</option>
+                    <option value="guardian">Guardian</option>
+                    <option value="spouse">Spouse</option>
+                    <option value="sibling">Sibling</option>
+                    <option value="friend">Friend</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <i
+                    class="fas fa-chevron-down select-arrow"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <span
+                  class="km-error"
+                  id="regEmergRelation-err"
+                  role="alert"
+                ></span>
+              </div>
+              <div class="km-field">
+                <label class="km-label" for="regMedical"
+                  >Medical Conditions / Allergies
+                  <span class="km-optional">(Optional)</span></label
+                >
+                <textarea
+                  id="regMedical"
+                  name="medicalConditions"
+                  class="km-textarea"
+                  rows="2"
+                  placeholder="Leave blank if none"
+                  aria-describedby="regMedical-hint"
+                ></textarea>
+                <span class="km-hint" id="regMedical-hint"
+                  >Kept confidential · used only if medical assistance is needed
+                  on-field</span
+                >
+              </div>
+            </fieldset>
+
+            <!-- S6: CONSENT -->
+            <fieldset class="km-fieldset" id="reg-sec-consent">
+              <legend class="km-legend">
+                <span class="km-legend__num">06</span>Declaration &amp; Consent
+              </legend>
+              <div class="km-consent-list">
+                <label class="km-consent-item">
+                  <input
+                    type="checkbox"
+                    name="consentAccuracy"
+                    id="regConsentAccuracy"
+                    required
+                    aria-required="true"
+                    aria-describedby="regConsentAccuracy-err"
+                  />
+                  <span class="km-cb__box"></span>
+                  <span
+                    >I declare that all information furnished is true and
+                    correct. I am aware that furnishing false information will
+                    result in immediate disqualification and possible legal
+                    action.</span
+                  >
+                </label>
+                <span
+                  class="km-error"
+                  id="regConsentAccuracy-err"
+                  role="alert"
+                ></span>
+                <label class="km-consent-item">
+                  <input
+                    type="checkbox"
+                    name="consentMedical"
+                    id="regConsentMedical"
+                    required
+                    aria-required="true"
+                    aria-describedby="regConsentMedical-err"
+                  />
+                  <span class="km-cb__box"></span>
+                  <span
+                    >I confirm that I am medically fit to undertake voluntary
+                    field work and community service activities in my
+                    district.</span
+                  >
+                </label>
+                <span
+                  class="km-error"
+                  id="regConsentMedical-err"
+                  role="alert"
+                ></span>
+                <label class="km-consent-item">
+                  <input
+                    type="checkbox"
+                    name="consentRules"
+                    id="regConsentRules"
+                    required
+                    aria-required="true"
+                    aria-describedby="regConsentRules-err"
+                  />
+                  <span class="km-cb__box"></span>
+                  <span
+                    >I agree to abide by the guidelines of the National Youth
+                    Corps (NYC) / MY Bharat program, including deployment terms,
+                    reporting obligations, and code of conduct.</span
+                  >
+                </label>
+                <span
+                  class="km-error"
+                  id="regConsentRules-err"
+                  role="alert"
+                ></span>
+                <label class="km-consent-item">
+                  <input
+                    type="checkbox"
+                    name="consentData"
+                    id="regConsentData"
+                    required
+                    aria-required="true"
+                    aria-describedby="regConsentData-err"
+                  />
+                  <span class="km-cb__box"></span>
+                  <span
+                    >I consent to the Department of Youth Welfare &amp; PRD,
+                    Government of Uttarakhand, processing my personal data for
+                    registration, deployment, and honorarium disbursement via
+                    DBT.</span
+                  >
+                </label>
+                <span
+                  class="km-error"
+                  id="regConsentData-err"
+                  role="alert"
+                ></span>
+              </div>
+            </fieldset>
+
+            <!-- CAPTCHA -->
+            <div class="km-captcha-wrap">
+              <div class="km-captcha">
+                <div class="km-captcha__img" aria-hidden="true">
+                  <span id="regCaptchaText">YV26XZ</span>
+                </div>
+                <div class="km-captcha__controls">
+                  <label class="km-label" for="regCaptchaInput"
+                    >Enter code <span class="km-req">*</span></label
+                  >
+                  <div class="km-captcha__row">
+                    <input
+                      type="text"
+                      id="regCaptchaInput"
+                      class="km-input"
+                      maxlength="6"
+                      placeholder="Type code"
+                      style="
+                        max-width: 140px;
+                        letter-spacing: 0.15em;
+                        font-family: monospace;
+                      "
+                    />
+                    <button
+                      type="button"
+                      class="km-captcha__refresh"
+                      onclick="regRefreshCaptcha()"
+                      aria-label="Refresh"
+                    >
+                      <i class="fas fa-rotate-right"></i>
+                    </button>
+                  </div>
+                  <span class="km-hint"
+                    >⚠️ Prototype only — CAPTCHA not enforced</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Error summary -->
+            <div
+              class="km-error-summary"
+              id="regErrorSummary"
+              hidden
+              role="alert"
+              aria-live="assertive"
+            >
+              <strong>Please fix the following errors:</strong>
+              <ul id="regErrorList"></ul>
+            </div>
+
+            <!-- Actions -->
+            <div class="km-form-actions">
+              <button type="button" class="km-btn-secondary" id="regSaveDraft">
+                <i class="fas fa-floppy-disk"></i> Save Draft
+              </button>
+              <button type="submit" class="km-btn-submit" id="regSubmitBtn">
+                <i class="fas fa-paper-plane"></i> Submit Application
+              </button>
+            </div>
+          </form>
+
+          <!-- SUCCESS -->
+          <div class="km-success" id="regSuccess" hidden>
+            <div class="km-success__icon">🤝</div>
+            <h2>Application Received!</h2>
+            <p>
+              Your Youth Volunteering application has been submitted. You will
+              be contacted by your district NYKS office.
+            </p>
+            <div class="km-reg-id-box">
+              <div>
+                <span class="km-reg-id-label">Your Application ID</span
+                ><span class="km-reg-id" id="regIdDisplay"></span>
+              </div>
+              <button class="km-btn-icon" id="regCopyId" aria-label="Copy ID">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <div class="km-success-details" id="regSuccessDetails"></div>
+            <div class="km-success-actions">
+              <button
+                class="register-btn"
+                onclick="regPrint()"
+                style="background: linear-gradient(135deg, #064e3b, #065f46)"
+              >
+                <i class="fas fa-print"></i> Print Receipt
+              </button>
+              <button class="register-btn" onclick="regRegisterAnother()">
+                <i class="fas fa-plus"></i> Register Another
+              </button>
+            </div>
+            <p class="km-success-note">
+              📋 Keep your Application ID safe. Selected candidates will be
+              called for verification by the district NYKS/PRD office within 15
+              working days.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Print receipt -->
+    <div class="km-print-receipt" id="regPrintReceipt" aria-hidden="true">
+      <div class="km-print-receipt__head">
+        <div>
+          🏛 Government of Uttarakhand — Department of Youth Welfare &amp; PRD
+        </div>
+        <h2>Youth Volunteering Program — Application Receipt</h2>
+      </div>
+      <div id="regPrintContent"></div>
+      <div class="km-print-receipt__foot">
+        Computer-generated receipt. No signature required. Keep for your
+        records.
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section logo-section">
+          <div class="logo-container">
+            <div class="yuva-sathi-logo">
+              <img src="../../images/logo.png" alt="Logo" class="logo-icon" />
+              <div class="logo-text">
+                <span class="yuva">Youth</span
+                ><span class="sathi">Welfare And PRD Department</span>
+                <div class="tagline">Uttarakhand</div>
+              </div>
+            </div>
+          </div>
+          <p class="description">
+            A Single Platform for Youth of Uttarakhand to get information
+            related to Jobs, Skill development, Vocational Training, Employment,
+            Sports, Health, Start-Up, Sewayojan etc.
+          </p>
+          <div class="newsletter-section">
+            <h4>Stay Informed with the Latest Updates!</h4>
+            <div class="newsletter-social-row">
+              <div class="newsletter-form">
+                <input
+                  type="email"
+                  placeholder="Enter your email id"
+                  class="email-input"
+                /><button class="send-btn">Send</button>
+              </div>
+              <div class="social-media">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  class="social-icon facebook"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  class="social-icon twitter"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  class="social-icon instagram"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  class="social-icon youtube"
+                  ><i class="fab fa-youtube"></i
+                ></a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  class="social-icon linkedin"
+                  ><i class="fab fa-linkedin-in"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">How To Register</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Policies</h3>
+          <ul class="footer-links">
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Disclaimer</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="#"
+                >Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a
+              >
+            </li>
+            <li>
+              <a href="tel:+919634312465"
+                ><strong>Phone:</strong> +91-9634312465</a
+              >
+            </li>
+            <li>
+              <a href="mailto:ywprd.uk@gmail.com"
+                ><strong>Email:</strong> ywprd.uk@gmail.com</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
+          Government. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+    <script src="../reg-engine.js"></script>
+    <script src="./index.js"></script>
+    <div
+      class="km-toasts"
+      id="regToasts"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+  </body>
+</html>
