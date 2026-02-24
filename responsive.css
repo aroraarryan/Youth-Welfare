@@ -11,11 +11,11 @@
     padding: 6px 15px;
     font-size: 12px;
   }
-  
+
   .gov-header-right {
     gap: 8px;
   }
-  
+
   .header-icon-btn {
     font-size: 14px;
     padding: 2px;
@@ -29,46 +29,48 @@
     flex-wrap: wrap;
     gap: 15px;
   }
-  
+
   .header-left {
     gap: 15px;
   }
-  
+
   .ashoka-chakra {
     width: 40px;
     height: 40px;
   }
-  
+
   .main-logo {
     width: 50px;
     height: 50px;
   }
-  
+
   .logo-text h1 {
     font-size: 20px;
   }
-  
+
   .logo-text p {
     font-size: 12px;
   }
-  
+
   .header-right {
     gap: 20px;
   }
-  
+
   .main-nav {
     gap: 15px;
   }
-  
+
   .nav-link {
     font-size: 13px;
   }
-  
+
   .header-actions {
     gap: 10px;
   }
-  
-  .login-btn, .join-btn, .lang-toggle {
+
+  .login-btn,
+  .join-btn,
+  .lang-toggle {
     font-size: 12px;
     padding: 6px 12px;
   }
@@ -80,25 +82,25 @@
     align-items: flex-start;
     padding: 15px;
   }
-  
+
   .header-left {
     width: 100%;
     justify-content: center;
   }
-  
+
   .header-right {
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
   }
-  
+
   .main-nav {
     order: 2;
     width: 100%;
     justify-content: center;
     margin-top: 10px;
   }
-  
+
   .header-actions {
     order: 1;
     width: 100%;
@@ -113,19 +115,19 @@
     gap: 30px;
     text-align: center;
   }
-  
+
   .hero-left {
     order: 2;
   }
-  
+
   .hero-center {
     order: 1;
   }
-  
+
   .hero-search {
     order: 3;
   }
-  
+
   .hero-title {
     font-size: 36px;
   }
@@ -135,39 +137,39 @@
   .main-content {
     padding: 40px 20px;
   }
-  
+
   .hero-section {
     gap: 20px;
   }
-  
+
   .hero-title {
     font-size: 28px;
   }
-  
+
   .hero-ashoka {
     width: 60px;
     height: 60px;
   }
-  
+
   .hero-logo {
     width: 80px;
     height: 80px;
   }
-  
+
   .search-container {
     max-width: 100%;
   }
-  
+
   .search-input {
     font-size: 14px;
     padding: 12px 40px 12px 40px;
   }
-  
+
   .search-icon {
     left: 15px;
     font-size: 16px;
   }
-  
+
   .search-action-btn {
     width: 32px;
     height: 32px;
@@ -181,7 +183,7 @@
     bottom: 20px;
     right: 20px;
   }
-  
+
   .assistant-avatar {
     width: 50px;
     height: 50px;
@@ -195,20 +197,20 @@
     flex-wrap: wrap;
     padding: 15px 20px;
   }
-  
+
   .main-text {
     text-align: center;
     margin: 0 auto;
   }
-  
+
   .main-text h1 {
     font-size: 1.5rem;
   }
-  
+
   .main-text h3 {
     font-size: 1rem;
   }
-  
+
   .header-actions {
     margin-left: auto;
   }
@@ -221,37 +223,38 @@
     align-items: center;
     padding: 10px;
   }
-  
+
   .gov-logo-link {
     margin-bottom: 10px;
   }
-  
+
   .main-text {
     width: 100%;
     text-align: center;
     margin-bottom: 10px;
   }
-  
+
   .header-actions {
     width: 100%;
     display: flex;
     justify-content: center;
     margin: 10px 0;
   }
-  
+
   header img.gov-logo {
     margin-top: 10px;
   }
-  
+
   /* Navigation menu for mobile - centered hamburger */
   .navbar {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0; /* Reduced padding to remove space */
+    padding: 0;
+    /* Reduced padding to remove space */
   }
-  
+
   /* Show hamburger menu on small screens and center it */
   .menu-toggle {
     display: block;
@@ -264,7 +267,7 @@
     z-index: 100;
     margin: 0 auto;
   }
-  
+
   .navbar .nav-links {
     display: none;
     flex-direction: column;
@@ -274,18 +277,18 @@
     top: 100%;
     left: 0;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
-  
+
   .navbar .nav-links.active {
     display: flex;
   }
-  
+
   .navbar .nav-links li {
     width: 100%;
     text-align: center;
   }
-  
+
   .navbar .nav-links li a {
     display: block;
     padding: 15px;
@@ -298,21 +301,21 @@
   .menu-toggle {
     display: none;
   }
-  
+
   .navbar {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
     padding: 10px 20px;
   }
-  
+
   .navbar .nav-links {
     flex: 1;
     display: flex !important;
     justify-content: flex-start;
     margin: 0;
   }
-  
+
   .navbar .header-actions {
     margin-left: auto;
     display: flex;
@@ -328,24 +331,24 @@
     flex-direction: column;
     padding: 10px 20px;
   }
-  
+
   .navbar .header-actions {
     width: 100%;
     justify-content: center;
     margin-top: 10px;
     order: 3;
   }
-  
+
   .menu-toggle {
     order: 1;
     align-self: center;
   }
-  
+
   .navbar .nav-links {
     order: 2;
     width: 100%;
   }
-  
+
   .navbar .nav-links.active {
     display: flex;
     margin-bottom: 10px;
@@ -354,18 +357,19 @@
 
 @media (max-width: 768px) {
   .carousel {
-    height: 300px; /* Reduced height for smaller screens */
+    height: 300px;
+    /* Reduced height for smaller screens */
   }
-  
+
   .carousel-arrow {
     font-size: 18px;
     padding: 10px 14px;
   }
-  
+
   .carousel-indicators {
     bottom: 15px;
   }
-  
+
   .carousel-indicator {
     width: 6px;
     height: 6px;
@@ -374,18 +378,19 @@
 
 @media (max-width: 480px) {
   .carousel {
-    height: 250px; /* Reduced height for mobile */
+    height: 250px;
+    /* Reduced height for mobile */
   }
-  
+
   .carousel-arrow {
     font-size: 16px;
     padding: 8px 12px;
   }
-  
+
   .carousel-arrow.prev {
     left: 10px;
   }
-  
+
   .carousel-arrow.next {
     right: 10px;
   }
@@ -394,7 +399,8 @@
 /* Additional fix for large screens */
 @media (min-width: 1200px) {
   .carousel {
-    height: 600px; /* Larger height for very large screens */
+    height: 600px;
+    /* Larger height for very large screens */
   }
 }
 
@@ -412,15 +418,15 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .video-container {
     height: 250px;
   }
-  
+
   .schemes-main-title {
     font-size: 36px;
   }
-  
+
   .schemes-container {
     padding: 0 30px;
   }
@@ -430,57 +436,57 @@
   .government-schemes-section {
     padding: 60px 0;
   }
-  
+
   .schemes-container {
     padding: 0 20px;
   }
-  
+
   .schemes-header {
     margin-bottom: 40px;
   }
-  
+
   .schemes-main-title {
     font-size: 28px;
   }
-  
+
   .schemes-subtitle {
     font-size: 16px;
   }
-  
+
   .filter-row {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .filter-group {
     min-width: 100%;
   }
-  
+
   .search-button {
     width: 100%;
     height: 52px;
   }
-  
+
   .video-container {
     height: 200px;
   }
-  
+
   .stats-box {
     flex-direction: column;
     gap: 30px;
     padding: 30px 20px;
   }
-  
+
   .stat {
     padding: 0;
   }
-  
+
   .divider {
     width: 100%;
     height: 1px;
     background: linear-gradient(to right, transparent, #cbd5e1, transparent);
   }
-  
+
   .stat-value {
     font-size: 28px;
   }
@@ -491,24 +497,24 @@
   .search-section {
     padding: 20px;
   }
-  
+
   .stats-box {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .stat {
     padding: 20px 0;
   }
-  
+
   .divider {
     display: none;
   }
-  
+
   .stat-value {
     font-size: 2rem;
   }
-  
+
   .stat-label {
     font-size: 14px;
   }
@@ -526,26 +532,26 @@
   .infrastructure-section {
     padding: 40px 20px;
   }
-  
+
   .infrastructure-section h2 {
     font-size: 1.8rem;
     text-align: center;
   }
-  
+
   .infrastructure-section p {
     text-align: center;
     margin-bottom: 30px;
   }
-  
+
   .infrastructure-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .infrastructure-card {
     padding: 30px 20px;
   }
-  
+
   .infrastructure-icon {
     font-size: 3rem;
   }
@@ -563,26 +569,26 @@
   .registration-section {
     padding: 40px 20px;
   }
-  
+
   .registration-section h2 {
     font-size: 1.8rem;
     text-align: center;
   }
-  
+
   .registration-section p {
     text-align: center;
     margin-bottom: 30px;
   }
-  
+
   .registration-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .registration-card {
     padding: 30px 20px;
   }
-  
+
   .registration-icon {
     font-size: 3rem;
   }
@@ -606,30 +612,30 @@
   .schemes-section {
     padding: 40px 20px;
   }
-  
+
   .schemes-section h2 {
     font-size: 1.8rem;
     text-align: center;
   }
-  
+
   .schemes-section p {
     text-align: center;
     margin-bottom: 30px;
   }
-  
+
   .schemes-grid {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .scheme-card {
     padding: 25px 20px;
   }
-  
+
   .scheme-icon {
     font-size: 2.5rem;
   }
-  
+
   .scheme-card h3 {
     font-size: 1.1rem;
   }
@@ -640,23 +646,23 @@
   .faq-section {
     padding: 40px 20px;
   }
-  
+
   .faq-section h2 {
     font-size: 1.8rem;
     text-align: center;
   }
-  
+
   .faq-section p {
     text-align: center;
     margin-bottom: 30px;
   }
-  
+
   .accordion-header {
     padding: 15px;
     font-size: 14px;
     text-align: left;
   }
-  
+
   .accordion-body {
     padding: 15px;
   }
@@ -667,111 +673,243 @@
   .support-section {
     padding: 40px 20px;
   }
-  
+
   .support-container {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .support-text {
     margin-bottom: 30px;
   }
-  
+
   .support-text h2 {
     font-size: 1.5rem;
     margin-bottom: 15px;
   }
-  
+
   .help-button {
     font-size: 14px;
     padding: 12px 20px;
     width: 100%;
   }
-  
+
   .support-image {
     max-width: 250px;
     margin: 0 auto;
   }
-  
+
   .support-image img {
     width: 100%;
     height: auto;
   }
 }
 
-/* Responsive styles for footer */
+/* ── Footer Responsive ─────────────────────────────────────── */
+
+/* Tablet: 3 columns — logo spans full row, 3 link cols below */
 @media screen and (max-width: 992px) {
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+  .footer {
+    padding: 50px 30px 30px;
   }
-  
+
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
   .logo-section {
-    grid-column: span 2;
+    grid-column: 1 / -1;
+    /* full width */
+  }
+
+  /* Newsletter+social side by side */
+  .newsletter-social-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .newsletter-social-row .newsletter-form {
+    flex: 1;
+    min-width: 200px;
   }
 }
 
+/* Small tablet & large phone: 2 columns */
 @media screen and (max-width: 768px) {
   .footer {
-    padding: 40px 20px 20px;
+    padding: 40px 20px 24px;
   }
-  
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    text-align: left;
+  }
+
+  .logo-section {
+    grid-column: 1 / -1;
+    /* full width */
+  }
+
+  /* Center logo row */
+  .yuva-sathi-logo {
+    justify-content: flex-start;
+  }
+
+  /* Newsletter row stacks vertically */
+  .newsletter-social-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .newsletter-social-row .newsletter-form {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .newsletter-form {
+    flex-direction: row;
+    gap: 0;
+    height: 48px;
+    width: 100%;
+  }
+
+  .email-input {
+    border-radius: 8px 0 0 8px;
+    width: 100%;
+  }
+
+  .send-btn {
+    border-radius: 0 8px 8px 0;
+    width: auto;
+    padding: 12px 18px;
+  }
+
+  .social-media {
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+
+  /* Section headings */
+  .footer-section h3 {
+    font-size: 17px;
+  }
+
+  /* Disable translateX on hover links (looks bad at small sizes) */
+  .footer-links a:hover {
+    transform: none;
+  }
+
+  /* Footer bottom */
+  .footer-bottom {
+    margin-top: 28px;
+    padding-top: 20px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+}
+
+/* Phone: 1 column, fully centred */
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 36px 18px 24px;
+  }
+
   .footer-container {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
     text-align: center;
   }
-  
-  .logo-section {
-    grid-column: span 1;
-  }
-  
+
   .yuva-sathi-logo {
     justify-content: center;
   }
-  
+
   .description {
     text-align: center;
-    margin-bottom: 20px;
   }
-  
+
   .newsletter-section {
     text-align: center;
   }
-  
+
   .newsletter-section h4 {
     text-align: center;
   }
-  
+
+  .newsletter-social-row {
+    align-items: center;
+  }
+
   .newsletter-form {
-    flex-direction: column;
-    gap: 10px;
-    align-items: stretch;
+    max-width: 320px;
     width: 100%;
-    max-width: 100%;
+    align-self: center;
   }
-  
-  .email-input {
-    width: 100%;
-    border-radius: 8px;
-  }
-  
-  .send-btn {
-    width: 100%;
-    border-radius: 8px;
-  }
-  
-  .footer-links {
-    text-align: center;
-  }
-  
+
   .social-media {
     justify-content: center;
-    width: 100%;
+    gap: 10px;
   }
-  
+
+  /* Center section headings */
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-section h3 {
+    display: block;
+    text-align: center;
+    align-self: unset;
+  }
+
+  .footer-section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-links {
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+
+  .footer-links a {
+    border-left: none;
+    padding: 4px 0;
+    display: inline-block;
+  }
+
+  .footer-links a:hover {
+    transform: none;
+    color: #60a5fa;
+  }
+
   .contact-info {
     text-align: center;
+  }
+
+  .contact-info p {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .footer-bottom p {
+    margin: 4px 0;
   }
 }
 
@@ -783,7 +921,7 @@
     line-height: 1.2;
     margin-bottom: 5px;
   }
-  
+
   header .main-text h3 {
     font-size: 1.2rem;
     font-weight: 500;
@@ -798,7 +936,7 @@
     line-height: 1.2;
     margin-bottom: 5px;
   }
-  
+
   header .main-text h3 {
     font-size: 1.1rem;
     font-weight: 500;
@@ -811,26 +949,26 @@
     max-width: 95%;
     padding: 14px 18px;
   }
-  
+
   .stats-card {
     max-width: 280px;
     gap: 12px;
     padding: 10px 14px;
   }
-  
+
   .stat-number {
     font-size: 16px;
   }
-  
+
   .search-options {
     gap: 5px;
   }
-  
+
   .white-btn {
     min-width: 140px;
     padding: 5px 10px;
   }
-  
+
   .orange-btn {
     min-width: 100px;
     padding: 8px 12px;
@@ -841,63 +979,63 @@
   .floating-search-ui {
     padding: 15px 8px;
   }
-  
+
   .floating-container {
     padding: 12px 14px;
     gap: 10px;
   }
-  
+
   .top-row {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
   }
-  
+
   .search-options {
     justify-content: center;
     gap: 6px;
   }
-  
+
   .running-text-container {
     margin-left: 0;
   }
-  
+
   .marquee-text {
     font-size: 11px;
   }
-  
+
   .bottom-row {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .stats-card {
     max-width: none;
     width: 100%;
     justify-content: space-around;
     gap: 10px;
   }
-  
+
   .search-option-btn {
     height: 35px;
   }
-  
+
   .white-btn {
     min-width: 120px;
   }
-  
+
   .orange-btn {
     min-width: 90px;
   }
-  
+
   .search-input-container {
     height: 38px;
   }
-  
+
   .search-icon-btn {
     width: 38px;
   }
-  
+
   .marquee-box {
     height: 35px;
   }
@@ -907,29 +1045,29 @@
     flex-direction: column;
     gap: 12px;
   }
-  
+
   .advanced-options {
     flex-direction: column;
     gap: 10px;
     width: 100%;
   }
-  
+
   .filter-group {
     min-width: auto;
     width: 100%;
   }
-  
+
   .filter-select {
     height: 38px;
     font-size: 12px;
   }
-  
+
   .advanced-search-btn {
     width: 100%;
     height: 38px;
     margin-top: 8px;
   }
-  
+
   .advanced-search-row .stats-card {
     order: 2;
     margin-top: 8px;
@@ -942,48 +1080,48 @@
     width: 100%;
     gap: 6px;
   }
-  
+
   .search-option-btn {
     width: 100%;
     justify-content: center;
     height: 32px;
   }
-  
+
   .btn-content {
     align-items: center;
     text-align: center;
   }
-  
+
   .stats-card {
     flex-direction: column;
     gap: 8px;
     padding: 10px;
   }
-  
+
   .stat-item {
     width: 100%;
   }
-  
+
   .stat-number {
     font-size: 14px;
   }
-  
+
   .stat-label {
     font-size: 9px;
   }
-  
+
   .marquee-box {
     height: 32px;
   }
-  
+
   .marquee-text {
     font-size: 10px;
   }
-  
+
   .search-input-container {
     height: 35px;
   }
-  
+
   .search-icon-btn {
     width: 35px;
   }
@@ -995,31 +1133,388 @@
     padding: 60px 15px;
     margin: 60px 15px;
   }
-  
+
   .infrastructure-section h2 {
     font-size: 32px;
   }
-  
+
   .infrastructure-section p {
     font-size: 18px;
     margin-bottom: 40px;
   }
-  
+
   .infrastructure-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
   }
-  
+
   .infrastructure-card {
     padding: 30px 20px;
     background: rgba(255, 255, 255, 0.98);
   }
-  
+
   .infrastructure-icon {
     font-size: 48px;
   }
-  
+
   .infrastructure-card h3 {
     font-size: 18px;
+  }
+}
+
+/* ====================================================
+   NEW RESPONSIVE ADDITIONS — Inner Pages
+   ==================================================== */
+
+/* ── Hamburger Toggle Button (inner pages) ────────────── */
+/* The button is hidden by default; shown at mobile widths */
+@media screen and (max-width: 768px) {
+  .main-header {
+    position: relative;
+  }
+
+  /* Show the hamburger button */
+  #menuToggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    padding: 8px 12px;
+    order: 3;
+    margin-left: auto;
+  }
+
+  /* Stack nav links vertically and hide until toggled */
+  .main-header .header-right {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .main-header .main-nav {
+    width: 100%;
+    order: 4;
+  }
+
+  .main-header .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #f8f8f8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .main-header .nav-links.active {
+    display: flex;
+  }
+
+  .main-header .nav-links li {
+    width: 100%;
+  }
+
+  .main-header .nav-links li a {
+    display: block;
+    padding: 14px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .main-header .header-actions {
+    width: 100%;
+    justify-content: center;
+    order: 2;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  #menuToggle {
+    display: none;
+  }
+}
+
+/* ── Page Hero Banner ────────────────────────────────── */
+@media screen and (max-width: 992px) {
+  .page-hero {
+    padding: 28px 30px 32px;
+  }
+
+  .page-hero-title {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page-hero {
+    padding: 22px 20px 26px;
+  }
+
+  .page-hero-hindi {
+    font-size: 20px;
+  }
+
+  .page-hero-title {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .page-hero-subtitle {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .ph-dot {
+    display: none;
+  }
+
+  .page-hero-subtitle br {
+    display: block;
+  }
+
+  .page-hero-stats {
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    justify-content: flex-start;
+    margin-top: 14px;
+  }
+
+  .ph-stat-value {
+    font-size: 22px;
+  }
+
+  .ph-stat-label {
+    font-size: 11px;
+  }
+
+  /* Downloads search bar in hero */
+  .dl-search-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .dl-search-bar input {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* ── Officials Section — Key Officials cards ─────────── */
+@media screen and (max-width: 900px) {
+  .officials-list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .officials-list {
+    gap: 16px;
+  }
+
+  .official-card {
+    flex-direction: column;
+  }
+
+  .official-photo-wrap {
+    flex: none;
+    width: 100%;
+    height: 180px;
+    min-height: unset;
+  }
+
+  .official-info {
+    padding: 16px;
+  }
+}
+
+/* ── Directorate & District grids ────────────────────── */
+@media screen and (max-width: 992px) {
+  .dir-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dist-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  .dir-grid,
+  .dist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dir-card {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .officials-page {
+    padding: 20px 16px;
+  }
+}
+
+/* ── Contact Page — two-column layout ───────────────── */
+@media screen and (max-width: 992px) {
+  .department-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .department-left,
+  .department-right {
+    width: 100%;
+    max-width: 100%;
+    flex: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .department-info-section {
+    padding: 30px 20px;
+  }
+
+  .department-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* Stack first/last name fields vertically */
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-form-section {
+    padding: 24px 20px;
+  }
+
+  .social-icons-contact {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .send-message-btn {
+    width: 100%;
+  }
+}
+
+/* ── Downloads Page — card grid & cards ──────────────── */
+@media screen and (max-width: 992px) {
+  .dl-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dl-page {
+    padding: 24px 16px;
+  }
+
+  .dl-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dl-card {
+    flex-direction: column;
+  }
+
+  .dl-card-left {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-right: none;
+    border-bottom: 1px solid #eef0f7;
+  }
+
+  .dl-card-actions {
+    flex-direction: row;
+    padding: 0 16px 14px;
+    gap: 10px;
+  }
+
+  .dl-download-btn,
+  .dl-preview-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .dl-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .dl-disclaimer-inner {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dl-card-actions {
+    flex-direction: column;
+  }
+
+  .dl-meta {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+/* ── Fixed Social Icons — hide on mobile (already in footer) ── */
+@media screen and (max-width: 768px) {
+  .fixed-social-media {
+    display: none;
+  }
+}
+
+/* ====================================================
+   FLOATING SEARCH UI — Override absolute positioning
+   The desktop CSS sets position:absolute; top:760px; left:130px
+   which causes massive overflow on mobile. Switch to relative.
+   ==================================================== */
+
+@media screen and (max-width: 1100px) {
+  .floating-search-ui {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 16px !important;
+    box-sizing: border-box;
+  }
+
+  /* Also fix the content section bottom padding so nothing is hidden behind the floating UI */
+  .content-section {
+    padding-bottom: 30px !important;
+  }
+
+  .government-schemes-section {
+    margin-top: 30px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .floating-search-ui {
+    padding: 0 10px !important;
+  }
+
+  .floating-container {
+    padding: 16px 14px;
   }
 }

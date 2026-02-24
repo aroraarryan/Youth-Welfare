@@ -23,7 +23,7 @@
     <div class="gov-header-bar">
         <div class="gov-header-left">
             <span class="flag-icon">🇮🇳</span>
-            <span class="gov-text">Government of Uttarakhand</span>
+            <span class="gov-text" data-i18n="gov.text">Government of Uttarakhand</span>
         </div>
         <div class="gov-header-right">
             <button class="header-icon-btn" title="Share">
@@ -53,18 +53,19 @@
         </div>
 
         <div class="header-right">
+            <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="aboutUs.html">About Us</a></li>
-                    <li><a href="#">Schemes/Services</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="contact.html?from=about">Contact Us</a></li>
+                    <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="aboutUs.html">About Usdata-i18n="nav.about" data-i18n="ft.about">About Us</a></li>
+                    <li><a href="#" data-i18n="nav.schemes">Schemes/Services</a></li>
+                    <li><a href="#" data-i18n="nav.gallery">Gallery</a></li>
+                    <li><a href="contact.html?from=about" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="downlods.html?from=about" data-i18n="nav.downloads">Downloads</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="downlods.html?from=about" class="login-btn">Downloads</a>
-                <a href="register.html" class="join-btn">Join the Community</a>
+                <a href="register.html" class="join-btn" data-i18n="nav.join">Join the Community</a>
                 <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
@@ -93,15 +94,15 @@
             <div class="page-hero-stats">
                 <div class="ph-stat">
                     <span class="ph-stat-value">13</span>
-                    <span class="ph-stat-label">Districts</span>
+                    <span class="ph-stat-label" data-i18n="ab.stat1">Districts</span>
                 </div>
                 <div class="ph-stat">
                     <span class="ph-stat-value">118+</span>
-                    <span class="ph-stat-label">Schemes</span>
+                    <span class="ph-stat-label" data-i18n="ab.stat2">Schemes</span>
                 </div>
                 <div class="ph-stat">
                     <span class="ph-stat-value">12.5L+</span>
-                    <span class="ph-stat-label">Youth Registered</span>
+                    <span class="ph-stat-label" data-i18n="ab.stat3">Youth Registered</span>
                 </div>
             </div>
         </div>
@@ -712,11 +713,11 @@
 
                 <!-- Newsletter Signup -->
                 <div class="newsletter-section">
-                    <h4>Stay Informed with the Latest Updates!</h4>
+                    <h4 data-i18n="ft.newsletter">Stay Informed with the Latest Updates!</h4>
                     <div class="newsletter-social-row">
                         <div class="newsletter-form">
-                            <input type="email" placeholder="Enter your email id" class="email-input" />
-                            <button class="send-btn">Send</button>
+                            <input type="email" placeholder="Enter your email id" class="email-input" data-i18n-placeholder="ft.email.placeholder" />
+                            <button class="send-btn" data-i18n="ft.send">Send</button>
                         </div>
                         <!-- Social Media Icons -->
                         <div class="social-media">
@@ -737,34 +738,34 @@
 
             <!-- Quick Links Section -->
             <div class="footer-section">
-                <h3>Quick Links</h3>
+                <h3 data-i18n="ft.quicklinks">Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">How To Register With Us </a></li>
-                    <li><a href="#">Who We Are</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">About Usdata-i18n="nav.about" data-i18n="ft.about">About Us</a></li>
+                    <li><a href="#" data-i18n="ft.register">How To Register With Us </a></li>
+                    <li><a href="#" data-i18n="ft.who">Who We Are</a></li>
+                    <li><a href="#" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="#" data-i18n="ft.faq">FAQ</a></li>
                 </ul>
 
             </div>
             <!-- Policies Section -->
             <div class="footer-section">
-                <h3>Policies</h3>
+                <h3 data-i18n="ft.policies">Policies</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Press Release</a></li>
-                    <li><a href="#">Photo Gallery</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Disclaimer</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#" data-i18n="ft.press">Press Release</a></li>
+                    <li><a href="#" data-i18n="ft.gallery">Photo Gallery</a></li>
+                    <li><a href="#" data-i18n="ft.terms">Terms & Conditions</a></li>
+                    <li><a href="#" data-i18n="ft.disclaimer">Disclaimer</a></li>
+                    <li><a href="#" data-i18n="ft.privacy">Privacy Policy</a></li>
                 </ul>
             </div>
 
             <!-- Contact Us Section -->
             <div class="footer-section">
-                <h3>Contact Us</h3>
+                <h3 data-i18n="ft.contact">Contact Us</h3>
                 <ul class="footer-links">
                     <li>
-                        <a href="#">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
+                        <a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
                     </li>
                     <li>
                         <a href="tel:+919634312465"><strong>Phone :</strong>+91-9634312465</a>
@@ -794,14 +795,14 @@
             var bc = document.getElementById('about-breadcrumb');
             if (!bc) return;
 
-            var homeLink = '<a href="../index.html">Home</a>';
+            var homeLink = '<a href="../index.html" data-i18n="nav.home">Home</a>';
             var sep = '<span class="bc-sep">›</span>';
             var current = '<span class="bc-current">About Us</span>';
 
             if (from === 'contact') {
-                bc.innerHTML = homeLink + sep + '<a href="contact.html">Contact Us</a>' + sep + current;
+                bc.innerHTML = homeLink + sep + '<a href="contact.html" data-i18n="nav.contact">Contact Us</a>' + sep + current;
             } else if (from === 'downloads') {
-                bc.innerHTML = homeLink + sep + '<a href="downlods.html">Downloads</a>' + sep + current;
+                bc.innerHTML = homeLink + sep + '<a href="downlods.html" data-i18n="nav.downloads">Downloads</a>' + sep + current;
             } else if (from === 'register') {
                 bc.innerHTML = homeLink + sep + '<a href="register.html">Register</a>' + sep + current;
             } else if (from === 'login') {

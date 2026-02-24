@@ -25,7 +25,7 @@
     <div class="gov-header-bar">
         <div class="gov-header-left">
             <span class="flag-icon">🇮🇳</span>
-            <span class="gov-text">Government of Uttarakhand</span>
+            <span class="gov-text" data-i18n="gov.text">Government of Uttarakhand</span>
         </div>
         <div class="gov-header-right">
             <button class="header-icon-btn" title="Share"><i class="fas fa-share-alt"></i></button>
@@ -48,18 +48,19 @@
             </div>
         </div>
         <div class="header-right">
+            <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="aboutUs.html?from=downloads">About Us</a></li>
-                    <li><a href="#">Schemes/Services</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="contact.html?from=downloads">Contact Us</a></li>
+                    <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="aboutUs.html?from=downloads">About Usdata-i18n="nav.about" data-i18n="ft.about">About Us</a></li>
+                    <li><a href="#" data-i18n="nav.schemes">Schemes/Services</a></li>
+                    <li><a href="#" data-i18n="nav.gallery">Gallery</a></li>
+                    <li><a href="contact.html?from=downloads" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="downlods.html" data-i18n="nav.downloads">Downloads</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="downlods.html" class="login-btn">Downloads</a>
-                <a href="register.html" class="join-btn">Join the Community</a>
+                <a href="register.html" class="join-btn" data-i18n="nav.join">Join the Community</a>
                 <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
@@ -78,7 +79,7 @@
             <h1 class="page-hero-title">Downloads — Youth Welfare &amp; PRD Department</h1>
 
             <!-- Subtitle -->
-            <p class="page-hero-subtitle">
+            <p class="page-hero-subtitle" data-i18n="dl.hero.subtitle">
                 Access official forms, circulars, scheme documents &amp; reports
                 <span class="ph-dot">·</span>
                 Department of Youth Welfare and PRD, Uttarakhand
@@ -88,22 +89,22 @@
             <div class="page-hero-stats">
                 <div class="ph-stat">
                     <span class="ph-stat-value">13</span>
-                    <span class="ph-stat-label">Districts</span>
+                    <span class="ph-stat-label" data-i18n="dl.stat1">Districts</span>
                 </div>
                 <div class="ph-stat">
                     <span class="ph-stat-value">40+</span>
-                    <span class="ph-stat-label">Documents</span>
+                    <span class="ph-stat-label" data-i18n="dl.stat2">Documents</span>
                 </div>
                 <div class="ph-stat">
                     <span class="ph-stat-value">2026</span>
-                    <span class="ph-stat-label">Edition</span>
+                    <span class="ph-stat-label" data-i18n="dl.stat3">Edition</span>
                 </div>
             </div>
 
             <!-- Search bar -->
             <div class="dl-search-bar" style="margin-top: 22px;">
                 <i class="fas fa-search"></i>
-                <input type="text" id="dlSearch" placeholder="Search documents…" oninput="filterDocs()" />
+                <input type="text" id="dlSearch" placeholder="Search documents…" data-i18n-placeholder="dl.search.placeholder" oninput="filterDocs()" />
             </div>
         </div>
     </div>
@@ -116,8 +117,8 @@
             <div class="dl-section-header">
                 <span class="dl-section-icon forms-icon"><i class="fas fa-file-alt"></i></span>
                 <div>
-                    <h3>Forms &amp; Applications</h3>
-                    <p>Official application and registration forms for various programmes and schemes.</p>
+                    <h3 data-i18n="dl.forms.title">Forms &amp; Applications</h3>
+                    <p data-i18n="dl.forms.desc">Official application and registration forms for various programmes and schemes.</p>
                 </div>
             </div>
             <div class="dl-grid">
@@ -139,7 +140,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -160,7 +161,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -181,7 +182,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -202,7 +203,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -214,8 +215,8 @@
             <div class="dl-section-header">
                 <span class="dl-section-icon circular-icon"><i class="fas fa-bullhorn"></i></span>
                 <div>
-                    <h3>Circulars &amp; Notices</h3>
-                    <p>Official circulars, orders and notices issued by the department.</p>
+                    <h3 data-i18n="dl.circ.title">Circulars &amp; Notices</h3>
+                    <p data-i18n="dl.circ.desc">Official circulars, orders and notices issued by the department.</p>
                 </div>
             </div>
             <div class="dl-grid">
@@ -237,7 +238,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -258,7 +259,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -279,7 +280,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -291,7 +292,7 @@
             <div class="dl-section-header">
                 <span class="dl-section-icon scheme-icon"><i class="fas fa-book-open"></i></span>
                 <div>
-                    <h3>Schemes &amp; Guidelines</h3>
+                    <h3 data-i18n="dl.scheme.title">Schemes &amp; Guidelines</h3>
                     <p>Detailed documents for government schemes, eligibility criteria and implementation guidelines.
                     </p>
                 </div>
@@ -315,7 +316,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -336,7 +337,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -357,7 +358,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -369,8 +370,8 @@
             <div class="dl-section-header">
                 <span class="dl-section-icon report-icon"><i class="fas fa-chart-bar"></i></span>
                 <div>
-                    <h3>Reports &amp; Publications</h3>
-                    <p>Annual reports, statistical publications and activity reports of the department.</p>
+                    <h3 data-i18n="dl.reports.title">Reports &amp; Publications</h3>
+                    <p data-i18n="dl.reports.desc">Annual reports, statistical publications and activity reports of the department.</p>
                 </div>
             </div>
             <div class="dl-grid">
@@ -392,7 +393,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -413,7 +414,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -434,7 +435,7 @@
                     </div>
                     <div class="dl-card-actions">
                         <a href="#" class="dl-preview-btn" title="Preview"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> Download</a>
+                        <a href="#" class="dl-download-btn" download><i class="fas fa-download"></i> <span data-i18n="dl.download">Download</span></a>
                     </div>
                 </div>
 
@@ -481,11 +482,11 @@
                     Counselling, Sports, Health, Secondary Education, Start-Up, Sewayojan etc.
                 </p>
                 <div class="newsletter-section">
-                    <h4>Stay Informed with the Latest Updates!</h4>
+                    <h4 data-i18n="ft.newsletter">Stay Informed with the Latest Updates!</h4>
                     <div class="newsletter-social-row">
                         <div class="newsletter-form">
-                            <input type="email" placeholder="Enter your email id" class="email-input" />
-                            <button class="send-btn">Send</button>
+                            <input type="email" placeholder="Enter your email id" class="email-input" data-i18n-placeholder="ft.email.placeholder" />
+                            <button class="send-btn" data-i18n="ft.send">Send</button>
                         </div>
                         <div class="social-media">
                             <a href="https://facebook.com" target="_blank" class="social-icon facebook"
@@ -503,36 +504,36 @@
                 </div>
             </div>
             <div class="footer-section">
-                <h3>Quick Links</h3>
+                <h3 data-i18n="ft.quicklinks">Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="aboutUs.html">About Us</a></li>
-                    <li><a href="#">How To Register With Us</a></li>
-                    <li><a href="#">Who We Are</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="aboutUs.html">About Usdata-i18n="nav.about" data-i18n="ft.about">About Us</a></li>
+                    <li><a href="#" data-i18n="ft.register">How To Register With Us</a></li>
+                    <li><a href="#" data-i18n="ft.who">Who We Are</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="#" data-i18n="ft.faq">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Policies</h3>
+                <h3 data-i18n="ft.policies">Policies</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Press Release</a></li>
-                    <li><a href="#">Photo Gallery</a></li>
-                    <li><a href="#">Terms &amp; Conditions</a></li>
-                    <li><a href="#">Disclaimer</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#" data-i18n="ft.press">Press Release</a></li>
+                    <li><a href="#" data-i18n="ft.gallery">Photo Gallery</a></li>
+                    <li><a href="#" data-i18n="ft.terms">Terms &amp; Conditions</a></li>
+                    <li><a href="#" data-i18n="ft.disclaimer">Disclaimer</a></li>
+                    <li><a href="#" data-i18n="ft.privacy">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Contact Us</h3>
+                <h3 data-i18n="ft.contact">Contact Us</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a></li>
+                    <li><a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a></li>
                     <li><a href="tel:+919634312465"><strong>Phone :</strong> +91-9634312465</a></li>
                     <li><a href="mailto:ywprd.uk@gmail.com"><strong>Email :</strong> ywprd.uk@gmail.com</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Department of Youth Welfare and PRD, Uttarakhand Government. All rights reserved.</p>
+            <p data-i18n="ft.copyright">&copy; 2025 Department of Youth Welfare and PRD, Uttarakhand Government. All rights reserved.</p>
         </div>
     </footer>
 
@@ -545,16 +546,16 @@
             var bc = document.getElementById('dl-breadcrumb');
             if (!bc) return;
 
-            var homeLink = '<a href="../index.html">Home</a>';
+            var homeLink = '<a href="../index.html" data-i18n="nav.home">Home</a>';
             var sep = '<span class="bc-sep">›</span>';
             var current = '<span class="bc-current">Downloads</span>';
 
             if (from === 'contact') {
                 bc.innerHTML = homeLink + sep +
-                    '<a href="contact.html">Contact Us</a>' + sep + current;
+                    '<a href="contact.html" data-i18n="nav.contact">Contact Us</a>' + sep + current;
             } else if (from === 'about') {
                 bc.innerHTML = homeLink + sep +
-                    '<a href="aboutUs.html">About Us</a>' + sep + current;
+                    '<a href="aboutUs.html">About Usdata-i18n="nav.about" data-i18n="ft.about">About Us</a>' + sep + current;
             } else if (from === 'register') {
                 bc.innerHTML = homeLink + sep +
                     '<a href="register.html">Register</a>' + sep + current;
