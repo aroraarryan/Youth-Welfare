@@ -19,6 +19,7 @@
   <meta name="twitter:widgets:theme" content="light" />
   <meta name="twitter:widgets:border-color" content="#e1e8ed" />
   <title>Youth Welfare</title>
+  <script src="translations.js"></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
   <div class="gov-header-bar">
     <div class="gov-header-left">
       <span class="flag-icon">🇮🇳</span>
-      <span class="gov-text">Government of Uttarakhand</span>
+      <span class="gov-text" data-i18n="gov.name">Government of Uttarakhand</span>
     </div>
     <div class="gov-header-right">
       <button class="header-icon-btn" title="Share">
@@ -50,8 +51,8 @@
         <img class="main-logo" src="images/logo.png" alt="Youth Welfare Logo" />
       </div>
       <div class="logo-text">
-        <h1>Department of Youth Welfare <br />and PRD</h1>
-        <p>Uttarakhand Government</p>
+        <h1 data-i18n="hero.title">Department of Youth Welfare <br />and PRD</h1>
+        <p data-i18n="hero.subtitle">Uttarakhand Government</p>
       </div>
     </div>
 
@@ -59,16 +60,16 @@
       <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
       <nav class="main-nav">
         <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="pages/aboutUs.html">About Us</a></li>
-          <li><a href="pages/gallery.html">Gallery</a></li>
-          <li><a href="pages/contact.html">Contact Us</a></li>
-          <li><a href="pages/downlods.html">Downloads</a></li>
-          <li><a href="#">RTI</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="pages/aboutUs.html" data-i18n="nav.about">About Us</a></li>
+          <li><a href="pages/gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="pages/contact.html" data-i18n="nav.contact">Contact Us</a></li>
+          <li><a href="pages/downlods.html" data-i18n="nav.downloads">Downloads</a></li>
+          <li><a href="#" data-i18n="nav.rti">RTI</a></li>
         </ul>
       </nav>
       <div class="header-actions">
-        <a href="pages/register.html" class="join-btn">Join the Community</a>
+        <a href="pages/register.html" class="join-btn" data-i18n="nav.join">Join the Community</a>
         <button class="search-btn"><i class="fas fa-search"></i></button>
       </div>
     </div>
@@ -119,16 +120,16 @@
         <div class="search-options">
           <button class="search-option-btn white-btn" id="schemeNameBtn">
             <div class="btn-content">
-              <span class="btn-title">Search with Scheme Name</span>
+              <span class="btn-title" data-i18n="search.scheme_btn">Search with Scheme Name</span>
             </div>
           </button>
           <button class="search-option-btn orange-btn" id="advanceSearchBtn">
-            <span class="btn-text">Advance Search</span>
+            <span class="btn-text" data-i18n="search.advance_btn">Advance Search</span>
           </button>
         </div>
         <div class="running-text-container">
           <div class="marquee-box">
-            <div class="marquee-text">
+            <div class="marquee-text" data-i18n="search.marquee">
               Single Platform for Youth of Uttarakhand to get information
               related to Jobs, Skill development, Vocational Training,
               Employment, Self-Employment, Higher Education, Competitive
@@ -143,40 +144,40 @@
       <div class="advanced-search-row" id="advancedSearchRow" style="display: none">
         <div class="advanced-options">
           <div class="filter-group">
-            <label class="filter-label">Scheme Categories</label>
+            <label class="filter-label" data-i18n="search.categories">Scheme Categories</label>
             <div class="select-wrapper">
               <select class="filter-select">
-                <option>Select Scheme Category</option>
-                <option>Education & Scholarship</option>
-                <option>Business & Entrepreneurship</option>
-                <option>Skill Development</option>
-                <option>Employment</option>
-                <option>Health & Wellness</option>
+                <option data-i18n="search.select_cat">Select Scheme Category</option>
+                <option data-i18n="filter.opt_edu">Education & Scholarship</option>
+                <option data-i18n="filter.opt_biz">Business & Entrepreneurship</option>
+                <option data-i18n="filter.opt_skill">Skill Development</option>
+                <option data-i18n="filter.opt_emp">Employment</option>
+                <option data-i18n="filter.opt_health">Health & Wellness</option>
               </select>
               <i class="fas fa-chevron-down select-arrow"></i>
             </div>
           </div>
           <div class="filter-group">
-            <label class="filter-label">Age</label>
+            <label class="filter-label" data-i18n="search.age">Age</label>
             <div class="select-wrapper">
               <select class="filter-select">
-                <option>Select Age</option>
-                <option>18-25</option>
-                <option>26-35</option>
-                <option>36-45</option>
-                <option>Above 45</option>
+                <option data-i18n="search.select_age">Select Age</option>
+                <option data-i18n="filter.opt_18_25">18-25</option>
+                <option data-i18n="filter.opt_26_35">26-35</option>
+                <option data-i18n="filter.opt_36_45">36-45</option>
+                <option data-i18n="filter.opt_above_45">Above 45</option>
               </select>
               <i class="fas fa-chevron-down select-arrow"></i>
             </div>
           </div>
           <div class="filter-group">
-            <label class="filter-label">Select State</label>
+            <label class="filter-label" data-i18n="search.state">Select State</label>
             <div class="select-wrapper">
               <select class="filter-select">
-                <option>Select Government</option>
-                <option>Central Government</option>
-                <option>State Government</option>
-                <option>Local Government</option>
+                <option data-i18n="search.select_gov">Select Government</option>
+                <option data-i18n="filter.opt_central">Central Government</option>
+                <option data-i18n="filter.opt_state">State Government</option>
+                <option data-i18n="filter.opt_local">Local Government</option>
               </select>
               <i class="fas fa-chevron-down select-arrow"></i>
             </div>
@@ -187,15 +188,15 @@
         </div>
         <div class="stats-card">
           <div class="stat-item">
-            <div class="stat-label">Youth Registered</div>
+            <div class="stat-label" data-i18n="stats.registered">Youth Registered</div>
             <div class="stat-number">1258635</div>
           </div>
           <div class="stat-item">
-            <div class="stat-label">Listed Youth Schemes</div>
+            <div class="stat-label" data-i18n="stats.listed">Listed Youth Schemes</div>
             <div class="stat-number">118</div>
           </div>
           <div class="stat-item">
-            <div class="stat-label">Student Schemes</div>
+            <div class="stat-label" data-i18n="stats.student">Student Schemes</div>
             <div class="stat-number">26</div>
           </div>
         </div>
@@ -205,7 +206,8 @@
       <div class="bottom-row" id="normalSearchRow">
         <div class="search-bar-section">
           <div class="search-input-container">
-            <input type="text" class="main-search-input" placeholder="Search with Scheme Name" />
+            <input type="text" class="main-search-input" placeholder="Search with Scheme Name"
+              data-i18n-placeholder="search.placeholder" />
             <button class="search-icon-btn">
               <i class="fas fa-search"></i>
             </button>
@@ -213,15 +215,15 @@
         </div>
         <div class="stats-card">
           <div class="stat-item">
-            <div class="stat-label">Youth Registered</div>
+            <div class="stat-label" data-i18n="stats.registered">Youth Registered</div>
             <div class="stat-number">1258635</div>
           </div>
           <div class="stat-item">
-            <div class="stat-label">Listed Youth Schemes</div>
+            <div class="stat-label" data-i18n="stats.listed">Listed Youth Schemes</div>
             <div class="stat-number">118</div>
           </div>
           <div class="stat-item">
-            <div class="stat-label">Student Schemes</div>
+            <div class="stat-label" data-i18n="stats.student">Student Schemes</div>
             <div class="stat-number">26</div>
           </div>
         </div>
@@ -253,58 +255,58 @@
         <div class="search-filters">
           <!-- Header -->
           <div class="schemes-header">
-            <h2 class="schemes-main-title">
+            <h2 class="schemes-main-title" data-i18n="schemes.main_title">
               Government Department Schemes for youth
             </h2>
-            <p class="schemes-subtitle">
+            <p class="schemes-subtitle" data-i18n="schemes.subtitle">
               Explore the government schemes/services
             </p>
           </div>
 
           <div class="filter-row">
             <div class="filter-group">
-              <label class="filter-label">Scheme Category</label>
+              <label class="filter-label" data-i18n="filter.category">Scheme Category</label>
               <div class="select-wrapper">
                 <select class="filter-select">
-                  <option>Select Scheme Category</option>
-                  <option>Education & Scholarship</option>
-                  <option>Business & Entrepreneurship</option>
-                  <option>Skill Development</option>
-                  <option>Employment</option>
-                  <option>Health & Wellness</option>
+                  <option data-i18n="filter.select_cat">Select Scheme Category</option>
+                  <option data-i18n="filter.opt_edu">Education & Scholarship</option>
+                  <option data-i18n="filter.opt_biz">Business & Entrepreneurship</option>
+                  <option data-i18n="filter.opt_skill">Skill Development</option>
+                  <option data-i18n="filter.opt_emp">Employment</option>
+                  <option data-i18n="filter.opt_health">Health & Wellness</option>
                 </select>
                 <i class="fas fa-chevron-down select-arrow"></i>
               </div>
             </div>
 
             <div class="filter-group">
-              <label class="filter-label">By Government</label>
+              <label class="filter-label" data-i18n="filter.government">By Government</label>
               <div class="select-wrapper">
                 <select class="filter-select">
-                  <option>Select Government</option>
-                  <option>Central Government</option>
-                  <option>State Government</option>
-                  <option>Local Government</option>
+                  <option data-i18n="filter.select_gov">Select Government</option>
+                  <option data-i18n="filter.opt_central">Central Government</option>
+                  <option data-i18n="filter.opt_state">State Government</option>
+                  <option data-i18n="filter.opt_local">Local Government</option>
                 </select>
                 <i class="fas fa-chevron-down select-arrow"></i>
               </div>
             </div>
 
             <div class="filter-group">
-              <label class="filter-label">Department</label>
+              <label class="filter-label" data-i18n="filter.department">Department</label>
               <div class="select-wrapper">
                 <select class="filter-select">
-                  <option>Select Department</option>
-                  <option>Youth Welfare</option>
-                  <option>Education</option>
-                  <option>Health</option>
-                  <option>Employment</option>
+                  <option data-i18n="filter.select_dept">Select Department</option>
+                  <option data-i18n="filter.opt_yw">Youth Welfare</option>
+                  <option data-i18n="filter.opt_edu_dept">Education</option>
+                  <option data-i18n="filter.opt_health_dept">Health</option>
+                  <option data-i18n="filter.opt_emp">Employment</option>
                 </select>
                 <i class="fas fa-chevron-down select-arrow"></i>
               </div>
             </div>
 
-            <button class="search-button">
+            <button class="search-button" data-i18n="filter.search_btn">
               <i class="fas fa-search"></i>
               Search
             </button>
@@ -315,51 +317,53 @@
   </section>
 
   <section class="infrastructure-section">
-    <h2>Infrastructure</h2>
-    <p>Explore the government infrastructure initiatives on Yuva Sathi !</p>
+    <h2 data-i18n="infra.title">Infrastructure</h2>
+    <p data-i18n="infra.subtitle">Explore the government infrastructure initiatives on Yuva Sathi !</p>
 
     <div class="infrastructure-grid">
       <!-- Item 1 -->
       <div class="infrastructure-card">
         <div class="infrastructure-icon">🏢</div>
-        <h3>Multipurpose Halls</h3>
-        <button class="moreinfo-btn" onclick="window.location.href='pages/multipurpose-halls.html'">More Info</button>
+        <h3 data-i18n="infra.halls">Multipurpose Halls</h3>
+        <button class="moreinfo-btn" onclick="window.location.href='pages/multipurpose-halls.html'"
+          data-i18n="infra.more_info">More Info</button>
       </div>
 
       <!-- Item 2 -->
       <div class="infrastructure-card">
         <div class="infrastructure-icon">🏟️</div>
-        <h3>Mini Stadiums</h3>
-        <button class="moreinfo-btn" onclick="window.location.href='pages/mini-stadiums.html'">More Info</button>
+        <h3 data-i18n="infra.stadiums">Mini Stadiums</h3>
+        <button class="moreinfo-btn" onclick="window.location.href='pages/mini-stadiums.html'"
+          data-i18n="infra.more_info">More Info</button>
       </div>
 
       <!-- Item 3 -->
       <div class="infrastructure-card">
         <div class="infrastructure-icon">🏠</div>
-        <h3>Youth hostel</h3>
-        <button class="moreinfo-btn">More Info</button>
+        <h3 data-i18n="infra.hostel">Youth hostel</h3>
+        <button class="moreinfo-btn" data-i18n="infra.more_info">More Info</button>
       </div>
 
       <!-- Item 4 -->
       <div class="infrastructure-card">
         <div class="infrastructure-icon">🏃</div>
-        <h3>Vocational Training Centers</h3>
-        <button class="moreinfo-btn">More Info</button>
+        <h3 data-i18n="infra.vocational">Vocational Training Centers</h3>
+        <button class="moreinfo-btn" data-i18n="infra.more_info">More Info</button>
       </div>
     </div>
   </section>
 
   <section class="registration-section">
-    <h2>Registration</h2>
-    <p>Register for various youth programs and services</p>
+    <h2 data-i18n="reg.title">Registration</h2>
+    <p data-i18n="reg.subtitle">Register for various youth programs and services</p>
 
     <div class="registration-grid">
       <!-- Sports Card -->
       <div class="registration-card">
         <div class="registration-icon">🏃‍♂️</div>
-        <h3>Sports (Khel Mahakumbh)</h3>
-        <p>Register for sports programs and competitions</p>
-        <button class="register-btn" onclick="window.location = 'pages/khel-mahakumbh/index.html'">
+        <h3 data-i18n="reg.sports_title">Sports (Khel Mahakumbh)</h3>
+        <p data-i18n="reg.sports_desc">Register for sports programs and competitions</p>
+        <button class="register-btn" onclick="window.location = 'pages/khel-mahakumbh/index.html'" data-i18n="reg.btn">
           Register Now
         </button>
       </div>
@@ -367,9 +371,10 @@
       <!-- Youth Volunteering Card -->
       <div class="registration-card">
         <div class="registration-icon">🤝</div>
-        <h3>Youth Volunteering</h3>
-        <p>Join volunteer programs and community service</p>
-        <button class="register-btn" onclick="window.location = 'pages/youth-volunteering/index.html'">
+        <h3 data-i18n="reg.volunteer_title">Youth Volunteering</h3>
+        <p data-i18n="reg.volunteer_desc">Join volunteer programs and community service</p>
+        <button class="register-btn" onclick="window.location = 'pages/youth-volunteering/index.html'"
+          data-i18n="reg.btn">
           Register Now
         </button>
       </div>
@@ -377,9 +382,10 @@
       <!-- Vocational Training Card -->
       <div class="registration-card">
         <div class="registration-icon">🔧</div>
-        <h3>Vocational Training</h3>
-        <p>Enroll in skill development and training programs</p>
-        <button class="register-btn" onclick="window.location = 'pages/vocational-training/index.html'">
+        <h3 data-i18n="reg.vocational_title">Vocational Training</h3>
+        <p data-i18n="reg.vocational_desc">Enroll in skill development and training programs</p>
+        <button class="register-btn" onclick="window.location = 'pages/vocational-training/index.html'"
+          data-i18n="reg.btn">
           Register Now
         </button>
       </div>
@@ -387,12 +393,13 @@
       <!-- Login Card -->
       <div class="registration-card">
         <div class="registration-icon">🏁</div>
-        <h3>Adventure Training Program</h3>
-        <p>
+        <h3 data-i18n="reg.adventure_title">Adventure Training Program</h3>
+        <p data-i18n="reg.adventure_desc">
           Join us for an exciting adventure training program designed for
           youth.
         </p>
-        <button class="register-btn" onclick="window.location = 'pages/adventure-training/index.html'">
+        <button class="register-btn" onclick="window.location = 'pages/adventure-training/index.html'"
+          data-i18n="reg.btn">
           Register Now
         </button>
       </div>
@@ -400,157 +407,157 @@
   </section>
 
   <section class="schemes-section">
-    <h2>Get government <span>Schemes/Services</span></h2>
-    <p>Explore the government schemes/services domain-wise on Yuva Sathi !</p>
+    <h2 data-i18n="services.title">Get government <span>Schemes/Services</span></h2>
+    <p data-i18n="services.subtitle">Explore the government schemes/services domain-wise on Yuva Sathi !</p>
 
     <div class="schemes-grid">
       <!-- Item 1 -->
       <div class="scheme-card">
         <div class="scheme-badge">23 Schemes</div>
         <div class="scheme-icon">🎓</div>
-        <h3>Education &<br />Scholarship</h3>
+        <h3 data-i18n="services.edu">Education &<br />Scholarship</h3>
       </div>
 
       <!-- Item 2 -->
       <div class="scheme-card">
         <div class="scheme-badge">14 Schemes</div>
         <div class="scheme-icon">💼</div>
-        <h3>Business &<br />Entrepreneurship</h3>
+        <h3 data-i18n="services.biz">Business &<br />Entrepreneurship</h3>
       </div>
 
       <!-- Item 3 -->
       <div class="scheme-card">
         <div class="scheme-badge">12 Schemes</div>
         <div class="scheme-icon">⚙️</div>
-        <h3>Skill Development</h3>
+        <h3 data-i18n="services.skill">Skill Development</h3>
       </div>
 
       <!-- Item 4 -->
       <div class="scheme-card">
         <div class="scheme-badge">3 Schemes</div>
         <div class="scheme-icon">🏃</div>
-        <h3>Sport & Culture</h3>
+        <h3 data-i18n="services.sport">Sport & Culture</h3>
       </div>
 
       <!-- Item 5 -->
       <div class="scheme-card">
         <div class="scheme-badge">22 Schemes</div>
         <div class="scheme-icon">💼</div>
-        <h3>Employment</h3>
+        <h3 data-i18n="services.emp">Employment</h3>
       </div>
 
       <!-- Item 6 -->
       <div class="scheme-card">
         <div class="scheme-badge">8 Schemes</div>
         <div class="scheme-icon">✊</div>
-        <h3>Empowerment</h3>
+        <h3 data-i18n="services.wom">Empowerment</h3>
       </div>
 
       <!-- Item 7 -->
       <div class="scheme-card">
         <div class="scheme-badge">3 Schemes</div>
         <div class="scheme-icon">🏠</div>
-        <h3>Housing & Shelter</h3>
+        <h3 data-i18n="services.house">Housing & Shelter</h3>
       </div>
 
       <!-- Item 8 -->
       <div class="scheme-card">
         <div class="scheme-badge">6 Schemes</div>
         <div class="scheme-icon">💰</div>
-        <h3>Financial Services</h3>
+        <h3 data-i18n="services.fin">Financial Services</h3>
       </div>
 
       <!-- Item 9 -->
       <div class="scheme-card">
         <div class="scheme-badge">17 Schemes</div>
         <div class="scheme-icon">📊</div>
-        <h3>Socio-economic</h3>
+        <h3 data-i18n="services.socio">Socio-economic</h3>
       </div>
 
       <!-- Item 10 -->
       <div class="scheme-card">
         <div class="scheme-badge">5 Schemes</div>
         <div class="scheme-icon">🏥</div>
-        <h3>Health & Wellness</h3>
+        <h3 data-i18n="services.health">Health & Wellness</h3>
       </div>
 
       <!-- Item 11 -->
       <div class="scheme-card">
         <div class="scheme-badge">5 Schemes</div>
         <div class="scheme-icon">🔬</div>
-        <h3>Technology &<br />Science</h3>
+        <h3 data-i18n="services.tech">Technology &<br />Science</h3>
       </div>
     </div>
   </section>
 
   <section class="faq-section">
-    <h2>FAQ</h2>
-    <p>Get answers of yours frequently asked questions</p>
+    <h2 data-i18n="faq.title">FAQ</h2>
+    <p data-i18n="faq.subtitle">Get answers of yours frequently asked questions</p>
 
     <div class="accordion">
       <div class="accordion-item">
-        <button class="accordion-header">
+        <button class="accordion-header" data-i18n="faq.q1">
           What is Youth Welfare Department of Uttarkhand?
         </button>
         <div class="accordion-body">
-          <p>Answer goes here...</p>
+          <p data-i18n="faq.a_placeholder">Answer goes here...</p>
         </div>
       </div>
 
       <div class="accordion-item">
-        <button class="accordion-header">
+        <button class="accordion-header" data-i18n="faq.q2">
           What are the categories of information Youth Welfare Department of
           Uttarkhand providing?
         </button>
         <div class="accordion-body">
-          <p>Answer goes here...</p>
+          <p data-i18n="faq.a_placeholder">Answer goes here...</p>
         </div>
       </div>
 
       <div class="accordion-item">
-        <button class="accordion-header">
+        <button class="accordion-header" data-i18n="faq.q3">
           Is it necessary to register in the portal to avail the advantages
           and other functionalities?
         </button>
         <div class="accordion-body">
-          <p>Answer goes here...</p>
+          <p data-i18n="faq.a_placeholder">Answer goes here...</p>
         </div>
       </div>
 
       <div class="accordion-item">
-        <button class="accordion-header">
+        <button class="accordion-header" data-i18n="faq.q4">
           How to register in the portal?
         </button>
         <div class="accordion-body">
-          <p>Answer goes here...</p>
+          <p data-i18n="faq.a_placeholder">Answer goes here...</p>
         </div>
       </div>
 
       <div class="accordion-item">
-        <button class="accordion-header">
+        <button class="accordion-header" data-i18n="faq.q5">
           In case of forgetting the password of the portal, how to reset
           password?
         </button>
         <div class="accordion-body">
-          <p>Answer goes here...</p>
+          <p data-i18n="faq.a_placeholder">Answer goes here...</p>
         </div>
       </div>
 
       <div class="accordion-item">
-        <button class="accordion-header">
+        <button class="accordion-header" data-i18n="faq.q6">
           What is the Scheme/service profiles?
         </button>
         <div class="accordion-body">
-          <p>Answer goes here...</p>
+          <p data-i18n="faq.a_placeholder">Answer goes here...</p>
         </div>
       </div>
 
       <div class="accordion-item">
-        <button class="accordion-header">
+        <button class="accordion-header" data-i18n="faq.q7">
           Where to contact for any assistance and support?
         </button>
         <div class="accordion-body">
-          <p>Answer goes here...</p>
+          <p data-i18n="faq.a_placeholder">Answer goes here...</p>
         </div>
       </div>
     </div>
@@ -577,13 +584,13 @@
           <div class="yuva-sathi-logo">
             <img src="images/logo.png" alt="Yuva Sathi Logo" class="logo-icon" />
             <div class="logo-text">
-              <span class="yuva">Youth</span>
-              <span class="sathi">Welfare And PRD Department</span>
-              <div class="tagline">Uttarakhand</div>
+              <span class="yuva" data-i18n="nav.home">Youth</span>
+              <span class="sathi" data-i18n="hero.title">Welfare And PRD Department</span>
+              <div class="tagline" data-i18n="hero.subtitle">Uttarakhand</div>
             </div>
           </div>
         </div>
-        <p class="description">
+        <p class="description" data-i18n="ft.description">
           A Single Platform for Youth of Uttarakhand to get information
           related to Jobs, Skill development, Vocational Training, Employment,
           Self-Employment, Higher Education, Competitive Examination, Carrier
@@ -593,11 +600,12 @@
 
         <!-- Newsletter Signup -->
         <div class="newsletter-section">
-          <h4>Stay Informed with the Latest Updates!</h4>
+          <h4 data-i18n="ft.newsletter_title">Stay Informed with the Latest Updates!</h4>
           <div class="newsletter-social-row">
             <div class="newsletter-form">
-              <input type="email" placeholder="Enter your email id" class="email-input" />
-              <button class="send-btn">Send</button>
+              <input type="email" placeholder="Enter your email id" class="email-input"
+                data-i18n-placeholder="ft.email_placeholder" />
+              <button class="send-btn" data-i18n="ft.send_btn">Send</button>
             </div>
             <!-- Social Media Icons -->
             <div class="social-media">
@@ -618,39 +626,39 @@
 
       <!-- Quick Links Section -->
       <div class="footer-section">
-        <h3>Quick Links</h3>
+        <h3 data-i18n="ft.quicklinks">Quick Links</h3>
         <ul class="footer-links">
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">How To Register With Us </a></li>
-          <li><a href="#">Who We Are</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="pages/aboutUs.html" data-i18n="nav.about">About Us</a></li>
+          <li><a href="#" data-i18n="ft.register">How To Register With Us </a></li>
+          <li><a href="#" data-i18n="ft.who">Who We Are</a></li>
+          <li><a href="pages/contact.html" data-i18n="nav.contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="ft.faq">FAQ</a></li>
         </ul>
       </div>
       <!-- Policies Section -->
       <div class="footer-section">
-        <h3>Policies</h3>
+        <h3 data-i18n="ft.policies">Policies</h3>
         <ul class="footer-links">
-          <li><a href="#">Press Release</a></li>
-          <li><a href="pages/gallery.html">Photo Gallery</a></li>
-          <li><a href="#">Terms & Conditions</a></li>
-          <li><a href="#">Disclaimer</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#" data-i18n="ft.press">Press Release</a></li>
+          <li><a href="pages/gallery.html" data-i18n="ft.gallery">Photo Gallery</a></li>
+          <li><a href="#" data-i18n="ft.terms">Terms & Conditions</a></li>
+          <li><a href="#" data-i18n="ft.disclaimer">Disclaimer</a></li>
+          <li><a href="#" data-i18n="ft.privacy">Privacy Policy</a></li>
         </ul>
       </div>
 
       <!-- Contact Us Section -->
       <div class="footer-section">
-        <h3>Contact Us</h3>
+        <h3 data-i18n="ft.contact">Contact Us</h3>
         <ul class="footer-links">
           <li>
-            <a href="#">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
+            <a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
           </li>
           <li>
-            <a href="tel:+919634312465"><strong>Phone :</strong>+91-9634312465</a>
+            <a href="tel:+919634312465"><strong data-i18n="ft.phone">Phone :</strong>+91-9634312465</a>
           </li>
           <li>
-            <a href="mailto:ywprd.uk@gmail.com"><strong>Email :</strong>ywprd.uk@gmail.com</a>
+            <a href="mailto:ywprd.uk@gmail.com"><strong data-i18n="ft.email">Email :</strong>ywprd.uk@gmail.com</a>
           </li>
         </ul>
       </div>
@@ -658,7 +666,7 @@
 
     <!-- Copyright Section -->
     <div class="footer-bottom">
-      <p>
+      <p data-i18n="ft.copyright">
         &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
         Government. All rights reserved.
       </p>

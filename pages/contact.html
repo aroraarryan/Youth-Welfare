@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
   <title>Contact Us</title>
+  <script src="../translations.js"></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
   <div class="gov-header-bar">
     <div class="gov-header-left">
       <span class="flag-icon">🇮🇳</span>
-      <span class="gov-text" data-i18n="gov.text">Government of Uttarakhand</span>
+      <span class="gov-text" data-i18n="gov.name">Government of Uttarakhand</span>
     </div>
     <div class="gov-header-right">
       <button class="header-icon-btn" title="Share">
@@ -47,8 +48,8 @@
         <img class="main-logo" src="../images/logo.png" alt="Youth Welfare Logo" />
       </div>
       <div class="logo-text">
-        <h1>Department of Youth Welfare <br />and PRD</h1>
-        <p>Uttarakhand Government</p>
+        <h1 data-i18n="hero.title">Department of Youth Welfare <br />and PRD</h1>
+        <p data-i18n="hero.subtitle">Uttarakhand Government</p>
       </div>
     </div>
 
@@ -61,7 +62,7 @@
           <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
           <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
           <li><a href="downlods.html?from=contact" data-i18n="nav.downloads">Downloads</a></li>
-          <li><a href="#" data-i18n="nav.schemes">RTI</a></li>
+          <li><a href="#" data-i18n="nav.rti">RTI</a></li>
         </ul>
       </nav>
       <div class="header-actions">
@@ -78,10 +79,10 @@
       <nav class="page-hero-breadcrumb" aria-label="Breadcrumb" id="contact-breadcrumb"></nav>
 
       <!-- Hindi Title -->
-      <p class="page-hero-hindi">संपर्क करें</p>
+      <p class="page-hero-hindi" data-i18n="ct.hero.hindi">संपर्क करें</p>
 
       <!-- English Title -->
-      <h1 class="page-hero-title">Contact Us — Youth Welfare &amp; PRD Department</h1>
+      <h1 class="page-hero-title" data-i18n="ct.hero.title">Contact Us — Youth Welfare &amp; PRD Department</h1>
 
       <!-- Subtitle -->
       <p class="page-hero-subtitle" data-i18n="ct.hero.subtitle">
@@ -178,17 +179,20 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName" data-i18n="ct.form.fname">First name</label>
-                <input type="text" id="firstName" name="firstName" placeholder="First name" data-i18n-placeholder="ct.fname.placeholder" required />
+                <input type="text" id="firstName" name="firstName" placeholder="First name"
+                  data-i18n-placeholder="ct.fname.placeholder" required />
               </div>
               <div class="form-group">
                 <label for="lastName" data-i18n="ct.form.lname">Last name</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Last name" data-i18n-placeholder="ct.lname.placeholder" required />
+                <input type="text" id="lastName" name="lastName" placeholder="Last name"
+                  data-i18n-placeholder="ct.lname.placeholder" required />
               </div>
             </div>
 
             <div class="form-group">
               <label for="email" data-i18n="ct.form.email">Email</label>
-              <input type="email" id="email" name="email" placeholder="you@company.com" data-i18n-placeholder="ct.email.placeholder" required />
+              <input type="email" id="email" name="email" placeholder="you@company.com"
+                data-i18n-placeholder="ct.email.placeholder" required />
             </div>
 
             <div class="form-group">
@@ -198,19 +202,22 @@
                   <option value="IN">IN</option>
                   <option value="US">US</option>
                 </select>
-                <input type="tel" id="phone" name="phone" placeholder="+91 (555) 000-0000" data-i18n-placeholder="ct.phone.placeholder" required />
+                <input type="tel" id="phone" name="phone" placeholder="+91 (555) 000-0000"
+                  data-i18n-placeholder="ct.phone.placeholder" required />
               </div>
             </div>
 
             <div class="form-group">
               <label for="message" data-i18n="ct.form.message">Message</label>
-              <textarea id="message" name="message" placeholder="Leave us a message..." data-i18n-placeholder="ct.message.placeholder" rows="5" required></textarea>
+              <textarea id="message" name="message" placeholder="Leave us a message..."
+                data-i18n-placeholder="ct.message.placeholder" rows="5" required></textarea>
             </div>
 
             <div class="form-group checkbox-group">
               <label class="checkbox-label">
                 <input type="checkbox" required />
-                <span class="checkbox-text" data-i18n="ct.form.checkbox">You agree to our friendly privacy policy.</span>
+                <span class="checkbox-text" data-i18n="ct.form.checkbox">You agree to our friendly privacy
+                  policy.</span>
               </label>
             </div>
 
@@ -250,7 +257,8 @@
           <h4 data-i18n="ft.newsletter">Stay Informed with the Latest Updates!</h4>
           <div class="newsletter-social-row">
             <div class="newsletter-form">
-              <input type="email" placeholder="Enter your email id" class="email-input" data-i18n-placeholder="ft.email.placeholder" />
+              <input type="email" placeholder="Enter your email id" class="email-input"
+                data-i18n-placeholder="ft.email.placeholder" />
               <button class="send-btn" data-i18n="ft.send">Send</button>
             </div>
             <!-- Social Media Icons -->
@@ -302,10 +310,10 @@
             <a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
           </li>
           <li>
-            <a href="tel:+919634312465"><strong>Phone :</strong>+91-9634312465</a>
+            <a href="tel:+919634312465"><strong data-i18n="ft.phone">Phone :</strong>+91-9634312465</a>
           </li>
           <li>
-            <a href="mailto:ywprd.uk@gmail.com"><strong>Email :</strong>ywprd.uk@gmail.com</a>
+            <a href="mailto:ywprd.uk@gmail.com"><strong data-i18n="ft.email">Email :</strong>ywprd.uk@gmail.com</a>
           </li>
         </ul>
       </div>
@@ -313,7 +321,8 @@
 
     <!-- Copyright Section -->
     <div class="footer-bottom">
-      <p data-i18n="ft.copyright">&copy; 2025 Department of Youth Welfare and PRD, Uttarakhand Government. All rights reserved.</p>
+      <p data-i18n="ft.copyright">&copy; 2025 Department of Youth Welfare and PRD, Uttarakhand Government. All rights
+        reserved.</p>
     </div>
   </footer>
 

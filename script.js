@@ -390,3 +390,56 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+// =========================================
+// LANGUAGE SWITCHING LOGIC
+// =========================================
+function setLanguage(lang) {
+    if (!window.translations) {
+        console.error("Translations not loaded");
+        return;
+    }
+
+    const elements = document.querySelectorAll("[data-i18n]");
+    elements.forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (window.translations[lang] && window.translations[lang][key]) {
+            el.textContent = window.translations[lang][key];
+        }
+    });
+
+    const inputs = document.querySelectorAll("[data-i18n-placeholder]");
+    inputs.forEach(input => {
+        const key = input.getAttribute("data-i18n-placeholder");
+        if (window.translations[lang] && window.translations[lang][key]) {
+            input.placeholder = window.translations[lang][key];
+        }
+    });
+
+    // Update button text
+    const langToggles = document.querySelectorAll('.lang-toggle');
+    langToggles.forEach(toggle => {
+        toggle.textContent = lang === 'en' ? 'हिन्दी' : 'EN';
+    });
+
+    // Update HTML lang attribute
+    document.documentElement.lang = lang;
+
+    // Save preference
+    localStorage.setItem("preferredLanguage", lang);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const langToggles = document.querySelectorAll('.lang-toggle');
+    let currentLang = localStorage.getItem("preferredLanguage") || "en";
+
+    // Initial set
+    setTimeout(() => setLanguage(currentLang), 100);
+
+    langToggles.forEach(toggle => {
+        toggle.addEventListener("click", () => {
+            currentLang = currentLang === "en" ? "hi" : "en";
+            setLanguage(currentLang);
+        });
+    });
+});

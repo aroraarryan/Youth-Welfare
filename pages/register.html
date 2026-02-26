@@ -16,6 +16,7 @@
   <!-- Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <title>Register</title>
+  <script src="../translations.js"></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
   <div class="gov-header-bar">
     <div class="gov-header-left">
       <span class="flag-icon">🇮🇳</span>
-      <span class="gov-text">Government of Uttarakhand</span>
+      <span class="gov-text" data-i18n="gov.name">Government of Uttarakhand</span>
     </div>
     <div class="gov-header-right">
       <button class="header-icon-btn" title="Share">
@@ -47,24 +48,24 @@
         <img class="main-logo" src="../images/logo.png" alt="Youth Welfare Logo" />
       </div>
       <div class="logo-text">
-        <h1>Department of Youth Welfare <br />and PRD</h1>
-        <p>Uttarakhand Government</p>
+        <h1 data-i18n="hero.title">Department of Youth Welfare <br />and PRD</h1>
+        <p data-i18n="hero.subtitle">Uttarakhand Government</p>
       </div>
     </div>
 
     <div class="header-right">
       <nav class="main-nav">
         <ul class="nav-links">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="aboutUs.html?from=register">About Us</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html?from=register">Contact Us</a></li>
+          <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="aboutUs.html?from=register" data-i18n="nav.about">About Us</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="contact.html?from=register" data-i18n="nav.contact">Contact Us</a></li>
         </ul>
       </nav>
       <div class="header-actions">
-        <a href="downlods.html?from=register" class="login-btn">Downloads</a>
-        <a href="#" class="login-btn" style="margin-left: 5px;">RTI</a>
-        <a href="register.html" class="join-btn">Join the Community</a>
+        <a href="downlods.html?from=register" class="login-btn" data-i18n="nav.downloads">Downloads</a>
+        <a href="#" class="login-btn" style="margin-left: 5px;" data-i18n="nav.rti">RTI</a>
+        <a href="register.html" class="join-btn" data-i18n="nav.join">Join the Community</a>
         <button class="search-btn"><i class="fas fa-search"></i></button>
       </div>
     </div>
@@ -145,7 +146,7 @@
             </div>
           </div>
         </div>
-        <p class="description">
+        <p class="description" data-i18n="ft.description">
           A Single Platform for Youth of Uttarakhand to get information
           related to Jobs, Skill development, Vocational Training, Employment,
           Self-Employment, Higher Education, Competitive Examination, Carrier
@@ -155,11 +156,12 @@
 
         <!-- Newsletter Signup -->
         <div class="newsletter-section">
-          <h4>Stay Informed with the Latest Updates!</h4>
+          <h4 data-i18n="ft.newsletter_title">Stay Informed with the Latest Updates!</h4>
           <div class="newsletter-social-row">
             <div class="newsletter-form">
-              <input type="email" placeholder="Enter your email id" class="email-input" />
-              <button class="send-btn">Send</button>
+              <input type="email" placeholder="Enter your email id" class="email-input"
+                data-i18n-placeholder="ft.email_placeholder" />
+              <button class="send-btn" data-i18n="ft.send_btn">Send</button>
             </div>
             <!-- Social Media Icons -->
             <div class="social-media">
@@ -180,40 +182,40 @@
 
       <!-- Quick Links Section -->
       <div class="footer-section">
-        <h3>Quick Links</h3>
+        <h3 data-i18n="ft.quicklinks">Quick Links</h3>
         <ul class="footer-links">
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">How To Register With Us </a></li>
-          <li><a href="#">Who We Are</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="aboutUs.html" data-i18n="nav.about">About Us</a></li>
+          <li><a href="#" data-i18n="ft.register">How To Register With Us </a></li>
+          <li><a href="#" data-i18n="ft.who">Who We Are</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="ft.faq">FAQ</a></li>
         </ul>
 
       </div>
       <!-- Policies Section -->
       <div class="footer-section">
-        <h3>Policies</h3>
+        <h3 data-i18n="ft.policies">Policies</h3>
         <ul class="footer-links">
-          <li><a href="#">Press Release</a></li>
-          <li><a href="gallery.html">Photo Gallery</a></li>
-          <li><a href="#">Terms & Conditions</a></li>
-          <li><a href="#">Disclaimer</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#" data-i18n="ft.press">Press Release</a></li>
+          <li><a href="gallery.html" data-i18n="ft.gallery">Photo Gallery</a></li>
+          <li><a href="#" data-i18n="ft.terms">Terms & Conditions</a></li>
+          <li><a href="#" data-i18n="ft.disclaimer">Disclaimer</a></li>
+          <li><a href="#" data-i18n="ft.privacy">Privacy Policy</a></li>
         </ul>
       </div>
 
       <!-- Contact Us Section -->
       <div class="footer-section">
-        <h3>Contact Us</h3>
+        <h3 data-i18n="ft.contact">Contact Us</h3>
         <ul class="footer-links">
           <li>
-            <a href="#">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
+            <a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
           </li>
           <li>
-            <a href="tel:+919634312465"><strong>Phone :</strong>+91-9634312465</a>
+            <a href="tel:+919634312465"><strong data-i18n="ft.phone">Phone :</strong>+91-9634312465</a>
           </li>
           <li>
-            <a href="mailto:ywprd.uk@gmail.com"><strong>Email :</strong>ywprd.uk@gmail.com</a>
+            <a href="mailto:ywprd.uk@gmail.com"><strong data-i18n="ft.email">Email :</strong>ywprd.uk@gmail.com</a>
           </li>
         </ul>
       </div>
@@ -221,7 +223,7 @@
 
     <!-- Copyright Section -->
     <div class="footer-bottom">
-      <p>
+      <p data-i18n="ft.copyright">
         &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
         Government. All rights reserved.
       </p>

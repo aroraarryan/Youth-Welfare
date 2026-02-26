@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
     <title>Gallery — Youth Welfare</title>
+    <script src="../translations.js"></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
     <div class="gov-header-bar">
         <div class="gov-header-left">
             <span class="flag-icon">🇮🇳</span>
-            <span class="gov-text" data-i18n="gov.text">Government of Uttarakhand</span>
+            <span class="gov-text" data-i18n="gov.name">Government of Uttarakhand</span>
         </div>
         <div class="gov-header-right">
             <button class="header-icon-btn" title="Share">
@@ -47,8 +48,8 @@
                 <img class="main-logo" src="../images/logo.png" alt="Youth Welfare Logo" />
             </div>
             <div class="logo-text">
-                <h1>Department of Youth Welfare <br />and PRD</h1>
-                <p>Uttarakhand Government</p>
+                <h1 data-i18n="hero.title">Department of Youth Welfare <br />and PRD</h1>
+                <p data-i18n="hero.subtitle">Uttarakhand Government</p>
             </div>
         </div>
 
@@ -61,7 +62,7 @@
                     <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
                     <li><a href="contact.html?from=gallery" data-i18n="nav.contact">Contact Us</a></li>
                     <li><a href="downlods.html?from=gallery" data-i18n="nav.downloads">Downloads</a></li>
-                    <li><a href="#" data-i18n="nav.schemes">RTI</a></li>
+                    <li><a href="#" data-i18n="nav.rti">RTI</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -78,13 +79,14 @@
             <nav class="page-hero-breadcrumb" aria-label="Breadcrumb" id="gallery-breadcrumb"></nav>
 
             <!-- Hindi Title -->
-            <p class="page-hero-hindi">फोटो और वीडियो गैलरी</p>
+            <p class="page-hero-hindi" data-i18n="gl.hero.hindi">फोटो और वीडियो गैलरी</p>
 
             <!-- English Title -->
-            <h1 class="page-hero-title">Photo &amp; Video Gallery — Youth Welfare &amp; PRD Department</h1>
+            <h1 class="page-hero-title" data-i18n="gl.hero.title">Photo &amp; Video Gallery — Youth Welfare &amp; PRD
+                Department</h1>
 
             <!-- Subtitle -->
-            <p class="page-hero-subtitle">
+            <p class="page-hero-subtitle" data-i18n="gl.hero.subtitle">
                 Capturing moments from various activities, sports, and training programs across the state.
             </p>
         </div>
@@ -94,11 +96,15 @@
     <main class="gallery-page">
         <!-- Filter Tabs -->
         <div class="gallery-filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="sports">Sports &amp; Khel Mahakumbh</button>
-            <button class="filter-btn" data-filter="training">Vocational Training</button>
-            <button class="filter-btn" data-filter="events">Events &amp; Ceremonies</button>
-            <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+            <button class="filter-btn active" data-filter="all" data-i18n="gl.filter.all">All</button>
+            <button class="filter-btn" data-filter="sports" data-i18n="gl.filter.sports">Sports &amp; Khel
+                Mahakumbh</button>
+            <button class="filter-btn" data-filter="training" data-i18n="gl.filter.training">Vocational
+                Training</button>
+            <button class="filter-btn" data-filter="events" data-i18n="gl.filter.events">Events &amp;
+                Ceremonies</button>
+            <button class="filter-btn" data-filter="infrastructure"
+                data-i18n="gl.filter.infrastructure">Infrastructure</button>
         </div>
 
         <!-- Masonry Grid -->
@@ -275,7 +281,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="description">
+                <p class="description" data-i18n="ft.description">
                     A Single Platform for Youth of Uttarakhand to get information
                     related to Jobs, Skill development, Vocational Training, Employment,
                     Self-Employment, Higher Education, Competitive Examination, Carrier
@@ -285,12 +291,12 @@
 
                 <!-- Newsletter Signup -->
                 <div class="newsletter-section">
-                    <h4 data-i18n="ft.newsletter">Stay Informed with the Latest Updates!</h4>
+                    <h4 data-i18n="ft.newsletter_title">Stay Informed with the Latest Updates!</h4>
                     <div class="newsletter-social-row">
                         <div class="newsletter-form">
                             <input type="email" placeholder="Enter your email id" class="email-input"
-                                data-i18n-placeholder="ft.email.placeholder" />
-                            <button class="send-btn" data-i18n="ft.send">Send</button>
+                                data-i18n-placeholder="ft.email_placeholder" />
+                            <button class="send-btn" data-i18n="ft.send_btn">Send</button>
                         </div>
                         <!-- Social Media Icons -->
                         <div class="social-media">
@@ -341,10 +347,11 @@
                         <a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
                     </li>
                     <li>
-                        <a href="tel:+919634312465"><strong>Phone :</strong>+91-9634312465</a>
+                        <a href="tel:+919634312465"><strong data-i18n="ft.phone">Phone :</strong>+91-9634312465</a>
                     </li>
                     <li>
-                        <a href="mailto:ywprd.uk@gmail.com"><strong>Email :</strong>ywprd.uk@gmail.com</a>
+                        <a href="mailto:ywprd.uk@gmail.com"><strong data-i18n="ft.email">Email
+                                :</strong>ywprd.uk@gmail.com</a>
                     </li>
                 </ul>
             </div>
@@ -352,7 +359,7 @@
 
         <!-- Copyright Section -->
         <div class="footer-bottom">
-            <p>
+            <p data-i18n="ft.copyright">
                 &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
                 Government. All rights reserved.
             </p>

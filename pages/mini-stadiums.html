@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
     <title>Mini Stadiums — Youth Welfare</title>
+    <script src="../translations.js"></script>
     <style>
         .stadiums-container {
             max-width: 1200px;
@@ -156,7 +157,7 @@
     <div class="gov-header-bar">
         <div class="gov-header-left">
             <span class="flag-icon">🇮🇳</span>
-            <span class="gov-text">Government of Uttarakhand</span>
+            <span class="gov-text" data-i18n="gov.name">Government of Uttarakhand</span>
         </div>
         <div class="gov-header-right">
             <button class="header-icon-btn" title="Share"><i class="fas fa-share-alt"></i></button>
@@ -174,8 +175,8 @@
                 <img class="main-logo" src="../images/logo.png" alt="Youth Welfare Logo" />
             </div>
             <div class="logo-text">
-                <h1>Department of Youth Welfare <br />and PRD</h1>
-                <p>Uttarakhand Government</p>
+                <h1 data-i18n="hero.title">Department of Youth Welfare <br />and PRD</h1>
+                <p data-i18n="hero.subtitle">Uttarakhand Government</p>
             </div>
         </div>
 
@@ -183,16 +184,16 @@
             <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="aboutUs.html">About Us</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="downlods.html">Downloads</a></li>
-                    <li><a href="#">RTI</a></li>
+                    <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="aboutUs.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="downlods.html" data-i18n="nav.downloads">Downloads</a></li>
+                    <li><a href="#" data-i18n="nav.rti">RTI</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="register.html" class="join-btn">Join the Community</a>
+                <a href="register.html" class="join-btn" data-i18n="nav.join">Join the Community</a>
                 <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
@@ -202,13 +203,13 @@
     <div class="page-hero">
         <div class="page-hero-inner">
             <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
-                <a href="../index.html">Home</a>
+                <a href="../index.html" data-i18n="nav.home">Home</a>
                 <span class="bc-sep">›</span>
-                <span class="bc-current">Mini Stadiums</span>
+                <span class="bc-current" data-i18n="infra.stadiums">Mini Stadiums</span>
             </nav>
-            <p class="page-hero-hindi">मिनी स्टेडियम</p>
-            <h1 class="page-hero-title">Constructed Mini Stadiums</h1>
-            <p class="page-hero-subtitle">
+            <p class="page-hero-hindi" data-i18n="infra.stadiums_hindi">मिनी स्टेडियम</p>
+            <h1 class="page-hero-title" data-i18n="infra.stadiums_title">Constructed Mini Stadiums</h1>
+            <p class="page-hero-subtitle" data-i18n="infra.stadiums_subtitle">
                 Find information about mini stadiums across various districts of Uttarakhand.
             </p>
         </div>
@@ -217,10 +218,10 @@
     <main class="stadiums-container">
         <!-- Filter Section -->
         <div class="filter-section">
-            <h2 class="filter-title">Select Your District</h2>
+            <h2 class="filter-title" data-i18n="filter.select_district">Select Your District</h2>
             <div class="district-select-wrapper">
                 <select id="districtSelect" class="district-select">
-                    <option value="" disabled selected>Choose a District</option>
+                    <option value="" disabled selected data-i18n="filter.choose_district">Choose a District</option>
                     <option value="almora">Almora</option>
                     <option value="bageshwar">Bageshwar</option>
                     <option value="chamoli">Chamoli</option>
@@ -241,7 +242,7 @@
         <div id="resultsArea" class="results-section">
             <div class="empty-state">
                 <i class="fas fa-running"></i>
-                <p>Please select a district to view the available mini stadiums.</p>
+                <p data-i18n="filter.empty_state">Please select a district to view the available mini stadiums.</p>
             </div>
         </div>
     </main>
@@ -259,7 +260,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="description">
+                <p class="description" data-i18n="ft.description">
                     A Single Platform for Youth of Uttarakhand to get information
                     related to Jobs, Skill development, Vocational Training, Employment,
                     Self-Employment, Higher Education, Competitive Examination, Carrier
@@ -269,35 +270,37 @@
             </div>
 
             <div class="footer-section">
-                <h3>Quick Links</h3>
+                <h3 data-i18n="ft.quicklinks">Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="aboutUs.html">About Us</a></li>
-                    <li><a href="#">How To Register</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="aboutUs.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="#" data-i18n="ft.register">How To Register</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="#" data-i18n="ft.faq">FAQ</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
-                <h3>Policies</h3>
+                <h3 data-i18n="ft.policies">Policies</h3>
                 <ul class="footer-links">
-                    <li><a href="gallery.html">Photo Gallery</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="gallery.html" data-i18n="ft.gallery">Photo Gallery</a></li>
+                    <li><a href="#" data-i18n="ft.terms">Terms & Conditions</a></li>
+                    <li><a href="#" data-i18n="ft.privacy">Privacy Policy</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
-                <h3>Contact Us</h3>
+                <h3 data-i18n="ft.contact">Contact Us</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Uttarakhand Secretariat, Dehradun – 248001</a></li>
-                    <li><a href="tel:+919634312465"><strong>Phone:</strong> +91-9634312465</a></li>
-                    <li><a href="mailto:ywprd.uk@gmail.com"><strong>Email:</strong> ywprd.uk@gmail.com</a></li>
+                    <li><a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Dehradun – 248001</a></li>
+                    <li><a href="tel:+919634312465"><strong data-i18n="ft.phone">Phone:</strong> +91-9634312465</a></li>
+                    <li><a href="mailto:ywprd.uk@gmail.com"><strong data-i18n="ft.email">Email:</strong>
+                            ywprd.uk@gmail.com</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Department of Youth Welfare and PRD, Uttarakhand. All rights reserved.</p>
+            <p data-i18n="ft.copyright">&copy; 2025 Department of Youth Welfare and PRD, Uttarakhand. All rights
+                reserved.</p>
         </div>
     </footer>
 
@@ -458,7 +461,7 @@
                 resultsArea.innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-search"></i>
-                        <p>No mini stadiums listed for <strong>${district}</strong> currently.</p>
+                        <p data-i18n="filter.empty_state">Please select a district to view the available facilities.</p>
                     </div>
                 `;
             }

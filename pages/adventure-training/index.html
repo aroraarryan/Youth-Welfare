@@ -1,1425 +1,969 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../../styles.css" />
-    <link rel="stylesheet" href="../../responsive.css" />
-    <link rel="stylesheet" href="../reg-shared.css" />
-    <!-- Page accent: earthy burnt orange / mountain brown for adventure -->
-    <style>
-      :root {
-        --page-accent-1: #431407;
-        --page-accent-2: #7c2d12;
-        --page-accent-3: #9a3412;
-      }
-      .km-legend__num,
-      .km-sec-link:hover .km-sec-num,
-      .km-sec-link.active .km-sec-num {
-        background: #7c2d12;
-      }
-      .km-sec-link:hover,
-      .km-sec-link.active {
-        color: #7c2d12;
-      }
-      .km-input:focus,
-      .km-select:focus,
-      .km-textarea:focus {
-        border-color: #7c2d12;
-        box-shadow: 0 0 0 3px rgba(124, 45, 18, 0.12);
-      }
-      .km-phone-wrap:focus-within {
-        border-color: #7c2d12;
-        box-shadow: 0 0 0 3px rgba(124, 45, 18, 0.12);
-      }
-      .km-cb:has(input:checked) {
-        border-color: #7c2d12;
-        background: rgba(124, 45, 18, 0.06);
-      }
-      .km-cb:has(input:checked) .km-cb__box {
-        background: #7c2d12;
-        border-color: #7c2d12;
-      }
-      .km-btn-submit {
-        background: linear-gradient(135deg, #431407 0%, #9a3412 100%);
-        box-shadow: 0 4px 14px rgba(124, 45, 18, 0.35);
-      }
-      .km-btn-submit:hover {
-        box-shadow: 0 6px 20px rgba(124, 45, 18, 0.45);
-      }
-      .km-radio:hover,
-      .km-radio:has(input:checked) {
-        border-color: #7c2d12;
-        color: #7c2d12;
-      }
-      .km-radio:has(input:checked) .km-radio__dot {
-        border-color: #7c2d12;
-      }
-      .km-radio:has(input:checked) .km-radio__dot::after {
-        background: #7c2d12;
-      }
-      .km-progress__fill {
-        background: linear-gradient(90deg, #431407, #fb923c);
-      }
-      .km-helpline {
-        color: #7c2d12;
-      }
-      .km-sidebar__card h3,
-      .km-reg-id,
-      .km-legend {
-        color: #7c2d12;
-      }
-      .km-reg-id-box {
-        border-color: #7c2d12;
-      }
-      .km-btn-secondary {
-        color: #7c2d12;
-        border-color: #7c2d12;
-      }
-      .km-btn-secondary:hover {
-        background: rgba(124, 45, 18, 0.06);
-      }
-      /* Medical warning box */
-      .km-medical-notice {
-        background: #fff7ed;
-        border: 2px solid #fed7aa;
-        border-left: 4px solid #ea580c;
-        border-radius: 8px;
-        padding: 14px 18px;
-        font-size: 13px;
-        color: #7c2d12;
-        margin-bottom: 20px;
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
-      }
-      .km-medical-notice i {
-        font-size: 1.1rem;
-        flex-shrink: 0;
-        margin-top: 1px;
-      }
-    </style>
-    <title>
-      Adventure Training Program – Registration | Youth Welfare Department
-    </title>
-  </head>
-  <body>
-    <!-- GOVERNMENT HEADER BAR -->
-    <div class="gov-header-bar">
-      <div class="gov-header-left">
-        <span class="flag-icon">🇮🇳</span
-        ><span class="gov-text">Government of Uttarakhand</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../responsive.css" />
+  <link rel="stylesheet" href="../reg-shared.css" />
+  <!-- Page accent: earthy burnt orange / mountain brown for adventure -->
+  <style>
+    :root {
+      --page-accent-1: #431407;
+      --page-accent-2: #7c2d12;
+      --page-accent-3: #9a3412;
+    }
+
+    .km-legend__num,
+    .km-sec-link:hover .km-sec-num,
+    .km-sec-link.active .km-sec-num {
+      background: #7c2d12;
+    }
+
+    .km-sec-link:hover,
+    .km-sec-link.active {
+      color: #7c2d12;
+    }
+
+    .km-input:focus,
+    .km-select:focus,
+    .km-textarea:focus {
+      border-color: #7c2d12;
+      box-shadow: 0 0 0 3px rgba(124, 45, 18, 0.12);
+    }
+
+    .km-phone-wrap:focus-within {
+      border-color: #7c2d12;
+      box-shadow: 0 0 0 3px rgba(124, 45, 18, 0.12);
+    }
+
+    .km-cb:has(input:checked) {
+      border-color: #7c2d12;
+      background: rgba(124, 45, 18, 0.06);
+    }
+
+    .km-cb:has(input:checked) .km-cb__box {
+      background: #7c2d12;
+      border-color: #7c2d12;
+    }
+
+    .km-btn-submit {
+      background: linear-gradient(135deg, #431407 0%, #9a3412 100%);
+      box-shadow: 0 4px 14px rgba(124, 45, 18, 0.35);
+    }
+
+    .km-btn-submit:hover {
+      box-shadow: 0 6px 20px rgba(124, 45, 18, 0.45);
+    }
+
+    .km-radio:hover,
+    .km-radio:has(input:checked) {
+      border-color: #7c2d12;
+      color: #7c2d12;
+    }
+
+    .km-radio:has(input:checked) .km-radio__dot {
+      border-color: #7c2d12;
+    }
+
+    .km-radio:has(input:checked) .km-radio__dot::after {
+      background: #7c2d12;
+    }
+
+    .km-progress__fill {
+      background: linear-gradient(90deg, #431407, #fb923c);
+    }
+
+    .km-helpline {
+      color: #7c2d12;
+    }
+
+    .km-sidebar__card h3,
+    .km-reg-id,
+    .km-legend {
+      color: #7c2d12;
+    }
+
+    .km-reg-id-box {
+      border-color: #7c2d12;
+    }
+
+    .km-btn-secondary {
+      color: #7c2d12;
+      border-color: #7c2d12;
+    }
+
+    .km-btn-secondary:hover {
+      background: rgba(124, 45, 18, 0.06);
+    }
+
+    /* Medical warning box */
+    .km-medical-notice {
+      background: #fff7ed;
+      border: 2px solid #fed7aa;
+      border-left: 4px solid #ea580c;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #7c2d12;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .km-medical-notice i {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+  </style>
+  <title>
+    Adventure Training Program – Registration | Youth Welfare Department
+  </title>
+</head>
+
+<body>
+  <!-- GOVERNMENT HEADER BAR -->
+  <div class="gov-header-bar">
+    <div class="gov-header-left">
+      <span class="flag-icon">🇮🇳</span><span class="gov-text">Government of Uttarakhand</span>
+    </div>
+    <div class="gov-header-right">
+      <button class="header-icon-btn">
+        <i class="fas fa-share-alt"></i>
+      </button>
+      <button class="header-icon-btn"><i class="fas fa-sun"></i></button>
+      <button class="header-icon-btn">
+        <i class="fas fa-universal-access"></i>
+      </button>
+      <button class="lang-toggle">EN</button>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="main-header" id="mainHeader">
+    <div class="header-left">
+      <div class="logos-container">
+        <img class="ashoka-chakra" src="../../images/gov-logo.png" alt="Ashoka Chakra" />
+        <img class="main-logo" src="../../images/logo.png" alt="Youth Welfare Logo" />
       </div>
-      <div class="gov-header-right">
-        <button class="header-icon-btn">
-          <i class="fas fa-share-alt"></i>
-        </button>
-        <button class="header-icon-btn"><i class="fas fa-sun"></i></button>
-        <button class="header-icon-btn">
-          <i class="fas fa-universal-access"></i>
-        </button>
-        <button class="lang-toggle">EN</button>
+      <div class="logo-text">
+        <h1 data-i18n="hero.title">Department of Youth Welfare <br />and PRD</h1>
+        <p data-i18n="hero.subtitle">Uttarakhand Government</p>
       </div>
     </div>
+    <div class="header-right">
+      <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="../../index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="../aboutUs.html" data-i18n="nav.about">About Us</a></li>
+          <li><a href="../gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="../contact.html" data-i18n="nav.contact">Contact Us</a></li>
+          <li><a href="../downlods.html" data-i18n="nav.downloads">Downloads</a></li>
+          <li><a href="#" data-i18n="nav.rti">RTI</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="../register.html" class="join-btn" data-i18n="nav.join">Join the Community</a>
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+  </header>
 
-    <!-- MAIN HEADER -->
-    <header class="main-header">
-      <div class="header-left">
-        <div class="logos-container">
-          <img
-            class="ashoka-chakra"
-            src="../../images/gov-logo.png"
-            alt="Ashoka Chakra"
-          />
-          <img
-            class="main-logo"
-            src="../../images/logo.png"
-            alt="Youth Welfare Logo"
-          />
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="nav.home">Home</a>
+        <span class="bc-sep">›</span>
+        <a href="../../index.html#registration-section" data-i18n="reg.title">Registration</a>
+        <span class="bc-sep">›</span>
+        <span class="bc-current" data-i18n="reg.adventure_title">Adventure Training</span>
+      </nav>
+      <p class="page-hero-hindi" data-i18n="adventure.hero.hindi">साहसिक प्रशिक्षण</p>
+      <h1 class="page-hero-title" data-i18n="adventure.hero.title">Adventure Training Program — Official
+        Registration</h1>
+      <p class="page-hero-subtitle" data-i18n="adventure.hero.subtitle">
+        Trekking · Mountaineering · Rock Climbing · River Rafting ·
+        Paragliding · In partnership with NIM Uttarkashi
+      </p>
+      <div class="page-hero-stats">
+        <div class="ph-stat">
+          <span class="ph-stat-value">15–35</span>
+          <span class="ph-stat-label" data-i18n="adventure.stat.age">Age Group</span>
         </div>
-        <div class="logo-text">
-          <h1>Department of Youth Welfare <br />and PRD</h1>
-          <p>Uttarakhand Government</p>
+        <div class="ph-stat">
+          <span class="ph-stat-value">6</span>
+          <span class="ph-stat-label" data-i18n="adventure.stat.activities">Adventure Activities</span>
+        </div>
+        <div class="ph-stat">
+          <span class="ph-stat-value">NIM</span>
+          <span class="ph-stat-label" data-i18n="adventure.stat.certified">Certified Instructors</span>
+        </div>
+        <div class="ph-stat">
+          <span class="ph-stat-value">Himalaya</span>
+          <span class="ph-stat-label" data-i18n="adventure.stat.terrain">Terrain Training</span>
         </div>
       </div>
-      <div class="header-right">
-        <nav class="main-nav">
-          <ul class="nav-links">
-            <li><a href="../../index.html">Home</a></li>
-            <li><a href="../aboutUs.html">About Us</a></li>
-            <li><a href="../gallery.html">Gallery</a></li>
-            <li><a href="../contact.html">Contact Us</a></li>
-          </ul>
-        </nav>
-        <div class="header-actions">
-          <a href="#" class="login-btn">Download</a>
-        <a href="#" class="login-btn" style="margin-left: 5px;">RTI</a>
-          <a href="../register.html" class="join-btn">Join the Community</a>
-          <button class="search-btn"><i class="fas fa-search"></i></button>
-        </div>
-      </div>
-    </header>
+    </div>
+  </div>
 
-    <!-- PAGE HERO -->
-    <div class="km-hero">
-      <div class="km-hero__inner">
-        <div class="km-hero__breadcrumb">
-          <a href="../../index.html">Home</a><span>›</span>
-          <a href="../../index.html#registration-section">Registration</a
-          ><span>›</span>
-          <span>Adventure Training</span>
-        </div>
-        <h2 class="km-hero__title">
-          <span class="km-hero__hindi">साहसिक प्रशिक्षण</span>
-          Adventure Training Program — Registration
-        </h2>
-        <p class="km-hero__sub">
-          Trekking · Mountaineering · Rock Climbing · River Rafting ·
-          Paragliding · In partnership with NIM Uttarkashi
-        </p>
-        <div class="km-hero__stats">
-          <div class="km-stat">
-            <span class="km-stat__n">15–35</span
-            ><span class="km-stat__l">Age Group</span>
-          </div>
-          <div class="km-stat">
-            <span class="km-stat__n">6</span
-            ><span class="km-stat__l">Adventure Activities</span>
-          </div>
-          <div class="km-stat">
-            <span class="km-stat__n">NIM</span
-            ><span class="km-stat__l">Certified Instructors</span>
-          </div>
-          <div class="km-stat">
-            <span class="km-stat__n">Himalaya</span
-            ><span class="km-stat__l">Terrain Training</span>
-          </div>
-        </div>
-      </div>
-      <div class="km-hero__deco" aria-hidden="true"></div>
+  <main class="km-main" id="km-main">
+    <div class="km-draft-banner" id="regDraftBanner" hidden>
+      <i class="fas fa-clock-rotate-left"></i>
+      <span>We found a saved draft. Would you like to restore it?</span>
+      <button class="moreinfo-btn" id="regRestoreBtn" style="margin-top: 0; padding: 8px 18px; font-size: 13px">
+        Restore Draft
+      </button>
+      <button class="km-btn-ghost" id="regDiscardBtn">Discard</button>
     </div>
 
-    <main class="km-main" id="km-main">
-      <div class="km-draft-banner" id="regDraftBanner" hidden>
-        <i class="fas fa-clock-rotate-left"></i>
-        <span>We found a saved draft. Would you like to restore it?</span>
-        <button
-          class="moreinfo-btn"
-          id="regRestoreBtn"
-          style="margin-top: 0; padding: 8px 18px; font-size: 13px"
-        >
-          Restore Draft
-        </button>
-        <button class="km-btn-ghost" id="regDiscardBtn">Discard</button>
-      </div>
-
-      <div class="km-layout">
-        <!-- SIDEBAR -->
-        <aside class="km-sidebar" aria-label="Registration guide">
-          <div class="km-sidebar__card">
-            <h3><i class="fas fa-mountain"></i> About the Program</h3>
-            <p
-              style="
+    <div class="km-layout">
+      <!-- SIDEBAR -->
+      <aside class="km-sidebar" aria-label="Registration guide">
+        <div class="km-sidebar__card">
+          <h3><i class="fas fa-mountain"></i> About the Program</h3>
+          <p style="
                 font-size: 13px;
                 color: #475569;
                 line-height: 1.6;
                 margin: 0;
-              "
-            >
-              Conducted in partnership with the
-              <strong
-                >Nehru Institute of Mountaineering (NIM), Uttarkashi</strong
-              >
-              (est. 1965), participants undergo structured training in Himalayan
-              adventure sports including trekking, rock climbing, river
-              navigation, and wilderness survival. The program builds physical
-              fitness, mental resilience, leadership, and teamwork.
-            </p>
-          </div>
-          <div class="km-sidebar__card km-sidebar__sections">
-            <h3><i class="fas fa-list-check"></i> Sections</h3>
-            <a href="#reg-sec-personal" class="km-sec-link active"
-              ><span class="km-sec-num">01</span> Personal Info</a
-            >
-            <a href="#reg-sec-program" class="km-sec-link"
-              ><span class="km-sec-num">02</span> Program Selection</a
-            >
-            <a href="#reg-sec-fitness" class="km-sec-link"
-              ><span class="km-sec-num">03</span> Fitness &amp; Experience</a
-            >
-            <a href="#reg-sec-photo" class="km-sec-link"
-              ><span class="km-sec-num">04</span> Photo Upload</a
-            >
-            <a href="#reg-sec-emergency" class="km-sec-link"
-              ><span class="km-sec-num">05</span> Emergency Contact</a
-            >
-            <a href="#reg-sec-consent" class="km-sec-link"
-              ><span class="km-sec-num">06</span> Consent</a
-            >
-          </div>
-          <div class="km-sidebar__card">
-            <h3>
-              <i class="fas fa-triangle-exclamation" style="color: #ea580c"></i>
-              Important
-            </h3>
-            <ul class="km-steps" style="color: #7c2d12">
-              <li>Medical fitness certificate (MBBS) mandatory at center</li>
-              <li>Personal accident insurance required</li>
-              <li>Minimum 10+2 for most courses</li>
-              <li>Physical fitness test on Day 1</li>
-              <li>Carry all original documents</li>
-              <li>No refund after program commencement</li>
-            </ul>
-          </div>
-          <div class="km-sidebar__card">
-            <h3><i class="fas fa-award"></i> What to Expect</h3>
-            <ul class="km-steps">
-              <li>Training at altitude 3,500m–5,000m+</li>
-              <li>Rock climbing, rappelling, rope techniques</li>
-              <li>Trekking to Gaumukh, Gangotri glacier</li>
-              <li>Tent pitching &amp; wilderness survival</li>
-              <li>Flora, fauna &amp; navigation studies</li>
-              <li>NIM / ABVIMAS completion certificate</li>
-            </ul>
-          </div>
-          <div class="km-sidebar__card km-sidebar__help">
-            <h3><i class="fas fa-headset"></i> Need Help?</h3>
-            <p>Call our help desk:</p>
-            <a href="tel:+919634312465" class="km-helpline">+91-9634312465</a>
-            <p style="margin-top: 8px">NIM Uttarkashi:</p>
-            <a
-              href="tel:+911374223344"
-              class="km-helpline"
-              style="font-size: 12px"
-              >01374-223344</a
-            >
-          </div>
-        </aside>
+              ">
+            Conducted in partnership with the
+            <strong>Nehru Institute of Mountaineering (NIM), Uttarkashi</strong>
+            (est. 1965), participants undergo structured training in Himalayan
+            adventure sports including trekking, rock climbing, river
+            navigation, and wilderness survival. The program builds physical
+            fitness, mental resilience, leadership, and teamwork.
+          </p>
+        </div>
+        <div class="km-sidebar__card km-sidebar__sections">
+          <h3><i class="fas fa-list-check"></i> Sections</h3>
+          <a href="#reg-sec-personal" class="km-sec-link active"><span class="km-sec-num">01</span> Personal
+            Info</a>
+          <a href="#reg-sec-program" class="km-sec-link"><span class="km-sec-num">02</span> Program Selection</a>
+          <a href="#reg-sec-fitness" class="km-sec-link"><span class="km-sec-num">03</span> Fitness &amp;
+            Experience</a>
+          <a href="#reg-sec-photo" class="km-sec-link"><span class="km-sec-num">04</span> Photo Upload</a>
+          <a href="#reg-sec-emergency" class="km-sec-link"><span class="km-sec-num">05</span> Emergency
+            Contact</a>
+          <a href="#reg-sec-consent" class="km-sec-link"><span class="km-sec-num">06</span> Consent</a>
+        </div>
+        <div class="km-sidebar__card">
+          <h3>
+            <i class="fas fa-triangle-exclamation" style="color: #ea580c"></i>
+            Important
+          </h3>
+          <ul class="km-steps" style="color: #7c2d12">
+            <li>Medical fitness certificate (MBBS) mandatory at center</li>
+            <li>Personal accident insurance required</li>
+            <li>Minimum 10+2 for most courses</li>
+            <li>Physical fitness test on Day 1</li>
+            <li>Carry all original documents</li>
+            <li>No refund after program commencement</li>
+          </ul>
+        </div>
+        <div class="km-sidebar__card">
+          <h3><i class="fas fa-award"></i> What to Expect</h3>
+          <ul class="km-steps">
+            <li>Training at altitude 3,500m–5,000m+</li>
+            <li>Rock climbing, rappelling, rope techniques</li>
+            <li>Trekking to Gaumukh, Gangotri glacier</li>
+            <li>Tent pitching &amp; wilderness survival</li>
+            <li>Flora, fauna &amp; navigation studies</li>
+            <li>NIM / ABVIMAS completion certificate</li>
+          </ul>
+        </div>
+        <div class="km-sidebar__card km-sidebar__help">
+          <h3><i class="fas fa-headset"></i> Need Help?</h3>
+          <p>Call our help desk:</p>
+          <a href="tel:+919634312465" class="km-helpline">+91-9634312465</a>
+          <p style="margin-top: 8px">NIM Uttarkashi:</p>
+          <a href="tel:+911374223344" class="km-helpline" style="font-size: 12px">01374-223344</a>
+        </div>
+      </aside>
 
-        <!-- FORM CARD -->
-        <div class="km-form-wrap">
-          <div
-            class="km-progress"
-            role="progressbar"
-            aria-valuenow="0"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-label="Form completion"
-            id="kmProgress"
-          >
-            <div
-              class="km-progress__fill"
-              id="kmProgressFill"
-              style="width: 0%"
-            ></div>
-            <span class="km-progress__label" id="kmProgressLabel"
-              >0% complete</span
-            >
-          </div>
-          <div
-            aria-live="assertive"
-            aria-atomic="true"
-            class="km-sr-only"
-            id="kmLiveAnnouncer"
-          ></div>
+      <!-- FORM CARD -->
+      <div class="km-form-wrap">
+        <div class="km-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+          aria-label="Form completion" id="kmProgress">
+          <div class="km-progress__fill" id="kmProgressFill" style="width: 0%"></div>
+          <span class="km-progress__label" id="kmProgressLabel">0% complete</span>
+        </div>
+        <div aria-live="assertive" aria-atomic="true" class="km-sr-only" id="kmLiveAnnouncer"></div>
 
-          <form id="kmForm" class="km-form" novalidate autocomplete="on">
-            <!-- S1: PERSONAL INFO -->
-            <fieldset class="km-fieldset" id="reg-sec-personal">
-              <legend class="km-legend">
-                <span class="km-legend__num">01</span>Personal Information
-              </legend>
+        <form id="kmForm" class="km-form" novalidate autocomplete="on">
+          <!-- S1: PERSONAL INFO -->
+          <fieldset class="km-fieldset" id="reg-sec-personal">
+            <legend class="km-legend">
+              <span class="km-legend__num">01</span>Personal Information
+            </legend>
+            <div class="km-field">
+              <label class="km-label" for="regFullName">Full Name <span class="km-req">*</span></label>
+              <input type="text" id="regFullName" name="fullName" class="km-input" placeholder="As per Aadhaar"
+                autocomplete="name" required aria-required="true" aria-describedby="regFullName-err" />
+              <span class="km-error" id="regFullName-err" role="alert"></span>
+            </div>
+            <div class="km-field-row">
               <div class="km-field">
-                <label class="km-label" for="regFullName"
-                  >Full Name <span class="km-req">*</span></label
-                >
-                <input
-                  type="text"
-                  id="regFullName"
-                  name="fullName"
-                  class="km-input"
-                  placeholder="As per Aadhaar"
-                  autocomplete="name"
-                  required
-                  aria-required="true"
-                  aria-describedby="regFullName-err"
-                />
-                <span class="km-error" id="regFullName-err" role="alert"></span>
-              </div>
-              <div class="km-field-row">
-                <div class="km-field">
-                  <label class="km-label" for="regDob"
-                    >Date of Birth <span class="km-req">*</span></label
-                  >
-                  <input
-                    type="date"
-                    id="regDob"
-                    name="dob"
-                    class="km-input"
-                    required
-                    aria-required="true"
-                    aria-describedby="regDob-err regDob-hint"
-                  />
-                  <span class="km-hint" id="regDob-hint"
-                    >Must be 15–35 years old for adventure programs</span
-                  >
-                  <span class="km-error" id="regDob-err" role="alert"></span>
-                </div>
-                <div class="km-field">
-                  <label class="km-label">Age &amp; Eligibility</label>
-                  <div class="km-age-box" id="regAgeBox" aria-live="polite">
-                    <span id="regCalcAge">—</span>
-                    <span class="km-age-badge" id="regCalcCat"></span>
-                  </div>
-                </div>
+                <label class="km-label" for="regDob">Date of Birth <span class="km-req">*</span></label>
+                <input type="date" id="regDob" name="dob" class="km-input" required aria-required="true"
+                  aria-describedby="regDob-err regDob-hint" />
+                <span class="km-hint" id="regDob-hint">Must be 15–35 years old for adventure programs</span>
+                <span class="km-error" id="regDob-err" role="alert"></span>
               </div>
               <div class="km-field">
-                <fieldset class="km-inner-fs">
-                  <legend class="km-label">
-                    Gender <span class="km-req">*</span>
-                  </legend>
-                  <div class="km-radio-group" aria-describedby="regGender-err">
-                    <label class="km-radio"
-                      ><input
-                        type="radio"
-                        name="gender"
-                        value="male"
-                        required
-                      /><span class="km-radio__dot"></span>Male</label
-                    >
-                    <label class="km-radio"
-                      ><input type="radio" name="gender" value="female" /><span
-                        class="km-radio__dot"
-                      ></span
-                      >Female</label
-                    >
-                    <label class="km-radio"
-                      ><input type="radio" name="gender" value="other" /><span
-                        class="km-radio__dot"
-                      ></span
-                      >Other</label
-                    >
-                    <label class="km-radio"
-                      ><input
-                        type="radio"
-                        name="gender"
-                        value="prefer_not"
-                      /><span class="km-radio__dot"></span>Prefer not to
-                      say</label
-                    >
-                  </div>
-                  <span class="km-error" id="regGender-err" role="alert"></span>
-                </fieldset>
+                <label class="km-label">Age &amp; Eligibility</label>
+                <div class="km-age-box" id="regAgeBox" aria-live="polite">
+                  <span id="regCalcAge">—</span>
+                  <span class="km-age-badge" id="regCalcCat"></span>
+                </div>
               </div>
-              <div class="km-field-row">
-                <div class="km-field">
-                  <label class="km-label" for="regMobile"
-                    >Mobile <span class="km-req">*</span></label
-                  >
-                  <div class="km-phone-wrap">
-                    <span class="km-phone-code">+91</span>
-                    <input
-                      type="tel"
-                      id="regMobile"
-                      name="mobile"
-                      class="km-input km-phone-input"
-                      placeholder="10-digit"
-                      maxlength="10"
-                      required
-                      aria-required="true"
-                      aria-describedby="regMobile-err"
-                      inputmode="numeric"
-                      autocomplete="tel"
-                    />
-                  </div>
-                  <span class="km-error" id="regMobile-err" role="alert"></span>
+            </div>
+            <div class="km-field">
+              <fieldset class="km-inner-fs">
+                <legend class="km-label">
+                  Gender <span class="km-req">*</span>
+                </legend>
+                <div class="km-radio-group" aria-describedby="regGender-err">
+                  <label class="km-radio"><input type="radio" name="gender" value="male" required /><span
+                      class="km-radio__dot"></span>Male</label>
+                  <label class="km-radio"><input type="radio" name="gender" value="female" /><span
+                      class="km-radio__dot"></span>Female</label>
+                  <label class="km-radio"><input type="radio" name="gender" value="other" /><span
+                      class="km-radio__dot"></span>Other</label>
+                  <label class="km-radio"><input type="radio" name="gender" value="prefer_not" /><span
+                      class="km-radio__dot"></span>Prefer not to
+                    say</label>
                 </div>
-                <div class="km-field">
-                  <label class="km-label" for="regEmail"
-                    >Email <span class="km-optional">(Optional)</span></label
-                  >
-                  <input
-                    type="email"
-                    id="regEmail"
-                    name="email"
-                    class="km-input"
-                    placeholder="your@email.com"
-                    autocomplete="email"
-                    aria-describedby="regEmail-err"
-                  />
-                  <span class="km-error" id="regEmail-err" role="alert"></span>
+                <span class="km-error" id="regGender-err" role="alert"></span>
+              </fieldset>
+            </div>
+            <div class="km-field-row">
+              <div class="km-field">
+                <label class="km-label" for="regMobile">Mobile <span class="km-req">*</span></label>
+                <div class="km-phone-wrap">
+                  <span class="km-phone-code">+91</span>
+                  <input type="tel" id="regMobile" name="mobile" class="km-input km-phone-input" placeholder="10-digit"
+                    maxlength="10" required aria-required="true" aria-describedby="regMobile-err" inputmode="numeric"
+                    autocomplete="tel" />
                 </div>
+                <span class="km-error" id="regMobile-err" role="alert"></span>
               </div>
               <div class="km-field">
-                <label class="km-label" for="regDistrict"
-                  >Home District <span class="km-req">*</span></label
-                >
+                <label class="km-label" for="regEmail">Email <span class="km-optional">(Optional)</span></label>
+                <input type="email" id="regEmail" name="email" class="km-input" placeholder="your@email.com"
+                  autocomplete="email" aria-describedby="regEmail-err" />
+                <span class="km-error" id="regEmail-err" role="alert"></span>
+              </div>
+            </div>
+            <div class="km-field">
+              <label class="km-label" for="regDistrict">Home District <span class="km-req">*</span></label>
+              <div class="km-select-wrap">
+                <select id="regDistrict" name="district" class="km-select" required aria-required="true"
+                  aria-describedby="regDistrict-err">
+                  <option value="">— Select your district —</option>
+                  <option>Almora</option>
+                  <option>Bageshwar</option>
+                  <option>Chamoli</option>
+                  <option>Champawat</option>
+                  <option>Dehradun</option>
+                  <option>Haridwar</option>
+                  <option>Nainital</option>
+                  <option>Pauri Garhwal</option>
+                  <option>Pithoragarh</option>
+                  <option>Rudraprayag</option>
+                  <option>Tehri Garhwal</option>
+                  <option>Udham Singh Nagar</option>
+                  <option>Uttarkashi</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
+              </div>
+              <span class="km-error" id="regDistrict-err" role="alert"></span>
+            </div>
+          </fieldset>
+
+          <!-- S2: PROGRAM SELECTION -->
+          <fieldset class="km-fieldset" id="reg-sec-program">
+            <legend class="km-legend">
+              <span class="km-legend__num">02</span>Program &amp; Activity
+              Selection
+            </legend>
+            <div class="km-field">
+              <label class="km-label" for="regCourseType">Course / Program Type <span class="km-req">*</span></label>
+              <div class="km-select-wrap">
+                <select id="regCourseType" name="courseType" class="km-select" required aria-required="true"
+                  aria-describedby="regCourseType-err regCourseType-hint">
+                  <option value="">— Select course —</option>
+                  <optgroup label="Mountaineering (NIM Uttarkashi)">
+                    <option value="bmc">
+                      Basic Mountaineering Course (BMC) — 28 days
+                    </option>
+                    <option value="amc">
+                      Advanced Mountaineering Course (AMC) — 28 days
+                    </option>
+                    <option value="moi">
+                      Method of Instruction (MOI) — 28 days
+                    </option>
+                    <option value="sar">
+                      Search and Rescue (SAR) — 14 days
+                    </option>
+                  </optgroup>
+                  <optgroup label="Adventure Activities">
+                    <option value="trekking_basic">
+                      Trekking — Basic (7 days)
+                    </option>
+                    <option value="trekking_advanced">
+                      Trekking — Advanced (14 days)
+                    </option>
+                    <option value="rock_climbing">
+                      Rock Climbing Course — 10 days
+                    </option>
+                    <option value="river_rafting">
+                      White Water River Rafting — 5 days
+                    </option>
+                    <option value="paragliding">
+                      Paragliding — Introductory (5 days)
+                    </option>
+                    <option value="skiing">
+                      Skiing — Basic (7 days, Winter only)
+                    </option>
+                    <option value="kayaking">
+                      Kayaking &amp; Canoeing — 7 days
+                    </option>
+                  </optgroup>
+                  <optgroup label="Youth Adventure Camp">
+                    <option value="adventure_camp_7d">
+                      Adventure Camp — 7 Days (Multi-activity)
+                    </option>
+                    <option value="adventure_camp_14d">
+                      Adventure Camp — 14 Days (Intensive)
+                    </option>
+                    <option value="outward_bound">
+                      Outward Bound / Personality Development Camp
+                    </option>
+                  </optgroup>
+                </select>
+                <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
+              </div>
+              <span class="km-hint" id="regCourseType-hint">BMC/AMC courses are in collaboration with NIM
+                Uttarkashi
+                (est. 1965)</span>
+              <span class="km-error" id="regCourseType-err" role="alert"></span>
+            </div>
+            <div class="km-field-row">
+              <div class="km-field">
+                <label class="km-label" for="regBatchMonth">Preferred Batch Month <span class="km-req">*</span></label>
                 <div class="km-select-wrap">
-                  <select
-                    id="regDistrict"
-                    name="district"
-                    class="km-select"
-                    required
-                    aria-required="true"
-                    aria-describedby="regDistrict-err"
-                  >
-                    <option value="">— Select your district —</option>
-                    <option>Almora</option>
-                    <option>Bageshwar</option>
-                    <option>Chamoli</option>
-                    <option>Champawat</option>
-                    <option>Dehradun</option>
-                    <option>Haridwar</option>
-                    <option>Nainital</option>
-                    <option>Pauri Garhwal</option>
-                    <option>Pithoragarh</option>
-                    <option>Rudraprayag</option>
-                    <option>Tehri Garhwal</option>
-                    <option>Udham Singh Nagar</option>
-                    <option>Uttarkashi</option>
+                  <select id="regBatchMonth" name="batchMonth" class="km-select" required aria-required="true"
+                    aria-describedby="regBatchMonth-err">
+                    <option value="">— Select month —</option>
+                    <option value="jan_2026">January 2026</option>
+                    <option value="feb_2026">February 2026</option>
+                    <option value="mar_2026">March 2026</option>
+                    <option value="apr_2026">April 2026</option>
+                    <option value="may_2026">May 2026</option>
+                    <option value="jun_2026">June 2026</option>
+                    <option value="jul_2026">July 2026</option>
+                    <option value="aug_2026">August 2026</option>
+                    <option value="sep_2026">September 2026</option>
+                    <option value="oct_2026">October 2026</option>
+                    <option value="nov_2026">November 2026</option>
+                    <option value="dec_2026">December 2026</option>
                   </select>
-                  <i
-                    class="fas fa-chevron-down select-arrow"
-                    aria-hidden="true"
-                  ></i>
+                  <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
                 </div>
-                <span class="km-error" id="regDistrict-err" role="alert"></span>
+                <span class="km-hint">Winter courses (Skiing) available Nov–Feb only</span>
+                <span class="km-error" id="regBatchMonth-err" role="alert"></span>
               </div>
-            </fieldset>
-
-            <!-- S2: PROGRAM SELECTION -->
-            <fieldset class="km-fieldset" id="reg-sec-program">
-              <legend class="km-legend">
-                <span class="km-legend__num">02</span>Program &amp; Activity
-                Selection
-              </legend>
               <div class="km-field">
-                <label class="km-label" for="regCourseType"
-                  >Course / Program Type <span class="km-req">*</span></label
-                >
+                <label class="km-label" for="regAccommodation">Accommodation Required <span
+                    class="km-req">*</span></label>
                 <div class="km-select-wrap">
-                  <select
-                    id="regCourseType"
-                    name="courseType"
-                    class="km-select"
-                    required
-                    aria-required="true"
-                    aria-describedby="regCourseType-err regCourseType-hint"
-                  >
-                    <option value="">— Select course —</option>
-                    <optgroup label="Mountaineering (NIM Uttarkashi)">
-                      <option value="bmc">
-                        Basic Mountaineering Course (BMC) — 28 days
-                      </option>
-                      <option value="amc">
-                        Advanced Mountaineering Course (AMC) — 28 days
-                      </option>
-                      <option value="moi">
-                        Method of Instruction (MOI) — 28 days
-                      </option>
-                      <option value="sar">
-                        Search and Rescue (SAR) — 14 days
-                      </option>
-                    </optgroup>
-                    <optgroup label="Adventure Activities">
-                      <option value="trekking_basic">
-                        Trekking — Basic (7 days)
-                      </option>
-                      <option value="trekking_advanced">
-                        Trekking — Advanced (14 days)
-                      </option>
-                      <option value="rock_climbing">
-                        Rock Climbing Course — 10 days
-                      </option>
-                      <option value="river_rafting">
-                        White Water River Rafting — 5 days
-                      </option>
-                      <option value="paragliding">
-                        Paragliding — Introductory (5 days)
-                      </option>
-                      <option value="skiing">
-                        Skiing — Basic (7 days, Winter only)
-                      </option>
-                      <option value="kayaking">
-                        Kayaking &amp; Canoeing — 7 days
-                      </option>
-                    </optgroup>
-                    <optgroup label="Youth Adventure Camp">
-                      <option value="adventure_camp_7d">
-                        Adventure Camp — 7 Days (Multi-activity)
-                      </option>
-                      <option value="adventure_camp_14d">
-                        Adventure Camp — 14 Days (Intensive)
-                      </option>
-                      <option value="outward_bound">
-                        Outward Bound / Personality Development Camp
-                      </option>
-                    </optgroup>
-                  </select>
-                  <i
-                    class="fas fa-chevron-down select-arrow"
-                    aria-hidden="true"
-                  ></i>
-                </div>
-                <span class="km-hint" id="regCourseType-hint"
-                  >BMC/AMC courses are in collaboration with NIM Uttarkashi
-                  (est. 1965)</span
-                >
-                <span
-                  class="km-error"
-                  id="regCourseType-err"
-                  role="alert"
-                ></span>
-              </div>
-              <div class="km-field-row">
-                <div class="km-field">
-                  <label class="km-label" for="regBatchMonth"
-                    >Preferred Batch Month <span class="km-req">*</span></label
-                  >
-                  <div class="km-select-wrap">
-                    <select
-                      id="regBatchMonth"
-                      name="batchMonth"
-                      class="km-select"
-                      required
-                      aria-required="true"
-                      aria-describedby="regBatchMonth-err"
-                    >
-                      <option value="">— Select month —</option>
-                      <option value="jan_2026">January 2026</option>
-                      <option value="feb_2026">February 2026</option>
-                      <option value="mar_2026">March 2026</option>
-                      <option value="apr_2026">April 2026</option>
-                      <option value="may_2026">May 2026</option>
-                      <option value="jun_2026">June 2026</option>
-                      <option value="jul_2026">July 2026</option>
-                      <option value="aug_2026">August 2026</option>
-                      <option value="sep_2026">September 2026</option>
-                      <option value="oct_2026">October 2026</option>
-                      <option value="nov_2026">November 2026</option>
-                      <option value="dec_2026">December 2026</option>
-                    </select>
-                    <i
-                      class="fas fa-chevron-down select-arrow"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-                  <span class="km-hint"
-                    >Winter courses (Skiing) available Nov–Feb only</span
-                  >
-                  <span
-                    class="km-error"
-                    id="regBatchMonth-err"
-                    role="alert"
-                  ></span>
-                </div>
-                <div class="km-field">
-                  <label class="km-label" for="regAccommodation"
-                    >Accommodation Required <span class="km-req">*</span></label
-                  >
-                  <div class="km-select-wrap">
-                    <select
-                      id="regAccommodation"
-                      name="accommodation"
-                      class="km-select"
-                      required
-                      aria-required="true"
-                      aria-describedby="regAccommodation-err"
-                    >
-                      <option value="">— Select —</option>
-                      <option value="yes_hostel">
-                        Yes — Hostel / Camp accommodation
-                      </option>
-                      <option value="yes_tent">
-                        Yes — Tent / Wilderness camping
-                      </option>
-                      <option value="no_own">No — Will arrange own</option>
-                    </select>
-                    <i
-                      class="fas fa-chevron-down select-arrow"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-                  <span
-                    class="km-error"
-                    id="regAccommodation-err"
-                    role="alert"
-                  ></span>
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- S3: FITNESS & EXPERIENCE -->
-            <fieldset class="km-fieldset" id="reg-sec-fitness">
-              <legend class="km-legend">
-                <span class="km-legend__num">03</span>Physical Fitness &amp;
-                Prior Experience
-              </legend>
-
-              <div class="km-medical-notice">
-                <i class="fas fa-triangle-exclamation"></i>
-                <div>
-                  <strong>Medical Certificate Required:</strong> All
-                  participants must submit a fitness certificate signed by an
-                  MBBS doctor before joining. Conditions like heart disease,
-                  epilepsy, asthma, or vertigo may be disqualifying for
-                  high-altitude programs. Please consult your doctor before
-                  applying.
-                </div>
-              </div>
-
-              <div class="km-field">
-                <label class="km-label" for="regFitnessLevel"
-                  >Self-assessed Fitness Level
-                  <span class="km-req">*</span></label
-                >
-                <div class="km-select-wrap">
-                  <select
-                    id="regFitnessLevel"
-                    name="fitnessLevel"
-                    class="km-select"
-                    required
-                    aria-required="true"
-                    aria-describedby="regFitnessLevel-err"
-                  >
+                  <select id="regAccommodation" name="accommodation" class="km-select" required aria-required="true"
+                    aria-describedby="regAccommodation-err">
                     <option value="">— Select —</option>
-                    <option value="beginner">
-                      Beginner — Moderate physical activity, no prior adventure
-                      exp.
+                    <option value="yes_hostel">
+                      Yes — Hostel / Camp accommodation
                     </option>
-                    <option value="intermediate">
-                      Intermediate — Regular exercise, some trekking experience
+                    <option value="yes_tent">
+                      Yes — Tent / Wilderness camping
                     </option>
-                    <option value="advanced">
-                      Advanced — High endurance, previous mountaineering / BMC
-                    </option>
-                    <option value="expert">
-                      Expert — BMC/AMC certified, multiple high-altitude climbs
-                    </option>
+                    <option value="no_own">No — Will arrange own</option>
                   </select>
-                  <i
-                    class="fas fa-chevron-down select-arrow"
-                    aria-hidden="true"
-                  ></i>
+                  <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
                 </div>
-                <span
-                  class="km-error"
-                  id="regFitnessLevel-err"
-                  role="alert"
-                ></span>
+                <span class="km-error" id="regAccommodation-err" role="alert"></span>
               </div>
-              <div class="km-field">
-                <label class="km-label"
-                  >Prior Adventure Experience
-                  <span class="km-optional"
-                    >(Select all that apply)</span
-                  ></label
-                >
-                <div class="km-sports-grid">
-                  <label class="km-cb"
-                    ><input
-                      type="checkbox"
-                      name="priorActivity"
-                      value="trekking"
-                    /><span class="km-cb__box"></span>🏔 Trekking</label
-                  >
-                  <label class="km-cb"
-                    ><input
-                      type="checkbox"
-                      name="priorActivity"
-                      value="rock_climbing"
-                    /><span class="km-cb__box"></span>🧗 Rock Climbing</label
-                  >
-                  <label class="km-cb"
-                    ><input
-                      type="checkbox"
-                      name="priorActivity"
-                      value="river_rafting"
-                    /><span class="km-cb__box"></span>🚣 River Rafting</label
-                  >
-                  <label class="km-cb"
-                    ><input
-                      type="checkbox"
-                      name="priorActivity"
-                      value="paragliding"
-                    /><span class="km-cb__box"></span>🪂 Paragliding</label
-                  >
-                  <label class="km-cb"
-                    ><input
-                      type="checkbox"
-                      name="priorActivity"
-                      value="skiing"
-                    /><span class="km-cb__box"></span>⛷ Skiing</label
-                  >
-                  <label class="km-cb"
-                    ><input
-                      type="checkbox"
-                      name="priorActivity"
-                      value="cycling"
-                    /><span class="km-cb__box"></span>🚴 Mountain Biking</label
-                  >
-                  <label class="km-cb"
-                    ><input
-                      type="checkbox"
-                      name="priorActivity"
-                      value="swimming"
-                    /><span class="km-cb__box"></span>🏊 Swimming</label
-                  >
-                  <label class="km-cb"
-                    ><input
-                      type="checkbox"
-                      name="priorActivity"
-                      value="none"
-                    /><span class="km-cb__box"></span>None yet</label
-                  >
-                </div>
-              </div>
-              <div class="km-field">
-                <label class="km-label" for="regHighestAltitude"
-                  >Highest Altitude Previously Reached
-                  <span class="km-optional">(Optional)</span></label
-                >
-                <div class="km-select-wrap">
-                  <select
-                    id="regHighestAltitude"
-                    name="highestAltitude"
-                    class="km-select"
-                  >
-                    <option value="">— Select —</option>
-                    <option value="below_2000">Below 2,000m</option>
-                    <option value="2000_3500">2,000m – 3,500m</option>
-                    <option value="3500_5000">3,500m – 5,000m</option>
-                    <option value="above_5000">Above 5,000m</option>
-                  </select>
-                  <i
-                    class="fas fa-chevron-down select-arrow"
-                    aria-hidden="true"
-                  ></i>
-                </div>
-              </div>
-              <div class="km-field">
-                <label class="km-label" for="regQualification"
-                  >Highest Academic Qualification
-                  <span class="km-req">*</span></label
-                >
-                <div class="km-select-wrap">
-                  <select
-                    id="regQualification"
-                    name="qualification"
-                    class="km-select"
-                    required
-                    aria-required="true"
-                    aria-describedby="regQualification-err"
-                  >
-                    <option value="">— Select —</option>
-                    <option value="below_10th">Below 10th</option>
-                    <option value="10th">10th Pass</option>
-                    <option value="12th">12th Pass (10+2)</option>
-                    <option value="graduate">Graduate</option>
-                    <option value="postgraduate">Post Graduate</option>
-                  </select>
-                  <i
-                    class="fas fa-chevron-down select-arrow"
-                    aria-hidden="true"
-                  ></i>
-                </div>
-                <span class="km-hint"
-                  >Minimum 10+2 required for BMC/AMC. Adventure camps open from
-                  10th pass.</span
-                >
-                <span
-                  class="km-error"
-                  id="regQualification-err"
-                  role="alert"
-                ></span>
-              </div>
-              <div class="km-field">
-                <label class="km-label" for="regSwimmingAbility"
-                  >Swimming Ability <span class="km-req">*</span>
-                  <span class="km-hint" style="display: inline"
-                    >(required for rafting / kayaking courses)</span
-                  ></label
-                >
-                <div class="km-select-wrap">
-                  <select
-                    id="regSwimmingAbility"
-                    name="swimmingAbility"
-                    class="km-select"
-                    required
-                    aria-required="true"
-                    aria-describedby="regSwimmingAbility-err"
-                  >
-                    <option value="">— Select —</option>
-                    <option value="strong_swimmer">
-                      Strong swimmer (100m+)
-                    </option>
-                    <option value="basic_swimmer">
-                      Basic swimmer (can float / 25m)
-                    </option>
-                    <option value="non_swimmer">Non-swimmer</option>
-                  </select>
-                  <i
-                    class="fas fa-chevron-down select-arrow"
-                    aria-hidden="true"
-                  ></i>
-                </div>
-                <span
-                  class="km-error"
-                  id="regSwimmingAbility-err"
-                  role="alert"
-                ></span>
-              </div>
-            </fieldset>
+            </div>
+          </fieldset>
 
-            <!-- S4: PHOTO -->
-            <fieldset class="km-fieldset" id="reg-sec-photo">
-              <legend class="km-legend">
-                <span class="km-legend__num">04</span>Photo Upload
-              </legend>
+          <!-- S3: FITNESS & EXPERIENCE -->
+          <fieldset class="km-fieldset" id="reg-sec-fitness">
+            <legend class="km-legend">
+              <span class="km-legend__num">03</span>Physical Fitness &amp;
+              Prior Experience
+            </legend>
+
+            <div class="km-medical-notice">
+              <i class="fas fa-triangle-exclamation"></i>
+              <div>
+                <strong>Medical Certificate Required:</strong> All
+                participants must submit a fitness certificate signed by an
+                MBBS doctor before joining. Conditions like heart disease,
+                epilepsy, asthma, or vertigo may be disqualifying for
+                high-altitude programs. Please consult your doctor before
+                applying.
+              </div>
+            </div>
+
+            <div class="km-field">
+              <label class="km-label" for="regFitnessLevel">Self-assessed Fitness Level
+                <span class="km-req">*</span></label>
+              <div class="km-select-wrap">
+                <select id="regFitnessLevel" name="fitnessLevel" class="km-select" required aria-required="true"
+                  aria-describedby="regFitnessLevel-err">
+                  <option value="">— Select —</option>
+                  <option value="beginner">
+                    Beginner — Moderate physical activity, no prior adventure
+                    exp.
+                  </option>
+                  <option value="intermediate">
+                    Intermediate — Regular exercise, some trekking experience
+                  </option>
+                  <option value="advanced">
+                    Advanced — High endurance, previous mountaineering / BMC
+                  </option>
+                  <option value="expert">
+                    Expert — BMC/AMC certified, multiple high-altitude climbs
+                  </option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
+              </div>
+              <span class="km-error" id="regFitnessLevel-err" role="alert"></span>
+            </div>
+            <div class="km-field">
+              <label class="km-label">Prior Adventure Experience
+                <span class="km-optional">(Select all that apply)</span></label>
+              <div class="km-sports-grid">
+                <label class="km-cb"><input type="checkbox" name="priorActivity" value="trekking" /><span
+                    class="km-cb__box"></span>🏔 Trekking</label>
+                <label class="km-cb"><input type="checkbox" name="priorActivity" value="rock_climbing" /><span
+                    class="km-cb__box"></span>🧗 Rock Climbing</label>
+                <label class="km-cb"><input type="checkbox" name="priorActivity" value="river_rafting" /><span
+                    class="km-cb__box"></span>🚣 River Rafting</label>
+                <label class="km-cb"><input type="checkbox" name="priorActivity" value="paragliding" /><span
+                    class="km-cb__box"></span>🪂 Paragliding</label>
+                <label class="km-cb"><input type="checkbox" name="priorActivity" value="skiing" /><span
+                    class="km-cb__box"></span>⛷ Skiing</label>
+                <label class="km-cb"><input type="checkbox" name="priorActivity" value="cycling" /><span
+                    class="km-cb__box"></span>🚴 Mountain Biking</label>
+                <label class="km-cb"><input type="checkbox" name="priorActivity" value="swimming" /><span
+                    class="km-cb__box"></span>🏊 Swimming</label>
+                <label class="km-cb"><input type="checkbox" name="priorActivity" value="none" /><span
+                    class="km-cb__box"></span>None yet</label>
+              </div>
+            </div>
+            <div class="km-field">
+              <label class="km-label" for="regHighestAltitude">Highest Altitude Previously Reached
+                <span class="km-optional">(Optional)</span></label>
+              <div class="km-select-wrap">
+                <select id="regHighestAltitude" name="highestAltitude" class="km-select">
+                  <option value="">— Select —</option>
+                  <option value="below_2000">Below 2,000m</option>
+                  <option value="2000_3500">2,000m – 3,500m</option>
+                  <option value="3500_5000">3,500m – 5,000m</option>
+                  <option value="above_5000">Above 5,000m</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="km-field">
+              <label class="km-label" for="regQualification">Highest Academic Qualification
+                <span class="km-req">*</span></label>
+              <div class="km-select-wrap">
+                <select id="regQualification" name="qualification" class="km-select" required aria-required="true"
+                  aria-describedby="regQualification-err">
+                  <option value="">— Select —</option>
+                  <option value="below_10th">Below 10th</option>
+                  <option value="10th">10th Pass</option>
+                  <option value="12th">12th Pass (10+2)</option>
+                  <option value="graduate">Graduate</option>
+                  <option value="postgraduate">Post Graduate</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
+              </div>
+              <span class="km-hint">Minimum 10+2 required for BMC/AMC. Adventure camps open from
+                10th pass.</span>
+              <span class="km-error" id="regQualification-err" role="alert"></span>
+            </div>
+            <div class="km-field">
+              <label class="km-label" for="regSwimmingAbility">Swimming Ability <span class="km-req">*</span>
+                <span class="km-hint" style="display: inline">(required for rafting / kayaking
+                  courses)</span></label>
+              <div class="km-select-wrap">
+                <select id="regSwimmingAbility" name="swimmingAbility" class="km-select" required aria-required="true"
+                  aria-describedby="regSwimmingAbility-err">
+                  <option value="">— Select —</option>
+                  <option value="strong_swimmer">
+                    Strong swimmer (100m+)
+                  </option>
+                  <option value="basic_swimmer">
+                    Basic swimmer (can float / 25m)
+                  </option>
+                  <option value="non_swimmer">Non-swimmer</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
+              </div>
+              <span class="km-error" id="regSwimmingAbility-err" role="alert"></span>
+            </div>
+          </fieldset>
+
+          <!-- S4: PHOTO -->
+          <fieldset class="km-fieldset" id="reg-sec-photo">
+            <legend class="km-legend">
+              <span class="km-legend__num">04</span>Photo Upload
+            </legend>
+            <div class="km-field">
+              <label class="km-label">Passport-size Photo <span class="km-req">*</span></label>
+              <div class="km-photo-zone" id="regPhotoZone" tabindex="0" role="button" aria-label="Upload photo"
+                aria-describedby="regPhoto-hint regPhoto-err">
+                <div class="km-photo-preview-wrap" id="regPhotoPreviewWrap" hidden>
+                  <img id="regPhotoPreview" class="km-photo-preview" alt="Uploaded photo" />
+                  <button type="button" class="km-photo-remove" id="regPhotoRemove" aria-label="Remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <div class="km-photo-placeholder" id="regPhotoPlaceholder">
+                  <div class="km-photo-icon">📷</div>
+                  <p>Click to upload or drag &amp; drop</p>
+                  <p class="km-hint" style="margin: 0">
+                    JPEG or PNG · Max 2 MB
+                  </p>
+                </div>
+                <input type="file" id="regPhotoInput" name="photo" accept="image/jpeg,image/png"
+                  class="km-photo-hidden-input" aria-hidden="true" tabindex="-1" />
+              </div>
+              <span class="km-hint" id="regPhoto-hint">Clear front-facing photo — same as will be used on course
+                ID
+                card</span>
+              <span class="km-error" id="regPhoto-err" role="alert"></span>
+            </div>
+          </fieldset>
+
+          <!-- S5: EMERGENCY -->
+          <fieldset class="km-fieldset" id="reg-sec-emergency">
+            <legend class="km-legend">
+              <span class="km-legend__num">05</span>Emergency Contact &amp;
+              Medical History
+            </legend>
+
+            <div class="km-medical-notice">
+              <i class="fas fa-heart-pulse"></i>
+              <div>
+                Emergency contact will be the first person notified in case of
+                any incident during the program. Please provide accurate and
+                reachable contact details. They must be available 24×7 during
+                the program dates.
+              </div>
+            </div>
+
+            <div class="km-field-row">
               <div class="km-field">
-                <label class="km-label"
-                  >Passport-size Photo <span class="km-req">*</span></label
-                >
-                <div
-                  class="km-photo-zone"
-                  id="regPhotoZone"
-                  tabindex="0"
-                  role="button"
-                  aria-label="Upload photo"
-                  aria-describedby="regPhoto-hint regPhoto-err"
-                >
-                  <div
-                    class="km-photo-preview-wrap"
-                    id="regPhotoPreviewWrap"
-                    hidden
-                  >
-                    <img
-                      id="regPhotoPreview"
-                      class="km-photo-preview"
-                      alt="Uploaded photo"
-                    />
-                    <button
-                      type="button"
-                      class="km-photo-remove"
-                      id="regPhotoRemove"
-                      aria-label="Remove"
-                    >
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                  <div class="km-photo-placeholder" id="regPhotoPlaceholder">
-                    <div class="km-photo-icon">📷</div>
-                    <p>Click to upload or drag &amp; drop</p>
-                    <p class="km-hint" style="margin: 0">
-                      JPEG or PNG · Max 2 MB
-                    </p>
-                  </div>
-                  <input
-                    type="file"
-                    id="regPhotoInput"
-                    name="photo"
-                    accept="image/jpeg,image/png"
-                    class="km-photo-hidden-input"
-                    aria-hidden="true"
-                    tabindex="-1"
-                  />
-                </div>
-                <span class="km-hint" id="regPhoto-hint"
-                  >Clear front-facing photo — same as will be used on course ID
-                  card</span
-                >
-                <span class="km-error" id="regPhoto-err" role="alert"></span>
-              </div>
-            </fieldset>
-
-            <!-- S5: EMERGENCY -->
-            <fieldset class="km-fieldset" id="reg-sec-emergency">
-              <legend class="km-legend">
-                <span class="km-legend__num">05</span>Emergency Contact &amp;
-                Medical History
-              </legend>
-
-              <div class="km-medical-notice">
-                <i class="fas fa-heart-pulse"></i>
-                <div>
-                  Emergency contact will be the first person notified in case of
-                  any incident during the program. Please provide accurate and
-                  reachable contact details. They must be available 24×7 during
-                  the program dates.
-                </div>
-              </div>
-
-              <div class="km-field-row">
-                <div class="km-field">
-                  <label class="km-label" for="regEmergName"
-                    >Contact Name <span class="km-req">*</span></label
-                  >
-                  <input
-                    type="text"
-                    id="regEmergName"
-                    name="emergencyName"
-                    class="km-input"
-                    placeholder="Full name"
-                    required
-                    aria-required="true"
-                    aria-describedby="regEmergName-err"
-                    autocomplete="off"
-                  />
-                  <span
-                    class="km-error"
-                    id="regEmergName-err"
-                    role="alert"
-                  ></span>
-                </div>
-                <div class="km-field">
-                  <label class="km-label" for="regEmergPhone"
-                    >Contact Phone <span class="km-req">*</span></label
-                  >
-                  <div class="km-phone-wrap">
-                    <span class="km-phone-code">+91</span>
-                    <input
-                      type="tel"
-                      id="regEmergPhone"
-                      name="emergencyPhone"
-                      class="km-input km-phone-input"
-                      placeholder="10-digit"
-                      maxlength="10"
-                      required
-                      aria-required="true"
-                      aria-describedby="regEmergPhone-err"
-                      inputmode="numeric"
-                    />
-                  </div>
-                  <span
-                    class="km-error"
-                    id="regEmergPhone-err"
-                    role="alert"
-                  ></span>
-                </div>
+                <label class="km-label" for="regEmergName">Contact Name <span class="km-req">*</span></label>
+                <input type="text" id="regEmergName" name="emergencyName" class="km-input" placeholder="Full name"
+                  required aria-required="true" aria-describedby="regEmergName-err" autocomplete="off" />
+                <span class="km-error" id="regEmergName-err" role="alert"></span>
               </div>
               <div class="km-field">
-                <label class="km-label" for="regEmergRelation"
-                  >Relation <span class="km-req">*</span></label
-                >
-                <div class="km-select-wrap">
-                  <select
-                    id="regEmergRelation"
-                    name="emergencyRelation"
-                    class="km-select"
-                    required
-                    aria-required="true"
-                    aria-describedby="regEmergRelation-err"
-                  >
-                    <option value="">— Select —</option>
-                    <option value="parent">Parent</option>
-                    <option value="guardian">Guardian</option>
-                    <option value="spouse">Spouse</option>
-                    <option value="sibling">Sibling</option>
-                    <option value="friend">Friend</option>
-                    <option value="other">Other</option>
-                  </select>
-                  <i
-                    class="fas fa-chevron-down select-arrow"
-                    aria-hidden="true"
-                  ></i>
+                <label class="km-label" for="regEmergPhone">Contact Phone <span class="km-req">*</span></label>
+                <div class="km-phone-wrap">
+                  <span class="km-phone-code">+91</span>
+                  <input type="tel" id="regEmergPhone" name="emergencyPhone" class="km-input km-phone-input"
+                    placeholder="10-digit" maxlength="10" required aria-required="true"
+                    aria-describedby="regEmergPhone-err" inputmode="numeric" />
                 </div>
-                <span
-                  class="km-error"
-                  id="regEmergRelation-err"
-                  role="alert"
-                ></span>
+                <span class="km-error" id="regEmergPhone-err" role="alert"></span>
               </div>
-              <div class="km-field">
-                <label class="km-label" for="regMedical"
-                  >Medical Conditions / Chronic Illnesses
-                  <span class="km-optional"
-                    >(Optional — but strongly recommended to disclose)</span
-                  ></label
-                >
-                <textarea
-                  id="regMedical"
-                  name="medicalConditions"
-                  class="km-textarea"
-                  rows="3"
-                  placeholder="e.g. Asthma, heart condition, vertigo, epilepsy, diabetes, any surgery in the last 2 years"
-                  aria-describedby="regMedical-hint"
-                ></textarea>
-                <span class="km-hint" id="regMedical-hint"
-                  >Disclosure is for your safety. This is confidential and
-                  shared only with the program's medical officer.</span
-                >
+            </div>
+            <div class="km-field">
+              <label class="km-label" for="regEmergRelation">Relation <span class="km-req">*</span></label>
+              <div class="km-select-wrap">
+                <select id="regEmergRelation" name="emergencyRelation" class="km-select" required aria-required="true"
+                  aria-describedby="regEmergRelation-err">
+                  <option value="">— Select —</option>
+                  <option value="parent">Parent</option>
+                  <option value="guardian">Guardian</option>
+                  <option value="spouse">Spouse</option>
+                  <option value="sibling">Sibling</option>
+                  <option value="friend">Friend</option>
+                  <option value="other">Other</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
               </div>
-              <div class="km-field">
-                <label class="km-label" for="regBloodGroup"
-                  >Blood Group
-                  <span class="km-optional">(Optional)</span></label
-                >
-                <div class="km-select-wrap">
-                  <select
-                    id="regBloodGroup"
-                    name="bloodGroup"
-                    class="km-select"
-                  >
-                    <option value="">— Select if known —</option>
-                    <option>A+</option>
-                    <option>A−</option>
-                    <option>B+</option>
-                    <option>B−</option>
-                    <option>AB+</option>
-                    <option>AB−</option>
-                    <option>O+</option>
-                    <option>O−</option>
-                  </select>
-                  <i
-                    class="fas fa-chevron-down select-arrow"
-                    aria-hidden="true"
-                  ></i>
-                </div>
+              <span class="km-error" id="regEmergRelation-err" role="alert"></span>
+            </div>
+            <div class="km-field">
+              <label class="km-label" for="regMedical">Medical Conditions / Chronic Illnesses
+                <span class="km-optional">(Optional — but strongly recommended to disclose)</span></label>
+              <textarea id="regMedical" name="medicalConditions" class="km-textarea" rows="3"
+                placeholder="e.g. Asthma, heart condition, vertigo, epilepsy, diabetes, any surgery in the last 2 years"
+                aria-describedby="regMedical-hint"></textarea>
+              <span class="km-hint" id="regMedical-hint">Disclosure is for your safety. This is confidential and
+                shared only with the program's medical officer.</span>
+            </div>
+            <div class="km-field">
+              <label class="km-label" for="regBloodGroup">Blood Group
+                <span class="km-optional">(Optional)</span></label>
+              <div class="km-select-wrap">
+                <select id="regBloodGroup" name="bloodGroup" class="km-select">
+                  <option value="">— Select if known —</option>
+                  <option>A+</option>
+                  <option>A−</option>
+                  <option>B+</option>
+                  <option>B−</option>
+                  <option>AB+</option>
+                  <option>AB−</option>
+                  <option>O+</option>
+                  <option>O−</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
               </div>
-            </fieldset>
+            </div>
+          </fieldset>
 
-            <!-- S6: CONSENT -->
-            <fieldset class="km-fieldset" id="reg-sec-consent">
-              <legend class="km-legend">
-                <span class="km-legend__num">06</span>Consent, Declaration &amp;
-                Indemnity
-              </legend>
-              <div class="km-consent-list">
-                <label class="km-consent-item">
-                  <input
-                    type="checkbox"
-                    name="consentAccuracy"
-                    id="regConsentAccuracy"
-                    required
-                    aria-required="true"
-                    aria-describedby="regConsentAccuracy-err"
-                  />
-                  <span class="km-cb__box"></span>
-                  <span
-                    >I declare that all information provided is true and
-                    accurate. I understand that misrepresentation of my fitness
-                    or experience level may lead to disqualification or removal
-                    from the program.</span
-                  >
-                </label>
-                <span
-                  class="km-error"
-                  id="regConsentAccuracy-err"
-                  role="alert"
-                ></span>
-                <label class="km-consent-item">
-                  <input
-                    type="checkbox"
-                    name="consentMedical"
-                    id="regConsentMedical"
-                    required
-                    aria-required="true"
-                    aria-describedby="regConsentMedical-err"
-                  />
-                  <span class="km-cb__box"></span>
-                  <span
-                    >I confirm that I am physically and medically fit to
-                    undertake the selected adventure training program. I will
-                    produce a valid medical fitness certificate signed by an
-                    MBBS doctor before commencement.</span
-                  >
-                </label>
-                <span
-                  class="km-error"
-                  id="regConsentMedical-err"
-                  role="alert"
-                ></span>
-                <label class="km-consent-item">
-                  <input
-                    type="checkbox"
-                    name="consentRules"
-                    id="regConsentRules"
-                    required
-                    aria-required="true"
-                    aria-describedby="regConsentRules-err"
-                  />
-                  <span class="km-cb__box"></span>
-                  <span
-                    >I voluntarily participate in this adventure program and
-                    accept all inherent risks. I indemnify the Department of
-                    Youth Welfare &amp; PRD, Government of Uttarakhand, and NIM
-                    Uttarkashi against any injury, loss, or damage arising
-                    during the program, unless caused by gross negligence.</span
-                  >
-                </label>
-                <span
-                  class="km-error"
-                  id="regConsentRules-err"
-                  role="alert"
-                ></span>
-                <label class="km-consent-item">
-                  <input
-                    type="checkbox"
-                    name="consentData"
-                    id="regConsentData"
-                    required
-                    aria-required="true"
-                    aria-describedby="regConsentData-err"
-                  />
-                  <span class="km-cb__box"></span>
-                  <span
-                    >I consent to the use of my personal and medical data for
-                    program registration, insurance, emergency response, and
-                    issuance of completion certificates by the Youth Welfare
-                    Department and NIM Uttarkashi.</span
-                  >
-                </label>
-                <span
-                  class="km-error"
-                  id="regConsentData-err"
-                  role="alert"
-                ></span>
-              </div>
-            </fieldset>
+          <!-- S6: CONSENT -->
+          <fieldset class="km-fieldset" id="reg-sec-consent">
+            <legend class="km-legend">
+              <span class="km-legend__num">06</span>Consent, Declaration &amp;
+              Indemnity
+            </legend>
+            <div class="km-consent-list">
+              <label class="km-consent-item">
+                <input type="checkbox" name="consentAccuracy" id="regConsentAccuracy" required aria-required="true"
+                  aria-describedby="regConsentAccuracy-err" />
+                <span class="km-cb__box"></span>
+                <span>I declare that all information provided is true and
+                  accurate. I understand that misrepresentation of my fitness
+                  or experience level may lead to disqualification or removal
+                  from the program.</span>
+              </label>
+              <span class="km-error" id="regConsentAccuracy-err" role="alert"></span>
+              <label class="km-consent-item">
+                <input type="checkbox" name="consentMedical" id="regConsentMedical" required aria-required="true"
+                  aria-describedby="regConsentMedical-err" />
+                <span class="km-cb__box"></span>
+                <span>I confirm that I am physically and medically fit to
+                  undertake the selected adventure training program. I will
+                  produce a valid medical fitness certificate signed by an
+                  MBBS doctor before commencement.</span>
+              </label>
+              <span class="km-error" id="regConsentMedical-err" role="alert"></span>
+              <label class="km-consent-item">
+                <input type="checkbox" name="consentRules" id="regConsentRules" required aria-required="true"
+                  aria-describedby="regConsentRules-err" />
+                <span class="km-cb__box"></span>
+                <span>I voluntarily participate in this adventure program and
+                  accept all inherent risks. I indemnify the Department of
+                  Youth Welfare &amp; PRD, Government of Uttarakhand, and NIM
+                  Uttarkashi against any injury, loss, or damage arising
+                  during the program, unless caused by gross negligence.</span>
+              </label>
+              <span class="km-error" id="regConsentRules-err" role="alert"></span>
+              <label class="km-consent-item">
+                <input type="checkbox" name="consentData" id="regConsentData" required aria-required="true"
+                  aria-describedby="regConsentData-err" />
+                <span class="km-cb__box"></span>
+                <span>I consent to the use of my personal and medical data for
+                  program registration, insurance, emergency response, and
+                  issuance of completion certificates by the Youth Welfare
+                  Department and NIM Uttarkashi.</span>
+              </label>
+              <span class="km-error" id="regConsentData-err" role="alert"></span>
+            </div>
+          </fieldset>
 
-            <!-- CAPTCHA -->
-            <div class="km-captcha-wrap">
-              <div class="km-captcha">
-                <div class="km-captcha__img" aria-hidden="true">
-                  <span id="regCaptchaText">AT26XZ</span>
-                </div>
-                <div class="km-captcha__controls">
-                  <label class="km-label" for="regCaptchaInput"
-                    >Enter code <span class="km-req">*</span></label
-                  >
-                  <div class="km-captcha__row">
-                    <input
-                      type="text"
-                      id="regCaptchaInput"
-                      class="km-input"
-                      maxlength="6"
-                      placeholder="Type code"
-                      style="
+          <!-- CAPTCHA -->
+          <div class="km-captcha-wrap">
+            <div class="km-captcha">
+              <div class="km-captcha__img" aria-hidden="true">
+                <span id="regCaptchaText">AT26XZ</span>
+              </div>
+              <div class="km-captcha__controls">
+                <label class="km-label" for="regCaptchaInput">Enter code <span class="km-req">*</span></label>
+                <div class="km-captcha__row">
+                  <input type="text" id="regCaptchaInput" class="km-input" maxlength="6" placeholder="Type code" style="
                         max-width: 140px;
                         letter-spacing: 0.15em;
                         font-family: monospace;
-                      "
-                    />
-                    <button
-                      type="button"
-                      class="km-captcha__refresh"
-                      onclick="regRefreshCaptcha()"
-                      aria-label="Refresh"
-                    >
-                      <i class="fas fa-rotate-right"></i>
-                    </button>
-                  </div>
-                  <span class="km-hint"
-                    >⚠️ Prototype only — CAPTCHA not enforced</span
-                  >
+                      " />
+                  <button type="button" class="km-captcha__refresh" onclick="regRefreshCaptcha()" aria-label="Refresh">
+                    <i class="fas fa-rotate-right"></i>
+                  </button>
                 </div>
+                <span class="km-hint">⚠️ Prototype only — CAPTCHA not enforced</span>
               </div>
             </div>
-
-            <div
-              class="km-error-summary"
-              id="regErrorSummary"
-              hidden
-              role="alert"
-              aria-live="assertive"
-            >
-              <strong>Please fix the following errors:</strong>
-              <ul id="regErrorList"></ul>
-            </div>
-
-            <div class="km-form-actions">
-              <button type="button" class="km-btn-secondary" id="regSaveDraft">
-                <i class="fas fa-floppy-disk"></i> Save Draft
-              </button>
-              <button type="submit" class="km-btn-submit" id="regSubmitBtn">
-                <i class="fas fa-paper-plane"></i> Submit Registration
-              </button>
-            </div>
-          </form>
-
-          <!-- SUCCESS -->
-          <div class="km-success" id="regSuccess" hidden>
-            <div class="km-success__icon">⛰️</div>
-            <h2>Registration Received!</h2>
-            <p>
-              Your Adventure Training application has been submitted. Check your
-              phone for confirmation.
-            </p>
-            <div class="km-reg-id-box">
-              <div>
-                <span class="km-reg-id-label">Your Registration ID</span
-                ><span class="km-reg-id" id="regIdDisplay"></span>
-              </div>
-              <button class="km-btn-icon" id="regCopyId" aria-label="Copy ID">
-                <i class="fas fa-copy"></i>
-              </button>
-            </div>
-            <div class="km-success-details" id="regSuccessDetails"></div>
-            <div class="km-success-actions">
-              <button
-                class="register-btn"
-                onclick="regPrint()"
-                style="background: linear-gradient(135deg, #431407, #7c2d12)"
-              >
-                <i class="fas fa-print"></i> Print Receipt
-              </button>
-              <button class="register-btn" onclick="regRegisterAnother()">
-                <i class="fas fa-plus"></i> Register Another
-              </button>
-            </div>
-            <p class="km-success-note">
-              ⛑️ Next steps: Arrange your MBBS medical fitness certificate and
-              personal accident insurance. Report to the venue with this
-              receipt, original Aadhaar, and 2 passport-size photos. Contact NIM
-              Uttarkashi at 01374-223344 for course-specific queries.
-            </p>
           </div>
-        </div>
-      </div>
-    </main>
 
-    <div class="km-print-receipt" id="regPrintReceipt" aria-hidden="true">
-      <div class="km-print-receipt__head">
-        <div>
-          🏛 Government of Uttarakhand — Department of Youth Welfare &amp; PRD |
-          In collaboration with NIM Uttarkashi
+          <div class="km-error-summary" id="regErrorSummary" hidden role="alert" aria-live="assertive">
+            <strong>Please fix the following errors:</strong>
+            <ul id="regErrorList"></ul>
+          </div>
+
+          <div class="km-form-actions">
+            <button type="button" class="km-btn-secondary" id="regSaveDraft">
+              <i class="fas fa-floppy-disk"></i> Save Draft
+            </button>
+            <button type="submit" class="km-btn-submit" id="regSubmitBtn">
+              <i class="fas fa-paper-plane"></i> Submit Registration
+            </button>
+          </div>
+        </form>
+
+        <!-- SUCCESS -->
+        <div class="km-success" id="regSuccess" hidden>
+          <div class="km-success__icon">⛰️</div>
+          <h2>Registration Received!</h2>
+          <p>
+            Your Adventure Training application has been submitted. Check your
+            phone for confirmation.
+          </p>
+          <div class="km-reg-id-box">
+            <div>
+              <span class="km-reg-id-label">Your Registration ID</span><span class="km-reg-id" id="regIdDisplay"></span>
+            </div>
+            <button class="km-btn-icon" id="regCopyId" aria-label="Copy ID">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+          <div class="km-success-details" id="regSuccessDetails"></div>
+          <div class="km-success-actions">
+            <button class="register-btn" onclick="regPrint()"
+              style="background: linear-gradient(135deg, #431407, #7c2d12)">
+              <i class="fas fa-print"></i> Print Receipt
+            </button>
+            <button class="register-btn" onclick="regRegisterAnother()">
+              <i class="fas fa-plus"></i> Register Another
+            </button>
+          </div>
+          <p class="km-success-note">
+            ⛑️ Next steps: Arrange your MBBS medical fitness certificate and
+            personal accident insurance. Report to the venue with this
+            receipt, original Aadhaar, and 2 passport-size photos. Contact NIM
+            Uttarkashi at 01374-223344 for course-specific queries.
+          </p>
         </div>
-        <h2>Adventure Training Program — Registration Receipt</h2>
-      </div>
-      <div id="regPrintContent"></div>
-      <div class="km-print-receipt__foot">
-        Present this receipt along with MBBS Medical Certificate, Aadhaar Card,
-        and 2 passport photos. Computer-generated. No signature required.
       </div>
     </div>
+  </main>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-section logo-section">
-          <div class="logo-container">
-            <div class="yuva-sathi-logo">
-              <img src="../../images/logo.png" alt="Logo" class="logo-icon" />
-              <div class="logo-text">
-                <span class="yuva">Youth</span
-                ><span class="sathi">Welfare And PRD Department</span>
-                <div class="tagline">Uttarakhand</div>
-              </div>
-            </div>
-          </div>
-          <p class="description">
-            A Single Platform for Youth of Uttarakhand to get information
-            related to Jobs, Skill development, Vocational Training, Employment,
-            Sports, Health, Start-Up, Sewayojan etc.
-          </p>
-          <div class="newsletter-section">
-            <h4>Stay Informed with the Latest Updates!</h4>
-            <div class="newsletter-social-row">
-              <div class="newsletter-form">
-                <input
-                  type="email"
-                  placeholder="Enter your email id"
-                  class="email-input"
-                /><button class="send-btn">Send</button>
-              </div>
-              <div class="social-media">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  class="social-icon facebook"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  class="social-icon twitter"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  class="social-icon instagram"
-                  ><i class="fab fa-instagram"></i
-                ></a>
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  class="social-icon youtube"
-                  ><i class="fab fa-youtube"></i
-                ></a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  class="social-icon linkedin"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="../contact.html">Contact Us</a></li>
-            <li><a href="#">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Policies</h3>
-          <ul class="footer-links">
-            <li><a href="#">Terms &amp; Conditions</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Disclaimer</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact Us</h3>
-          <ul class="footer-links">
-            <li>
-              <a href="#"
-                >Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a
-              >
-            </li>
-            <li>
-              <a href="tel:+919634312465"
-                ><strong>Phone:</strong> +91-9634312465</a
-              >
-            </li>
-            <li>
-              <a href="mailto:ywprd.uk@gmail.com"
-                ><strong>Email:</strong> ywprd.uk@gmail.com</a
-              >
-            </li>
-          </ul>
-        </div>
+  <div class="km-print-receipt" id="regPrintReceipt" aria-hidden="true">
+    <div class="km-print-receipt__head">
+      <div>
+        🏛 Government of Uttarakhand — Department of Youth Welfare &amp; PRD |
+        In collaboration with NIM Uttarkashi
       </div>
-      <div class="footer-bottom">
-        <p>
-          &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
-          Government. All rights reserved.
+      <h2>Adventure Training Program — Registration Receipt</h2>
+    </div>
+    <div id="regPrintContent"></div>
+    <div class="km-print-receipt__foot">
+      Present this receipt along with MBBS Medical Certificate, Aadhaar Card,
+      and 2 passport photos. Computer-generated. No signature required.
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section logo-section">
+        <div class="logo-container">
+          <div class="yuva-sathi-logo">
+            <img src="../../images/logo.png" alt="Logo" class="logo-icon" />
+            <div class="logo-text">
+              <span class="yuva">Youth</span><span class="sathi">Welfare And PRD Department</span>
+              <div class="tagline">Uttarakhand</div>
+            </div>
+          </div>
+        </div>
+        <p class="description">
+          A Single Platform for Youth of Uttarakhand to get information
+          related to Jobs, Skill development, Vocational Training, Employment,
+          Sports, Health, Start-Up, Sewayojan etc.
         </p>
+        <div class="newsletter-section">
+          <h4>Stay Informed with the Latest Updates!</h4>
+          <div class="newsletter-social-row">
+            <div class="newsletter-form">
+              <input type="email" placeholder="Enter your email id" class="email-input" /><button
+                class="send-btn">Send</button>
+            </div>
+            <div class="social-media">
+              <a href="https://facebook.com" target="_blank" class="social-icon facebook"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com" target="_blank" class="social-icon twitter"><i
+                  class="fab fa-twitter"></i></a>
+              <a href="https://instagram.com" target="_blank" class="social-icon instagram"><i
+                  class="fab fa-instagram"></i></a>
+              <a href="https://youtube.com" target="_blank" class="social-icon youtube"><i
+                  class="fab fa-youtube"></i></a>
+              <a href="https://linkedin.com" target="_blank" class="social-icon linkedin"><i
+                  class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="../contact.html">Contact Us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Policies</h3>
+        <ul class="footer-links">
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li>
+            <a href="#">Uttarakhand Secretariat, Subhash Road, Dehradun – 248001</a>
+          </li>
+          <li>
+            <a href="tel:+919634312465"><strong>Phone:</strong> +91-9634312465</a>
+          </li>
+          <li>
+            <a href="mailto:ywprd.uk@gmail.com"><strong>Email:</strong> ywprd.uk@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        &copy; 2025 Department of Youth Welfare and PRD, Uttarakhand
+        Government. All rights reserved.
+      </p>
+    </div>
+  </footer>
 
-    <script src="../../script.js"></script>
-    <script src="../reg-engine.js"></script>
-    <script src="./index.js"></script>
-    <div
-      class="km-toasts"
-      id="regToasts"
-      aria-live="polite"
-      aria-atomic="true"
-    ></div>
-  </body>
+  <script src="../../translations.js"></script>
+  <script src="../../script.js"></script>
+  <script src="../reg-engine.js"></script>
+  <script src="./index.js"></script>
+  <div class="km-toasts" id="regToasts" aria-live="polite" aria-atomic="true"></div>
+</body>
+
 </html>
