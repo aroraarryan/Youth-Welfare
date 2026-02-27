@@ -55,9 +55,9 @@
                     <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
                     <li><a href="aboutUs.html?from=downloads" data-i18n="nav.about">About Us</a></li>
                     <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
-                    <li><a href="contact.html?from=downloads" data-i18n="nav.contact">Contact Us</a></li>
-                    <li><a href="downlods.html" data-i18n="nav.downloads">Downloads</a></li>
                     <li><a href="#" data-i18n="nav.rti">RTI</a></li>
+                    <li><a href="downlods.html" data-i18n="nav.downloads">Downloads</a></li>
+                    <li><a href="contact.html?from=downloads" data-i18n="nav.contact">Contact Us</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -114,14 +114,68 @@
     <!-- Downloads Main Content -->
     <main class="dl-page">
 
-        <!-- ── Category 1: Forms & Applications ─────────────────── -->
-        <section class="dl-section" id="forms">
+        <!-- Categories Selection -->
+        <div class="dl-category-selector"
+            style="display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; padding: 0 20px;">
+            <button class="dl-cat-btn active" onclick="showCategory(event, 'publication')">Publication/Circular</button>
+            <button class="dl-cat-btn" onclick="showCategory(event, 'tender')">Tender</button>
+            <button class="dl-cat-btn" onclick="showCategory(event, 'policies')">Policies</button>
+            <button class="dl-cat-btn" onclick="showCategory(event, 'advertisements')">Advertisements</button>
+        </div>
+
+        <style>
+            .dl-cat-btn {
+                padding: 10px 20px;
+                border: 2px solid #e1e8ed;
+                background: white;
+                color: #333;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+            }
+
+            .dl-cat-btn:hover {
+                background: #f8f9fa;
+                border-color: #cbd5e1;
+            }
+
+            .dl-cat-btn.active {
+                background: #1e3a8a;
+                color: white;
+                border-color: #1e3a8a;
+            }
+
+            .dl-section {
+                display: none;
+            }
+
+            .dl-section.active {
+                display: block;
+                animation: fadeIn 0.4s ease;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+
+        <!-- ── Category 1: Publication/Circular ─────────────────── -->
+        <section class="dl-section active" id="cat-publication">
             <div class="dl-section-header">
-                <span class="dl-section-icon forms-icon"><i class="fas fa-file-alt"></i></span>
+                <span class="dl-section-icon circular-icon"><i class="fas fa-bullhorn"></i></span>
                 <div>
-                    <h3 data-i18n="dl.forms.title">Forms &amp; Applications</h3>
-                    <p data-i18n="dl.forms.desc">Official application and registration forms for various programmes and
-                        schemes.</p>
+                    <h3>Publication / Circular</h3>
+                    <p>Official circulars, publications and notices issued by the department.</p>
                 </div>
             </div>
             <div class="dl-grid">
@@ -217,13 +271,13 @@
             </div>
         </section>
 
-        <!-- ── Category 2: Circulars & Notices ──────────────────── -->
-        <section class="dl-section" id="circulars">
+        <!-- ── Category 2: Tender ──────────────────── -->
+        <section class="dl-section" id="cat-tender">
             <div class="dl-section-header">
-                <span class="dl-section-icon circular-icon"><i class="fas fa-bullhorn"></i></span>
+                <span class="dl-section-icon scheme-icon"><i class="fas fa-file-contract"></i></span>
                 <div>
-                    <h3 data-i18n="dl.circ.title">Circulars &amp; Notices</h3>
-                    <p data-i18n="dl.circ.desc">Official circulars, orders and notices issued by the department.</p>
+                    <h3>Tender</h3>
+                    <p>Active and archived tenders and procurement notices.</p>
                 </div>
             </div>
             <div class="dl-grid">
@@ -297,14 +351,13 @@
             </div>
         </section>
 
-        <!-- ── Category 3: Schemes & Guidelines ─────────────────── -->
-        <section class="dl-section" id="schemes">
+        <!-- ── Category 3: Policies ─────────────────── -->
+        <section class="dl-section" id="cat-policies">
             <div class="dl-section-header">
-                <span class="dl-section-icon scheme-icon"><i class="fas fa-book-open"></i></span>
+                <span class="dl-section-icon report-icon"><i class="fas fa-landmark"></i></span>
                 <div>
-                    <h3 data-i18n="dl.scheme.title">Schemes &amp; Guidelines</h3>
-                    <p>Detailed documents for government schemes, eligibility criteria and implementation guidelines.
-                    </p>
+                    <h3>Policies</h3>
+                    <p>Department policies, guidelines and governing rules.</p>
                 </div>
             </div>
             <div class="dl-grid">
@@ -378,14 +431,13 @@
             </div>
         </section>
 
-        <!-- ── Category 4: Reports & Publications ───────────────── -->
-        <section class="dl-section" id="reports">
+        <!-- ── Category 4: Advertisements ───────────────── -->
+        <section class="dl-section" id="cat-advertisements">
             <div class="dl-section-header">
-                <span class="dl-section-icon report-icon"><i class="fas fa-chart-bar"></i></span>
+                <span class="dl-section-icon forms-icon"><i class="fas fa-ad"></i></span>
                 <div>
-                    <h3 data-i18n="dl.reports.title">Reports &amp; Publications</h3>
-                    <p data-i18n="dl.reports.desc">Annual reports, statistical publications and activity reports of the
-                        department.</p>
+                    <h3>Advertisements</h3>
+                    <p>Official advertisements and announcements for recruitment and events.</p>
                 </div>
             </div>
             <div class="dl-grid">
@@ -592,11 +644,27 @@
         // ── Document search filter ─────────────────────────────────────
         function filterDocs() {
             const query = document.getElementById('dlSearch').value.toLowerCase();
-            document.querySelectorAll('.dl-card').forEach(card => {
+            document.querySelectorAll('.dl-section.active .dl-card').forEach(card => {
                 const title = card.dataset.title || '';
                 const text = card.innerText.toLowerCase();
                 card.style.display = (title.includes(query) || text.includes(query)) ? '' : 'none';
             });
+        }
+
+        // ── Tab filter ─────────────────────────────────────
+        function showCategory(event, categoryId) {
+            // Update buttons
+            document.querySelectorAll('.dl-cat-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Show corresponding section
+            document.querySelectorAll('main.dl-page .dl-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById('cat-' + categoryId).classList.add('active');
+
+            // Re-apply search filter if there's any query
+            filterDocs();
         }
     </script>
 </body>
