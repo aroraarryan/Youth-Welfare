@@ -1608,6 +1608,77 @@ body {
 }
 
 
+/* MMD and YMD Section */
+.mmd-ymd-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f8fafc;
+}
+
+.mmd-ymd-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mmd-ymd-section h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 20px;
+}
+
+.mmd-ymd-section p {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 50px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mmd-ymd-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  justify-content: center;
+}
+
+.mmd-ymd-card {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mmd-ymd-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
+}
+
+.mmd-ymd-icon {
+  font-size: 64px;
+  margin-bottom: 25px;
+}
+
+.mmd-ymd-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+  .mmd-ymd-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Registration Section */
 .registration-section {
   text-align: center;
