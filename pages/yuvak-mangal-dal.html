@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles.css" />
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="../responsive.css" />
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <title>Yuvak Mangal Dal — Youth Welfare</title>
+    <script src="../translations.js"></script>
+    <style>
+        .page-content-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .filter-title {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .select-group {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+            text-align: left;
+        }
+
+        .select-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .dropdown-wrapper {
+            position: relative;
+        }
+
+        .district-select,
+        .block-select {
+            width: 100%;
+            padding: 12px 40px 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            appearance: none;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #1e293b;
+        }
+
+        .district-select:focus,
+        .block-select:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .district-select:disabled,
+        .block-select:disabled {
+            background-color: #f1f5f9;
+            cursor: not-allowed;
+            color: #94a3b8;
+        }
+
+        .select-arrow-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            pointer-events: none;
+        }
+
+        /* Results Section */
+        .results-section {
+            min-height: 200px;
+        }
+
+        .block-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .block-title {
+            color: #1e3a8a;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff6b6b;
+            display: inline-block;
+        }
+
+        .data-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .data-table tr:hover {
+            background: #f1f5f9;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fff;
+            border-radius: 15px;
+            color: #64748b;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        .empty-state p {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .block-title {
+                font-size: 1.4rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Government Header Bar -->
+    <div class="gov-header-bar">
+        <div class="gov-header-left">
+            <span class="flag-icon">🇮🇳</span>
+            <span class="gov-text" data-i18n="gov.name">Government of Uttarakhand</span>
+        </div>
+        <div class="gov-header-right">
+            <button class="header-icon-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+            <button class="header-icon-btn" title="Theme Toggle"><i class="fas fa-sun"></i></button>
+            <button class="header-icon-btn" title="Accessibility"><i class="fas fa-universal-access"></i></button>
+            <button class="lang-toggle">EN</button>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logos-container">
+                <img class="ashoka-chakra" src="../images/gov-logo.png" alt="Ashoka Chakra" />
+                <img class="main-logo" src="../images/logo.png" alt="Youth Welfare Logo" />
+            </div>
+            <div class="logo-text">
+                <h1 data-i18n="hero.title">Department of Youth Welfare <br />and PRD</h1>
+                <p data-i18n="hero.subtitle">Uttarakhand Government</p>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="aboutUs.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+                    <li><a href="#" data-i18n="nav.rti">RTI</a></li>
+                    <li><a href="downlods.html" data-i18n="nav.downloads">Downloads</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="register.html" class="join-btn" data-i18n="nav.join">Join the Community</a>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+                <a href="../index.html" data-i18n="nav.home">Home</a>
+                <span class="bc-sep">›</span>
+                <span class="bc-current" data-i18n="mmd_ymd.ymd">Yuvak Mangal Dal</span>
+            </nav>
+            <p class="page-hero-hindi">युवक मंगल दल</p>
+            <h1 class="page-hero-title">Yuvak Mangal Dal (YMD)</h1>
+            <p class="page-hero-subtitle">
+                Empowering the youth of Uttarakhand through community engagement and leadership development.
+            </p>
+        </div>
+    </div>
+
+    <main class="page-content-container">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <h2 class="filter-title">Explore Yuvak Mangal Dal Details</h2>
+            <div class="filter-controls">
+                <div class="select-group">
+                    <label for="districtSelect" class="select-label">Select District</label>
+                    <div class="dropdown-wrapper">
+                        <select id="districtSelect" class="district-select">
+                            <option value="" disabled selected>Choose a District</option>
+                            <option value="almora">Almora</option>
+                            <option value="bageshwar">Bageshwar</option>
+                            <option value="chamoli">Chamoli</option>
+                            <option value="champawat">Champawat</option>
+                            <option value="dehradun">Dehradun</option>
+                            <option value="haridwar">Haridwar</option>
+                            <option value="nainital">Nainital</option>
+                            <option value="pauri">Pauri</option>
+                            <option value="pithoragarh">Pithoragarh</option>
+                            <option value="rudraprayag">Rudraprayag</option>
+                            <option value="tehri">Tehri</option>
+                            <option value="udam singh nagar">Udham Singh Nagar</option>
+                            <option value="uttarakashi">Uttarkashi</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow-icon"></i>
+                    </div>
+                </div>
+
+                <div class="select-group">
+                    <label for="blockSelect" class="select-label">Select Block</label>
+                    <div class="dropdown-wrapper">
+                        <select id="blockSelect" class="block-select" disabled>
+                            <option value="" disabled selected>Choose a Block</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Display Area -->
+        <div id="resultsArea" class="results-section">
+            <div class="empty-state">
+                <i class="fas fa-search-location"></i>
+                <p>Please select a district and then a block to see the data.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section logo-section">
+                <div class="logo-container">
+                    <div class="yuva-sathi-logo">
+                        <img src="../images/logo.png" alt="Yuva Sathi Logo" class="logo-icon" />
+                        <div class="logo-text">
+                            <span class="yuva">Youth</span>
+                            <span class="sathi">Welfare And PRD Department</span>
+                            <div class="tagline">Uttarakhand</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="description" data-i18n="ft.description">
+                    A Single Platform for Youth of Uttarakhand to get information
+                    related to Jobs, Skill development, Vocational Training, Employment,
+                    Self-Employment, Higher Education, Competitive Examination, Carrier
+                    Counselling, Sports, Health, Secondary Education, Start-Up,
+                    Sewayojan etc.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3 data-i18n="ft.quicklinks">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="aboutUs.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="#" data-i18n="ft.register">How To Register</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                    <li><a href="#" data-i18n="ft.faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 data-i18n="ft.policies">Policies</h3>
+                <ul class="footer-links">
+                    <li><a href="gallery.html" data-i18n="ft.gallery">Photo Gallery</a></li>
+                    <li><a href="#" data-i18n="ft.terms">Terms & Conditions</a></li>
+                    <li><a href="#" data-i18n="ft.privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 data-i18n="ft.contact">Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#" data-i18n="ft.address">Uttarakhand Secretariat, Dehradun – 248001</a></li>
+                    <li><a href="tel:+919634312465"><strong data-i18n="ft.phone">Phone:</strong> +91-9634312465</a></li>
+                    <li><a href="mailto:ywprd.uk@gmail.com"><strong data-i18n="ft.email">Email:</strong>
+                            ywprd.uk@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="ft.copyright">&copy; 2025 Department of Youth Welfare and PRD, Uttarakhand. All rights
+                reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const chamoliData = {
+            "Joshimath": [
+                { sl: 1, name: "Pokhni", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 01", chair: "Rajneesh Singh" },
+                { sl: 2, name: "Choi", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 02", chair: "Akhilesh" },
+                { sl: 3, name: "Jakhola", affDate: "8/26/21", renDate: "8/25/23", affNo: "SEW 03", chair: "Narendra Singh Rana" },
+                { sl: 4, name: "Bampa", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 04", chair: "Shri Rajendra Singh" },
+                { sl: 5, name: "bharki", affDate: "6/25/20", renDate: "6/24/22", affNo: "SEW 05", chair: "Subhash Singh" },
+                { sl: 6, name: "thang", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 06", chair: "Shailesh" },
+                { sl: 7, name: "Gamshaali", affDate: "10/3/22", renDate: "10/2/24", affNo: "SEW 07", chair: "Mukesh Rawat" },
+                { sl: 8, name: "Bhangyul", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 08", chair: "Mithlesh" },
+                { sl: 9, name: "Auth Hanumanchatti", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 09", chair: "Mr. Ramesh Singh" },
+                { sl: 10, name: "Selang", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 10", chair: "Shri Kalpeshwar Bhandari" },
+                { sl: 11, name: "brings", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 11", chair: "Manoj Singh" },
+                { sl: 12, name: "cover", affDate: "1/21/15", renDate: "1/21/17", affNo: "SEW 12", chair: "Mr. Balbir Lal" },
+                { sl: 13, name: "Raini Check Subhai", affDate: "2/6/17", renDate: "2/5/19", affNo: "SEW 13", chair: "Mr. Kalam Singh" },
+                { sl: 14, name: "jelam", affDate: "2/6/17", renDate: "2/5/19", affNo: "SEW 14", chair: "Shri Dharam Singh" },
+                { sl: 15, name: "diploid", affDate: "2/6/17", renDate: "2/5/19", affNo: "SEW 15", chair: "Mr. Pradeep Prasad" },
+                { sl: 16, name: "Larithina", affDate: "2/6/17", renDate: "2/5/19", affNo: "SEW 16", chair: "Shri Rajendra Singh" },
+                { sl: 17, name: "ringi", affDate: "12/2/16", renDate: "12/1/18", affNo: "SEW 17", chair: "Pankaj Negi" },
+                { sl: 18, name: "Cucumbers Lambagad", affDate: "6/25/20", renDate: "6/24/22", affNo: "SEW 18", chair: "Mr. Harish Chauhan" },
+                { sl: 19, name: "meet up", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 19", chair: "Shri Devendra Singh" },
+                { sl: 20, name: "Dugri Barosi", affDate: "8/26/21", renDate: "8/25/23", affNo: "SEW 20", chair: "Rohit Rawat" },
+                { sl: 21, name: "treasury", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 21", chair: "Arvind Singh" },
+                { sl: 22, name: "helang", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 22", chair: "Pradeep Lal" },
+                { sl: 23, name: "considered", affDate: "7/5/21", renDate: "7/4/21", affNo: "SEW 23", chair: "Prem Singh" },
+                { sl: 24, name: "Kimana", affDate: "8/26/21", renDate: "8/25/23", affNo: "SEW 24", chair: "Narendra Singh" },
+                { sl: 25, name: "farkia", affDate: "10/3/22", renDate: "10/2/24", affNo: "SEW 25", chair: "Sanjay Singh" },
+                { sl: 26, name: "tangani talli", affDate: "-", renDate: "-", affNo: "SEW 26", chair: "Mr. Ashish Bhatt" },
+                { sl: 27, name: "Kailashpur", affDate: "4/17/17", renDate: "4/16/19", affNo: "SEW 27", chair: "Shri Rajendra Singh" },
+                { sl: 28, name: "Raini", affDate: "1/18/20", renDate: "1/17/22", affNo: "SEW 28", chair: "Puran Singh" },
+                { sl: 29, name: "Molta", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 29", chair: "Arvind Singh" },
+                { sl: 30, name: "Dumka", affDate: "1/18/20", renDate: "1/17/22", affNo: "SEW 30", chair: "Ramesh Singh" },
+                { sl: 31, name: "ladles", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 31", chair: "Hrithik Farswan" },
+                { sl: 32, name: "Tapovan", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 32", chair: "Pradeep Prasad" },
+                { sl: 33, name: "Badsgaon", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 33", chair: "Rupesh Chauhan" },
+                { sl: 34, name: "salud", affDate: "8/26/21", renDate: "8/25/23", affNo: "SEW 34", chair: "Chandrashekhar" },
+                { sl: 35, name: "Dugra", affDate: "8/26/21", renDate: "8/25/23", affNo: "SEW 35", chair: "Nikhil Kunwar" },
+                { sl: 36, name: "mehargaon", affDate: "7/25/15", renDate: "7/25/17", affNo: "SEW 36", chair: "Dinesh Singh" },
+                { sl: 37, name: "Suki Bhalagov", affDate: "8/26/21", renDate: "8/25/23", affNo: "SEW 37", chair: "Pushkar Singh" },
+                { sl: 38, name: "Kalgoth", affDate: "8/5/15", renDate: "8/5/17", affNo: "SEW 38", chair: "Mr. Surendra Singh" },
+                { sl: 39, name: "Devgram", affDate: "9/1/15", renDate: "9/1/17", affNo: "SEW 39", chair: "Mr. Bhola Singh" },
+                { sl: 40, name: "on balance", affDate: "3/11/19", renDate: "3/10/21", affNo: "SEW 40", chair: "Raghuveer Singh" },
+                { sl: 41, name: "Penny", affDate: "9/1/15", renDate: "9/1/17", affNo: "SEW 41", chair: "Mr. Vikram Singh" },
+                { sl: 42, name: "counting", affDate: "12/15/15", renDate: "12/15/17", affNo: "SEW 42", chair: "Mr. Sukhveer Singh" },
+                { sl: 43, name: "Tangani Malli", affDate: "8/26/21", renDate: "8/25/23", affNo: "SEW 43", chair: "Subhash Chandra" },
+                { sl: 44, name: "Gulabkoti", affDate: "12/12/22", renDate: "12/11/24", affNo: "SEW 46", chair: "Pradeep Kumar" },
+                { sl: 45, name: "Dronagiri", affDate: "12/15/15", renDate: "12/15/17", affNo: "SEW 47", chair: "Shri Narendra Singh" },
+                { sl: 46, name: "origin", affDate: "1/30/17", renDate: "1/29/19", affNo: "SEW 48", chair: "Sanjay Singh" },
+                { sl: 47, name: "Pakhi", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 49", chair: "Ravindra Singh" },
+                { sl: 48, name: "don't melt", affDate: "1/18/20", renDate: "1/17/22", affNo: "SEW 50", chair: "Pradeep Singh" },
+                { sl: 49, name: "opened the latch", affDate: "8/26/21", renDate: "8/25/23", affNo: "SEW 51", chair: "Suraj Singh" },
+                { sl: 50, name: "policy", affDate: "8/18/18", renDate: "8/17/20", affNo: "SEW 52", chair: "Ashutosh Rana" },
+                { sl: 51, name: "malaria", affDate: "8/18/18", renDate: "8/17/20", affNo: "SEW 53", chair: "Birendra Lal" },
+                { sl: 52, name: "ragdi", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 54", chair: "Dabble Singh" },
+                { sl: 53, name: "Meerg", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 55", chair: "Prakash Rawat" },
+                { sl: 54, name: "langsi", affDate: "1/18/20", renDate: "1/17/22", affNo: "SEW 56", chair: "Satendra Singh" },
+                { sl: 55, name: "Pandukeshwar", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 57", chair: "Raghav Panwar" },
+                { sl: 56, name: "crow", affDate: "12/4/20", renDate: "12/3/22", affNo: "SEW 58", chair: "Bhagat Singh" },
+                { sl: 57, name: "bhudar", affDate: "7/5/21", renDate: "7/4/23", affNo: "SEW 59", chair: "Akash Chauhan" }
+            ],
+            "Dasholi": [
+                { sl: 1, name: "brother in law khadora", affDate: "8/26/21", renDate: "8/25/23", affNo: "DASH 01", chair: "Satish Chandra Bhatt" },
+                { sl: 2, name: "Birhi Digoli", affDate: "10/17/14", renDate: "10/17/16", affNo: "DASH 02", chair: "Pushkar Singh" },
+                { sl: 3, name: "rangtoli", affDate: "6/25/20", renDate: "6/24/22", affNo: "DASH 03", chair: "Vijay Singh" },
+                { sl: 4, name: "months", affDate: "7/23/21", renDate: "1/22/23", affNo: "DASH 04", chair: "Sohan Singh" },
+                { sl: 5, name: "Medtheli", affDate: "1/18/20", renDate: "1/17/22", affNo: "DASH 05", chair: "satisfaction" },
+                { sl: 6, name: "Jaisal", affDate: "8/20/19", renDate: "8/19/21", affNo: "DASH 06", chair: "smith jaisali" },
+                { sl: 7, name: "head", affDate: "12/24/20", renDate: "12/23/22", affNo: "DASH 07", chair: "Ravindra Singh" },
+                { sl: 8, name: "Pagana", affDate: "2/6/21", renDate: "2/5/23", affNo: "DASH 08", chair: "Makar Singh" },
+                { sl: 9, name: "harmony", affDate: "6/25/20", renDate: "6/24/22", affNo: "DASH 09", chair: "Surendra Singh" },
+                { sl: 10, name: "guad", affDate: "8/20/19", renDate: "8/19/21", affNo: "DASH 10", chair: "Arvind Bisht" },
+                { sl: 11, name: "Khainuri", affDate: "6/25/20", renDate: "6/24/22", affNo: "DASH 11", chair: "Subhash Singh" },
+                { sl: 12, name: "Rogtoli", affDate: "12/19/16", renDate: "12/18/18", affNo: "DASH 12", chair: "Vijay Singh" },
+                { sl: 13, name: "Dogdi Kandai", affDate: "7/4/19", renDate: "7/3/21", affNo: "DASH 13", chair: "Prithvi Pal Singh" },
+                { sl: 14, name: "thaw", affDate: "12/19/16", renDate: "12/18/18", affNo: "DASH 14", chair: "Than Singh" },
+                { sl: 15, name: "the hole", affDate: "12/4/20", renDate: "12/3/22", affNo: "DASH 15", chair: "Rahul Singh" },
+                { sl: 16, name: "Nizamula", affDate: "8/20/19", renDate: "8/19/21", affNo: "DASH 16", chair: "Mahipal Singh" },
+                { sl: 17, name: "Luhan", affDate: "8/20/19", renDate: "8/19/21", affNo: "DASH 17", chair: "Pawan Singh" },
+                { sl: 18, name: "calf", affDate: "9/26/20", renDate: "9/25/22", affNo: "DASH 18", chair: "Kuldeep Singh" },
+                { sl: 19, name: "tangsa", affDate: "8/11/20", renDate: "8/10/22", affNo: "DASH 19", chair: "Lamp" },
+                { sl: 20, name: "Bamiala", affDate: "12/19/14", renDate: "12/19/16", affNo: "DASH 20", chair: "Avtar Singh" },
+                { sl: 21, name: "planted", affDate: "12/19/16", renDate: "12/18/18", affNo: "DASH 21", chair: "Heera Singh" },
+                { sl: 22, name: "Salla Raitoli", affDate: "7/5/21", renDate: "7/4/23", affNo: "DASH 22", chair: "Pradeep Singh" },
+                { sl: 23, name: "Pilang", affDate: "7/16/19", renDate: "7/15/21", affNo: "DASH 23", chair: "Rupendra Singh" },
+                { sl: 24, name: "Lacy", affDate: "1/18/20", renDate: "1/17/22", affNo: "DASH 24", chair: "Harendra Singh" },
+                { sl: 25, name: "market", affDate: "1/15/21", renDate: "1/14/23", affNo: "DASH 25", chair: "Amit Gairola" },
+                { sl: 26, name: "bemru", affDate: "1/18/20", renDate: "1/17/22", affNo: "DASH 26", chair: "Sohan Singh" },
+                { sl: 27, name: "Byara", affDate: "8/11/20", renDate: "8/10/22", affNo: "DASH 27", chair: "Devendra Singh" },
+                { sl: 28, name: "cut off", affDate: "12/19/16", renDate: "12/18/18", affNo: "DASH 28", chair: "Yashwant Singh" },
+                { sl: 29, name: "brother in law canary", affDate: "7/20/20", renDate: "7/19/22", affNo: "DASH 29", chair: "Chandi Prasad" },
+                { sl: 30, name: "golem", affDate: "1/29/20", renDate: "1/28/22", affNo: "DASH 30", chair: "Mohit Singh" },
+                { sl: 31, name: "Semdugra", affDate: "1/29/20", renDate: "1/28/22", affNo: "DASH 31", chair: "Vipin" },
+                { sl: 32, name: "Chatoli Kiruli", affDate: "3/11/19", renDate: "3/10/21", affNo: "DASH 32", chair: "Suraj Singh" },
+                { sl: 33, name: "stable", affDate: "10/18/22", renDate: "10/17/24", affNo: "DASH 33", chair: "Praveen Panwar" },
+                { sl: 34, name: "Roli Gwad", affDate: "1/14/15", renDate: "1/14/17", affNo: "DASH 34", chair: "Manoj Kumar" },
+                { sl: 35, name: "Ropa Banjbagad", affDate: "7/16/19", renDate: "7/15/21", affNo: "DASH 35", chair: "Shiv Prasad" },
+                { sl: 36, name: "minor", affDate: "7/5/21", renDate: "7/4/23", affNo: "DASH 36", chair: "Dinesh Singh" },
+                { sl: 37, name: "Vehicle", affDate: "6/25/20", renDate: "6/24/22", affNo: "DASH 37", chair: "Rahul Singh" },
+                { sl: 38, name: "Iranian", affDate: "12/31/22", renDate: "12/30/24", affNo: "DASH 38", chair: "Virendra Singh" },
+                { sl: 39, name: "Devaldhar", affDate: "8/20/19", renDate: "8/19/21", affNo: "DASH 39", chair: "Pramod Singh" },
+                { sl: 40, name: "Koteshwar", affDate: "8/20/19", renDate: "8/19/21", affNo: "DASH 40", chair: "Karanbir Singh" },
+                { sl: 41, name: "Saiji", affDate: "6/25/20", renDate: "6/24/22", affNo: "DASH 41", chair: "Vinod Singh" },
+                { sl: 42, name: "Nelkudav", affDate: "4/20/17", renDate: "4/19/19", affNo: "DASH 42", chair: "Dinansh Rawat" },
+                { sl: 43, name: "Kilondi", affDate: "3/11/19", renDate: "3/10/21", affNo: "DASH 43", chair: "Raghunath Singh" },
+                { sl: 44, name: "to son", affDate: "1/15/21", renDate: "1/14/23", affNo: "DASH 44", chair: "Kailash Chandra" },
+                { sl: 45, name: "Sartoli", affDate: "7/20/20", renDate: "7/19/22", affNo: "DASH 45", chair: "Satendra Bisht" },
+                { sl: 46, name: "to get", affDate: "11/16/22", renDate: "11/15/24", affNo: "DASH 46", chair: "Pradeep Singh" },
+                { sl: 47, name: "sacot", affDate: "11/16/22", renDate: "12/15/24", affNo: "DASH 47", chair: "Anurag Thapliyal" },
+                { sl: 48, name: "Mandal", affDate: "7/4/19", renDate: "7/3/21", affNo: "DASH 48", chair: "Naveen Semwal" },
+                { sl: 49, name: "Palethi", affDate: "7/5/21", renDate: "7/4/23", affNo: "DASH 49", chair: "Narendra Singh" },
+                { sl: 50, name: "Siroli", affDate: "9/29/17", renDate: "9/28/19", affNo: "DASH 50", chair: "Rakesh Lal" },
+                { sl: 51, name: "Bhadakoti", affDate: "9/29/17", renDate: "9/28/19", affNo: "DASH 51", chair: "Ashok Rana" },
+                { sl: 52, name: "Dharkumala", affDate: "1/15/21", renDate: "1/14/23", affNo: "DASH 52", chair: "Pooran Singh" },
+                { sl: 53, name: "Dharkot", affDate: "2/6/21", renDate: "2/5/23", affNo: "DASH 53", chair: "Sandeep Singh" },
+                { sl: 54, name: "math-buster", affDate: "7/5/21", renDate: "7/4/23", affNo: "DASH 54", chair: "Sunil Singh" },
+                { sl: 55, name: "Kujou Makot", affDate: "12/24/20", renDate: "12/23/22", affNo: "DASH 55", chair: "Ashish Singh" },
+                { sl: 56, name: "Kathud", affDate: "8/11/20", renDate: "8/10/22", affNo: "DASH 56", chair: "Vijendra Singh" },
+                { sl: 57, name: "kaunj pothani", affDate: "12/24/20", renDate: "12/23/22", affNo: "DASH 57", chair: "Bharat Singh" },
+                { sl: 58, name: "Syun", affDate: "8/11/20", renDate: "8/10/22", affNo: "DASH 58", chair: "Arun Singh" },
+                { sl: 59, name: "degree", affDate: "12/4/20", renDate: "12/3/22", affNo: "DASH 59", chair: "Anuj Singh" },
+                { sl: 60, name: "Maithana", affDate: "7/20/20", renDate: "7/19/22", affNo: "DASH 60", chair: "Vaibhav Mishra" },
+                { sl: 61, name: "majothi", affDate: "1/29/20", renDate: "1/28/22", affNo: "DASH 61", chair: "Roshan Lal" },
+                { sl: 62, name: "Tedakhansal", affDate: "1/30/17", renDate: "1/29/19", affNo: "DASH 62", chair: "Yaduveer Singh" },
+                { sl: 63, name: "boula", affDate: "7/16/19", renDate: "7/15/21", affNo: "DASH 63", chair: "Laxman Singh" },
+                { sl: 64, name: "to son", affDate: "1/30/17", renDate: "1/29/19", affNo: "DASH 64", chair: "Atul Kumar" },
+                { sl: 65, name: "To Bhatangya", affDate: "4/20/17", renDate: "4/19/19", affNo: "DASH 65", chair: "Naveen Singh" },
+                { sl: 66, name: "Digoli", affDate: "10/29/18", renDate: "10/28/20", affNo: "DASH 67", chair: "Harish Purohit" }
+            ],
+            "Nandanagar": [
+                { sl: 1, name: "Sutol", affDate: "2/9/23", renDate: "2/8/25", affNo: "GHAT 01", chair: "Bakhtawar Singh" },
+                { sl: 2, name: "Bizarre", affDate: "10/29/14", renDate: "10/29/16", affNo: "GHAT 02", chair: "Mr. Charan Singh" },
+                { sl: 3, name: "Guladi", affDate: "2/6/21", renDate: "2/5/23", affNo: "GHAT 03", chair: "Rai Singh" },
+                { sl: 4, name: "bad", affDate: "8/26/21", renDate: "8/25/23", affNo: "GHAT 04", chair: "Mohit Singh Panwar" },
+                { sl: 5, name: "Khunana", affDate: "8/26/21", renDate: "8/25/23", affNo: "GHAT 05", chair: "Yogesh Prasad" },
+                { sl: 6, name: "kumjuk", affDate: "2/6/21", renDate: "2/5/23", affNo: "GHAT 06", chair: "Surendra Singh" },
+                { sl: 7, name: "visits", affDate: "10/18/22", renDate: "10/17/24", affNo: "GHAT 07", chair: "Laxman Singh" },
+                { sl: 8, name: "indifference", affDate: "6/25/20", renDate: "6/24/22", affNo: "GHAT 08", chair: "Mahavir Singh" },
+                { sl: 9, name: "Ramani", affDate: "10/29/18", renDate: "10/28/20", affNo: "GHAT 09", chair: "Mr. Rakesh Singh" },
+                { sl: 10, name: "The wheel is big", affDate: "10/29/14", renDate: "10/29/16", affNo: "GHAT 10", chair: "Shri Narendra Singh" },
+                { sl: 11, name: "Mathkot", affDate: "10/29/14", renDate: "10/29/16", affNo: "GHAT 11", chair: "Mr. Dinesh Lal" },
+                { sl: 12, name: "orange", affDate: "10/18/22", renDate: "10/17/24", affNo: "GHAT 12", chair: "Yogendra Singh" },
+                { sl: 13, name: "sema", affDate: "2/9/23", renDate: "2/8/25", affNo: "GHAT 13", chair: "Ankit Singh" },
+                { sl: 14, name: "bhatiana", affDate: "12/24/20", renDate: "12/23/22", affNo: "GHAT 14", chair: "Narendra Singh" },
+                { sl: 15, name: "Bairon", affDate: "1/16/15", renDate: "1/16/17", affNo: "GHAT 15", chair: "Umashankar" },
+                { sl: 16, name: "bossabada", affDate: "1/18/20", renDate: "1/17/22", affNo: "GHAT 16", chair: "Devendra Singh" },
+                { sl: 17, name: "Baduk", affDate: "1/16/15", renDate: "1/16/17", affNo: "GHAT 17", chair: "Rai Singh" },
+                { sl: 18, name: "Manakhi", affDate: "1/18/20", renDate: "1/17/22", affNo: "GHAT 18", chair: "Satish Chandra" },
+                { sl: 19, name: "perry", affDate: "6/25/20", renDate: "6/24/22", affNo: "GHAT 19", chair: "Rajesh Singh" },
+                { sl: 20, name: "Kurud", affDate: "6/25/20", renDate: "6/24/22", affNo: "GHAT 20", chair: "Bhawan Singh" },
+                { sl: 21, name: "sung", affDate: "1/18/20", renDate: "1/17/22", affNo: "GHAT 21", chair: "Ravindra Singh" },
+                { sl: 22, name: "charbang", affDate: "7/23/21", renDate: "7/22/23", affNo: "GHAT 22", chair: "Sohan Singh" },
+                { sl: 23, name: "Jakhani", affDate: "1/21/15", renDate: "1/21/17", affNo: "GHAT 23", chair: "Karan Singh" },
+                { sl: 24, name: "Punakila", affDate: "4/20/15", renDate: "4/20/17", affNo: "GHAT 24", chair: "Pooran Singh" },
+                { sl: 25, name: "Fali", affDate: "8/26/21", renDate: "8/25/21", affNo: "GHAT 25", chair: "Pradeep Singh" },
+                { sl: 26, name: "canol", affDate: "9/29/22", renDate: "9/28/24", affNo: "GHAT 26", chair: "Pradeep Singh" },
+                { sl: 27, name: "The threat came", affDate: "4/20/17", renDate: "4/19/19", affNo: "GHAT 27", chair: "Makar Singh" },
+                { sl: 28, name: "Bherani", affDate: "2/6/21", renDate: "2/5/23", affNo: "GHAT 28", chair: "Girish Singh" },
+                { sl: 29, name: "Sarpani", affDate: "9/26/20", renDate: "9/25/22", affNo: "GHAT 29", chair: "Kalam Singh" },
+                { sl: 30, name: "Ivani", affDate: "9/26/20", renDate: "9/25/22", affNo: "GHAT 30", chair: "Satendra Singh" },
+                { sl: 31, name: "Saiti", affDate: "8/5/17", renDate: "8/4/19", affNo: "GHAT 31", chair: "Himashu Joshi" },
+                { sl: 32, name: "Pagana", affDate: "6/25/20", renDate: "6/24/22", affNo: "GHAT 32", chair: "Shailendra Singh" },
+                { sl: 33, name: "Lunatara", affDate: "1/18/20", renDate: "1/17/22", affNo: "GHAT 33", chair: "Kamal Singh" },
+                { sl: 34, name: "Mokh Malla", affDate: "4/29/21", renDate: "4/28/23", affNo: "GHAT 34", chair: "Sandeep Singh" },
+                { sl: 35, name: "Dhanna", affDate: "12/24/20", renDate: "12/23/22", affNo: "GHAT 35", chair: "Dinesh Singh" },
+                { sl: 36, name: "Gwaii", affDate: "10/6/15", renDate: "10/6/17", affNo: "GHAT 36", chair: "Dilbar Singh" },
+                { sl: 37, name: "Khaltara", affDate: "10/6/17", renDate: "10/5/19", affNo: "GHAT 37", chair: "Bhawan Singh" },
+                { sl: 38, name: "Chauprakot", affDate: "10/16/15", renDate: "10/16/17", affNo: "GHAT 38", chair: "moon light" },
+                { sl: 39, name: "latch", affDate: "6/25/20", renDate: "6/24/22", affNo: "GHAT 39", chair: "only lion" },
+                { sl: 40, name: "Matai", affDate: "2/10/16", renDate: "2/10/18", affNo: "GHAT 40", chair: "Chandraballabh" },
+                { sl: 41, name: "disparity", affDate: "2/10/16", renDate: "2/10/18", affNo: "GHAT 41", chair: "Khilap Singh" },
+                { sl: 42, name: "Ustoli", affDate: "2/10/16", renDate: "2/10/18", affNo: "GHAT 42", chair: "Tajbar Singh" },
+                { sl: 43, name: "bojbagad", affDate: "1/29/20", renDate: "1/28/22", affNo: "GHAT 43", chair: "Pratap Singh" },
+                { sl: 44, name: "Gandasu", affDate: "2/6/21", renDate: "2/5/23", affNo: "GHAT 44", chair: "Mohan Singh" },
+                { sl: 45, name: "Sayari Bengali", affDate: "9/18/19", renDate: "9/17/21", affNo: "GHAT 45", chair: "Vinod Singh" },
+                { sl: 46, name: "Tagla", affDate: "9/29/22", renDate: "9/28/24", affNo: "GHAT 46", chair: "Vikram Singh" },
+                { sl: 47, name: "Kandai", affDate: "1/10/23", renDate: "1/9/25", affNo: "GHAT 47", chair: "Mukesh Singh" },
+                { sl: 48, name: "gary seek", affDate: "9/26/20", renDate: "9/25/22", affNo: "GHAT 48", chair: "Jaiveer Singh" },
+                { sl: 49, name: "Lakhi", affDate: "4/29/21", renDate: "4/28/23", affNo: "GHAT 49", chair: "Laxman Singh" },
+                { sl: 50, name: "Padergaon", affDate: "7/23/21", renDate: "7/22/23", affNo: "GHAT 50", chair: "Satendra Singh" },
+                { sl: 51, name: "royal throne", affDate: "8/26/21", renDate: "8/25/23", affNo: "GHAT 51", chair: "Ravindra Singh" }
+            ],
+            "Karnaprayag": [
+                { sl: 1, name: "Kaleshwar", affDate: "12/4/20", renDate: "12/3/22", affNo: "KPG 01", chair: "Mr. Anoop Singh" },
+                { sl: 2, name: "Kuneth", affDate: "11/13/14", renDate: "11/13/16", affNo: "KPG 02", chair: "Vidyadat" },
+                { sl: 3, name: "Maikhura", affDate: "11/13/14", renDate: "11/13/16", affNo: "KPG 03", chair: "Anasuya Prasad" },
+                { sl: 4, name: "Ghatoda", affDate: "12/1/14", renDate: "12/1/16", affNo: "KPG 04", chair: "Jaiveer Singh" },
+                { sl: 5, name: "coat tendon", affDate: "12/1/14", renDate: "12/1/16", affNo: "KPG 05", chair: "love bulb" },
+                { sl: 6, name: "Silangi", affDate: "2/6/21", renDate: "2/5/23", affNo: "KPG 06", chair: "Jaiveer Singh" },
+                { sl: 7, name: "Sundergaon", affDate: "12/4/20", renDate: "12/3/22", affNo: "KPG 07", chair: "Santosh Singh" },
+                { sl: 8, name: "Let's go", affDate: "12/18/14", renDate: "12/18/16", affNo: "KPG 08", chair: "Sanjay Prasad" },
+                { sl: 9, name: "Enter the link", affDate: "2/15/23", renDate: "2/14/25", affNo: "KPG 09", chair: "Mahavir Singh" },
+                { sl: 10, name: "in the crowd", affDate: "2/25/15", renDate: "2/25/17", affNo: "KPG 10", chair: "Ramesh Singh" },
+                { sl: 11, name: "cannon", affDate: "12/4/20", renDate: "12/3/22", affNo: "KPG 11", chair: "Subham" },
+                { sl: 12, name: "Guad (Kapiri)", affDate: "10/29/18", renDate: "10/28/20", affNo: "KPG 12", chair: "Sunil Singh" },
+                { sl: 13, name: "Cola Dugri", affDate: "8/20/20", renDate: "8/19/22", affNo: "KPG 13", chair: "Ashok Kumar" },
+                { sl: 55, name: "Hearing", affDate: "8/29/16", renDate: "8/28/18", affNo: "KPG 55", chair: "Mohan Singh" },
+                { sl: 56, name: "toli", affDate: "12/24/20", renDate: "12/23/22", affNo: "KPG 56", chair: "Shyam Singh" },
+                { sl: 57, name: "Jasyara", affDate: "8/6/20", renDate: "8/5/22", affNo: "KPG 57", chair: "Gajendra Singh" },
+                { sl: 58, name: "tendon", affDate: "8/29/16", renDate: "8/28/18", affNo: "KPG 58", chair: "Jaikrit Singh" },
+                { sl: 59, name: "umatta", affDate: "8/31/16", renDate: "8/30/18", affNo: "KPG 59", chair: "Girish" },
+                { sl: 60, name: "Jayakandi Bansoli", affDate: "7/16/19", renDate: "7/15/21", affNo: "KPG 60", chair: "Pankaj Kumar" },
+                { sl: 61, name: "Seragaad", affDate: "9/5/16", renDate: "9/4/18", affNo: "KPG 61", chair: "Amla Nanda" },
+                { sl: 62, name: "Kimoli", affDate: "9/5/16", renDate: "9/4/18", affNo: "KPG 62", chair: "Devendra Singh" },
+                { sl: 63, name: "Paddy", affDate: "9/5/16", renDate: "9/4/18", affNo: "KPG 63", chair: "Raheeb Ahmed" },
+                { sl: 64, name: "thapli", affDate: "3/11/19", renDate: "3/10/21", affNo: "KPG 64", chair: "Balbir Singh" },
+                { sl: 65, name: "Umrakot Baidanu", affDate: "2/15/23", renDate: "2/14/25", affNo: "KPG 65", chair: "Prem Singh" },
+                { sl: 66, name: "Ghandiyal", affDate: "10/4/16", renDate: "10/3/18", affNo: "KPG 66", chair: "Pradeep Singh" },
+                { sl: 67, name: "Chamali", affDate: "3/11/19", renDate: "3/10/21", affNo: "KPG 67", chair: "Surendra Singh" },
+                { sl: 68, name: "answers", affDate: "12/2/16", renDate: "12/1/18", affNo: "KPG 68", chair: "Kailash Chandra Khanduri" },
+                { sl: 69, name: "dimmer", affDate: "8/20/19", renDate: "8/19/21", affNo: "KPG 69", chair: "Shobhit Dimri" },
+                { sl: 70, name: "Kankhul floor", affDate: "7/28/22", renDate: "7/27/24", affNo: "KPG 70", chair: "Digpal Singh" },
+                { sl: 71, name: "second", affDate: "1/30/17", renDate: "1/29/19", affNo: "KPG 71", chair: "Digambar Singh" },
+                { sl: 72, name: "Auvyagwad", affDate: "6/12/17", renDate: "6/11/19", affNo: "KPG 72", chair: "Tajbar Singh" },
+                { sl: 73, name: "guad", affDate: "8/4/17", renDate: "8/3/19", affNo: "KPG 73", chair: "Sohan Singh" },
+                { sl: 74, name: "bannoli", affDate: "7/4/18", renDate: "7/3/20", affNo: "KPG 74", chair: "Gajendra Singh" },
+                { sl: 75, name: "Bars (Kameda)", affDate: "3/7/19", renDate: "3/6/21", affNo: "KPG 75", chair: "Kamlesh Chandra Sati" },
+                { sl: 76, name: "Koli Bhatoli", affDate: "7/16/19", renDate: "7/15/21", affNo: "KPG 76", chair: "Manoj Singh" },
+                { sl: 77, name: "Sukhatoli", affDate: "8/6/20", renDate: "8/5/22", affNo: "KPG 77", chair: "Sukhdeep Singh" },
+                { sl: 78, name: "stove", affDate: "12/4/20", renDate: "12/3/22", affNo: "KPG 78", chair: "yonger brother" },
+                { sl: 79, name: "airwadi", affDate: "12/4/20", renDate: "12/3/22", affNo: "KPG 79", chair: "Bhagwati Prasad" },
+                { sl: 80, name: "middle hole", affDate: "2/6/21", renDate: "2/5/23", affNo: "KPG 80", chair: "Pankaj Singh" },
+                { sl: 81, name: "Nausari Barmoli", affDate: "2/6/21", renDate: "2/5/23", affNo: "KPG 81", chair: "Vinod Singh" },
+                { sl: 82, name: "Kandara Nainisain", affDate: "2/6/21", renDate: "2/5/23", affNo: "KPG 82", chair: "Jaideep Rawat" },
+                { sl: 83, name: "Bagoli", affDate: "2/25/21", renDate: "2/24/23", affNo: "KPG 83", chair: "Dinesh God" },
+                { sl: 84, name: "beans", affDate: "7/23/21", renDate: "7/22/23", affNo: "KPG 84", chair: "rohit deudy" },
+                { sl: 85, name: "Ratura", affDate: "8/26/21", renDate: "8/25/23", affNo: "KPG 85", chair: "Mohit Rawat" },
+                { sl: 86, name: "chaundli", affDate: "10/21/22", renDate: "10/20/24", affNo: "KPG86", chair: "Sandeep Kumar" }
+            ],
+            "Narayanbagh": [
+                { sl: 1, name: "Simli", affDate: "9/16/21", renDate: "9/15/23", affNo: "NBR 01", chair: "Pradeep Singh" },
+                { sl: 2, name: "fourness", affDate: "12/27/14", renDate: "12/27/16", affNo: "NBR 02", chair: "Mukesh Singh" },
+                { sl: 3, name: "Alcott", affDate: "3/10/19", renDate: "3/10/21", affNo: "NBR 03", chair: "Manish" },
+                { sl: 4, name: "delusional", affDate: "1/14/15", renDate: "1/14/17", affNo: "NBR 04", chair: "Harendra Singh" },
+                { sl: 5, name: "bethra", affDate: "4/29/21", renDate: "4/28/23", affNo: "NBR 05", chair: "Jaiveer Singh" },
+                { sl: 6, name: "Jabbercoat", affDate: "2/6/15", renDate: "2/6/17", affNo: "NBR 06", chair: "Gambhir Singh" },
+                { sl: 7, name: "Devpuri", affDate: "3/10/19", renDate: "3/10/21", affNo: "NBR 07", chair: "Darshan Singh" },
+                { sl: 8, name: "Meeng", affDate: "6/25/20", renDate: "6/24/22", affNo: "NBR 08", chair: "Pushkar Singh" },
+                { sl: 9, name: "Gadkot", affDate: "3/10/19", renDate: "3/10/21", affNo: "NBR 09", chair: "Rohit Singh" },
+                { sl: 10, name: "Sankot", affDate: "6/25/20", renDate: "6/24/22", affNo: "NBR 10", chair: "Harendra Singh" },
+                { sl: 11, name: "twisted", affDate: "6/26/15", renDate: "6/26/17", affNo: "NBR 11", chair: "Jaipal Singh" },
+                { sl: 12, name: "sloping", affDate: "8/26/15", renDate: "8/26/17", affNo: "NBR 12", chair: "Mohan Singh" },
+                { sl: 13, name: "rye", affDate: "8/26/15", renDate: "8/26/17", affNo: "NBR 13", chair: "Yashwant Singh" },
+                { sl: 14, name: "Goods", affDate: "8/26/15", renDate: "8/26/17", affNo: "NBR 14", chair: "Dhirendra Singh" },
+                { sl: 15, name: "thumb", affDate: "5/3/19", renDate: "5/2/21", affNo: "NBR 15", chair: "Vinod Singh" },
+                { sl: 16, name: "Khainoli", affDate: "6/25/20", renDate: "6/24/22", affNo: "NBR 16", chair: "Harendra Singh" },
+                { sl: 17, name: "Nilaadi", affDate: "1/18/20", renDate: "1/17/22", affNo: "NBR 17", chair: "Harendra Singh" },
+                { sl: 18, name: "bannoli", affDate: "9/19/15", renDate: "9/19/17", affNo: "NBR 18", chair: "Birendra Singh" },
+                { sl: 19, name: "degree", affDate: "12/24/20", renDate: "12/23/22", affNo: "NBR 19", chair: "Anil Prasad" },
+                { sl: 20, name: "Narayanbagad", affDate: "9/18/21", renDate: "9/19/23", affNo: "NBR 20", chair: "Vikram Singh" },
+                { sl: 21, name: "Gadsira", affDate: "9/19/17", renDate: "9/19/17", affNo: "NBR 21", chair: "Digpal" },
+                { sl: 22, name: "name weight", affDate: "9/19/15", renDate: "9/19/17", affNo: "NBR 22", chair: "Nandan Singh" },
+                { sl: 23, name: "Naini", affDate: "7/23/21", renDate: "7/22/23", affNo: "NBR 23", chair: "Naresh Nainwal" },
+                { sl: 24, name: "booga", affDate: "10/14/15", renDate: "10/14/17", affNo: "NBR 24", chair: "Mangal Singh" },
+                { sl: 25, name: "kaipanty jakh", affDate: "10/13/21", renDate: "10/12/23", affNo: "NBR 25", chair: "Trilok Singh" },
+                { sl: 26, name: "Pastoli", affDate: "12/15/17", renDate: "12/14/19", affNo: "NBR 26", chair: "Ganga Singh" },
+                { sl: 27, name: "Jakhapatiya", affDate: "1/18/20", renDate: "1/17/22", affNo: "NBR 27", chair: "Balvant Lal" },
+                { sl: 28, name: "Ased", affDate: "10/1/21", renDate: "9/30/23", affNo: "NBR 28", chair: "Satendra Singh" },
+                { sl: 29, name: "Silkoti", affDate: "10/1/21", renDate: "9/30/23", affNo: "NBR 29", chair: "Manohar Singh" },
+                { sl: 30, name: "Manoda", affDate: "8/19/16", renDate: "8/18/16", affNo: "NBR 30", chair: "Santosh Manodi" },
+                { sl: 31, name: "Garbaram", affDate: "3/10/19", renDate: "3/10/21", affNo: "NBR 31", chair: "Devendra Singh" },
+                { sl: 32, name: "Paithani", affDate: "6/25/20", renDate: "6/24/22", affNo: "NBR 32", chair: "Bhupal Singh" },
+                { sl: 33, name: "Palchhuni", affDate: "9/16/21", renDate: "9/15/23", affNo: "NBR 33", chair: "Rajendra Singh" },
+                { sl: 34, name: "Bamiala", affDate: "1/18/20", renDate: "1/17/22", affNo: "NBR 34", chair: "Narendra Singh" },
+                { sl: 35, name: "Atonement", affDate: "2/3/23", renDate: "2/2/25", affNo: "NBR 35", chair: "Laxman Singh" },
+                { sl: 36, name: "Bedula", affDate: "11/15/16", renDate: "11/14/18", affNo: "NBR 36", chair: "Mukesh Tamta" },
+                { sl: 37, name: "Matta", affDate: "7/19/17", renDate: "7/18/19", affNo: "NBR 37", chair: "Karan Singh" },
+                { sl: 38, name: "Bedula", affDate: "1/18/20", renDate: "1/17/22", affNo: "NBR 38", chair: "Mukesh Negi" },
+                { sl: 39, name: "fugitive", affDate: "1/18/20", renDate: "1/17/22", affNo: "NBR 39", chair: "Chandramohan Singh" },
+                { sl: 40, name: "crow", affDate: "2/3/23", renDate: "2/2/25", affNo: "NBR 40", chair: "Harendra Singh" },
+                { sl: 41, name: "race", affDate: "10/3/22", renDate: "10/2/24", affNo: "NBR 41", chair: "Harpal Singh" },
+                { sl: 42, name: "Chhekuda", affDate: "10/3/22", renDate: "10/2/24", affNo: "NBR 42", chair: "Sanjay Sati" },
+                { sl: 43, name: "Consola Nagaon", affDate: "6/25/20", renDate: "6/24/22", affNo: "NBR 43", chair: "Sanjay Prasad" },
+                { sl: 44, name: "Siri", affDate: "1/7/23", renDate: "1/6/25", affNo: "NBR 44", chair: "Bhagwati Prasad" },
+                { sl: 45, name: "Chidinga floor", affDate: "6/25/20", renDate: "6/24/22", affNo: "NBR 45", chair: "Jaspal Singh" },
+                { sl: 46, name: "Bedgow Manor", affDate: "9/26/20", renDate: "9/25/22", affNo: "NBR 46", chair: "Rakesh Singh" },
+                { sl: 47, name: "Coat", affDate: "2/17/23", renDate: "2/16/25", affNo: "NBR 47", chair: "Kuldeep" },
+                { sl: 48, name: "Angtoli", affDate: "2/3/23", renDate: "2/2/25", affNo: "NBR 48", chair: "Dhirendra Ram" },
+                { sl: 49, name: "chaliyapaani", affDate: "2/3/23", renDate: "2/2/25", affNo: "NBR 49", chair: "Sachin Kumar" },
+                { sl: 50, name: "juner", affDate: "2/3/23", renDate: "2/2/25", affNo: "NBR 50", chair: "Bharat Singh" },
+                { sl: 51, name: "Kotuli", affDate: "9/26/20", renDate: "9/25/22", affNo: "NBR 51", chair: "Deepak Prasad" },
+                { sl: 52, name: "Mouna", affDate: "12/24/20", renDate: "12/23/22", affNo: "NBR 52", chair: "Sandeep Rawat" },
+                { sl: 53, name: "the room", affDate: "4/29/21", renDate: "4/28/23", affNo: "NBR 53", chair: "Sachin Purohit" },
+                { sl: 54, name: "silodi", affDate: "4/29/21", renDate: "4/28/23", affNo: "NBR 54", chair: "Bhupal Singh" },
+                { sl: 55, name: "Kaffoli", affDate: "4/29/21", renDate: "4/28/23", affNo: "NBR 55", chair: "Harendra Singh" },
+                { sl: 56, name: "Lodla", affDate: "7/23/21", renDate: "7/22/21", affNo: "NBR 56", chair: "Brijmohan" },
+                { sl: 57, name: "budera", affDate: "2/3/23", renDate: "2/2/25", affNo: "NBR 57", chair: "Jagdish Singh" },
+                { sl: 58, name: "row", affDate: "9/16/21", renDate: "9/15/23", affNo: "NBR 60", chair: "Vijaypal Singh" },
+                { sl: 59, name: "Banela", affDate: "9/14/21", renDate: "9/13/23", affNo: "NBR 61", chair: "Manoj Singh" },
+                { sl: 60, name: "Raigaon", affDate: "10/1/21", renDate: "9/30/23", affNo: "NBR 68", chair: "Sandeep Singh" },
+                { sl: 61, name: "Jakhakadakot", affDate: "7/27/22", renDate: "7/28/24", affNo: "NBR 78", chair: "Ajay Sati" }
+            ],
+            "The pool": null,
+            "Tharaali": [
+                { sl: 1, name: "Gwaldam", affDate: "2/21/17", renDate: "2/20/19", affNo: "NEW", chair: "Pradhuman Singh" },
+                { sl: 2, name: "kimni", affDate: "3/11/19", renDate: "3/10/21", affNo: "NEW 02", chair: "Anuj Singh" },
+                { sl: 3, name: "chaunda", affDate: "6/1/15", renDate: "6/1/17", affNo: "NEW 03", chair: "Ankit Singh" },
+                { sl: 4, name: "dugakholi", affDate: "6/5/15", renDate: "6/5/17", affNo: "NEW 04", chair: "lion lion" },
+                { sl: 5, name: "the bag", affDate: "6/5/15", renDate: "6/5/17", affNo: "NEW 05", chair: "Laxman Singh" },
+                { sl: 6, name: "chidinga malla", affDate: "2/25/21", renDate: "2/24/23", affNo: "NEW 06", chair: "Narendra" },
+                { sl: 7, name: "Dewalgwad", affDate: "11/7/22", renDate: "11/6/24", affNo: "NEW 07", chair: "Shishupala" },
+                { sl: 8, name: "dugi", affDate: "6/25/20", renDate: "6/24/22", affNo: "NEW 08", chair: "Suraj Kumar" },
+                { sl: 9, name: "Sunoutalla", affDate: "11/7/22", renDate: "11/6/24", affNo: "NEW 09", chair: "Mukesh Purohit" },
+                { sl: 10, name: "Bursol", affDate: "6/25/16", renDate: "12/25/18", affNo: "NEW", chair: "Vinod Singh" },
+                { sl: 11, name: "Ratgaon", affDate: "4/29/21", renDate: "4/28/23", affNo: "NEW", chair: "Vinod Singh" },
+                { sl: 12, name: "Chidinga floor", affDate: "8/29/16", renDate: "8/28/18", affNo: "NEW", chair: "Kripal Singh" },
+                { sl: 13, name: "Talwari State", affDate: "10/1/16", renDate: "9/30/16", affNo: "NEW", chair: "Devendra Singh" },
+                { sl: 14, name: "tricot", affDate: "6/25/20", renDate: "6/24/22", affNo: "NEW", chair: "Pratap Singh" },
+                { sl: 15, name: "Serawijaypur", affDate: "6/25/20", renDate: "6/24/22", affNo: "NEW", chair: "Santosh Kumar" },
+                { sl: 16, name: "Kurad", affDate: "4/29/21", renDate: "4/28/23", affNo: "NEW", chair: "Anusuya Prasad" },
+                { sl: 17, name: "Dugakholi", affDate: "3/11/19", renDate: "3/10/21", affNo: "NEW", chair: "lion lion" },
+                { sl: 18, name: "Pastoli", affDate: "11/7/22", renDate: "11/6/24", affNo: "NEW", chair: "Ganga Singh" },
+                { sl: 19, name: "Cooney Partha", affDate: "6/25/20", renDate: "6/24/22", affNo: "NEW", chair: "Narayan Singh" },
+                { sl: 20, name: "tray", affDate: "8/11/20", renDate: "8/10/22", affNo: "NEW", chair: "Sujan Singh" },
+                { sl: 21, name: "Jabbercoat", affDate: "9/26/20", renDate: "9/25/22", affNo: "NEW", chair: "Balveer Singh" },
+                { sl: 22, name: "sinai valley", affDate: "12/24/20", renDate: "12/23/22", affNo: "NEW", chair: "Deepak Singh" },
+                { sl: 23, name: "deserted", affDate: "12/24/20", renDate: "12/23/22", affNo: "NEW", chair: "Yogesh Devradi" },
+                { sl: 24, name: "man", affDate: "2/8/21", renDate: "2/7/23", affNo: "NEW", chair: "Lalit" },
+                { sl: 25, name: "Matta", affDate: "2/8/21", renDate: "2/7/23", affNo: "NEW", chair: "Sumit Negi" },
+                { sl: 26, name: "town city", affDate: "2/8/21", renDate: "2/7/23", affNo: "NEW", chair: "Jayaram" },
+                { sl: 27, name: "Geruda", affDate: "2/8/21", renDate: "2/7/23", affNo: "NEW", chair: "Dhirendra Singh" },
+                { sl: 28, name: "Harinagar Letal", affDate: "2/8/21", renDate: "2/7/23", affNo: "NEW", chair: "Ramesh" },
+                { sl: 29, name: "Ruisan", affDate: "4/29/21", renDate: "4/28/23", affNo: "NEW", chair: "Bharat Singh" },
+                { sl: 30, name: "chapados", affDate: "4/29/21", renDate: "4/28/23", affNo: "NEW", chair: "Laxman Singh" },
+                { sl: 31, name: "Dharbaram", affDate: "4/29/21", renDate: "4/28/23", affNo: "NEW 31", chair: "Dalbir Singh" },
+                { sl: 32, name: "Talwari Khalsa", affDate: "4/29/21", renDate: "4/28/23", affNo: "NEW 32", chair: "Pradyuman Singh" },
+                { sl: 33, name: "Budjola", affDate: "11/7/22", renDate: "11/6/24", affNo: "NEW 33", chair: "Suraj Gadia" }
+            ],
+            "the wall": [
+                { sl: 1, name: "Sawad", affDate: "8/18/18", renDate: "8/17/20", affNo: "DEW 01", chair: "Pramod Singh" },
+                { sl: 2, name: "Mundoli", affDate: "8/6/20", renDate: "8/5/22", affNo: "DEW 02", chair: "Chandra Singh" },
+                { sl: 3, name: "Ghuragharkot", affDate: "1/16/15", renDate: "1/16/17", affNo: "DEW 03", chair: "Balwant Singh" },
+                { sl: 4, name: "cell door", affDate: "11/15/18", renDate: "11/14/20", affNo: "DEW 04", chair: "Shyam Pant" },
+                { sl: 5, name: "broad", affDate: "6/25/20", renDate: "6/24/22", affNo: "DEW 05", chair: "Pushkar Singh" },
+                { sl: 6, name: "Hatakalyani", affDate: "4/22/15", renDate: "4/22/17", affNo: "DEW 06", chair: "Kundan Singh" },
+                { sl: 7, name: "glacier", affDate: "2/6/21", renDate: "2/5/23", affNo: "DEW 07", chair: "Soban Singh" },
+                { sl: 8, name: "Mailkhet", affDate: "12/4/20", renDate: "12/3/22", affNo: "DEW 08", chair: "Bhuvanchandra" },
+                { sl: 9, name: "Losari", affDate: "10/3/15", renDate: "10/3/17", affNo: "DEW 09", chair: "Dayal Singh" },
+                { sl: 10, name: "mopata", affDate: "8/6/20", renDate: "8/5/22", affNo: "DEW 10", chair: "Khadak Singh" },
+                { sl: 11, name: "rubbed", affDate: "8/6/20", renDate: "8/5/22", affNo: "DEW 11", chair: "Ranjit Singh" },
+                { sl: 12, name: "house", affDate: "2/25/21", renDate: "2/24/23", affNo: "DEW 12", chair: "Yogendra Singh" },
+                { sl: 13, name: "Padmala", affDate: "10/17/15", renDate: "10/17/17", affNo: "DEW 13", chair: "Prithvi Singh" },
+                { sl: 14, name: "Whose", affDate: "1/29/20", renDate: "1/28/22", affNo: "DEW 14", chair: "Chandra Singh" },
+                { sl: 15, name: "baseless", affDate: "12/28/15", renDate: "12/28/17", affNo: "DEW 15", chair: "Bharat Singh" },
+                { sl: 16, name: "cooling", affDate: "6/25/20", renDate: "6/24/22", affNo: "DEW 16", chair: "Mahivat Singh" },
+                { sl: 17, name: "Kandai", affDate: "8/18/18", renDate: "8/17/20", affNo: "DEW 17", chair: "Rajendra Singh" },
+                { sl: 18, name: "Koteda", affDate: "2/6/16", renDate: "2/6/18", affNo: "DEW 18", chair: "Harish Ram" },
+                { sl: 19, name: "deer", affDate: "2/9/23", renDate: "2/8/25", affNo: "DEW 19", chair: "Pradeep Singh" },
+                { sl: 20, name: "Banudi", affDate: "7/16/19", renDate: "7/15/21", affNo: "DEW 20", chair: "Khemchandra" },
+                { sl: 21, name: "Harmal", affDate: "1/29/20", renDate: "1/28/22", affNo: "DEW 21", chair: "Praveen Singh" },
+                { sl: 22, name: "Faldia Village", affDate: "6/25/20", renDate: "6/24/22", affNo: "DEW 22", chair: "Khadak Singh" },
+                { sl: 23, name: "ulangra", affDate: "6/25/20", renDate: "6/24/22", affNo: "DEW 23", chair: "Mahendra Singh" },
+                { sl: 24, name: "Varieties", affDate: "11/15/18", renDate: "11/14/20", affNo: "DEW 24", chair: "Devendra Singh" },
+                { sl: 25, name: "Naldhura", affDate: "8/18/18", renDate: "8/17/20", affNo: "DEW 25", chair: "dinashchandrajoshi" },
+                { sl: 26, name: "Purna", affDate: "7/23/21", renDate: "7/22/23", affNo: "DEW 26", chair: "Krishna Kumar" },
+                { sl: 27, name: "Rampur", affDate: "5/3/19", renDate: "5/2/21", affNo: "DEW 27", chair: "Khilap Singh" },
+                { sl: 28, name: "Balaw", affDate: "1/18/20", renDate: "1/17/22", affNo: "DEW 28", chair: "Kamal Singh" },
+                { sl: 29, name: "Udaipur", affDate: "1/29/20", renDate: "1/28/22", affNo: "DEW 29", chair: "Hukkam Singh" },
+                { sl: 30, name: "bank", affDate: "6/25/20", renDate: "6/24/22", affNo: "DEW 30", chair: "Laxman Singh" },
+                { sl: 31, name: "Torah", affDate: "6/25/20", renDate: "6/24/22", affNo: "DEW 31", chair: "Hargovind Singh" },
+                { sl: 32, name: "Palvara", affDate: "2/6/21", renDate: "2/5/23", affNo: "DEW 32", chair: "Sanjeev" },
+                { sl: 33, name: "Tajpur", affDate: "2/6/21", renDate: "2/5/23", affNo: "DEW 33", chair: "Bhupal Lal" },
+                { sl: 34, name: "Dharkot Laga Sujhya", affDate: "7/5/21", renDate: "7/4/23", affNo: "DEW 34", chair: "Gajendra Singh" }
+            ],
+            "Gairsain": [
+                { sl: 1, name: "cream", affDate: "1/24/23", renDate: "1/23/25", affNo: "GAIRN 01", chair: "Vinod Malai" },
+                { sl: 2, name: "Coonighat Malli", affDate: "6/26/15", renDate: "6/26/17", affNo: "GAIRN 02", chair: "Surendra Singh" },
+                { sl: 3, name: "Kalchunda", affDate: "2/6/21", renDate: "2/5/23", affNo: "GAIRN 03", chair: "Pushkar Singh" },
+                { sl: 4, name: "Sarigangov", affDate: "6/25/20", renDate: "6/24/22", affNo: "GAIRN 04", chair: "Pushkar Singh" },
+                { sl: 5, name: "Bhatgwali", affDate: "6/26/17", renDate: "6/25/19", affNo: "GAIRN 05", chair: "Pawan Singh" },
+                { sl: 6, name: "Sarkot", affDate: "10/18/22", renDate: "10/17/24", affNo: "GAIRN 06", chair: "Surendra Singh" },
+                { sl: 7, name: "Bhalsau", affDate: "9/2/15", renDate: "9/2/17", affNo: "GAIRN 07", chair: "Govind Singh" },
+                { sl: 8, name: "Coat", affDate: "9/2/17", renDate: "9/1/19", affNo: "GAIRN 08", chair: "Manohar Singh" },
+                { sl: 9, name: "feet", affDate: "12/4/20", renDate: "12/3/22", affNo: "GAIRN 09", chair: "Deepak Singh" },
+                { sl: 10, name: "maikholi", affDate: "9/3/15", renDate: "9/3/17", affNo: "GAIRN 10", chair: "Ranjit Singh" },
+                { sl: 11, name: "Sayuni Malli", affDate: "9/3/17", renDate: "9/2/19", affNo: "GAIRN 11", chair: "Jaspal Singh" },
+                { sl: 12, name: "cuckoo", affDate: "12/4/20", renDate: "12/3/22", affNo: "GAIRN 12", chair: "Subhash Singh" },
+                { sl: 13, name: "fake", affDate: "8/18/22", affNo: "GAIRN 13", renDate: "8/17/24", chair: "Mahendra Singh" },
+                { sl: 14, name: "Kushrani Talli", affDate: "9/3/17", renDate: "9/2/19", affNo: "GAIRN 14", chair: "Lalit Singh" },
+                { sl: 15, name: "Kushrani", affDate: "9/3/17", renDate: "9/2/19", affNo: "GAIRN 15", chair: "Dan Singh" },
+                { sl: 16, name: "with a bang", affDate: "9/3/15", renDate: "9/3/17", affNo: "GAIRN 16", chair: "Madan Singh" },
+                { sl: 17, name: "malkot", affDate: "9/28/15", renDate: "9/28/17", affNo: "GAIRN 17", chair: "Manish Kotwal" },
+                { sl: 18, name: "Bacchuwaban", affDate: "3/16/18", renDate: "3/15/20", affNo: "GAIRN 18", chair: "Nain Singh" },
+                { sl: 19, name: "Agar", affDate: "3/11/19", renDate: "3/10/21", affNo: "GAIRN 19", chair: "Yashwant Negi" },
+                { sl: 20, name: "kafalodi", affDate: "12/4/20", renDate: "12/3/22", affNo: "GAIRN 20", chair: "Ajendra Singh" },
+                { sl: 21, name: "Ased", affDate: "8/19/16", renDate: "8/18/18", affNo: "GAIRN 21", chair: "Satendra Singh" },
+                { sl: 22, name: "Silkoti", affDate: "8/19/16", renDate: "8/18/18", affNo: "GAIRN 22", chair: "Manohar Singh" },
+                { sl: 23, name: "Manoda", affDate: "8/19/16", renDate: "8/18/18", affNo: "GAIRN 23", chair: "Santosh Manodi" },
+                { sl: 24, name: "Garbaram", affDate: "8/19/16", renDate: "8/18/18", affNo: "GAIRN 24", chair: "Dharamveer Singh" },
+                { sl: 25, name: "Paithani", affDate: "8/19/16", renDate: "8/18/18", affNo: "GAIRN 25", chair: "Bharat Singh" },
+                { sl: 26, name: "Palchhuni", affDate: "8/19/16", renDate: "8/18/18", affNo: "GAIRN 26", chair: "Surendra Singh" },
+                { sl: 27, name: "gaul", affDate: "8/31/16", renDate: "8/30/18", affNo: "GAIRN 27", chair: "Bachan Singh" },
+                { sl: 28, name: "in Kunkhet", affDate: "10/18/22", renDate: "10/17/24", affNo: "GAIRN 28", chair: "Surendra Singh" },
+                { sl: 29, name: "she-wolf", affDate: "8/31/16", renDate: "8/30/18", affNo: "GAIRN 29", chair: "Bharat Singh" },
+                { sl: 30, name: "tongs", affDate: "8/31/16", renDate: "8/30/18", affNo: "GAIRN 30", chair: "Dharam Singh" },
+                { sl: 31, name: "Farming", affDate: "8/31/16", renDate: "8/30/18", affNo: "GAIRN 31", chair: "Balwant Singh" },
+                { sl: 32, name: "caida", affDate: "9/5/16", renDate: "9/4/18", affNo: "GAIRN 32", chair: "Rakesh Singh" },
+                { sl: 33, name: "Sumerpur", affDate: "9/5/16", renDate: "9/4/18", affNo: "GAIRN 33", chair: "Mahipal Singh" },
+                { sl: 34, name: "Kalimathi", affDate: "6/25/20", renDate: "6/24/22", affNo: "GAIRN 34", chair: "Surendra Kumar" },
+                { sl: 35, name: "Pungov", affDate: "10/6/16", renDate: "10/5/18", affNo: "GAIRN 35", chair: "Khet Singh" },
+                { sl: 36, name: "Bhandari Khod", affDate: "10/26/16", renDate: "10/25/18", affNo: "GAIRN 36", chair: "khim singh" },
+                { sl: 37, name: "suni talli", affDate: "10/26/16", renDate: "10/25/18", affNo: "GAIRN 37", chair: "Govind Singh" },
+                { sl: 38, name: "chaurada", affDate: "10/26/16", renDate: "10/25/18", affNo: "GAIRN 38", chair: "Pritam Singh" },
+                { sl: 39, name: "Kolani", affDate: "6/25/20", renDate: "6/24/22", affNo: "GAIRN 39", chair: "Dhirendra Singh" },
+                { sl: 40, name: "mahalchauri", affDate: "10/26/16", renDate: "10/25/18", affNo: "GAIRN 40", chair: "Jeet Singh" },
+                { sl: 41, name: "Ramda Talla", affDate: "10/26/16", renDate: "10/25/18", affNo: "GAIRN 41", chair: "Mohan Singh" },
+                { sl: 42, name: "Tatuna", affDate: "1/16/23", renDate: "1/15/25", affNo: "GAIRN 42", chair: "Birendra Singh" },
+                { sl: 43, name: "Sirana", affDate: "6/25/20", renDate: "6/24/22", affNo: "gairn 43", chair: "Puran Singh" },
+                { sl: 44, name: "Lambagad", affDate: "3/11/19", renDate: "3/10/21", affNo: "GAIRN 44", chair: "Paan Singh" },
+                { sl: 45, name: "let's", affDate: "11/15/16", renDate: "11/14/18", affNo: "gairn 45", chair: "Mukesh Kandari" },
+                { sl: 46, name: "Bachhuvaban Talla", affDate: "11/15/16", renDate: "11/14/18", affNo: "gairn 46", chair: "Khadak Singh" },
+                { sl: 47, name: "Pava (Panya)", affDate: "11/15/16", renDate: "11/14/18", affNo: "GAIRN 47", chair: "Devendra Kohli" },
+                { sl: 48, name: "Pindwali", affDate: "6/25/20", renDate: "6/24/22", affNo: "gairn 48", chair: "Chandra Mohan" },
+                { sl: 49, name: "the room", affDate: "4/25/17", renDate: "4/24/19", affNo: "gairn 49", chair: "Sureshanand" },
+                { sl: 50, name: "Chhadisain", affDate: "3/11/19", renDate: "3/10/21", affNo: "GAIRN 50", chair: "red lion" },
+                { sl: 51, name: "gingod", affDate: "12/4/20", renDate: "12/3/22", affNo: "GAIRN 51", chair: "Sandeep Singh" },
+                { sl: 52, name: "Gogna Malla", affDate: "4/25/17", renDate: "4/24/19", affNo: "GAIRN 52", chair: "Birendra Singh" },
+                { sl: 53, name: "Silpata", affDate: "8/17/17", renDate: "8/16/19", affNo: "GAIRN 53", chair: "Sanjay Prasad" },
+                { sl: 54, name: "cream", affDate: "8/17/17", renDate: "8/16/19", affNo: "GAIRN 54", chair: "Pushkar Singh" },
+                { sl: 55, name: "Kirsal", affDate: "2/6/21", renDate: "2/5/23", affNo: "GAIRN 55", chair: "Kuldeep Singh" },
+                { sl: 56, name: "Randoli", affDate: "7/3/18", renDate: "7/2/20", affNo: "gairn 56", chair: "Sandeep Singh" },
+                { sl: 57, name: "Coswa", affDate: "7/3/18", renDate: "7/2/20", affNo: "GAIRN 57", chair: "Jitendra Singh" },
+                { sl: 58, name: "cintoli", affDate: "7/3/18", renDate: "7/2/20", affNo: "gairn 58", chair: "Ramesh Kumar" },
+                { sl: 59, name: "Devpuri", affDate: "12/4/20", renDate: "12/3/22", affNo: "gairn 59", chair: "Khadak Singh" },
+                { sl: 60, name: "twisted", affDate: "8/18/18", renDate: "8/17/20", affNo: "GAIRN 60", chair: "Ranjit Singh" },
+                { sl: 61, name: "Candari Khod", affDate: "8/18/18", renDate: "8/17/20", affNo: "GAIRN 61", chair: "Birendra Singh" },
+                { sl: 62, name: "nail", affDate: "8/18/18", renDate: "8/17/20", affNo: "GAIRN 62", chair: "kuwari red" },
+                { sl: 63, name: "Silanga", affDate: "10/18/22", renDate: "10/17/24", affNo: "GAIRN 63", chair: "Manoj Kumar" },
+                { sl: 64, name: "Farm", affDate: "8/18/18", renDate: "8/17/20", affNo: "GAIRN 64", chair: "Rakesh Singh" },
+                { sl: 65, name: "Airoli", affDate: "7/16/19", renDate: "7/15/21", affNo: "GAIRN 65", chair: "Ashok Singh" },
+                { sl: 66, name: "Jalchaura", affDate: "10/18/22", renDate: "10/17/24", affNo: "gairn 66", chair: "Bhawan Singh" },
+                { sl: 67, name: "Jhumakhet", affDate: "6/25/20", renDate: "6/24/22", affNo: "gairn 67", chair: "Bhaskar Singh" },
+                { sl: 68, name: "Malsi", affDate: "6/25/20", renDate: "6/24/22", affNo: "gairn 68", chair: "Ishwar Singh" },
+                { sl: 69, name: "Bugaan", affDate: "6/25/20", renDate: "6/24/22", affNo: "gairn 69", chair: "Mukesh Singh" },
+                { sl: 70, name: "bedi talli", affDate: "6/25/20", renDate: "6/24/22", affNo: "GAIRN 70", chair: "Surendra Singh" },
+                { sl: 71, name: "furcande", affDate: "6/25/20", renDate: "6/24/22", affNo: "GAIRN 71", chair: "Brijmohan Singh" },
+                { sl: 72, name: "Banjiani", affDate: "6/25/20", renDate: "6/24/22", affNo: "GAIRN 72", chair: "Kalam Singh" },
+                { sl: 73, name: "colorful", affDate: "12/4/20", renDate: "12/3/22", affNo: "GAIRN 73", chair: "Manoj Negi" },
+                { sl: 74, name: "Nail Kumoli", affDate: "1/24/23", renDate: "1/23/25", affNo: "GAIRN 74", chair: "Motsalim" }
+            ],
+            "The pool": [
+                { sl: 1, name: "Sarmola", affDate: "12/18/16", renDate: "12/17/18", affNo: "POK 01", chair: "Basudev Singh" },
+                { sl: 2, name: "Brahmanthala", affDate: "2/6/21", renDate: "2/5/23", affNo: "POK 02", chair: "Dinesh" },
+                { sl: 3, name: "Bangthal", affDate: "7/23/21", renDate: "7/22/23", affNo: "POK 03", chair: "Sanjata Mishra" },
+                { sl: 4, name: "Sodamangra", affDate: "12/18/16", renDate: "12/17/18", affNo: "POK 04", chair: "Ranveer Singh" },
+                { sl: 5, name: "nailetha", affDate: "12/18/16", renDate: "12/17/18", affNo: "POK 05", chair: "Vikram Singh" },
+                { sl: 6, name: "nail", affDate: "12/18/16", renDate: "12/17/18", affNo: "POK 06", chair: "Sanjay Singh" },
+                { sl: 7, name: "semi guard", affDate: "12/18/14", renDate: "12/18/16", affNo: "POK 07", chair: "life moon" },
+                { sl: 8, name: "scoundrel", affDate: "12/18/14", renDate: "12/18/16", affNo: "POK 08", chair: "Mahavir Singh Negi" },
+                { sl: 9, name: "Sangood", affDate: "12/24/20", renDate: "12/23/22", affNo: "POK 09", chair: "Rakesh Singh" },
+                { sl: 10, name: "Godi Giwala", affDate: "12/18/16", renDate: "12/17/18", affNo: "POK 10", chair: "Laxman Singh" },
+                { sl: 11, name: "came", affDate: "7/23/21", renDate: "7/22/23", affNo: "POK 11", chair: "Tejpal Singh" },
+                { sl: 12, name: "to moisten", affDate: "12/18/16", renDate: "12/17/18", affNo: "POK 12", chair: "Girish Chandra Kimothi" },
+                { sl: 13, name: "Nauli", affDate: "12/4/20", renDate: "12/3/22", affNo: "POK 13", chair: "Ramesh Singh" },
+                { sl: 14, name: "Tali Kansari", affDate: "12/24/20", renDate: "12/23/22", affNo: "POK 14", chair: "Prem Singh" },
+                { sl: 15, name: "District Court", affDate: "12/18/14", renDate: "12/18/16", affNo: "POK 15", chair: "indu sati" },
+                { sl: 16, name: "Beena Malla", affDate: "8/26/21", renDate: "8/25/23", affNo: "POK 16", chair: "Kapil Barwal" },
+                { sl: 17, name: "Myoli", affDate: "6/25/20", renDate: "6/24/22", affNo: "POK 17", chair: "Amit Singh" },
+                { sl: 18, name: "Pvt", affDate: "4/29/21", renDate: "4/28/23", affNo: "POK 18", chair: "Deepak Bhandari" },
+                { sl: 19, name: "Thalabad", affDate: "12/4/20", renDate: "12/3/22", affNo: "POK 19", chair: "Harendra Singh" },
+                { sl: 20, name: "Patiyakhamala", affDate: "12/4/20", renDate: "12/3/22", affNo: "POK 20", chair: "Yashveer" },
+                { sl: 21, name: "Pogtha", affDate: "12/24/20", renDate: "12/23/22", affNo: "POK 21", chair: "kuvar singh" },
+                { sl: 22, name: "Harp floor", affDate: "1/16/15", renDate: "1/16/17", affNo: "POK 22", chair: "Satendra Singh" },
+                { sl: 23, name: "Gudam", affDate: "12/4/20", renDate: "12/3/22", affNo: "POK 23", chair: "Devraj Singh" },
+                { sl: 24, name: "Srigarh", affDate: "1/16/17", renDate: "1/15/19", affNo: "POK 24", chair: "Sanju Singh" },
+                { sl: 25, name: "cry", affDate: "1/16/15", renDate: "1/16/17", affNo: "POK 25", chair: "Pradeep Singh" },
+                { sl: 26, name: "Kandai Chandrashila", affDate: "1/16/15", renDate: "1/16/17", affNo: "POK 26", chair: "Sanjay Kimothi" },
+                { sl: 27, name: "Masoli", affDate: "12/4/20", renDate: "12/3/22", affNo: "POK 27", chair: "Yogendra Singh" },
+                { sl: 28, name: "Girsa", affDate: "8/6/20", renDate: "8/5/22", affNo: "POK 28", chair: "Ashoka" },
+                { sl: 29, name: "Samesockery", affDate: "8/6/20", renDate: "8/5/22", affNo: "POK 29", chair: "light moon" },
+                { sl: 30, name: "chaundi", affDate: "4/29/21", renDate: "4/28/23", affNo: "POK 30", chair: "Laxman Singh" },
+                { sl: 31, name: "Vingadh", affDate: "4/18/15", renDate: "4/18/17", affNo: "POK 31", chair: "Chandan Singh" },
+                { sl: 32, name: "the trident", affDate: "4/18/17", renDate: "4/17/19", affNo: "POK 32", chair: "Pradeep Lal" },
+                { sl: 33, name: "Salna", affDate: "12/24/20", renDate: "12/23/22", affNo: "POK 33", chair: "Boundless" },
+                { sl: 34, name: "Nagkanda", affDate: "4/22/15", renDate: "4/22/17", affNo: "POK 34", chair: "Ranveer Singh" },
+                { sl: 35, name: "Dungar", affDate: "7/23/21", renDate: "7/22/23", affNo: "POK 35", chair: "Naveen Singh" },
+                { sl: 36, name: "Karghuna", affDate: "12/24/20", renDate: "12/23/22", affNo: "POK 36", chair: "Rahul Singh" },
+                { sl: 37, name: "Sugi Gaduna", affDate: "2/8/21", renDate: "2/7/23", affNo: "POK 37", chair: "Satendra Singh" },
+                { sl: 38, name: "Kumeda", affDate: "9/26/20", renDate: "9/25/22", affNo: "POK 38", chair: "Praveen Singh" },
+                { sl: 39, name: "मज्याडी", affDate: "12/15/17", renDate: "12/14/19", affNo: "POK 39", chair: "Umaid Singh" },
+                { sl: 40, name: "Jaurasi", affDate: "12/15/15", renDate: "12/15/17", affNo: "POK 40", chair: "Ranjit Singh" },
+                { sl: 41, name: "Kalseer", affDate: "6/25/20", renDate: "6/24/22", affNo: "POK 41", chair: "Prem Singh" },
+                { sl: 42, name: "Airas", affDate: "1/11/16", renDate: "1/11/18", affNo: "POK 42", chair: "Dinesh Singh" },
+                { sl: 43, name: "Let's answer", affDate: "8/6/20", renDate: "8/5/22", affNo: "POK 43", chair: "Anup Kumar" },
+                { sl: 44, name: "Dhamak Chamsil", affDate: "2/6/21", renDate: "2/5/23", affNo: "POK 44", chair: "Rakesh Bhatt" },
+                { sl: 45, name: "Bamoth", affDate: "5/3/19", renDate: "5/2/21", affNo: "POK 45", chair: "Anoop Singh" },
+                { sl: 46, name: "Tonji", affDate: "3/18/16", renDate: "3/18/18", affNo: "POK 46", chair: "" },
+                { sl: 47, name: "Harishankar", affDate: "7/23/21", renDate: "7/22/23", affNo: "POK 47", chair: "Anoop Singh" },
+                { sl: 48, name: "skin", affDate: "8/6/20", renDate: "8/5/22", affNo: "POK 48", chair: "Dheeraj Singh" },
+                { sl: 49, name: "District Court", affDate: "9/29/22", renDate: "9/28/24", affNo: "POK 49", chair: "Ajay Kumar" },
+                { sl: 50, name: "Sinau Malla Talla", affDate: "6/25/20", renDate: "6/24/22", affNo: "POK 50", chair: "Deepak Singh" },
+                { sl: 51, name: "Khanni", affDate: "7/23/21", renDate: "7/22/23", affNo: "POK 51", chair: "sitav singh" },
+                { sl: 52, name: "simkholi", affDate: "9/26/20", renDate: "9/25/22", affNo: "POK 52", chair: "Sun" },
+                { sl: 53, name: "skin sitting", affDate: "7/23/21", renDate: "7/22/23", affNo: "POK 53", chair: "Sandeep Singh" },
+                { sl: 54, name: "Kimotha", affDate: "5/3/19", renDate: "5/2/21", affNo: "POK 54", chair: "Sandeep Kimothi" },
+                { sl: 55, name: "Surrender", affDate: "6/25/20", renDate: "6/24/22", affNo: "POK 55", chair: "Naveen Singh" },
+                { sl: 56, name: "Kandai Seladugara", affDate: "9/29/22", renDate: "9/28/24", affNo: "POK 56", chair: "Sanjay" },
+                { sl: 57, name: "the key", affDate: "9/26/20", renDate: "9/25/22", affNo: "POK 57", chair: "Suraj Rawat" },
+                { sl: 58, name: "Sharanaa", affDate: "9/26/20", renDate: "9/25/22", affNo: "POK 58", chair: "Kundeep Singh" },
+                { sl: 59, name: "Siwai", affDate: "9/26/20", renDate: "9/25/22", affNo: "POK 59", chair: "Vijayveer" },
+                { sl: 60, name: "Rauta", affDate: "12/24/20", renDate: "12/23/22", affNo: "POK 60", chair: "Narendra Singh" },
+                { sl: 61, name: "kujasu", affDate: "12/24/20", renDate: "12/23/22", affNo: "POK 61", chair: "Rakesh Lal" },
+                { sl: 62, name: "Kanda", affDate: "12/24/20", renDate: "12/23/22", affNo: "POK 62", chair: "Neeraj Kandari" },
+                { sl: 63, name: "Valli", affDate: "2/8/21", renDate: "2/7/23", affNo: "POK 63", chair: "Jaipal Singh" },
+                { sl: 64, name: "Ranau", affDate: "7/23/21", renDate: "7/22/23", affNo: "POK 64", chair: "Sushil Singh" },
+                { sl: 65, name: "Sinau Palla", affDate: "7/23/21", renDate: "7/22/23", affNo: "POK 65", chair: "Sunil Singh" }
+            ]
+        };
+        const districtSelect = document.getElementById('districtSelect');
+        const blockSelect = document.getElementById('blockSelect');
+        const resultsArea = document.getElementById('resultsArea');
+
+        districtSelect.addEventListener('change', function () {
+            const district = this.value;
+
+            // Clear block select
+            blockSelect.innerHTML = '<option value="" disabled selected>Choose a Block</option>';
+            blockSelect.disabled = true;
+            resultsArea.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Now please select a block for ${district.charAt(0).toUpperCase() + district.slice(1)}.</p>
+                </div>
+            `;
+
+            if (district === 'chamoli') {
+                blockSelect.disabled = false;
+                for (const block in chamoliData) {
+                    const option = document.createElement('option');
+                    option.value = block;
+                    option.textContent = block;
+                    blockSelect.appendChild(option);
+                }
+            } else {
+                resultsArea.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Data will be uploaded soon for ${district.charAt(0).toUpperCase() + district.slice(1)}</p>
+                    </div>
+                `;
+            }
+        });
+
+        blockSelect.addEventListener('change', function () {
+            const block = this.value;
+            renderBlockData(block);
+        });
+
+        function renderBlockData(blockName) {
+            resultsArea.innerHTML = '';
+            const data = chamoliData[blockName];
+
+            const blockSection = document.createElement('div');
+            blockSection.className = 'block-section';
+
+            const title = document.createElement('h3');
+            title.className = 'block-title';
+            title.textContent = blockName;
+            blockSection.appendChild(title);
+
+            if (data && data.length > 0) {
+                const tableWrapper = document.createElement('div');
+                tableWrapper.className = 'data-table-wrapper';
+
+                let tableHtml = `
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Sl. No.</th>
+                                <th>Name of Yuvak Mangal Dal</th>
+                                <th>Affiliation Date</th>
+                                <th>Renewal Date</th>
+                                <th>Affiliation Number</th>
+                                <th>Chairman</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                data.forEach(item => {
+                    tableHtml += `
+                        <tr>
+                            <td>${item.sl}</td>
+                            <td>${item.name}</td>
+                            <td>${item.affDate}</td>
+                            <td>${item.renDate}</td>
+                            <td>${item.affNo}</td>
+                            <td>${item.chair}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHtml += `</tbody></table>`;
+                tableWrapper.innerHTML = tableHtml;
+                blockSection.appendChild(tableWrapper);
+            } else {
+                const msg = document.createElement('p');
+                msg.style.color = '#64748b';
+                msg.style.fontStyle = 'italic';
+                msg.textContent = 'Detailed data will be uploaded soon for this block.';
+                blockSection.appendChild(msg);
+            }
+
+            resultsArea.appendChild(blockSection);
+        }
+    </script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

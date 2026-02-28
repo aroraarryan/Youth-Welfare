@@ -36,19 +36,43 @@
 
         .filter-title {
             color: #1e3a8a;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 1.5rem;
+            font-weight: 700;
         }
 
-        .district-select-wrapper {
-            position: relative;
-            max-width: 400px;
+        .filter-controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .district-select {
+        .select-group {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+            text-align: left;
+        }
+
+        .select-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .dropdown-wrapper {
+            position: relative;
+        }
+
+        .district-select,
+        .block-select {
             width: 100%;
-            padding: 12px 20px;
+            padding: 12px 40px 12px 20px;
             font-size: 1rem;
             border: 2px solid #e2e8f0;
             border-radius: 10px;
@@ -56,12 +80,21 @@
             background: #fff;
             cursor: pointer;
             transition: all 0.3s ease;
+            color: #1e293b;
         }
 
-        .district-select:focus {
+        .district-select:focus,
+        .block-select:focus {
             outline: none;
             border-color: #ff6b6b;
             box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .district-select:disabled,
+        .block-select:disabled {
+            background-color: #f1f5f9;
+            cursor: not-allowed;
+            color: #94a3b8;
         }
 
         .select-arrow-icon {
@@ -75,7 +108,7 @@
 
         /* Results Section */
         .results-section {
-            min-height: 300px;
+            min-height: 200px;
         }
 
         .block-section {
@@ -220,33 +253,50 @@
     <main class="page-content-container">
         <!-- Filter Section -->
         <div class="filter-section">
-            <h2 class="filter-title" data-i18n="filter.select_district">Select Your District</h2>
-            <div class="district-select-wrapper">
-                <select id="districtSelect" class="district-select">
-                    <option value="" disabled selected data-i18n="filter.choose_district">Choose a District</option>
-                    <option value="almora">Almora</option>
-                    <option value="bageshwar">Bageshwar</option>
-                    <option value="chamoli">Chamoli</option>
-                    <option value="champawat">Champawat</option>
-                    <option value="dehradun">Dehradun</option>
-                    <option value="haridwar">Haridwar</option>
-                    <option value="nainital">Nainital</option>
-                    <option value="pauri">Pauri</option>
-                    <option value="pithoragarh">Pithoragarh</option>
-                    <option value="rudraprayag">Rudraprayag</option>
-                    <option value="tehri">Tehri</option>
-                    <option value="udam singh nagar">Udham Singh Nagar</option>
-                    <option value="uttarakashi">Uttarkashi</option>
-                </select>
-                <i class="fas fa-chevron-down select-arrow-icon"></i>
+            <h2 class="filter-title" data-i18n="filter.select_details">Explore Mahila Mangal Dal Details</h2>
+            <div class="filter-controls">
+                <div class="select-group">
+                    <label for="districtSelect" class="select-label" data-i18n="filter.select_district">Select
+                        District</label>
+                    <div class="dropdown-wrapper">
+                        <select id="districtSelect" class="district-select">
+                            <option value="" disabled selected data-i18n="filter.choose_district">Choose a District
+                            </option>
+                            <option value="almora">Almora</option>
+                            <option value="bageshwar">Bageshwar</option>
+                            <option value="chamoli">Chamoli</option>
+                            <option value="champawat">Champawat</option>
+                            <option value="dehradun">Dehradun</option>
+                            <option value="haridwar">Haridwar</option>
+                            <option value="nainital">Nainital</option>
+                            <option value="pauri">Pauri</option>
+                            <option value="pithoragarh">Pithoragarh</option>
+                            <option value="rudraprayag">Rudraprayag</option>
+                            <option value="tehri">Tehri</option>
+                            <option value="udam singh nagar">Udham Singh Nagar</option>
+                            <option value="uttarakashi">Uttarkashi</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow-icon"></i>
+                    </div>
+                </div>
+
+                <div class="select-group">
+                    <label for="blockSelect" class="select-label" data-i18n="filter.select_block">Select Block</label>
+                    <div class="dropdown-wrapper">
+                        <select id="blockSelect" class="block-select" disabled>
+                            <option value="" disabled selected data-i18n="filter.choose_block">Choose a Block</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow-icon"></i>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Results Display Area -->
         <div id="resultsArea" class="results-section">
             <div class="empty-state">
-                <i class="fas fa-map-marker-alt"></i>
-                <p data-i18n="filter.empty_state">Please select a district to view the Mahila Mangal Dal details.</p>
+                <i class="fas fa-search-location"></i>
+                <p data-i18n="filter.empty_state_new">Please select a district and then a block to see the data.</p>
             </div>
         </div>
     </main>
@@ -324,7 +374,7 @@
                 { sl: 1, name: "Mandal", affDate: "6/25/20", renDate: "6/24/22", affNo: "DASH 01", chair: "Harita Devi" },
                 { sl: 2, name: "Math", affDate: "7/23/21", renDate: "7/22/23", affNo: "DASH 02", chair: "Madhuri Devi" },
                 { sl: 3, name: "Khadora", affDate: "8/26/21", renDate: "8/25/23", affNo: "DASH 03", chair: "Babli Devi" },
-                { sl: 30, name: "Kilodi", affDate: "8/26/21", renDate: "8/25/23", affNo: "DASH 30", chair: "Pushpa Devi" },
+                { sl: 30, name: "Kilodi", affDate: "8/26/21", renDate: "8/25/23", ERROR: "DASH 30", chair: "Pushpa Devi" },
                 { sl: 31, name: "Semdugra", affDate: "8/11/20", renDate: "8/10/22", affNo: "DASH 31", chair: "Hemanti Devi" }
             ],
             "Nandanagar": [
@@ -377,71 +427,29 @@
         };
 
         const districtSelect = document.getElementById('districtSelect');
+        const blockSelect = document.getElementById('blockSelect');
         const resultsArea = document.getElementById('resultsArea');
 
         districtSelect.addEventListener('change', function () {
             const district = this.value;
-            renderData(district);
-        });
 
-        function renderData(district) {
-            resultsArea.innerHTML = '';
+            // Clear block select
+            blockSelect.innerHTML = '<option value="" disabled selected>Choose a Block</option>';
+            blockSelect.disabled = true;
+            resultsArea.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Now please select a block for ${district.charAt(0).toUpperCase() + district.slice(1)}.</p>
+                </div>
+            `;
 
             if (district === 'chamoli') {
+                blockSelect.disabled = false;
                 for (const block in chamoliData) {
-                    const blockSection = document.createElement('div');
-                    blockSection.className = 'block-section';
-
-                    const title = document.createElement('h3');
-                    title.className = 'block-title';
-                    title.textContent = block;
-                    blockSection.appendChild(title);
-
-                    const data = chamoliData[block];
-                    if (data && data.length > 0) {
-                        const tableWrapper = document.createElement('div');
-                        tableWrapper.className = 'data-table-wrapper';
-
-                        let tableHtml = `
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Sl. No.</th>
-                                        <th>Name of Mahila Mangal Dal</th>
-                                        <th>Affiliation Date</th>
-                                        <th>Renewal Date</th>
-                                        <th>Affiliation Number</th>
-                                        <th>Chairperson</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                        `;
-
-                        data.forEach(item => {
-                            tableHtml += `
-                                <tr>
-                                    <td>${item.sl}</td>
-                                    <td>${item.name}</td>
-                                    <td>${item.affDate}</td>
-                                    <td>${item.renDate}</td>
-                                    <td>${item.affNo}</td>
-                                    <td>${item.chair}</td>
-                                </tr>
-                            `;
-                        });
-
-                        tableHtml += `</tbody></table>`;
-                        tableWrapper.innerHTML = tableHtml;
-                        blockSection.appendChild(tableWrapper);
-                    } else {
-                        const msg = document.createElement('p');
-                        msg.style.color = '#64748b';
-                        msg.style.fontStyle = 'italic';
-                        msg.textContent = 'Data will be uploaded soon';
-                        blockSection.appendChild(msg);
-                    }
-
-                    resultsArea.appendChild(blockSection);
+                    const option = document.createElement('option');
+                    option.value = block;
+                    option.textContent = block;
+                    blockSelect.appendChild(option);
                 }
             } else {
                 resultsArea.innerHTML = `
@@ -451,6 +459,69 @@
                     </div>
                 `;
             }
+        });
+
+        blockSelect.addEventListener('change', function () {
+            const block = this.value;
+            renderBlockData(block);
+        });
+
+        function renderBlockData(blockName) {
+            resultsArea.innerHTML = '';
+            const data = chamoliData[blockName];
+
+            const blockSection = document.createElement('div');
+            blockSection.className = 'block-section';
+
+            const title = document.createElement('h3');
+            title.className = 'block-title';
+            title.textContent = blockName;
+            blockSection.appendChild(title);
+
+            if (data && data.length > 0) {
+                const tableWrapper = document.createElement('div');
+                tableWrapper.className = 'data-table-wrapper';
+
+                let tableHtml = `
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Sl. No.</th>
+                                <th>Name of Mahila Mangal Dal</th>
+                                <th>Affiliation Date</th>
+                                <th>Renewal Date</th>
+                                <th>Affiliation Number</th>
+                                <th>Chairperson</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                data.forEach(item => {
+                    tableHtml += `
+                        <tr>
+                            <td>${item.sl}</td>
+                            <td>${item.name}</td>
+                            <td>${item.affDate}</td>
+                            <td>${item.renDate}</td>
+                            <td>${item.affNo || item.ERROR}</td>
+                            <td>${item.chair}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHtml += `</tbody></table>`;
+                tableWrapper.innerHTML = tableHtml;
+                blockSection.appendChild(tableWrapper);
+            } else {
+                const msg = document.createElement('p');
+                msg.style.color = '#64748b';
+                msg.style.fontStyle = 'italic';
+                msg.textContent = 'Detailed data will be uploaded soon for this block.';
+                blockSection.appendChild(msg);
+            }
+
+            resultsArea.appendChild(blockSection);
         }
     </script>
     <script src="../script.js"></script>
