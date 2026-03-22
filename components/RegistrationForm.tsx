@@ -73,6 +73,7 @@ export default function RegistrationForm({
   // ── Reference data ──────────────────────────────────────────────────────────
   const [districts, setDistricts] = useState<District[]>([]);
   const [sports, setSports] = useState<Sport[]>([]);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     infrastructureApi
@@ -152,6 +153,7 @@ export default function RegistrationForm({
     e.preventDefault();
     setError("");
     setSubmitting(true);
+    setFieldErrors({});
 
     const base = {
       fullName: form.fullName,
@@ -234,6 +236,11 @@ export default function RegistrationForm({
     } catch (err) {
       if (err instanceof ApiError) {
         setError(err.message);
+        if (err.errors?.length) {
+          setFieldErrors(
+            Object.fromEntries(err.errors.map((e) => [e.field, e.message])),
+          );
+        }
       } else {
         setError("Submission failed. Please try again.");
       }
@@ -904,7 +911,27 @@ export default function RegistrationForm({
             {error}
           </div>
         )}
+        {Object.entries(fieldErrors).filter(([, msg]) => msg).length > 0 && (
+          <div className="px-5 py-4 rounded-xl bg-red-50 border border-red-200 text-sm text-red-600 flex flex-col gap-1">
+            {Object.entries(fieldErrors)
+              .filter(([, msg]) => msg)
+              .map(([field, msg]) => (
+                <p key={field} className="flex items-center gap-2">
+                  <i className="fas fa-circle-exclamation text-[11px]" />
+                  <span className="capitalize">
+                    {field.replace(/([A-Z])/g, " $1")}:
+                  </span>
+                  {msg}
+                </p>
+              ))}
+          </div>
+        )}
 
+        {error && (
+          <div className="px-5 py-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm">
+            {error}
+          </div>
+        )}
         {/* Submit */}
         <button
           type="submit"
