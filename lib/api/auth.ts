@@ -57,7 +57,7 @@ export const authApi = {
   refresh: async (): Promise<AuthUser | null> => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/refresh`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/refresh`,
         {
           method: "POST",
           credentials: "include",
