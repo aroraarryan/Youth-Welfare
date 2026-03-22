@@ -88,6 +88,8 @@ export default function RegistrationForm({
     }
   }, [type]);
 
+  const toISODate = (date: string) => new Date(date + "T00:00:00.000Z");
+
   // ── Form state ───────────────────────────────────────────────────────────────
   const blank = {
     fullName: "",
@@ -157,7 +159,7 @@ export default function RegistrationForm({
 
     const base = {
       fullName: form.fullName,
-      dob: new Date(form.dob),
+      dob: toISODate(form.dob),
       gender: GENDER_MAP[form.gender] ?? (form.gender as Gender),
       mobile: form.mobile,
       email: form.email || undefined,
