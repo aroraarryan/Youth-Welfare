@@ -1,6 +1,6 @@
 /**
  * Centralized API client for yuva-frontend → Express backend
- * Base URL: http://localhost:5000/api
+ * Base URL: ${process.env.NEXT_PUBLIC_BASE_URL}/api
  * - Attaches Bearer access token from in-memory store
  * - Sends cookies (credentials: 'include') for httpOnly refresh token
  * - On 401, attempts silent token refresh once, then retries
