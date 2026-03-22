@@ -1,14 +1,24 @@
-import { api, PaginatedResponse } from '../api';
+import { api, PaginatedResponse } from "../api";
 
 // ─── Shared types ─────────────────────────────────────────────────────────────
 
-export type RegistrationStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'WAITLISTED';
-export type Gender = 'MALE' | 'FEMALE' | 'OTHER' | 'PREFER_NOT_TO_SAY';
-export type EmergencyRelation = 'PARENT' | 'GUARDIAN' | 'SPOUSE' | 'SIBLING' | 'FRIEND' | 'OTHER';
+export type RegistrationStatus =
+  | "PENDING"
+  | "APPROVED"
+  | "REJECTED"
+  | "WAITLISTED";
+export type Gender = "MALE" | "FEMALE" | "OTHER" | "PREFER_NOT_TO_SAY";
+export type EmergencyRelation =
+  | "PARENT"
+  | "GUARDIAN"
+  | "SPOUSE"
+  | "SIBLING"
+  | "FRIEND"
+  | "OTHER";
 
 interface BaseRegistrationPayload {
   fullName: string;
-  dob: string;             // ISO8601 date
+  dob: Date; // ISO8601 date
   gender: Gender;
   mobile: string;
   email?: string;
@@ -16,10 +26,10 @@ interface BaseRegistrationPayload {
   emergencyName: string;
   emergencyPhone: string;
   emergencyRelation: EmergencyRelation;
-  consentAccuracy: 'true';
-  consentMedical: 'true';
-  consentRules: 'true';
-  consentData: 'true';
+  consentAccuracy: "true";
+  consentMedical: "true";
+  consentRules: "true";
+  consentData: "true";
 }
 
 export interface BaseRegistration {
@@ -34,12 +44,12 @@ export interface BaseRegistration {
 // ─── Khel Mahakumbh ───────────────────────────────────────────────────────────
 
 export interface KhelMahakumbhPayload extends BaseRegistrationPayload {
-  ageCategory: 'JUNIOR' | 'SENIOR';
-  sportIds: string[];     // 1-3 UUIDs
+  ageCategory: "JUNIOR" | "SENIOR";
+  sportIds: string[]; // 1-3 UUIDs
 }
 
 export interface KhelMahakumbhRegistration extends BaseRegistration {
-  ageCategory: 'JUNIOR' | 'SENIOR';
+  ageCategory: "JUNIOR" | "SENIOR";
   sports: { id: string; name: string }[];
 }
 
@@ -47,7 +57,11 @@ export interface KhelMahakumbhRegistration extends BaseRegistration {
 
 export interface VolunteerPayload extends BaseRegistrationPayload {
   serviceAreas: string[];
-  availability: 'FULL_TIME' | 'PART_TIME_MORNING' | 'PART_TIME_EVENING' | 'WEEKENDS';
+  availability:
+    | "FULL_TIME"
+    | "PART_TIME_MORNING"
+    | "PART_TIME_EVENING"
+    | "WEEKENDS";
   motivation: string;
   qualification: string;
 }
@@ -61,7 +75,7 @@ export interface VolunteerRegistration extends BaseRegistration {
 
 export interface VocationalPayload extends BaseRegistrationPayload {
   sector: string;
-  courseDuration: 'THREE_MONTHS' | 'SIX_MONTHS' | 'RPL' | 'FLEXIBLE';
+  courseDuration: "THREE_MONTHS" | "SIX_MONTHS" | "RPL" | "FLEXIBLE";
   qualification: string;
   employmentStatus: string;
 }
@@ -75,10 +89,10 @@ export interface VocationalRegistration extends BaseRegistration {
 
 export interface AdventurePayload extends BaseRegistrationPayload {
   courseType: string;
-  batchMonth: string;  // YYYY-MM
-  accommodation: 'YES_HOSTEL' | 'YES_TENT' | 'NO_OWN_ARRANGEMENT';
-  fitnessLevel: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' | 'EXPERT';
-  swimmingAbility: 'STRONG_SWIMMER' | 'BASIC_SWIMMER' | 'NON_SWIMMER';
+  batchMonth: string; // YYYY-MM
+  accommodation: "YES_HOSTEL" | "YES_TENT" | "NO_OWN_ARRANGEMENT";
+  fitnessLevel: "BEGINNER" | "INTERMEDIATE" | "ADVANCED" | "EXPERT";
+  swimmingAbility: "STRONG_SWIMMER" | "BASIC_SWIMMER" | "NON_SWIMMER";
   qualification: string;
 }
 
@@ -102,47 +116,86 @@ interface TrackResponse<T> {
 export const registrationsApi = {
   // Khel Mahakumbh
   registerKhel: (payload: KhelMahakumbhPayload) =>
-    api.post<RegisterResponse<KhelMahakumbhRegistration>>('/khel-mahakumbh/register', payload),
+    api.post<RegisterResponse<KhelMahakumbhRegistration>>(
+      "/khel-mahakumbh/register",
+      payload,
+    ),
 
   trackKhel: (registrationNo: string) =>
-    api.get<TrackResponse<KhelMahakumbhRegistration>>(`/khel-mahakumbh/track/${registrationNo}`),
+    api.get<TrackResponse<KhelMahakumbhRegistration>>(
+      `/khel-mahakumbh/track/${registrationNo}`,
+    ),
 
   myKhelRegistrations: () =>
-    api.get<{ success: boolean; data: KhelMahakumbhRegistration[] }>('/khel-mahakumbh/my'),
+    api.get<{ success: boolean; data: KhelMahakumbhRegistration[] }>(
+      "/khel-mahakumbh/my",
+    ),
 
   // Youth Volunteering
   registerVolunteer: (payload: VolunteerPayload) =>
-    api.post<RegisterResponse<VolunteerRegistration>>('/volunteer/register', payload),
+    api.post<RegisterResponse<VolunteerRegistration>>(
+      "/volunteer/register",
+      payload,
+    ),
 
   myVolunteerRegistrations: () =>
-    api.get<{ success: boolean; data: VolunteerRegistration[] }>('/volunteer/my'),
+    api.get<{ success: boolean; data: VolunteerRegistration[] }>(
+      "/volunteer/my",
+    ),
 
   // Vocational Training
   enrollVocational: (payload: VocationalPayload) =>
-    api.post<RegisterResponse<VocationalRegistration>>('/vocational/enroll', payload),
+    api.post<RegisterResponse<VocationalRegistration>>(
+      "/vocational/enroll",
+      payload,
+    ),
 
   myVocationalEnrollments: () =>
-    api.get<{ success: boolean; data: VocationalRegistration[] }>('/vocational/my'),
+    api.get<{ success: boolean; data: VocationalRegistration[] }>(
+      "/vocational/my",
+    ),
 
   // Adventure Training
   enrollAdventure: (payload: AdventurePayload) =>
-    api.post<RegisterResponse<AdventureRegistration>>('/adventure/enroll', payload),
+    api.post<RegisterResponse<AdventureRegistration>>(
+      "/adventure/enroll",
+      payload,
+    ),
 
   myAdventureEnrollments: () =>
-    api.get<{ success: boolean; data: AdventureRegistration[] }>('/adventure/my'),
+    api.get<{ success: boolean; data: AdventureRegistration[] }>(
+      "/adventure/my",
+    ),
 
   // Admin / Officer — list all (any module)
-  listKhel: (params?: { page?: number; limit?: number; status?: RegistrationStatus }) =>
-    api.get<PaginatedResponse<KhelMahakumbhRegistration>>('/khel-mahakumbh', params),
+  listKhel: (params?: {
+    page?: number;
+    limit?: number;
+    status?: RegistrationStatus;
+  }) =>
+    api.get<PaginatedResponse<KhelMahakumbhRegistration>>(
+      "/khel-mahakumbh",
+      params,
+    ),
 
-  listVolunteers: (params?: { page?: number; limit?: number; status?: RegistrationStatus }) =>
-    api.get<PaginatedResponse<VolunteerRegistration>>('/volunteer', params),
+  listVolunteers: (params?: {
+    page?: number;
+    limit?: number;
+    status?: RegistrationStatus;
+  }) => api.get<PaginatedResponse<VolunteerRegistration>>("/volunteer", params),
 
-  listVocational: (params?: { page?: number; limit?: number; status?: RegistrationStatus }) =>
-    api.get<PaginatedResponse<VocationalRegistration>>('/vocational', params),
+  listVocational: (params?: {
+    page?: number;
+    limit?: number;
+    status?: RegistrationStatus;
+  }) =>
+    api.get<PaginatedResponse<VocationalRegistration>>("/vocational", params),
 
-  listAdventure: (params?: { page?: number; limit?: number; status?: RegistrationStatus }) =>
-    api.get<PaginatedResponse<AdventureRegistration>>('/adventure', params),
+  listAdventure: (params?: {
+    page?: number;
+    limit?: number;
+    status?: RegistrationStatus;
+  }) => api.get<PaginatedResponse<AdventureRegistration>>("/adventure", params),
 
   // Admin / Officer — update status
   updateKhelStatus: (id: string, status: RegistrationStatus) =>
