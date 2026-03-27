@@ -14,7 +14,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
   }
 
   const handleLogout = async () => {
-    await fetch(`${API}/officer/logout`, { method: 'POST', credentials: 'include' });
+    await fetch(`/api/officer/logout`, { method: 'POST' });
     router.push('/officer/login');
   };
 

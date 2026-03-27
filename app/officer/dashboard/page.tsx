@@ -24,7 +24,7 @@ export default function OfficerDashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API}/officer/me`, { credentials: 'include' })
+    fetch(`/api/officer/me`)
       .then(async (res) => {
         if (res.status === 401) { router.push('/officer/login'); return; }
         const data = await res.json();

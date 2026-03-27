@@ -18,10 +18,9 @@ export default function OfficerLoginPage() {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch(`${API}/officer/login`, {
+      const res = await fetch(`/api/officer/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify(form),
       });
       const data = await res.json();
