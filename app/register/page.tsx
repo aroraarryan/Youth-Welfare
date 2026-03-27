@@ -164,6 +164,28 @@ export default function RegisterPage() {
             LOGIN HERE
           </Link>
         </p>
+
+        <div className="mt-5 pt-5 border-t border-gray-100 flex items-center justify-center gap-4">
+          <Link
+            href="/officer/login"
+            className="flex items-center gap-1.5 text-xs font-medium text-teal-700 hover:underline"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Officer Login
+          </Link>
+          <span className="text-gray-300">|</span>
+          <Link
+            href="/admin/login"
+            className="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-gray-600 hover:underline"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            Admin Login
+          </Link>
+        </div>
       </div>
     </main>
   );

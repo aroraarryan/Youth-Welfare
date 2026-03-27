@@ -5,6 +5,7 @@ import GovHeader from "@/components/GovHeader";
 import MainHeader from "@/components/MainHeader";
 import Footer from "@/components/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700', '900'],
@@ -32,6 +33,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col font-[family-name:var(--font-roboto)]">
         <AuthProvider>
+        <LanguageProvider>
         <GovHeader />
         <MainHeader />
         <main className="flex-1">{children}</main>
@@ -66,6 +68,7 @@ export default function RootLayout({
             <i className="fas fa-user-tie" />
           </div>
         </div>
+        </LanguageProvider>
         </AuthProvider>
       </body>
     </html>

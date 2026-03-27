@@ -3,18 +3,20 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-const navLinks = [
-  { href: '/',              label: 'Home' },
-  { href: '/about',         label: 'About Us' },
-  { href: '/gallery',       label: 'Gallery' },
-  { href: '#',              label: 'RTI' },
-  { href: '/downloads',     label: 'Downloads' },
-  { href: '/contact',       label: 'Contact Us' },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function MainHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: '/',          label: t('nav_home') },
+    { href: '/about',     label: t('nav_about') },
+    { href: '/gallery',   label: t('nav_gallery') },
+    { href: '#',          label: t('nav_rti') },
+    { href: '/downloads', label: t('nav_downloads') },
+    { href: '/contact',   label: t('nav_contact') },
+  ];
 
   return (
     <header className="flex justify-between items-center py-5 px-10 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] w-full box-border">
@@ -38,9 +40,15 @@ export default function MainHeader() {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-[#1e3a8a] m-0 leading-tight">
-            Department of Youth Welfare <br />and PRD
+            {t('dept_name').includes('and') ? (
+              <>
+                {t('dept_name').split(' and ')[0]} <br />and {t('dept_name').split(' and ')[1]}
+              </>
+            ) : (
+              t('dept_name')
+            )}
           </h1>
-          <p className="text-sm text-[#666] m-0 font-medium">Uttarakhand Government</p>
+          <p className="text-sm text-[#666] m-0 font-medium">{t('dept_sub')}</p>
         </div>
       </div>
 
@@ -78,7 +86,7 @@ export default function MainHeader() {
             href="/register"
             className="bg-[#1e3a8a] text-white no-underline font-medium text-sm py-2.5 px-5 rounded-md hover:bg-[#1e40af] transition-colors"
           >
-            Join the Community
+            {t('join_community')}
           </Link>
           <button className="bg-none border-none text-lg text-[#666] cursor-pointer p-2 rounded-full hover:bg-[#f0f0f0] hover:text-[#1e3a8a] transition-all">
             <i className="fas fa-search" />
