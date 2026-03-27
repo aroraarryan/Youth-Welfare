@@ -26,7 +26,7 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`${API}/admin/dashboard`, { credentials: "include" })
+    fetch(`/api/admin/dashboard`)
       .then(async (res) => {
         if (res.status === 401) { router.push("/admin/login"); return; }
         const data = await res.json();

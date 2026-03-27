@@ -30,10 +30,9 @@ export default function NewOfficerPage() {
     setErrors([]);
     setLoading(true);
     try {
-      const res = await fetch(`${API}/admin/officers`, {
+      const res = await fetch(`/api/admin/officers`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(form),
       });
       const data = await res.json();

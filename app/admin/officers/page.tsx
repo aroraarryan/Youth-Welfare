@@ -53,7 +53,7 @@ export default function OfficersPage() {
       params.set("page", String(page));
 
       try {
-        const res = await fetch(`${API}/admin/officers?${params}`, { credentials: "include" });
+        const res = await fetch(`/api/admin/officers?${params}`);
         if (res.status === 401) { router.push("/admin/login"); return; }
         const data = await res.json();
         if (data.success) {
@@ -93,9 +93,8 @@ export default function OfficersPage() {
         : "bg-green-600 hover:bg-green-700 text-white",
       onConfirm: async () => {
         setModal(null);
-        const res = await fetch(`${API}/admin/officers/${officer.id}/toggle`, {
+        const res = await fetch(`/api/admin/officers/${officer.id}/toggle`, {
           method: "PATCH",
-          credentials: "include",
         });
         const data = await res.json();
         setMessage({
@@ -115,9 +114,8 @@ export default function OfficersPage() {
       confirmClass: "bg-orange-600 hover:bg-orange-700 text-white",
       onConfirm: async () => {
         setModal(null);
-        const res = await fetch(`${API}/admin/officers/${officer.id}/reset-password`, {
+        const res = await fetch(`/api/admin/officers/${officer.id}/reset-password`, {
           method: "PATCH",
-          credentials: "include",
         });
         const data = await res.json();
         setMessage({
@@ -136,9 +134,8 @@ export default function OfficersPage() {
       confirmClass: "bg-red-600 hover:bg-red-700 text-white",
       onConfirm: async () => {
         setModal(null);
-        const res = await fetch(`${API}/admin/officers/${officer.id}`, {
+        const res = await fetch(`/api/admin/officers/${officer.id}`, {
           method: "DELETE",
-          credentials: "include",
         });
         const data = await res.json();
         if (data.success) {

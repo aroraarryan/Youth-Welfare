@@ -39,7 +39,7 @@ export default function EditOfficerPage() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetch(`${API}/admin/officers/${id}`, { credentials: "include" })
+    fetch(`/api/admin/officers/${id}`)
       .then(async (res) => {
         if (res.status === 401) { router.push("/admin/login"); return; }
         const data = await res.json();
@@ -66,10 +66,9 @@ export default function EditOfficerPage() {
     setErrors([]);
     setSaving(true);
     try {
-      const res = await fetch(`${API}/admin/officers/${id}`, {
+      const res = await fetch(`/api/admin/officers/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(form),
       });
       const data = await res.json();
