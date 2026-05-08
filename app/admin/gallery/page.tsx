@@ -227,12 +227,24 @@ export default function AdminGalleryPage() {
                       </span>
                     </div>
 
-                    <p className="text-[11px] text-gray-400 mb-2">
-                      {item.mobile}
-                      {item.email && ` · ${item.email}`}
-                      {item.district && ` · ${item.district.name}`}
-                      {item.blockName && ` › ${item.blockName}`}
-                    </p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 mb-2 mt-1">
+                      <span className="text-xs text-gray-600 flex items-center gap-1">
+                        <i className="fas fa-phone-alt text-[9px] text-gray-400" />
+                        {item.mobile}
+                      </span>
+                      {item.email && (
+                        <span className="text-xs text-gray-600 flex items-center gap-1">
+                          <i className="fas fa-envelope text-[9px] text-gray-400" />
+                          {item.email}
+                        </span>
+                      )}
+                      {item.district && (
+                        <span className="text-xs text-gray-600 flex items-center gap-1">
+                          <i className="fas fa-map-marker-alt text-[9px] text-gray-400" />
+                          {item.district.name}{item.blockName && ` › ${item.blockName}`}
+                        </span>
+                      )}
+                    </div>
 
                     <p className="text-xs text-gray-600 line-clamp-2 mb-3">{item.description}</p>
 

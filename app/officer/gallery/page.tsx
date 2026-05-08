@@ -14,6 +14,7 @@ type StatusFilter = 'PENDING' | 'DO_APPROVED' | 'REJECTED' | '';
 
 export default function OfficerGalleryPage() {
   const { data: officer } = useCurrentOfficer();
+  const isBO = officer?.role === 'BO_PRD';
   const isDO = officer?.role === 'DO_PRD';
 
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('PENDING');
@@ -53,11 +54,11 @@ export default function OfficerGalleryPage() {
     );
   };
 
-  const tabs: { label: string; value: StatusFilter }[] = isDO
+  const tabs: { label: string; value: StatusFilter }[] = isBO
     ? [
-        { label: 'Pending Review',          value: 'PENDING'     },
-        { label: 'Sent for Final Approval', value: 'DO_APPROVED' },
-        { label: 'Rejected',                value: 'REJECTED'    },
+        { label: 'Pending Review',        value: 'PENDING'     },
+        { label: 'Sent for Admin Approval', value: 'DO_APPROVED' },
+        { label: 'Rejected',              value: 'REJECTED'    },
       ]
     : [
         { label: 'All',      value: ''          },
@@ -66,21 +67,37 @@ export default function OfficerGalleryPage() {
         { label: 'Rejected', value: 'REJECTED'  },
       ];
 
+  // DO_PRD has no gallery review role
+  if (isDO) {
+    return (
+      <div className="p-6 max-w-2xl">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Gallery Management</h2>
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3 text-sm text-blue-800">
+          <i className="fas fa-info-circle mt-0.5 text-blue-500 flex-shrink-0 text-lg" />
+          <div>
+            <p className="font-semibold">Gallery review is handled by Block Officers.</p>
+            <p className="mt-1 text-blue-700">Block Officers review submissions from their specific block and forward approved entries to the Admin for final publication.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 max-w-5xl space-y-5">
       <div>
         <h2 className="text-xl font-bold text-gray-800">Gallery Management</h2>
         <p className="text-sm text-gray-500 mt-0.5">
-          {isDO
-            ? 'Review gallery submissions from your district. Approved entries go to Admin for final publication.'
+          {isBO
+            ? 'Review gallery submissions from your block. Approved entries go to Admin for final publication.'
             : 'View and manage gallery submissions.'}
         </p>
       </div>
 
-      {isDO && (
+      {isBO && (
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-start gap-3 text-sm text-blue-800">
           <i className="fas fa-info-circle mt-0.5 text-blue-500 flex-shrink-0" />
-          <span>Step 1 of 2 — You review district submissions. After your approval, the Admin publishes them to the public gallery.</span>
+          <span>Step 1 of 2 — You review submissions from your block. After your approval, the Admin publishes them to the public gallery.</span>
         </div>
       )}
 
@@ -148,11 +165,24 @@ export default function OfficerGalleryPage() {
                         {new Date(item.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-400 mb-2">
-                      {item.mobile}{item.email && ` · ${item.email}`}
-                      {item.district && ` · ${item.district.name}`}
-                      {item.blockName && ` › ${item.blockName}`}
-                    </p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 mb-2 mt-1">
+                      <span className="text-xs text-gray-600 flex items-center gap-1">
+                        <i className="fas fa-phone-alt text-[9px] text-gray-400" />
+                        {item.mobile}
+                      </span>
+                      {item.email && (
+                        <span className="text-xs text-gray-600 flex items-center gap-1">
+                          <i className="fas fa-envelope text-[9px] text-gray-400" />
+                          {item.email}
+                        </span>
+                      )}
+                      {item.district && (
+                        <span className="text-xs text-gray-600 flex items-center gap-1">
+                          <i className="fas fa-map-marker-alt text-[9px] text-gray-400" />
+                          {item.district.name}{item.blockName && ` › ${item.blockName}`}
+                        </span>
+                      )}
+                    </div>
 
                     {/* Description */}
                     {editingId === item.id ? (
@@ -177,14 +207,14 @@ export default function OfficerGalleryPage() {
                     {/* Actions */}
                     {editingId !== item.id && (
                       <div className="flex flex-wrap gap-2">
-                        {/* DO_PRD: can approve PENDING → DO_APPROVED */}
-                        {isDO && item.status === 'PENDING' && (
+                        {/* BO_PRD: can approve PENDING → DO_APPROVED (then admin publishes) */}
+                        {isBO && item.status === 'PENDING' && (
                           <button onClick={() => approve.mutate({ id: item.id })} disabled={approve.isPending}
                             className="px-3 py-1.5 bg-green-600 text-white text-xs font-semibold rounded-lg hover:bg-green-700 disabled:opacity-50 flex items-center gap-1.5">
-                            <i className="fas fa-check" /> Send for Final Approval
+                            <i className="fas fa-check" /> Send for Admin Approval
                           </button>
                         )}
-                        {isDO && item.status === 'PENDING' && (
+                        {isBO && item.status === 'PENDING' && (
                           <button onClick={() => reject.mutate({ id: item.id })} disabled={reject.isPending}
                             className="px-3 py-1.5 bg-red-100 text-red-700 text-xs font-semibold rounded-lg hover:bg-red-200 disabled:opacity-50 flex items-center gap-1.5">
                             <i className="fas fa-times" /> Reject

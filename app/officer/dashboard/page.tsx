@@ -16,13 +16,18 @@ export default function OfficerDashboardPage() {
   const approveGallery = useApproveGallery();
   const rejectGallery = useRejectGallery();
 
+  // Profile edit state
   const [editMode, setEditMode] = useState(false);
-  const [profileForm, setProfileForm] = useState({
-    name: '', email: '', username: '',
-    currentPassword: '', newPassword: '',
-  });
+  const [profileForm, setProfileForm] = useState({ name: '', email: '', username: '' });
   const [profileMsg, setProfileMsg] = useState('');
   const [profileErr, setProfileErr] = useState('');
+
+  // Change password state
+  const [pwForm, setPwForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [pwMsg, setPwMsg] = useState('');
+  const [pwErr, setPwErr] = useState('');
+  const [pwLoading, setPwLoading] = useState(false);
+  const [showPwForm, setShowPwForm] = useState(false);
 
   if (isLoading) return <div className="p-6 text-gray-500 text-sm">Loading…</div>;
   if (!officer) return null;
@@ -39,10 +44,7 @@ export default function OfficerDashboardPage() {
     : 'First login';
 
   const startEdit = () => {
-    setProfileForm({
-      name: officer.name, email: officer.email,
-      username: officer.username, currentPassword: '', newPassword: '',
-    });
+    setProfileForm({ name: officer.name, email: officer.email, username: officer.username });
     setProfileMsg('');
     setProfileErr('');
     setEditMode(true);
@@ -56,20 +58,41 @@ export default function OfficerDashboardPage() {
     if (profileForm.name !== officer.name)         payload.name = profileForm.name;
     if (profileForm.email !== officer.email)       payload.email = profileForm.email;
     if (profileForm.username !== officer.username) payload.username = profileForm.username;
-    if (profileForm.newPassword) {
-      payload.currentPassword = profileForm.currentPassword;
-      payload.newPassword     = profileForm.newPassword;
-    }
-    if (Object.keys(payload).length === 0) {
-      setEditMode(false);
-      return;
-    }
+    if (Object.keys(payload).length === 0) { setEditMode(false); return; }
     try {
       await updateProfile.mutateAsync(payload);
       setProfileMsg('Profile updated successfully.');
       setEditMode(false);
     } catch (err: any) {
       setProfileErr(err.message || 'Failed to update profile.');
+    }
+  };
+
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPwMsg('');
+    setPwErr('');
+    if (pwForm.newPassword !== pwForm.confirmPassword) {
+      setPwErr('New passwords do not match.');
+      return;
+    }
+    if (pwForm.newPassword.length < 6) {
+      setPwErr('New password must be at least 6 characters.');
+      return;
+    }
+    setPwLoading(true);
+    try {
+      await updateProfile.mutateAsync({
+        currentPassword: pwForm.currentPassword,
+        newPassword:     pwForm.newPassword,
+      });
+      setPwMsg('Password changed successfully.');
+      setPwForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setShowPwForm(false);
+    } catch (err: any) {
+      setPwErr(err.message || 'Failed to change password.');
+    } finally {
+      setPwLoading(false);
     }
   };
 
@@ -111,14 +134,7 @@ export default function OfficerDashboardPage() {
                 <label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Username</label>
                 <input className={inp} value={profileForm.username} onChange={(e) => setProfileForm((f) => ({ ...f, username: e.target.value }))} required />
               </div>
-              <div className="pt-2 border-t border-gray-100">
-                <p className="text-[10px] text-gray-400 mb-2 uppercase font-bold">Change Password (optional)</p>
-                <div className="space-y-2">
-                  <input type="password" className={inp} placeholder="Current password" value={profileForm.currentPassword} onChange={(e) => setProfileForm((f) => ({ ...f, currentPassword: e.target.value }))} />
-                  <input type="password" className={inp} placeholder="New password" value={profileForm.newPassword} onChange={(e) => setProfileForm((f) => ({ ...f, newPassword: e.target.value }))} />
-                </div>
-              </div>
-              <div className="flex gap-2 pt-2">
+              <div className="flex gap-2 pt-1">
                 <button type="submit" disabled={updateProfile.isPending} className="flex-1 bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-800 disabled:opacity-60 flex items-center justify-center gap-2">
                   {updateProfile.isPending ? <i className="fas fa-circle-notch fa-spin" /> : <i className="fas fa-save" />}
                   Save
@@ -166,7 +182,105 @@ export default function OfficerDashboardPage() {
         </div>
       </div>
 
-      {/* Gallery Requests Section */}
+      {/* ── Change Password Card ────────────────────────────────────── */}
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+        <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center">
+              <i className="fas fa-lock text-orange-500 text-sm" />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-700">Change Password</h3>
+              <p className="text-[11px] text-gray-400 mt-0.5">Update your login password</p>
+            </div>
+          </div>
+          <button
+            onClick={() => { setShowPwForm((v) => !v); setPwMsg(''); setPwErr(''); setPwForm({ currentPassword: '', newPassword: '', confirmPassword: '' }); }}
+            className="text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1"
+          >
+            <i className={`fas ${showPwForm ? 'fa-chevron-up' : 'fa-chevron-down'} text-[10px]`} />
+            {showPwForm ? 'Cancel' : 'Change'}
+          </button>
+        </div>
+
+        {pwMsg && !showPwForm && (
+          <div className="px-5 py-3 bg-green-50 border-b border-green-100">
+            <p className="text-xs text-green-700 flex items-center gap-2">
+              <i className="fas fa-check-circle" /> {pwMsg}
+            </p>
+          </div>
+        )}
+
+        {showPwForm && (
+          <form onSubmit={handlePasswordChange} className="p-5 space-y-4">
+            {pwErr && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-600 text-xs flex items-center gap-2">
+                <i className="fas fa-exclamation-circle" /> {pwErr}
+              </div>
+            )}
+            {pwMsg && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-green-700 text-xs flex items-center gap-2">
+                <i className="fas fa-check-circle" /> {pwMsg}
+              </div>
+            )}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="text-xs text-gray-500 mb-1.5 block uppercase font-semibold">Current Password</label>
+                <input
+                  type="password"
+                  required
+                  className={inp}
+                  placeholder="Enter current password"
+                  value={pwForm.currentPassword}
+                  onChange={(e) => setPwForm((f) => ({ ...f, currentPassword: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1.5 block uppercase font-semibold">New Password</label>
+                <input
+                  type="password"
+                  required
+                  className={inp}
+                  placeholder="Min. 6 characters"
+                  value={pwForm.newPassword}
+                  onChange={(e) => setPwForm((f) => ({ ...f, newPassword: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1.5 block uppercase font-semibold">Confirm New Password</label>
+                <input
+                  type="password"
+                  required
+                  className={inp}
+                  placeholder="Repeat new password"
+                  value={pwForm.confirmPassword}
+                  onChange={(e) => setPwForm((f) => ({ ...f, confirmPassword: e.target.value }))}
+                />
+              </div>
+            </div>
+            <div className="flex justify-end gap-3 pt-1">
+              <button
+                type="button"
+                onClick={() => { setShowPwForm(false); setPwErr(''); setPwMsg(''); setPwForm({ currentPassword: '', newPassword: '', confirmPassword: '' }); }}
+                className="px-4 py-2 text-sm font-semibold text-gray-500 border border-gray-200 rounded-lg hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={pwLoading}
+                className="px-5 py-2 bg-orange-500 text-white text-sm font-semibold rounded-lg hover:bg-orange-600 disabled:opacity-60 flex items-center gap-2 transition-colors"
+              >
+                {pwLoading ? <i className="fas fa-circle-notch fa-spin" /> : <i className="fas fa-lock" />}
+                Update Password
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+
+      {/* Gallery Requests Section — visible only to Block Officers and Super Admins */}
+      {officer.role !== 'DO_PRD' && (
       <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
         <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
           <div>
@@ -174,7 +288,9 @@ export default function OfficerDashboardPage() {
               <i className="fas fa-images text-purple-500" />
               Gallery Requests
             </h3>
-            <p className="text-[11px] text-gray-400 mt-0.5">Review and approve/reject public photo submissions</p>
+            <p className="text-[11px] text-gray-400 mt-0.5">
+              Review photo submissions from your block. Approved entries go to Admin for final publication.
+            </p>
           </div>
           {pendingItems.length > 0 && (
             <span className="bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full">
@@ -207,8 +323,22 @@ export default function OfficerDashboardPage() {
                   <div className="flex flex-col sm:flex-row items-start sm:justify-between gap-2 sm:gap-4">
                     <div>
                       <p className="text-sm font-semibold text-gray-800">{item.fullName}</p>
-                      <p className="text-[11px] text-gray-400">{item.mobile} {item.email && `· ${item.email}`}</p>
-                      {item.district && <p className="text-[11px] text-gray-400">{item.district.name}{item.blockName && ` › ${item.blockName}`}</p>}
+                      <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-0.5">
+                        <span className="text-xs text-gray-600 flex items-center gap-1">
+                          <i className="fas fa-phone-alt text-[9px] text-gray-400" />{item.mobile}
+                        </span>
+                        {item.email && (
+                          <span className="text-xs text-gray-600 flex items-center gap-1">
+                            <i className="fas fa-envelope text-[9px] text-gray-400" />{item.email}
+                          </span>
+                        )}
+                        {item.district && (
+                          <span className="text-xs text-gray-600 flex items-center gap-1">
+                            <i className="fas fa-map-marker-alt text-[9px] text-gray-400" />
+                            {item.district.name}{item.blockName && ` › ${item.blockName}`}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <p className="text-[10px] text-gray-400 whitespace-nowrap">
                       {new Date(item.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
@@ -224,7 +354,7 @@ export default function OfficerDashboardPage() {
                       disabled={approveGallery.isPending || rejectGallery.isPending}
                       className="flex-1 sm:flex-none px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded-lg hover:bg-green-700 disabled:opacity-50 flex items-center justify-center gap-1.5"
                     >
-                      <i className="fas fa-check" /> Approve
+                      <i className="fas fa-check" /> Send for Admin Approval
                     </button>
                     <button
                       onClick={() => rejectGallery.mutate({ id: item.id })}
@@ -240,6 +370,7 @@ export default function OfficerDashboardPage() {
           </div>
         )}
       </div>
+      )}
     </div>
   );
 }
