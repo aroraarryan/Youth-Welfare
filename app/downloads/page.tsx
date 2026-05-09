@@ -5,6 +5,19 @@ import PageHero from '@/components/PageHero';
 import { useDocuments } from '@/hooks/useDocuments';
 import { DocumentCategory } from '@/lib/api/documents';
 
+/**
+ * For Cloudinary raw uploads (PDFs, DOCX, XLSX), the browser tries to
+ * render them inline and often shows "Failed to load PDF document."
+ * Adding fl_attachment forces the server to respond with
+ * Content-Disposition: attachment, triggering a proper file download.
+ */
+function toDownloadUrl(url: string): string {
+  if (url && url.includes('res.cloudinary.com') && url.includes('/raw/upload/')) {
+    return url.replace('/raw/upload/', '/raw/upload/fl_attachment/');
+  }
+  return url;
+}
+
 const categories: { key: DocumentCategory; label: string }[] = [
   { key: 'FORMS',             label: 'Forms' },
   { key: 'CIRCULARS',         label: 'Circular/GO' },
@@ -145,7 +158,7 @@ export default function DownloadsPage() {
                         </td>
                         <td className="px-4 sm:px-6 py-4">
                           <a
-                            href={doc.fileUrl}
+                            href={toDownloadUrl(doc.fileUrl)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-1.5 text-[#1e3a8a] text-sm font-medium hover:text-[#1e40af] transition-colors"
