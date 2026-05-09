@@ -12,6 +12,10 @@ interface MangalDalRegistrationFormProps {
   mode?: 'create' | 'edit';
   initialData?: any; // MangalDal
   officer: OfficerProfile;
+  /** Admin override: provide these to bypass officer hooks */
+  saveFn?: (payload: any) => Promise<any>;
+  updateFn?: (id: string, payload: any) => Promise<any>;
+  isPendingOverride?: boolean;
 }
 
 const sidebarSteps = ['Dal Information', 'Office Bearers', 'Location & Registration'];
@@ -23,6 +27,9 @@ export default function MangalDalRegistrationForm({
   mode = 'create',
   initialData,
   officer,
+  saveFn,
+  updateFn,
+  isPendingOverride,
 }: MangalDalRegistrationFormProps) {
   const { districts } = useDistricts();
   const isDO = officer.role === 'DO_PRD';
@@ -115,10 +122,20 @@ export default function MangalDalRegistrationForm({
     };
 
     try {
-      if (mode === 'edit' && initialData) {
-        await updateMutation.mutateAsync({ id: initialData.id, data: payload });
+      if (saveFn || updateFn) {
+        // Admin mode: use injected callbacks
+        if (mode === 'edit' && initialData && updateFn) {
+          await updateFn(initialData.id, payload);
+        } else if (saveFn) {
+          await saveFn(payload);
+        }
       } else {
-        await createMutation.mutateAsync(payload);
+        // Officer mode: use officer hooks
+        if (mode === 'edit' && initialData) {
+          await updateMutation.mutateAsync({ id: initialData.id, data: payload });
+        } else {
+          await createMutation.mutateAsync(payload);
+        }
       }
       setSubmitted(true);
       setTimeout(() => onSuccess(), 1500);
@@ -151,7 +168,7 @@ export default function MangalDalRegistrationForm({
 
   const inp = "w-full px-4 py-3 border-2 border-[#e5e7eb] rounded-lg text-sm text-[#374151] outline-none focus:border-[#1e3a8a] transition-all bg-white hover:border-gray-300";
   const sel = inp + " appearance-none cursor-pointer";
-  const isMutating = createMutation.isPending || updateMutation.isPending;
+  const isMutating = isPendingOverride ?? (createMutation.isPending || updateMutation.isPending);
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">

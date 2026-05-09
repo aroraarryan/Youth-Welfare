@@ -72,12 +72,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <h1 className="text-lg font-bold leading-tight">Admin Panel</h1>
           <p className="text-xs text-blue-300 mt-0.5">Yuva Shakti Portal</p>
         </div>
-        <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto pt-20 md:pt-4">
+        <nav className="flex-1 px-2 py-4 overflow-y-auto pt-20 md:pt-4 space-y-0.5">
           {navLink("/admin/dashboard", "Dashboard")}
-          {navLink("/admin/officers", "Officers")}
-          {navLink("/admin/gallery",  "Gallery Approvals")}
+          {navLink("/admin/officers",  "Officers")}
+          {navLink("/admin/gallery",   "Gallery Approvals")}
           {navLink("/admin/downloads", "Downloads")}
-          {navLink("/admin/contact", "Contact Messages")}
+          {navLink("/admin/contact",   "Contact Messages")}
+
+          {/* Mangal Dal */}
+          <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
+            Mangal Dal
+          </p>
+          {navLink("/admin/yuvak-mangal-dal",  "Yuvak Mangal Dal")}
+          {navLink("/admin/mahila-mangal-dal", "Mahila Mangal Dal")}
+
+          {/* Infrastructure */}
+          <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
+            Infrastructure
+          </p>
+          {navLink("/admin/multipurpose-halls",           "Multipurpose Halls")}
+          {navLink("/admin/mini-stadiums",                "Mini Stadiums")}
+          {navLink("/admin/youth-hostels",                "Youth Hostels")}
+          {navLink("/admin/vocational-training-centers",  "Vocational Centers")}
+          {navLink("/admin/indoor-gym",                   "Indoor Gym")}
+          {navLink("/admin/open-gym",                     "Open Gym")}
+          {navLink("/admin/khel-maidaan",                 "Khel Maidaan")}
         </nav>
         <div className="px-2 py-4 border-t border-blue-700 mb-safe">
           <button

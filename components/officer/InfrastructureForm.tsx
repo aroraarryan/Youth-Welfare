@@ -18,6 +18,10 @@ interface InfrastructureFormProps {
   mode?: 'create' | 'edit';
   initialData?: InfrastructureItem;
   officer: OfficerProfile;
+  /** Admin override: provide these to bypass officer hooks */
+  saveFn?: (payload: any) => Promise<any>;
+  updateFn?: (id: string, payload: any) => Promise<any>;
+  isPendingOverride?: boolean;
 }
 
 const typeLabels: Record<string, string> = {
@@ -61,6 +65,9 @@ export default function InfrastructureForm({
   mode = 'create',
   initialData,
   officer,
+  saveFn,
+  updateFn,
+  isPendingOverride,
 }: InfrastructureFormProps) {
   const { districts } = useDistricts();
 
@@ -185,10 +192,20 @@ export default function InfrastructureForm({
     };
 
     try {
-      if (mode === 'edit' && initialData) {
-        await (updateMutation.mutateAsync as any)({ id: initialData.id, data: payload });
+      if (saveFn || updateFn) {
+        // Admin mode: use injected callbacks
+        if (mode === 'edit' && initialData && updateFn) {
+          await updateFn(initialData.id, payload);
+        } else if (saveFn) {
+          await saveFn(payload);
+        }
       } else {
-        await (createMutation.mutateAsync as any)(payload);
+        // Officer mode: use officer hooks
+        if (mode === 'edit' && initialData) {
+          await (updateMutation.mutateAsync as any)({ id: initialData.id, data: payload });
+        } else {
+          await (createMutation.mutateAsync as any)(payload);
+        }
       }
       setSubmitted(true);
       setTimeout(() => onSuccess(), 1500);
@@ -220,7 +237,7 @@ export default function InfrastructureForm({
   const inp  = "w-full px-4 py-3 border-2 border-[#e5e7eb] rounded-lg text-sm text-[#374151] outline-none focus:border-[#1e3a8a] transition-all bg-white hover:border-gray-300";
   const sel  = inp + " appearance-none cursor-pointer";
   const area = "w-full px-4 py-3 border-2 border-[#e5e7eb] rounded-lg text-sm text-[#374151] outline-none focus:border-[#1e3a8a] transition-all bg-white hover:border-gray-300 resize-none";
-  const isMutating = createMutation.isPending || updateMutation.isPending || uploadingCount > 0;
+  const isMutating = (isPendingOverride ?? (createMutation.isPending || updateMutation.isPending)) || uploadingCount > 0;
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
