@@ -4,10 +4,12 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 
 const slides = [
-  { src: '/images/gallery/WhatsApp Image 2026-02-24 at 18.07.26 (1).jpeg', alt: 'Youth Welfare Event 1' },
-  { src: '/images/gallery/WhatsApp Image 2026-02-24 at 18.07.27 (1).jpeg', alt: 'Youth Welfare Event 2' },
-  { src: '/images/gallery/WhatsApp Image 2026-02-24 at 18.07.28 (2).jpeg', alt: 'Youth Welfare Event 3' },
-  { src: '/images/gallery/WhatsApp Image 2026-02-24 at 18.07.29.jpeg',     alt: 'Youth Welfare Event 4' },
+  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.08.jpeg', alt: 'Youth Welfare Event 1' },
+  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.09.jpeg', alt: 'Youth Welfare Event 2' },
+  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.12.jpeg', alt: 'Youth Welfare Event 3' },
+  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.13.jpeg', alt: 'Youth Welfare Event 4' },
+  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.14.jpeg', alt: 'Youth Welfare Event 5' },
+  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.16.jpeg', alt: 'Youth Welfare Event 6' },
 ];
 
 export default function Carousel() {
