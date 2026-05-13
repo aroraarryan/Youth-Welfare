@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import PageHero from '@/components/PageHero';
+import DistrictOfficersSection from '@/components/DistrictOfficersSection';
 
 const keyOfficials = [
   {
@@ -155,6 +156,8 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+
+        <DistrictOfficersSection />
       </main>
     </>
   );

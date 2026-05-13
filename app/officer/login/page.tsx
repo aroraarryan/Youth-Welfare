@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useQueryClient } from '@tanstack/react-query';
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 export default function OfficerLoginPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [form, setForm] = useState({ username: '', password: '' });
   const [showPwd, setShowPwd] = useState(false);
   const [error, setError] = useState('');
@@ -27,6 +29,8 @@ export default function OfficerLoginPage() {
       if (!res.ok || !data.success) {
         setError(data.error || 'Login failed.');
       } else {
+        // Clear ALL cached officer data so the new officer's data is fetched fresh
+        queryClient.clear();
         router.push('/officer/dashboard');
       }
     } catch {

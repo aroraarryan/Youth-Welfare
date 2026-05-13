@@ -66,7 +66,7 @@ export default function YuvakMangalDalPage() {
                 disabled={!selectedDistrictId || loadingBlocks}
                 className={sel}
               >
-                <option value="">{selectedDistrictId ? (loadingBlocks ? 'Loading…' : 'Select Block') : 'Select District First'}</option>
+                <option value="">{selectedDistrictId ? (loadingBlocks ? 'Loading…' : 'All Blocks') : 'All Blocks'}</option>
                 {blocks.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
               </select>
               <i className="fas fa-chevron-down absolute right-4 bottom-4 text-[#7f8c8d] pointer-events-none" />
@@ -75,11 +75,12 @@ export default function YuvakMangalDalPage() {
         </div>
 
         <div className="min-h-[200px]">
-          {selectedDistrictId && selectedBlockId ? (
+          {selectedDistrictId ? (
             <>
               <div className="mb-5 pb-2 border-b-[3px] border-[#1e3a8a] inline-block w-full lg:w-auto">
                 <h2 className="text-xl lg:text-[2rem] text-[#2c3e50] leading-tight">
-                  {selectedDistrict?.name} <span className="text-[#1e3a8a]">›</span> {selectedBlock?.name}
+                  {selectedDistrict?.name}
+                  {selectedBlock && <><span className="text-[#1e3a8a]"> › </span>{selectedBlock.name}</>}
                 </h2>
               </div>
 
@@ -91,7 +92,9 @@ export default function YuvakMangalDalPage() {
                 <div className="text-center py-20 text-red-400">{error}</div>
               ) : dals.length === 0 ? (
                 <div className="text-center py-20">
-                  <p className="text-[#9ca3af] text-lg">No YMDs found for {selectedBlock?.name} block yet.</p>
+                  <p className="text-[#9ca3af] text-lg">
+                    No YMDs found for {selectedBlock ? selectedBlock.name + ' block' : selectedDistrict?.name + ' district'} yet.
+                  </p>
                 </div>
               ) : (
                 <div className="grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
@@ -124,15 +127,10 @@ export default function YuvakMangalDalPage() {
                 </div>
               )}
             </>
-          ) : selectedDistrictId ? (
-            <div className="text-center py-20">
-              <span className="text-5xl mb-4 block">🏃‍♂️</span>
-              <p className="text-[#9ca3af] text-lg">Select a block to view Yuvak Mangal Dals</p>
-            </div>
           ) : (
             <div className="text-center py-20">
               <span className="text-5xl mb-4 block">🏃‍♂️</span>
-              <p className="text-[#9ca3af] text-lg">Select a district and block to view Yuvak Mangal Dals</p>
+              <p className="text-[#9ca3af] text-lg">Select a district to view Yuvak Mangal Dals</p>
             </div>
           )}
         </div>

@@ -183,10 +183,10 @@ export function useMangalDals(districtId?: string, dalType?: 'MAHILA' | 'YUVAK',
   const [error, setError] = useState<string | null>(null);
 
   const load = useCallback((distId?: string, blkId?: string) => {
-    if (!distId || !blkId) { setDals([]); setMeta(null); return; }
+    if (!distId) { setDals([]); setMeta(null); return; }
     setLoading(true);
     setError(null);
-    infrastructureApi.getMangalDals({ districtId: distId, blockId: blkId, dalType, limit: 100 })
+    infrastructureApi.getMangalDals({ districtId: distId, ...(blkId ? { blockId: blkId } : {}), dalType, limit: 200 })
       .then(res => { setDals(res.data); setMeta(res.meta); })
       .catch(err => setError(err.message ?? 'Failed to load Mangal Dals'))
       .finally(() => setLoading(false));

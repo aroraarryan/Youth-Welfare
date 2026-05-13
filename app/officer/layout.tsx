@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 const API = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -11,13 +12,15 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
   const pathname = usePathname();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  
+  const queryClient = useQueryClient();
+
   if (pathname === '/officer/login') {
     return <>{children}</>;
   }
 
   const handleLogout = async () => {
     await fetch(`/api/officer/logout`, { method: 'POST' });
+    queryClient.clear();
     router.push('/officer/login');
   };
 

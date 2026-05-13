@@ -2,6 +2,31 @@
 
 import { useState, useMemo } from 'react';
 import { useDistricts, useBlocks } from '@/hooks/useInfrastructure';
+
+function exportToCSV(dals: any[], filename: string) {
+  const now = new Date();
+  const headers = ['S.No', 'Village Name', 'Affiliation No', 'Chairperson', 'District', 'Block', 'Affiliation Date', 'Renewal Date', 'Status'];
+  const rows = dals.map((d, i) => {
+    const expired = d.renewalDate && new Date(d.renewalDate) < now;
+    return [
+      i + 1,
+      d.name,
+      d.affiliationNo,
+      d.chairperson,
+      d.block?.district?.name ?? '',
+      d.block?.name ?? '',
+      d.affiliationDate ? new Date(d.affiliationDate).toLocaleDateString('en-IN') : '',
+      d.renewalDate   ? new Date(d.renewalDate).toLocaleDateString('en-IN')   : '',
+      expired ? 'Expired' : 'Active',
+    ];
+  });
+  const csv = [headers, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
 import {
   useAdminMangalDals,
   useAdminCreateMangalDal,
@@ -34,6 +59,7 @@ export default function AdminMangalDalPage({ type }: Props) {
 
   const [filterDistrictId, setFilterDistrictId] = useState('');
   const [filterBlockId, setFilterBlockId]       = useState('');
+  const [filterExpired, setFilterExpired]       = useState<'all' | 'active' | 'expired'>('all');
   const [view, setView]       = useState<'list' | 'create' | 'edit'>('list');
   const [editItem, setEditItem] = useState<any | null>(null);
 
@@ -51,11 +77,17 @@ export default function AdminMangalDalPage({ type }: Props) {
 
   const allDals = data?.data ?? [];
 
-  // Apply block filter client-side (data is already filtered by district from server)
+  // Apply block + expiry filter client-side
   const dals = useMemo(() => {
-    if (!filterBlockId) return allDals;
-    return allDals.filter((d: any) => d.block?.id === filterBlockId);
-  }, [allDals, filterBlockId]);
+    const now = new Date();
+    return allDals.filter((d: any) => {
+      if (filterBlockId && d.block?.id !== filterBlockId) return false;
+      const expired = d.renewalDate && new Date(d.renewalDate) < now;
+      if (filterExpired === 'expired' && !expired) return false;
+      if (filterExpired === 'active'  &&  expired) return false;
+      return true;
+    });
+  }, [allDals, filterBlockId, filterExpired]);
 
   const handleDelete = async (id: string, name: string) => {
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
@@ -113,12 +145,21 @@ export default function AdminMangalDalPage({ type }: Props) {
           <h2 className="text-xl font-bold text-gray-800">{typeLabel} Mangal Dal</h2>
           <p className="text-xs text-gray-400 mt-0.5">All Districts & Blocks · Admin View</p>
         </div>
-        <button
-          onClick={() => setView('create')}
-          className="bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-800 transition-colors shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
-        >
-          <i className="fas fa-plus" /> New {typeLabel} Mangal Dal
-        </button>
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => exportToCSV(dals, `${typeLabel}_Mangal_Dal.csv`)}
+            disabled={dals.length === 0}
+            className="bg-green-600 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
+          >
+            <i className="fas fa-file-excel" /> Export Excel
+          </button>
+          <button
+            onClick={() => setView('create')}
+            className="bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-800 transition-colors shadow-sm flex items-center justify-center gap-2"
+          >
+            <i className="fas fa-plus" /> New {typeLabel} Mangal Dal
+          </button>
+        </div>
       </div>
 
       {/* Filters */}
@@ -142,9 +183,19 @@ export default function AdminMangalDalPage({ type }: Props) {
           {blocks.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
 
-        {(filterDistrictId || filterBlockId) && (
+        <select
+          value={filterExpired}
+          onChange={(e) => setFilterExpired(e.target.value as any)}
+          className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[140px] bg-white"
+        >
+          <option value="all">All Status</option>
+          <option value="active">Active</option>
+          <option value="expired">Expired</option>
+        </select>
+
+        {(filterDistrictId || filterBlockId || filterExpired !== 'all') && (
           <button
-            onClick={() => { setFilterDistrictId(''); setFilterBlockId(''); }}
+            onClick={() => { setFilterDistrictId(''); setFilterBlockId(''); setFilterExpired('all'); }}
             className="text-sm text-gray-400 hover:text-blue-600 font-medium"
           >
             Clear
@@ -188,10 +239,15 @@ export default function AdminMangalDalPage({ type }: Props) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {(dals as any[]).map((dal) => (
-                  <tr key={dal.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 text-gray-600 font-mono text-[12px]">{dal.serialNo}</td>
-                    <td className="px-6 py-4 text-gray-900 font-medium">{dal.name}</td>
+                {(dals as any[]).map((dal, idx) => {
+                  const expired = dal.renewalDate && new Date(dal.renewalDate) < new Date();
+                  return (
+                  <tr key={dal.id} className={`hover:bg-gray-50 transition-colors ${expired ? 'bg-red-50/40' : ''}`}>
+                    <td className="px-6 py-4 text-gray-600 font-mono text-[12px]">{idx + 1}</td>
+                    <td className="px-6 py-4 text-gray-900 font-medium">
+                      {dal.name}
+                      {expired && <span className="ml-2 bg-red-100 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase">Expired</span>}
+                    </td>
                     <td className="px-6 py-4 text-gray-600 font-mono text-[12px]">{dal.affiliationNo}</td>
                     <td className="px-6 py-4 text-gray-600">{dal.chairperson}</td>
                     <td className="px-6 py-4">
@@ -222,7 +278,8 @@ export default function AdminMangalDalPage({ type }: Props) {
                       </div>
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>

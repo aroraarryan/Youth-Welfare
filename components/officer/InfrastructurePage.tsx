@@ -25,9 +25,10 @@ export default function InfrastructurePage({
 
   const isDO = officer?.role === 'DO_PRD';
 
-  // District filter — DO_PRD sees a dropdown; BO_PRD is auto-scoped
+  // Normalize underscores/extra spaces before matching officer.district → District record
+  const normDistrict = (s: string) => s.toLowerCase().replace(/[_\s]+/g, ' ').trim();
   const officerDistrictId = districts.find(
-    (d) => officer && d.name.toLowerCase().includes(officer.district.toLowerCase())
+    (d) => officer && normDistrict(d.name) === normDistrict(officer.district)
   )?.id ?? '';
 
   const [filterDistrictId, setFilterDistrictId] = useState('');

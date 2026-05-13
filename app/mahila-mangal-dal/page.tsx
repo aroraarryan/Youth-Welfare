@@ -67,7 +67,7 @@ export default function MahilaMangalDalPage() {
                 disabled={!selectedDistrictId || loadingBlocks}
                 className={sel}
               >
-                <option value="">{selectedDistrictId ? (loadingBlocks ? 'Loading…' : 'Select Block') : 'Select District First'}</option>
+                <option value="">{selectedDistrictId ? (loadingBlocks ? 'Loading…' : 'All Blocks') : 'All Blocks'}</option>
                 {blocks.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
               </select>
               <i className="fas fa-chevron-down absolute right-4 bottom-4 text-[#7f8c8d] pointer-events-none" />
@@ -76,11 +76,12 @@ export default function MahilaMangalDalPage() {
         </div>
 
         <div className="min-h-[200px]">
-          {selectedDistrictId && selectedBlockId ? (
+          {selectedDistrictId ? (
             <>
               <div className="mb-5 pb-2 border-b-[3px] border-[#be185d] inline-block w-full lg:w-auto">
                 <h2 className="text-xl lg:text-[2rem] text-[#2c3e50] leading-tight">
-                  {selectedDistrict?.name} <span className="text-[#be185d]">›</span> {selectedBlock?.name}
+                  {selectedDistrict?.name}
+                  {selectedBlock && <><span className="text-[#be185d]"> › </span>{selectedBlock.name}</>}
                 </h2>
               </div>
 
@@ -92,7 +93,9 @@ export default function MahilaMangalDalPage() {
                 <div className="text-center py-20 text-red-400">{error}</div>
               ) : dals.length === 0 ? (
                 <div className="text-center py-20">
-                  <p className="text-[#9ca3af] text-lg">No MMDs found for {selectedBlock?.name} block yet.</p>
+                  <p className="text-[#9ca3af] text-lg">
+                    No MMDs found for {selectedBlock ? selectedBlock.name + ' block' : selectedDistrict?.name + ' district'} yet.
+                  </p>
                 </div>
               ) : (
                 <div className="grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
@@ -125,15 +128,10 @@ export default function MahilaMangalDalPage() {
                 </div>
               )}
             </>
-          ) : selectedDistrictId ? (
-            <div className="text-center py-20">
-              <span className="text-5xl mb-4 block">👩‍👩‍👧</span>
-              <p className="text-[#9ca3af] text-lg">Select a block to view Mahila Mangal Dals</p>
-            </div>
           ) : (
             <div className="text-center py-20">
               <span className="text-5xl mb-4 block">👩‍👩‍👧</span>
-              <p className="text-[#9ca3af] text-lg">Select a district and block to view Mahila Mangal Dals</p>
+              <p className="text-[#9ca3af] text-lg">Select a district to view Mahila Mangal Dals</p>
             </div>
           )}
         </div>

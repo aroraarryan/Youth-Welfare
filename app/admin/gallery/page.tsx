@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import ImageLightbox from "@/components/ImageLightbox";
 
 type GalleryStatus = "DO_APPROVED" | "APPROVED" | "REJECTED";
 
@@ -47,6 +48,7 @@ export default function AdminGalleryPage() {
   const [error, setError]                 = useState<string | null>(null);
   const [confirmRejectId, setConfirmRejectId] = useState<string | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
 
   const load = useCallback(async (status: GalleryStatus) => {
     setLoading(true);
@@ -125,6 +127,7 @@ export default function AdminGalleryPage() {
   };
 
   return (
+    <>
     <div className="p-6 max-w-5xl space-y-5">
       <div>
         <h2 className="text-xl font-bold text-gray-800">Gallery Approvals</h2>
@@ -192,14 +195,22 @@ export default function AdminGalleryPage() {
                   {/* Image thumbnails */}
                   <div className="flex gap-2 flex-shrink-0 w-full sm:w-auto overflow-x-auto no-scrollbar pb-1">
                     {item.mediaUrls.slice(0, 3).map((url, i) => (
-                      <div key={i} className="w-24 h-20 sm:w-20 sm:h-16 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 relative flex-shrink-0">
-                        <img src={url} alt="" className="w-full h-full object-cover" />
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setLightbox({ images: item.mediaUrls, index: i })}
+                        className="w-24 h-20 sm:w-20 sm:h-16 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 relative flex-shrink-0 hover:ring-2 hover:ring-blue-400 transition-all group"
+                      >
+                        <img src={url} alt="" className="w-full h-full object-cover group-hover:brightness-90 transition-all" />
                         {i === 2 && item.mediaUrls.length > 3 && (
                           <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-xs font-bold">
                             +{item.mediaUrls.length - 3}
                           </div>
                         )}
-                      </div>
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                          <i className="fas fa-expand text-white text-sm drop-shadow" />
+                        </div>
+                      </button>
                     ))}
                     {item.mediaUrls.length === 0 && (
                       <div className="w-24 h-20 sm:w-20 sm:h-16 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-300 flex-shrink-0">
@@ -351,5 +362,14 @@ export default function AdminGalleryPage() {
         )}
       </div>
     </div>
+
+    {lightbox && (
+      <ImageLightbox
+        images={lightbox.images}
+        initialIndex={lightbox.index}
+        onClose={() => setLightbox(null)}
+      />
+    )}
+    </>
   );
 }
