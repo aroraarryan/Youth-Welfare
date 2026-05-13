@@ -1,4 +1,5 @@
 'use client';
+// Refreshed to resolve hydration mismatch after phone number update
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -159,7 +160,7 @@ export default function Footer() {
               </p>
               <div className="flex flex-col gap-2">
                 <p className="text-slate-300 font-medium text-[14px]">
-                  <strong className="text-white">Phone: </strong>+91-9634312465
+                  <strong className="text-white">Phone: </strong>+91 93687 76459
                 </p>
                 <p className="text-slate-300 font-medium text-[14px]">
                   <strong className="text-white">Email: </strong>ywprd.uk@gmail.com

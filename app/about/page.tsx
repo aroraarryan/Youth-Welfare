@@ -34,7 +34,7 @@ const keyOfficials = [
     role: 'Director — Department of Youth Welfare and PRD',
     desc: 'Responsible for the day-to-day operations, implementation of schemes, and coordination of youth welfare activities across all districts of Uttarakhand.',
     photo: '/images/ashishChauhan.jpeg',
-    phone: '+91-9634312465',
+    phone: '+91 93687 76459',
     email: 'ywprd.uk@gmail.com',
   },
 ];
@@ -45,10 +45,9 @@ const directorateOfficials = [
   { name: 'Shri. Ajay Aggarwal',        role: 'Joint Director',       email: 'ajayagarwal.ywprd@uk.gov.in' },
   { name: 'Shri Shakti Singh',          role: 'Deputy Director',      email: 'shaktisingh.ywprd@uk.gov.in' },
   { name: 'Shri Sravendra Kumar Jayaraj', role: 'Deputy Director',    email: 'skjairaj.ywprd@uk.gov.in' },
-  { name: 'Smt. Deepti Joshi',          role: 'Deputy Director',      email: 'deepti.joshi.ywprd@uk.gov.in' },
   { name: 'Shri Neeraj Gupta',          role: 'Assistant Director',   email: 'neerajgupta.ywprd@uk.gov.in' },
-  { name: 'Smt. Himani Bhatt',          role: 'Assistant Director',   email: 'himanibhatt.ywprd@uk.gov.in' },
-  { name: 'Shri Ajay Kumar',            role: 'Assistant Director',   email: 'ajaykumar.ywprd@uk.gov.in' },
+  { name: 'Smt. Deepti Joshi',          role: 'Assistant Director',      email: 'deepti.joshi.ywprd@uk.gov.in' },
+  { name: 'Smt. Himani Bhatt',          role: 'AAO',   email: 'himanibhatt.ywprd@uk.gov.in' },
 ];
 
 

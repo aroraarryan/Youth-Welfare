@@ -165,6 +165,69 @@ body {
   box-shadow: 0 12px 30px rgba(99,102,241,0.4), 0 6px 12px rgba(0,0,0,0.15);
 }
 
+/* ── Premium Icon Styles ───────────────────────────────────── */
+.premium-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.premium-icon-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.premium-icon-container:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.premium-icon-container:hover::after {
+  opacity: 1;
+}
+
+.premium-icon-container svg {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.premium-icon-container:hover svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.icon-glow-blue { 
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); 
+  color: #1e40af;
+  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.1);
+}
+.icon-glow-rose { 
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%); 
+  color: #e11d48;
+  box-shadow: 0 8px 20px rgba(225, 29, 72, 0.1);
+}
+.icon-glow-emerald { 
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); 
+  color: #059669;
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.1);
+}
+.icon-glow-amber { 
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); 
+  color: #d97706;
+  box-shadow: 0 8px 20px rgba(217, 119, 6, 0.1);
+}
+
 /* ── Register button ───────────────────────────────────────── */
 .register-btn {
   background: linear-gradient(135deg, #5d6bd8 0%, #4c5bc7 100%);

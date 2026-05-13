@@ -1,42 +1,67 @@
 import Link from 'next/link';
+// Refreshed to resolve hydration mismatch
 import Image from 'next/image';
 import Carousel from '@/components/Carousel';
 import FloatingSearchUI from '@/components/FloatingSearchUI';
 import FaqSection from '@/components/FaqSection';
 import { getInfraStats } from '@/lib/api/infrastructure';
+import { 
+  Building2, 
+  LandPlot, 
+  Home, 
+  Lightbulb, 
+  Dumbbell, 
+  Trees, 
+  Activity,
+  Trophy,
+  Handshake,
+  Wrench,
+  Flag,
+  Users,
+  PersonStanding,
+  GraduationCap,
+  Briefcase,
+  Settings,
+  UserCheck,
+  ShieldCheck,
+  Coins,
+  BarChart3,
+  Hospital,
+  Microscope
+} from 'lucide-react';
 
 // ── Infrastructure cards ────────────────────────────────────
 const infraCards = [
-  { icon: '🏢', title: 'Multipurpose Halls',          href: '/multipurpose-halls' },
-  { icon: '🏟️', title: 'Mini Stadiums',               href: '/mini-stadiums' },
-  { icon: '🏠', title: 'Youth Hostel',                 href: '/youth-hostels' },
-  { icon: '💡', title: 'Vocational Training Centers',  href: '/vocational-training-centers' },
-  { icon: '🏋️‍♂️', title: 'Indoor Gym',                 href: '/indoor-gym' },
-  { icon: '🌳', title: 'Open Gym',                   href: '/open-gym' },
-  { icon: '🏃', title: 'Khel Maidaan',               href: '/khel-maidaan' },
+  { icon: Building2, title: 'Multipurpose Halls',          href: '/multipurpose-halls' },
+  { icon: LandPlot,  title: 'Mini Stadiums',               href: '/mini-stadiums' },
+  { icon: Home,      title: 'Youth Hostel',                 href: '/youth-hostels' },
+  { icon: Lightbulb, title: 'Vocational Training Centers',  href: '/vocational-training-centers' },
+  { icon: Dumbbell,  title: 'Indoor Gym',                 href: '/indoor-gym' },
+  { icon: Trees,     title: 'Open Gym',                   href: '/open-gym' },
+  { icon: Activity,  title: 'Khel Maidaan',               href: '/khel-maidaan' },
 ];
 
 // ── Registration cards ──────────────────────────────────────
 const registrationCards = [
-  { icon: '🏃‍♂️', title: 'Sports (Khel Mahakumbh)',  desc: 'Register for sports programs and competitions',      href: '/khel-mahakumbh' },
-  { icon: '🤝',   title: 'Youth Volunteering',         desc: 'Join volunteer programs and community service',       href: '/youth-volunteering' },
-  { icon: '🔧',   title: 'Vocational Training',         desc: 'Enroll in skill development and training programs',   href: '/vocational-training' },
-  { icon: '🏁',   title: 'Adventure Training Program',  desc: 'Join us for an exciting adventure training program.', href: '/adventure-training' },
+  { icon: Trophy,    title: 'Sports (Khel Mahakumbh)',  desc: 'Register for sports programs and competitions',      href: '/khel-mahakumbh' },
+  { icon: Handshake, title: 'Youth Volunteering',         desc: 'Join volunteer programs and community service',       href: '/youth-volunteering' },
+  { icon: Wrench,    title: 'Vocational Training',         desc: 'Enroll in skill development and training programs',   href: '/vocational-training' },
+  { icon: Flag,      title: 'Adventure Training Program',  desc: 'Join us for an exciting adventure training program.', href: '/adventure-training' },
 ];
 
 // ── Schemes cards ───────────────────────────────────────────
 const schemeCards = [
-  { badge: '23 Schemes', icon: '🎓', title: 'Education &\nScholarship' },
-  { badge: '14 Schemes', icon: '💼', title: 'Business &\nEntrepreneurship' },
-  { badge: '12 Schemes', icon: '⚙️', title: 'Skill Development' },
-  { badge: '3 Schemes',  icon: '🏃', title: 'Sport & Culture' },
-  { badge: '22 Schemes', icon: '💼', title: 'Employment' },
-  { badge: '8 Schemes',  icon: '✊', title: 'Empowerment' },
-  { badge: '3 Schemes',  icon: '🏠', title: 'Housing & Shelter' },
-  { badge: '6 Schemes',  icon: '💰', title: 'Financial Services' },
-  { badge: '17 Schemes', icon: '📊', title: 'Socio-economic' },
-  { badge: '5 Schemes',  icon: '🏥', title: 'Health & Wellness' },
-  { badge: '5 Schemes',  icon: '🔬', title: 'Technology &\nScience' },
+  { badge: '23 Schemes', icon: GraduationCap, title: 'Education &\nScholarship' },
+  { badge: '14 Schemes', icon: Briefcase,     title: 'Business &\nEntrepreneurship' },
+  { badge: '12 Schemes', icon: Settings,      title: 'Skill Development' },
+  { badge: '3 Schemes',  icon: Activity,      title: 'Sport & Culture' },
+  { badge: '22 Schemes', icon: UserCheck,     title: 'Employment' },
+  { badge: '8 Schemes',  icon: ShieldCheck,   title: 'Empowerment' },
+  { badge: '3 Schemes',  icon: Home,          title: 'Housing & Shelter' },
+  { badge: '6 Schemes',  icon: Coins,         title: 'Financial Services' },
+  { badge: '17 Schemes', icon: BarChart3,     title: 'Socio-economic' },
+  { badge: '5 Schemes',  icon: Hospital,      title: 'Health & Wellness' },
+  { badge: '5 Schemes',  icon: Microscope,    title: 'Technology &\nScience' },
 ];
 
 export default async function HomePage() {
@@ -120,9 +145,11 @@ export default async function HomePage() {
           {infraCards.map(card => (
             <div
               key={card.title}
-              className="infra-card relative bg-white/95 rounded-3xl px-4 py-7 shadow-[0_10px_30px_rgba(0,0,0,0.15)] text-center transition-all duration-300 border border-white/80 backdrop-blur-sm overflow-hidden hover:-translate-y-3 hover:scale-[1.02]"
+              className="infra-card relative bg-white/95 rounded-3xl px-4 py-7 shadow-[0_10px_30px_rgba(0,0,0,0.15)] text-center transition-all duration-300 border border-white/80 backdrop-blur-sm overflow-hidden hover:-translate-y-3 hover:scale-[1.02] flex flex-col items-center"
             >
-              <span className="text-[56px] mb-6 block drop-shadow-md">{card.icon}</span>
+              <div className="premium-icon-container icon-glow-blue w-20 h-20 mb-6">
+                <card.icon size={40} strokeWidth={1.5} />
+              </div>
               <h3 className="text-xl font-bold text-[#1e293b] mb-5 leading-snug">{card.title}</h3>
               <Link href={card.href}>
                 <button className="moreinfo-btn">More Info</button>
@@ -144,14 +171,16 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 max-w-[900px] mx-auto">
             {[
-              { icon: '👩‍👩‍👧', title: 'Mahila Mangal Dal', href: '/mahila-mangal-dal' },
-              { icon: '🏃‍♂️',   title: 'Yuvak Mangal Dal',  href: '/yuvak-mangal-dal' },
+              { icon: Users,          title: 'Mahila Mangal Dal', href: '/mahila-mangal-dal', glow: 'icon-glow-rose' },
+              { icon: PersonStanding, title: 'Yuvak Mangal Dal',  href: '/yuvak-mangal-dal',  glow: 'icon-glow-blue' },
             ].map(card => (
               <div
                 key={card.title}
-                className="bg-white rounded-3xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 border border-[#e2e8f0] flex flex-col items-center hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)]"
+                className="bg-white rounded-3xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 border border-[#e2e8f0] flex flex-col items-center hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] group"
               >
-                <span className="text-6xl mb-6">{card.icon}</span>
+                <div className={`premium-icon-container ${card.glow} w-24 h-24 mb-8`}>
+                  <card.icon size={48} strokeWidth={1.5} />
+                </div>
                 <h3 className="text-2xl font-bold text-[#1e293b] mb-6">{card.title}</h3>
                 <Link href={card.href}>
                   <button className="moreinfo-btn">More Info</button>
@@ -168,12 +197,14 @@ export default async function HomePage() {
         <p className="text-base sm:text-lg text-[#2c3e50] mb-10">Register for various youth programs and services</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 justify-center max-w-[1200px] mx-auto">
-          {registrationCards.map(card => (
+            {registrationCards.map(card => (
             <div
               key={card.title}
               className="bg-white rounded-2xl px-5 py-8 shadow-[0_6px_25px_rgba(0,0,0,0.08)] text-center transition-all duration-300 border border-[#f0f0f0] flex flex-col items-center hover:-translate-y-1.5 hover:shadow-[0_12px_35px_rgba(0,0,0,0.12)]"
             >
-              <span className="text-5xl mb-5 block">{card.icon}</span>
+              <div className="premium-icon-container icon-glow-emerald w-16 h-16 mb-5">
+                <card.icon size={32} strokeWidth={2} />
+              </div>
               <h3 className="text-xl font-bold text-[#2c3e50] mt-0 mb-4 leading-snug">{card.title}</h3>
               <p className="text-sm text-[#666] mb-6 leading-relaxed">{card.desc}</p>
               <Link href={card.href}>
@@ -194,15 +225,17 @@ export default async function HomePage() {
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6 justify-center max-w-[1200px] mx-auto">
-          {schemeCards.map((card, i) => (
+            {schemeCards.map((card, i) => (
             <div
               key={i}
-              className="relative bg-white rounded-2xl px-5 pt-10 pb-6 shadow-[0_6px_25px_rgba(0,0,0,0.08)] text-center transition-all duration-300 border border-[#f0f0f0] hover:-translate-y-1.5 cursor-pointer"
+              className="relative bg-white rounded-2xl px-5 pt-10 pb-6 shadow-[0_6px_25px_rgba(0,0,0,0.08)] text-center transition-all duration-300 border border-[#f0f0f0] hover:-translate-y-1.5 cursor-pointer flex flex-col items-center"
             >
               <span className="absolute top-[-8px] left-1/2 -translate-x-1/2 bg-[#C0CFE6] text-black text-xs font-semibold px-3 py-1.5 rounded-2xl whitespace-nowrap">
                 {card.badge}
               </span>
-              <span className="text-[40px] my-5 block">{card.icon}</span>
+              <div className="premium-icon-container icon-glow-blue w-14 h-14 my-5">
+                <card.icon size={28} strokeWidth={1.5} />
+              </div>
               <h3 className="text-base font-bold text-[#2c3e50] m-0 leading-snug whitespace-pre-line">
                 {card.title}
               </h3>
@@ -225,7 +258,7 @@ export default async function HomePage() {
               Contact Us to get detailed information about schemes.
             </p>
             <button className="bg-[#C0CFE6] text-black border-none px-6 lg:px-10 py-3 lg:py-5 text-lg lg:text-2xl font-bold rounded-lg cursor-pointer w-full lg:w-auto">
-              Help Desk Number +91-9634312465
+              Help Desk Number +91 93687 76459
             </button>
           </div>
           <div className="w-full lg:w-auto">
