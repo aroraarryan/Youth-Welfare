@@ -35,7 +35,7 @@ const keyOfficials = [
     desc: 'Responsible for the day-to-day operations, implementation of schemes, and coordination of youth welfare activities across all districts of Uttarakhand.',
     photo: '/images/ashishChauhan.jpeg',
     phone: '+91 93687 76459',
-    email: 'ywprd.uk@gmail.com',
+    email: 'ykprd.uk@gmail.com',
   },
 ];
 

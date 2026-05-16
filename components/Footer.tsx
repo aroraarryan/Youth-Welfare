@@ -163,7 +163,7 @@ export default function Footer() {
                   <strong className="text-white">Phone: </strong>+91 93687 76459
                 </p>
                 <p className="text-slate-300 font-medium text-[14px]">
-                  <strong className="text-white">Email: </strong>ywprd.uk@gmail.com
+                  <strong className="text-white">Email: </strong>ykprd.uk@gmail.com
                 </p>
               </div>
             </div>
