@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export type PortalSession =
   | { kind: 'officer'; name: string; role: string; dashboardUrl: '/officer/dashboard'; logoutUrl: '/api/officer/logout' }
@@ -15,6 +16,10 @@ export type PortalSession =
 export function usePortalSession() {
   const [session, setSession] = useState<PortalSession>(null);
   const [loading, setLoading] = useState(true);
+  const [tick, setTick] = useState(0);
+  const pathname = usePathname();
+
+  const refresh = () => setTick(t => t + 1);
 
   useEffect(() => {
     let cancelled = false;
@@ -66,7 +71,7 @@ export function usePortalSession() {
     })();
 
     return () => { cancelled = true; };
-  }, []);
+  }, [pathname, tick]);
 
-  return { session, loading };
+  return { session, loading, refresh };
 }

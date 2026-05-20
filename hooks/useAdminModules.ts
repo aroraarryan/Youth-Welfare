@@ -9,8 +9,8 @@ import { InfraType, InfraFormData } from '@/lib/api/officerApi';
 const adminModuleKeys = {
   infra:      (type: InfraType, districtId?: string, page?: number) =>
                 ['admin', 'infra', type, districtId, page] as const,
-  mangalDals: (dalType?: string, districtId?: string) =>
-                ['admin', 'mangalDals', dalType, districtId] as const,
+  mangalDals: (dalType?: string, districtId?: string, blockId?: string, page?: number, sortBy?: string, renewalStatus?: string) =>
+                ['admin', 'mangalDals', dalType, districtId, blockId, page, sortBy, renewalStatus] as const,
 };
 
 // ─── Infrastructure ───────────────────────────────────────────────────────────
@@ -49,10 +49,25 @@ export function useAdminDeleteInfra(type: InfraType) {
 
 // ─── Mangal Dal ───────────────────────────────────────────────────────────────
 
-export function useAdminMangalDals(dalType?: 'MAHILA' | 'YUVAK', districtId?: string) {
+export function useAdminMangalDals(
+  dalType?: 'MAHILA' | 'YUVAK',
+  districtId?: string,
+  blockId?: string,
+  page = 1,
+  sortBy = 'name_asc',
+  renewalStatus = 'all'
+) {
+  const [sortField, sortOrder] = sortBy === 'name_desc'  ? ['name', 'desc']
+                               : sortBy === 'date_desc'  ? ['affiliationDate', 'desc']
+                               : sortBy === 'date_asc'   ? ['affiliationDate', 'asc']
+                               : ['name', 'asc'];
+  const rs = renewalStatus === 'all' ? undefined : renewalStatus;
   return useQuery({
-    queryKey: adminModuleKeys.mangalDals(dalType, districtId),
-    queryFn:  () => adminModulesApi.listMangalDals({ dalType, districtId, limit: 200 }),
+    queryKey: adminModuleKeys.mangalDals(dalType, districtId, blockId, page, sortBy, renewalStatus),
+    queryFn:  () => adminModulesApi.listMangalDals({
+      dalType, districtId, blockId: blockId || undefined,
+      page, limit: 50, sortBy: sortField, sortOrder: sortOrder, renewalStatus: rs,
+    }),
   });
 }
 

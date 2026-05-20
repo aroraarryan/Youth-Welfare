@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useDistricts, useBlocks } from '@/hooks/useInfrastructure';
 
 function exportToCSV(dals: any[], filename: string) {
@@ -28,6 +28,7 @@ function exportToCSV(dals: any[], filename: string) {
   a.href = url; a.download = filename; a.click();
   URL.revokeObjectURL(url);
 }
+
 import {
   useAdminMangalDals,
   useAdminCreateMangalDal,
@@ -36,7 +37,6 @@ import {
 } from '@/hooks/useAdminModules';
 import MangalDalRegistrationForm from '@/components/officer/MangalDalRegistrationForm';
 
-/** Synthetic admin profile → MangalDalRegistrationForm treats it as SUPER_ADMIN */
 const ADMIN_PROFILE = {
   id: 0,
   name: 'Admin',
@@ -62,42 +62,29 @@ export default function AdminMangalDalPage({ type }: Props) {
   const [filterBlockId, setFilterBlockId]       = useState('');
   const [filterExpired, setFilterExpired]       = useState<'all' | 'active' | 'expired'>('all');
   const [sortBy, setSortBy]                     = useState<'name_asc' | 'name_desc' | 'date_desc' | 'date_asc'>('name_asc');
+  const [page, setPage]                         = useState(1);
   const [view, setView]       = useState<'list' | 'create' | 'edit'>('list');
   const [editItem, setEditItem] = useState<any | null>(null);
 
-  // Blocks for the selected district filter
   const { blocks } = useBlocks(filterDistrictId || undefined);
 
   const { data, isLoading, isError, error, refetch } = useAdminMangalDals(
     type,
-    filterDistrictId || undefined
+    filterDistrictId || undefined,
+    filterBlockId || undefined,
+    page,
+    sortBy,
+    filterExpired
   );
 
   const createMutation = useAdminCreateMangalDal();
   const updateMutation = useAdminUpdateMangalDal();
   const deleteMutation = useAdminDeleteMangalDal();
 
-  const allDals = data?.data ?? [];
+  const dals = data?.data ?? [];
+  const meta = data?.meta;
 
-  // Apply block + expiry filter, then sort, client-side
-  const dals = useMemo(() => {
-    const now = new Date();
-    const filtered = allDals.filter((d: any) => {
-      if (filterBlockId && d.block?.id !== filterBlockId) return false;
-      const expired = d.renewalDate && new Date(d.renewalDate) < now;
-      if (filterExpired === 'expired' && !expired) return false;
-      if (filterExpired === 'active'  &&  expired) return false;
-      return true;
-    });
-    const cmp = (a: any, b: any) => {
-      if (sortBy === 'name_asc')  return String(a.name ?? '').localeCompare(String(b.name ?? ''), undefined, { sensitivity: 'base' });
-      if (sortBy === 'name_desc') return String(b.name ?? '').localeCompare(String(a.name ?? ''), undefined, { sensitivity: 'base' });
-      const da = a.affiliationDate ? new Date(a.affiliationDate).getTime() : 0;
-      const db = b.affiliationDate ? new Date(b.affiliationDate).getTime() : 0;
-      return sortBy === 'date_asc' ? da - db : db - da;
-    };
-    return [...filtered].sort(cmp);
-  }, [allDals, filterBlockId, filterExpired, sortBy]);
+  const resetPage = () => setPage(1);
 
   const handleDelete = async (id: string, name: string) => {
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
@@ -176,7 +163,7 @@ export default function AdminMangalDalPage({ type }: Props) {
       <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4 flex flex-wrap gap-4 items-center shadow-sm">
         <select
           value={filterDistrictId}
-          onChange={(e) => { setFilterDistrictId(e.target.value); setFilterBlockId(''); }}
+          onChange={(e) => { setFilterDistrictId(e.target.value); setFilterBlockId(''); resetPage(); }}
           className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[220px] bg-white"
         >
           <option value="">All Districts</option>
@@ -185,7 +172,7 @@ export default function AdminMangalDalPage({ type }: Props) {
 
         <select
           value={filterBlockId}
-          onChange={(e) => setFilterBlockId(e.target.value)}
+          onChange={(e) => { setFilterBlockId(e.target.value); resetPage(); }}
           disabled={!filterDistrictId || blocks.length === 0}
           className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[180px] bg-white disabled:opacity-50"
         >
@@ -195,7 +182,7 @@ export default function AdminMangalDalPage({ type }: Props) {
 
         <select
           value={filterExpired}
-          onChange={(e) => setFilterExpired(e.target.value as any)}
+          onChange={(e) => { setFilterExpired(e.target.value as any); resetPage(); }}
           className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[140px] bg-white"
         >
           <option value="all">All Status</option>
@@ -205,7 +192,7 @@ export default function AdminMangalDalPage({ type }: Props) {
 
         <select
           value={sortBy}
-          onChange={(e) => setSortBy(e.target.value as any)}
+          onChange={(e) => { setSortBy(e.target.value as any); resetPage(); }}
           className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[180px] bg-white"
         >
           <option value="name_asc">Sort: Name A–Z</option>
@@ -216,13 +203,15 @@ export default function AdminMangalDalPage({ type }: Props) {
 
         {(filterDistrictId || filterBlockId || filterExpired !== 'all' || sortBy !== 'name_asc') && (
           <button
-            onClick={() => { setFilterDistrictId(''); setFilterBlockId(''); setFilterExpired('all'); setSortBy('name_asc'); }}
+            onClick={() => { setFilterDistrictId(''); setFilterBlockId(''); setFilterExpired('all'); setSortBy('name_asc'); resetPage(); }}
             className="text-sm text-gray-400 hover:text-blue-600 font-medium"
           >
             Clear
           </button>
         )}
-        <span className="text-xs text-gray-400 ml-auto">{dals.length} records</span>
+        {meta && (
+          <span className="text-xs text-gray-400 ml-auto">{meta.total} records</span>
+        )}
       </div>
 
       {/* Table */}
@@ -265,7 +254,7 @@ export default function AdminMangalDalPage({ type }: Props) {
                   const expired = dal.renewalDate && new Date(dal.renewalDate) < new Date();
                   return (
                   <tr key={dal.id} className={`hover:bg-gray-50 transition-colors ${expired ? 'bg-red-50/40' : ''}`}>
-                    <td className="px-6 py-4 text-gray-600 font-mono text-[12px]">{idx + 1}</td>
+                    <td className="px-6 py-4 text-gray-600 font-mono text-[12px]">{(page - 1) * 50 + idx + 1}</td>
                     <td className="px-6 py-4 text-gray-700 font-mono text-[12px]">{dal.serialNo ?? '—'}</td>
                     <td className="px-6 py-4 text-gray-900 font-medium">
                       {dal.name}
@@ -308,6 +297,33 @@ export default function AdminMangalDalPage({ type }: Props) {
           </div>
         )}
       </div>
+
+      {/* Pagination */}
+      {meta && meta.totalPages > 1 && (
+        <div className="mt-4 flex items-center justify-between text-[13px] text-gray-500 px-1">
+          <p>
+            Page <span className="font-semibold text-gray-700">{meta.page}</span> of{' '}
+            <span className="font-semibold text-gray-700">{meta.totalPages}</span> (
+            <span className="font-semibold text-gray-700">{meta.total}</span> total)
+          </p>
+          <div className="flex gap-2">
+            <button
+              disabled={page <= 1}
+              onClick={() => { setPage((p) => p - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="px-4 py-1.5 border border-gray-300 rounded-md disabled:opacity-40 hover:bg-gray-100 font-medium bg-white"
+            >
+              Previous
+            </button>
+            <button
+              disabled={page >= meta.totalPages}
+              onClick={() => { setPage((p) => p + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="px-4 py-1.5 border border-gray-300 rounded-md disabled:opacity-40 hover:bg-gray-100 font-medium bg-white"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

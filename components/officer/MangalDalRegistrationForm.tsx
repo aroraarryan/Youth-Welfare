@@ -42,9 +42,9 @@ export default function MangalDalRegistrationForm({
   const [form, setForm] = useState({
     name:           initialData?.name ?? '',
     presidentName:  initialData?.chairperson ?? '',
-    presidentPhone: '',
-    secretaryName:  '',
-    secretaryPhone: '',
+    presidentPhone: initialData?.chairpersonPhone ?? '',
+    secretaryName:  initialData?.secretaryName ?? '',
+    secretaryPhone: initialData?.secretaryPhone ?? '',
     districtId:     initialData?.block?.district?.id ?? '',
     blockId:        initialData?.block?.id ?? '',
     registrationNo: initialData?.affiliationNo ?? '',
@@ -100,7 +100,10 @@ export default function MangalDalRegistrationForm({
       name:            form.name.trim().toUpperCase(),
       serialNo:        parseInt(form.serialNo) || 1,
       affiliationNo:   form.registrationNo.trim().toUpperCase(),
-      chairperson:     form.presidentName,
+      chairperson:      form.presidentName,
+      chairpersonPhone: form.presidentPhone.trim() || undefined,
+      secretaryName:    form.secretaryName.trim() || undefined,
+      secretaryPhone:   form.secretaryPhone.trim() || undefined,
       affiliationDate: form.validityFrom
         ? new Date(form.validityFrom).toISOString()
         : new Date().toISOString(),

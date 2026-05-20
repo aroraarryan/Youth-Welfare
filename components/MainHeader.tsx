@@ -12,13 +12,13 @@ export default function MainHeader() {
   const [loginOpen, setLoginOpen] = useState(false);
   const { t } = useLanguage();
   const router = useRouter();
-  const { session, loading: sessionLoading } = usePortalSession();
+  const { session, loading: sessionLoading, refresh: refreshSession } = usePortalSession();
 
   const handlePortalLogout = async () => {
     if (!session) return;
     try { await fetch(session.logoutUrl, { method: 'POST', credentials: 'include' }); } catch {}
     setLoginOpen(false);
-    router.refresh();
+    refreshSession();
     router.push('/');
   };
 

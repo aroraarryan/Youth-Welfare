@@ -100,7 +100,7 @@ export interface InfraStats {
 export async function getInfraStats(): Promise<InfraStats | null> {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const res = await fetch(`${baseUrl}/stats`, { next: { revalidate: 60 } });
+    const res = await fetch(`${baseUrl}/stats`, { next: { revalidate: 0 } });
     if (!res.ok) return null;
     const json = await res.json();
     return (json.data as InfraStats) ?? null;

@@ -175,13 +175,19 @@ export const officerApi = {
     blockId?: string;
     page?: number;
     limit?: number;
+    sortBy?: string;
+    sortOrder?: string;
+    renewalStatus?: string;
   } = {}): Promise<PaginatedResponse<any>> => {
     const qs = new URLSearchParams();
-    if (params.dalType)    qs.set('dalType', params.dalType);
-    if (params.districtId) qs.set('districtId', params.districtId);
-    if (params.blockId)    qs.set('blockId', params.blockId);
-    if (params.page)       qs.set('page', String(params.page));
-    if (params.limit)      qs.set('limit', String(params.limit));
+    if (params.dalType)       qs.set('dalType', params.dalType);
+    if (params.districtId)    qs.set('districtId', params.districtId);
+    if (params.blockId)       qs.set('blockId', params.blockId);
+    if (params.page)          qs.set('page', String(params.page));
+    if (params.limit)         qs.set('limit', String(params.limit));
+    if (params.sortBy)        qs.set('sortBy', params.sortBy);
+    if (params.sortOrder)     qs.set('sortOrder', params.sortOrder);
+    if (params.renewalStatus) qs.set('renewalStatus', params.renewalStatus);
     const query = qs.toString() ? `?${qs}` : '';
     return officerFetch(`mangal-dals${query}`);
   },

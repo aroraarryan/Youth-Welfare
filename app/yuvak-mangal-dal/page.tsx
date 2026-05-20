@@ -13,7 +13,7 @@ export default function YuvakMangalDalPage() {
   const { blocks, loading: loadingBlocks } = useBlocks(selectedDistrictId || undefined);
   const selectedBlock = blocks.find(b => b.id === selectedBlockId);
 
-  const { dals, loading, error } = useMangalDals(selectedDistrictId || undefined, 'YUVAK', selectedBlockId || undefined);
+  const { dals, meta, loading, error, page, setPage } = useMangalDals(selectedDistrictId || undefined, 'YUVAK', selectedBlockId || undefined);
 
   const sortedDals = useMemo(
     () => [...dals].sort((a, b) =>
@@ -84,11 +84,16 @@ export default function YuvakMangalDalPage() {
         <div className="min-h-[200px]">
           {selectedDistrictId ? (
             <>
-              <div className="mb-5 pb-2 border-b-[3px] border-[#1e3a8a] inline-block w-full lg:w-auto">
+              <div className="mb-5 pb-2 border-b-[3px] border-[#1e3a8a] flex items-baseline gap-3 flex-wrap">
                 <h2 className="text-xl lg:text-[2rem] text-[#2c3e50] leading-tight">
                   {selectedDistrict?.name}
                   {selectedBlock && <><span className="text-[#1e3a8a]"> › </span>{selectedBlock.name}</>}
                 </h2>
+                {meta && (
+                  <span className="text-sm font-semibold text-[#1e3a8a] bg-[#eff6ff] border border-[#bfdbfe] rounded-full px-3 py-0.5">
+                    {meta.total} records
+                  </span>
+                )}
               </div>
 
               {loading ? (
@@ -104,34 +109,63 @@ export default function YuvakMangalDalPage() {
                   </p>
                 </div>
               ) : (
-                <div className="grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
-                  {sortedDals.map(dal => (
-                    <div key={dal.id} className="bg-white rounded-xl p-6 shadow-sm border border-[#e2e8f0] hover:shadow-md hover:-translate-y-1 transition-all">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-12 h-12 bg-[#eff6ff] rounded-xl flex items-center justify-center text-2xl">🏃‍♂️</div>
-                        <div>
-                          <h3 className="text-base font-bold text-[#1e293b]">{dal.name}</h3>
-                          <p className="text-xs text-[#1e3a8a] font-medium">Serial #{dal.serialNo}</p>
+                <>
+                  <div className="grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+                    {sortedDals.map(dal => (
+                      <div key={dal.id} className="bg-white rounded-xl p-6 shadow-sm border border-[#e2e8f0] hover:shadow-md hover:-translate-y-1 transition-all">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-12 h-12 bg-[#eff6ff] rounded-xl flex items-center justify-center text-2xl">🏃‍♂️</div>
+                          <div>
+                            <h3 className="text-base font-bold text-[#1e293b] uppercase">{dal.name}</h3>
+                            <p className="text-xs text-[#1e3a8a] font-medium">Serial #{dal.serialNo}</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col gap-2 text-sm text-[#6b7280]">
+                          <span className="flex items-center gap-2">
+                            <i className="fas fa-map-marker-alt text-[#1e3a8a] w-4" />{dal.block.name} Block
+                          </span>
+                          <span className="flex items-center gap-2">
+                            <i className="fas fa-hashtag text-[#1e3a8a] w-4" />Affiliation: {dal.affiliationNo}
+                          </span>
+                          <span className="flex items-center gap-2">
+                            <i className="fas fa-user-tie text-[#1e3a8a] w-4" />Chairperson: {dal.chairperson}
+                          </span>
+                          <span className="flex items-center gap-2">
+                            <i className="fas fa-calendar text-[#1e3a8a] w-4" />
+                            Affiliated: {new Date(dal.affiliationDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          </span>
                         </div>
                       </div>
-                      <div className="flex flex-col gap-2 text-sm text-[#6b7280]">
-                        <span className="flex items-center gap-2">
-                          <i className="fas fa-map-marker-alt text-[#1e3a8a] w-4" />{dal.block.name} Block
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <i className="fas fa-hashtag text-[#1e3a8a] w-4" />Affiliation: {dal.affiliationNo}
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <i className="fas fa-user-tie text-[#1e3a8a] w-4" />Chairperson: {dal.chairperson}
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <i className="fas fa-calendar text-[#1e3a8a] w-4" />
-                          Affiliated: {new Date(dal.affiliationDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                        </span>
-                      </div>
+                    ))}
+                  </div>
+                  {meta && meta.totalPages > 1 && (
+                    <div className="flex items-center justify-center gap-2 mt-8">
+                      <button
+                        onClick={() => setPage(page - 1)}
+                        disabled={page <= 1}
+                        className="px-4 py-2 rounded-lg border border-[#e2e8f0] text-sm font-semibold text-[#6b7280] hover:border-[#1e3a8a] hover:text-[#1e3a8a] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                      >
+                        ← Prev
+                      </button>
+                      {Array.from({ length: meta.totalPages }, (_, i) => i + 1).map(p => (
+                        <button
+                          key={p}
+                          onClick={() => setPage(p)}
+                          className={`w-9 h-9 rounded-lg text-sm font-semibold transition-colors ${p === page ? 'bg-[#1e3a8a] text-white' : 'border border-[#e2e8f0] text-[#6b7280] hover:border-[#1e3a8a] hover:text-[#1e3a8a]'}`}
+                        >
+                          {p}
+                        </button>
+                      ))}
+                      <button
+                        onClick={() => setPage(page + 1)}
+                        disabled={page >= meta.totalPages}
+                        className="px-4 py-2 rounded-lg border border-[#e2e8f0] text-sm font-semibold text-[#6b7280] hover:border-[#1e3a8a] hover:text-[#1e3a8a] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                      >
+                        Next →
+                      </button>
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
               )}
             </>
           ) : (

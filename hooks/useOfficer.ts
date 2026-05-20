@@ -9,8 +9,8 @@ export const officerKeys = {
   me:          ['officer', 'me'] as const,
   infra:       (type: InfraType, districtId?: string) =>
                  ['officer', 'infra', type, districtId] as const,
-  mangalDals:  (dalType?: string, districtId?: string) =>
-                 ['officer', 'mangalDals', dalType, districtId] as const,
+  mangalDals:  (dalType?: string, districtId?: string, blockId?: string, page?: number, sortBy?: string, renewalStatus?: string) =>
+                 ['officer', 'mangalDals', dalType, districtId, blockId, page, sortBy, renewalStatus] as const,
   gallery:     ['officer', 'gallery', 'pending'] as const,
   galleryAll:  (status?: string) => ['officer', 'gallery', 'all', status] as const,
 };
@@ -74,11 +74,23 @@ export function useDeleteInfra(type: InfraType) {
 
 export function useOfficerMangalDals(
   dalType?: 'MAHILA' | 'YUVAK',
-  districtId?: string
+  districtId?: string,
+  blockId?: string,
+  page = 1,
+  sortBy = 'name_asc',
+  renewalStatus = 'all'
 ) {
+  const [sortField, sortOrder] = sortBy === 'name_desc'  ? ['name', 'desc']
+                               : sortBy === 'date_desc'  ? ['affiliationDate', 'desc']
+                               : sortBy === 'date_asc'   ? ['affiliationDate', 'asc']
+                               : ['name', 'asc'];
+  const rs = renewalStatus === 'all' ? undefined : renewalStatus;
   return useQuery({
-    queryKey: officerKeys.mangalDals(dalType, districtId),
-    queryFn: () => officerApi.listMangalDals({ dalType, districtId, limit: 100 }),
+    queryKey: officerKeys.mangalDals(dalType, districtId, blockId, page, sortBy, renewalStatus),
+    queryFn: () => officerApi.listMangalDals({
+      dalType, districtId, blockId: blockId || undefined,
+      page, limit: 50, sortBy: sortField, sortOrder: sortOrder, renewalStatus: rs,
+    }),
   });
 }
 
