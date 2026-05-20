@@ -108,9 +108,9 @@ export default function MangalDalRegistrationForm({
 
     const payload = {
       dalType:         type,
-      name:            form.name,
+      name:            form.name.trim().toUpperCase(),
       serialNo:        parseInt(form.serialNo) || 1,
-      affiliationNo:   form.registrationNo,
+      affiliationNo:   form.registrationNo.trim().toUpperCase(),
       chairperson:     form.presidentName,
       affiliationDate: form.validityFrom
         ? new Date(form.validityFrom).toISOString()
@@ -218,7 +218,7 @@ export default function MangalDalRegistrationForm({
           <div className="grid gap-6">
             <div>
               <label className="block text-sm font-semibold text-[#374151] mb-2 uppercase tracking-tight">Name of the Village <span className="text-red-500">*</span></label>
-              <input type="text" required value={form.name} onChange={(e) => set('name', e.target.value)} placeholder={`e.g. Village Name`} className={inp} />
+              <input type="text" required value={form.name} onChange={(e) => set('name', e.target.value.toUpperCase())} placeholder={`e.g. VILLAGE NAME`} className={inp + ' uppercase'} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div>

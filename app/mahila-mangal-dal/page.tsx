@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDistricts, useBlocks, useMangalDals } from '@/hooks/useInfrastructure';
 
@@ -14,6 +14,13 @@ export default function MahilaMangalDalPage() {
   const selectedBlock = blocks.find(b => b.id === selectedBlockId);
 
   const { dals, loading, error } = useMangalDals(selectedDistrictId || undefined, 'MAHILA', selectedBlockId || undefined);
+
+  const sortedDals = useMemo(
+    () => [...dals].sort((a, b) =>
+      String(a.name ?? '').localeCompare(String(b.name ?? ''), undefined, { sensitivity: 'base' })
+    ),
+    [dals]
+  );
 
   const handleDistrictChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedDistrictId(e.target.value);
@@ -99,7 +106,7 @@ export default function MahilaMangalDalPage() {
                 </div>
               ) : (
                 <div className="grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
-                  {dals.map(dal => (
+                  {sortedDals.map(dal => (
                     <div key={dal.id} className="bg-white rounded-xl p-6 shadow-sm border border-[#e2e8f0] hover:shadow-md hover:-translate-y-1 transition-all">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-12 h-12 bg-[#fdf2f8] rounded-xl flex items-center justify-center text-2xl">👩‍👩‍👧</div>

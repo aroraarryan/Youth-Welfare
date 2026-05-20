@@ -181,6 +181,7 @@ export const officerApi = {
     if (params.districtId) qs.set('districtId', params.districtId);
     if (params.blockId)    qs.set('blockId', params.blockId);
     if (params.page)       qs.set('page', String(params.page));
+    if (params.limit)      qs.set('limit', String(params.limit));
     const query = qs.toString() ? `?${qs}` : '';
     return officerFetch(`mangal-dals${query}`);
   },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -12,6 +12,15 @@ export default function AdminLoginPage() {
   const [showPwd, setShowPwd] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // If the admin_token cookie is still valid, skip the login form
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/admin/me', { credentials: 'include' })
+      .then(res => { if (!cancelled && res.ok) router.replace('/admin/dashboard'); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

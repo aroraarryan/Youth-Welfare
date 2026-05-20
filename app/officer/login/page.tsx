@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useQueryClient } from '@tanstack/react-query';
@@ -14,6 +14,15 @@ export default function OfficerLoginPage() {
   const [showPwd, setShowPwd] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // If the officer_token cookie is still valid, skip the login form
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/officer/me', { credentials: 'include' })
+      .then(res => { if (!cancelled && res.ok) router.replace('/officer/dashboard'); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

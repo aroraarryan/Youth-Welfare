@@ -7,11 +7,12 @@ import MangalDalRegistrationForm from './MangalDalRegistrationForm';
 
 function exportToCSV(dals: any[], filename: string) {
   const now = new Date();
-  const headers = ['S.No', 'Village Name', 'Affiliation No', 'Chairperson', 'District', 'Block', 'Affiliation Date', 'Renewal Date', 'Status'];
+  const headers = ['S.No', 'Dept. S.No', 'Village Name', 'Affiliation No', 'Chairperson', 'District', 'Block', 'Affiliation Date', 'Renewal Date', 'Status'];
   const rows = dals.map((d, i) => {
     const expired = d.renewalDate && new Date(d.renewalDate) < now;
     return [
       i + 1,
+      d.serialNo ?? '',
       d.name,
       d.affiliationNo,
       d.chairperson,
@@ -48,6 +49,7 @@ export default function MangalDalPage({ type }: MangalDalPageProps) {
   const [filterDistrictId, setFilterDistrictId] = useState('');
   const [filterBlockId, setFilterBlockId] = useState('');
   const [filterExpired, setFilterExpired] = useState<'all' | 'active' | 'expired'>('all');
+  const [sortBy, setSortBy] = useState<'name_asc' | 'name_desc' | 'date_desc' | 'date_asc'>('name_asc');
   const [view, setView] = useState<'list' | 'create' | 'edit'>('list');
   const [editItem, setEditItem] = useState<any | null>(null);
 
@@ -73,14 +75,22 @@ export default function MangalDalPage({ type }: MangalDalPageProps) {
 
   const filteredDals = useMemo(() => {
     const now = new Date();
-    return dals.filter((d: any) => {
+    const out = dals.filter((d: any) => {
       if (filterBlockId && d.block?.id !== filterBlockId) return false;
       const expired = d.renewalDate && new Date(d.renewalDate) < now;
       if (filterExpired === 'expired' && !expired) return false;
       if (filterExpired === 'active'  &&  expired) return false;
       return true;
     });
-  }, [dals, filterBlockId, filterExpired]);
+    const cmp = (a: any, b: any) => {
+      if (sortBy === 'name_asc')  return String(a.name ?? '').localeCompare(String(b.name ?? ''), undefined, { sensitivity: 'base' });
+      if (sortBy === 'name_desc') return String(b.name ?? '').localeCompare(String(a.name ?? ''), undefined, { sensitivity: 'base' });
+      const da = a.affiliationDate ? new Date(a.affiliationDate).getTime() : 0;
+      const db = b.affiliationDate ? new Date(b.affiliationDate).getTime() : 0;
+      return sortBy === 'date_asc' ? da - db : db - da;
+    };
+    return [...out].sort(cmp);
+  }, [dals, filterBlockId, filterExpired, sortBy]);
 
   const typeLabel = type === 'MAHILA' ? 'Mahila' : 'Yuvak';
 
@@ -186,8 +196,18 @@ export default function MangalDalPage({ type }: MangalDalPageProps) {
           <option value="active">Active</option>
           <option value="expired">Expired</option>
         </select>
-        {(filterDistrictId || filterBlockId || filterExpired !== 'all') && (
-          <button onClick={() => { setFilterDistrictId(''); setFilterBlockId(''); setFilterExpired('all'); }} className="text-sm text-gray-400 hover:text-blue-600 font-medium">Clear</button>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as any)}
+          className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[180px] bg-white"
+        >
+          <option value="name_asc">Sort: Name A–Z</option>
+          <option value="name_desc">Sort: Name Z–A</option>
+          <option value="date_desc">Sort: Newest first</option>
+          <option value="date_asc">Sort: Oldest first</option>
+        </select>
+        {(filterDistrictId || filterBlockId || filterExpired !== 'all' || sortBy !== 'name_asc') && (
+          <button onClick={() => { setFilterDistrictId(''); setFilterBlockId(''); setFilterExpired('all'); setSortBy('name_asc'); }} className="text-sm text-gray-400 hover:text-blue-600 font-medium">Clear</button>
         )}
         <span className="text-xs text-gray-400 ml-auto">{filteredDals.length} records</span>
       </div>
@@ -218,6 +238,7 @@ export default function MangalDalPage({ type }: MangalDalPageProps) {
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200 text-left">
                   <th className="px-6 py-3 text-[11px] font-semibold text-gray-700 uppercase tracking-wider">S.No</th>
+                  <th className="px-6 py-3 text-[11px] font-semibold text-gray-700 uppercase tracking-wider">Dept. S.No</th>
                   <th className="px-6 py-3 text-[11px] font-semibold text-gray-700 uppercase tracking-wider">Village Name</th>
                   <th className="px-6 py-3 text-[11px] font-semibold text-gray-700 uppercase tracking-wider">Affiliation No</th>
                   <th className="px-6 py-3 text-[11px] font-semibold text-gray-700 uppercase tracking-wider">Chairperson</th>
@@ -232,6 +253,7 @@ export default function MangalDalPage({ type }: MangalDalPageProps) {
                   return (
                   <tr key={dal.id} className={`hover:bg-gray-50 transition-colors ${expired ? 'bg-red-50/40' : ''}`}>
                     <td className="px-6 py-4 text-gray-600 font-mono text-[12px]">{idx + 1}</td>
+                    <td className="px-6 py-4 text-gray-700 font-mono text-[12px]">{dal.serialNo ?? '—'}</td>
                     <td className="px-6 py-4 text-gray-900 font-medium">
                       {dal.name}
                       {expired && <span className="ml-2 bg-red-100 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase">Expired</span>}
