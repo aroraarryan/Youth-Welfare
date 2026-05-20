@@ -83,17 +83,6 @@ export default function MangalDalRegistrationForm({
     }
   }, [blocks, isBO, officer.block]);
 
-  const handleFromDateChange = (val: string) => {
-    set('validityFrom', val);
-    if (val) {
-      const from = new Date(val);
-      if (!isNaN(from.getTime())) {
-        const until = new Date(from);
-        until.setFullYear(from.getFullYear() + 5);
-        set('validityDate', until.toISOString().split('T')[0]);
-      }
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -231,7 +220,7 @@ export default function MangalDalRegistrationForm({
               </div>
               <div>
                 <label className="block text-sm font-semibold text-[#374151] mb-2 uppercase tracking-tight">Affiliation Date <span className="text-red-500">*</span></label>
-                <input type="date" required value={form.validityFrom} onChange={(e) => handleFromDateChange(e.target.value)} className={inp} />
+                <input type="date" required value={form.validityFrom} onChange={(e) => set('validityFrom', e.target.value)} className={inp} />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-[#374151] mb-2 uppercase tracking-tight">Renewal Date</label>

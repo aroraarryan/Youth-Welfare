@@ -353,10 +353,10 @@ export default function RegistrationForm({
           </a>
           <p className="text-sm text-white/80 mt-3 mb-1">Email:</p>
           <a
-            href="mailto:ywprd.uk@gmail.com"
+            href="mailto:ykprd.uk@gmail.com"
             className="text-white/90 text-xs no-underline break-all"
           >
-            ywprd.uk@gmail.com
+            ykprd.uk@gmail.com
           </a>
         </div>
       </aside>
