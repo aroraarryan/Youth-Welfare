@@ -8,6 +8,7 @@ import {
   useApproveGallery,
   useRejectGallery,
 } from '@/hooks/useOfficer';
+import { uploadOfficerPhoto } from '@/lib/api/officerApi';
 
 export default function OfficerDashboardPage() {
   const { data: officer, isLoading } = useCurrentOfficer();
@@ -18,7 +19,10 @@ export default function OfficerDashboardPage() {
 
   // Profile edit state
   const [editMode, setEditMode] = useState(false);
-  const [profileForm, setProfileForm] = useState({ name: '', email: '', username: '' });
+  const [profileForm, setProfileForm] = useState({ name: '', email: '', username: '', phone: '' });
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [photoUploading, setPhotoUploading] = useState(false);
   const [profileMsg, setProfileMsg] = useState('');
   const [profileErr, setProfileErr] = useState('');
 
@@ -44,7 +48,14 @@ export default function OfficerDashboardPage() {
     : 'First login';
 
   const startEdit = () => {
-    setProfileForm({ name: officer.name, email: officer.email, username: officer.username });
+    setProfileForm({
+      name: officer.name,
+      email: officer.email,
+      username: officer.username,
+      phone: officer.phone ?? '',
+    });
+    setPhotoFile(null);
+    setPhotoPreview(officer.profilePhotoUrl ?? null);
     setProfileMsg('');
     setProfileErr('');
     setEditMode(true);
@@ -58,10 +69,28 @@ export default function OfficerDashboardPage() {
     if (profileForm.name !== officer.name)         payload.name = profileForm.name;
     if (profileForm.email !== officer.email)       payload.email = profileForm.email;
     if (profileForm.username !== officer.username) payload.username = profileForm.username;
+    if (profileForm.phone !== (officer.phone ?? '')) payload.phone = profileForm.phone || null;
+
+    if (photoFile) {
+      try {
+        setPhotoUploading(true);
+        payload.profilePhotoUrl = await uploadOfficerPhoto(photoFile);
+      } catch {
+        setProfileErr('Photo upload failed. Try again.');
+        setPhotoUploading(false);
+        return;
+      } finally {
+        setPhotoUploading(false);
+      }
+    } else if (photoPreview === null && officer.profilePhotoUrl) {
+      payload.profilePhotoUrl = null;
+    }
+
     if (Object.keys(payload).length === 0) { setEditMode(false); return; }
     try {
       await updateProfile.mutateAsync(payload);
       setProfileMsg('Profile updated successfully.');
+      setPhotoFile(null);
       setEditMode(false);
     } catch (err: any) {
       setProfileErr(err.message || 'Failed to update profile.');
@@ -100,6 +129,8 @@ export default function OfficerDashboardPage() {
 
   const inp = "w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent";
 
+  const currentPhoto = officer.profilePhotoUrl;
+
   return (
     <div className="p-4 sm:p-6 space-y-6 max-w-5xl">
       {/* Welcome */}
@@ -122,6 +153,50 @@ export default function OfficerDashboardPage() {
           {editMode ? (
             <form onSubmit={handleProfileSave} className="space-y-3">
               {profileErr && <p className="text-xs text-red-500 bg-red-50 p-2 rounded">{profileErr}</p>}
+
+              {/* Photo upload */}
+              <div>
+                <label className="text-xs text-gray-500 mb-1.5 block uppercase font-semibold">Profile Photo</label>
+                <div className="flex items-center gap-3">
+                  {photoPreview ? (
+                    <img src={photoPreview} alt="preview" className="w-14 h-14 rounded-full object-cover border border-gray-200 flex-shrink-0" />
+                  ) : (
+                    <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-300 flex-shrink-0">
+                      <i className="fas fa-user text-xl" />
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="cursor-pointer text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1.5">
+                      {photoUploading ? (
+                        <><i className="fas fa-circle-notch fa-spin" /> Uploading…</>
+                      ) : (
+                        <><i className="fas fa-camera" /> Change photo</>
+                      )}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (!f) return;
+                          setPhotoFile(f);
+                          setPhotoPreview(URL.createObjectURL(f));
+                        }}
+                      />
+                    </label>
+                    {photoPreview && (
+                      <button
+                        type="button"
+                        className="text-xs text-red-500 hover:text-red-700 font-medium flex items-center gap-1.5"
+                        onClick={() => { setPhotoFile(null); setPhotoPreview(null); }}
+                      >
+                        <i className="fas fa-trash-alt" /> Remove photo
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
               <div>
                 <label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Name</label>
                 <input className={inp} value={profileForm.name} onChange={(e) => setProfileForm((f) => ({ ...f, name: e.target.value }))} required />
@@ -134,9 +209,24 @@ export default function OfficerDashboardPage() {
                 <label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Username</label>
                 <input className={inp} value={profileForm.username} onChange={(e) => setProfileForm((f) => ({ ...f, username: e.target.value }))} required />
               </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Phone</label>
+                <input
+                  type="tel"
+                  className={inp}
+                  placeholder="10-digit mobile number"
+                  maxLength={10}
+                  value={profileForm.phone}
+                  onChange={(e) => setProfileForm((f) => ({ ...f, phone: e.target.value.replace(/\D/g, '') }))}
+                />
+              </div>
               <div className="flex gap-2 pt-1">
-                <button type="submit" disabled={updateProfile.isPending} className="flex-1 bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-800 disabled:opacity-60 flex items-center justify-center gap-2">
-                  {updateProfile.isPending ? <i className="fas fa-circle-notch fa-spin" /> : <i className="fas fa-save" />}
+                <button
+                  type="submit"
+                  disabled={updateProfile.isPending || photoUploading}
+                  className="flex-1 bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-800 disabled:opacity-60 flex items-center justify-center gap-2"
+                >
+                  {(updateProfile.isPending || photoUploading) ? <i className="fas fa-circle-notch fa-spin" /> : <i className="fas fa-save" />}
                   Save
                 </button>
                 <button type="button" onClick={() => setEditMode(false)} className="flex-1 py-2 rounded-lg text-sm font-semibold text-gray-500 border border-gray-200 hover:bg-gray-50">
@@ -147,9 +237,18 @@ export default function OfficerDashboardPage() {
           ) : (
             <div className="space-y-3">
               {profileMsg && <p className="text-xs text-green-600 bg-green-50 p-2 rounded">{profileMsg}</p>}
+
+              {/* Avatar in view mode */}
+              {currentPhoto && (
+                <div className="flex justify-center mb-2">
+                  <img src={currentPhoto} alt="profile" className="w-16 h-16 rounded-full object-cover border-2 border-gray-200" />
+                </div>
+              )}
+
               <Row label="Name"     value={officer.name} />
               <Row label="Username" value={officer.username} mono />
               <Row label="Email"    value={officer.email || '—'} />
+              <Row label="Phone"    value={officer.phone || '—'} />
               <Row label="Role"     value={roleLabel} />
               <Row label="District" value={officer.district} />
               <Row label="Block"    value={officer.block || '—'} />

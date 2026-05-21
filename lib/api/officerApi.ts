@@ -59,6 +59,8 @@ export interface OfficerProfile {
   role: 'DO_PRD' | 'BO_PRD' | 'SUPER_ADMIN';
   district: string;
   block: string | null;
+  phone: string | null;
+  profilePhotoUrl: string | null;
   isActive: boolean;
   createdAt: string;
   lastLogin: string | null;
@@ -123,6 +125,8 @@ export const officerApi = {
     name?: string;
     email?: string;
     username?: string;
+    phone?: string;
+    profilePhotoUrl?: string;
     currentPassword?: string;
     newPassword?: string;
   }): Promise<{ success: boolean; officer: OfficerProfile }> =>
@@ -265,6 +269,23 @@ export const officerApi = {
   deleteGallery: (id: string): Promise<{ success: boolean }> =>
     officerFetch(`gallery/${id}`, { method: 'DELETE' }),
 };
+
+// ─── Cloudinary photo upload ──────────────────────────────────────────────────
+
+export async function uploadOfficerPhoto(file: File): Promise<string> {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const preset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+  const fd = new FormData();
+  fd.append('file', file);
+  fd.append('upload_preset', preset!);
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+    { method: 'POST', body: fd }
+  );
+  const data = await res.json();
+  if (!data.secure_url) throw new Error('Photo upload failed');
+  return data.secure_url as string;
+}
 
 // ─── Public gallery submission ────────────────────────────────────────────────
 export const submitGallery = (data: {
