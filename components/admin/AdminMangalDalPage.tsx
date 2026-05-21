@@ -45,6 +45,8 @@ const ADMIN_PROFILE = {
   role: 'SUPER_ADMIN' as const,
   district: '',
   block: null,
+  phone: null,
+  profilePhotoUrl: null,
   isActive: true,
   createdAt: '',
   lastLogin: null,

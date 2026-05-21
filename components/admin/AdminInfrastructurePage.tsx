@@ -20,6 +20,8 @@ const ADMIN_PROFILE = {
   role: 'SUPER_ADMIN' as const,
   district: '',   // empty → no officerDistrictId match → full district dropdown
   block: null,
+  phone: null,
+  profilePhotoUrl: null,
   isActive: true,
   createdAt: '',
   lastLogin: null,
