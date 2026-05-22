@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
+import * as XLSX from "xlsx";
 
 interface BlockData {
   id: string;
@@ -13,6 +14,7 @@ interface BlockData {
   activeYmd: number;
   activeMmd: number;
   infraCount: number;
+  infraByType: Record<string, number>;
   flags: string[];
 }
 
@@ -99,6 +101,64 @@ export default function DistrictDetailPage() {
 
   if (!data) return null;
 
+  function exportToExcel() {
+    if (!data) return;
+
+    const INFRA_COLS: { key: string; label: string }[] = [
+      { key: "HALL",              label: "Multipurpose Hall" },
+      { key: "STADIUM",           label: "Mini Stadium" },
+      { key: "OPEN_GYM",          label: "Open Gym" },
+      { key: "KHEL_MAIDAAN",      label: "Khel Maidaan" },
+      { key: "YOUTH_HOSTEL",      label: "Youth Hostel" },
+      { key: "INDOOR_GYM",        label: "Indoor Gym" },
+      { key: "VOCATIONAL_CENTER", label: "Vocational Training Center" },
+    ];
+
+    const headers = [
+      "Block Name",
+      "Mahila Mangal Dal (MMD)",
+      "Yuvak Mangal Dal (YMD)",
+      ...INFRA_COLS.map(c => c.label),
+    ];
+
+    const rows = data.blocks.map(b => [
+      b.name,
+      b.mmdCount,
+      b.ymdCount,
+      ...INFRA_COLS.map(c => b.infraByType?.[c.key] ?? 0),
+    ]);
+
+    const totalsRow = [
+      "TOTAL",
+      data.blocks.reduce((s, b) => s + b.mmdCount, 0),
+      data.blocks.reduce((s, b) => s + b.ymdCount, 0),
+      ...INFRA_COLS.map(c =>
+        data.blocks.reduce((s, b) => s + (b.infraByType?.[c.key] ?? 0), 0)
+      ),
+    ];
+
+    const sheetData = [
+      [`${data.name} District — Infrastructure & Mangal Dal Report`],
+      [],
+      headers,
+      ...rows,
+      [],
+      totalsRow,
+    ];
+
+    const ws = XLSX.utils.aoa_to_sheet(sheetData);
+    ws["!cols"] = [
+      { wch: 28 },
+      { wch: 26 },
+      { wch: 26 },
+      ...INFRA_COLS.map(() => ({ wch: 28 })),
+    ];
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, data.name);
+    XLSX.writeFile(wb, `${data.name}_District_Report.xlsx`);
+  }
+
   const expiredDals = (data.totalYmd - data.activeYmd) + (data.totalMmd - data.activeMmd);
   const allInfraTotal = Object.values(data.infraByType).reduce((s, v) => s + v, 0) + data.multipurposeHalls + data.miniStadiums;
 
@@ -127,6 +187,15 @@ export default function DistrictDetailPage() {
               )}
             </div>
           </div>
+
+          {/* Export Excel button */}
+          <button
+            onClick={exportToExcel}
+            className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded-lg shadow-sm transition-colors self-start"
+          >
+            <i className="fas fa-file-excel" />
+            Export Excel
+          </button>
 
           {/* DO Officer card */}
           <div className={`flex-shrink-0 rounded-xl p-4 min-w-[220px] ${data.doOfficer ? 'bg-blue-50 border border-blue-100' : 'bg-amber-50 border border-amber-200'}`}>
