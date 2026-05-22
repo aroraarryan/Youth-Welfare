@@ -1,0 +1,3313 @@
+{
+  "edges": [
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "target": "__components_infracard"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "target": "__components_infradetailmodal"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "yuvak-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/yuvak-mangal-dal/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "yuvak-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/yuvak-mangal-dal/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "yuvak-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/yuvak-mangal-dal/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "contact_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "contact_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "target": "next_image"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "contact_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "contact_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "target": "__lib_api_contact"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "contact_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "target": "__lib_api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training-centers/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training-centers/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training-centers/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training-centers/page.tsx",
+      "target": "__components_infracard"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training-centers/page.tsx",
+      "target": "__components_infradetailmodal"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training-centers/page.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "callback_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "callback_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "callback_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "__lib_api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "callback_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "callback_page::AuthCallbackPage"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "callback_page::AuthCallbackPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "userouter"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "callback_page::AuthCallbackPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "useeffect"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "callback_page::AuthCallbackPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "callback_page::AuthCallbackPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "set"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "callback_page::AuthCallbackPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "target": "replace"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training/page.tsx",
+      "target": "__components_registrationform"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "vocational-training_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training/page.tsx",
+      "target": "vocational-training_page::VocationalTrainingPage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mahila-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mahila-mangal-dal/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mahila-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mahila-mangal-dal/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mahila-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mahila-mangal-dal/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/gallery/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/gallery/page.tsx",
+      "target": "__components_galleryclient"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/gallery/page.tsx",
+      "target": "gallery_page::GalleryPage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/mini-stadiums/page.tsx",
+      "target": "__components_admin_admininfrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/mini-stadiums/page.tsx",
+      "target": "mini-stadiums_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "yuvak-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/yuvak-mangal-dal/page.tsx",
+      "target": "__components_admin_adminmangaldalpage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "yuvak-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/yuvak-mangal-dal/page.tsx",
+      "target": "yuvak-mangal-dal_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "contact_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/contact/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "contact_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/contact/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/vocational-training-centers/page.tsx",
+      "target": "__components_admin_admininfrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/vocational-training-centers/page.tsx",
+      "target": "vocational-training-centers_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mahila-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/mahila-mangal-dal/page.tsx",
+      "target": "__components_admin_adminmangaldalpage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "mahila-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/mahila-mangal-dal/page.tsx",
+      "target": "mahila-mangal-dal_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "new_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/new/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "new_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/new/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "new_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/new/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "edit_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/[id]/edit/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "edit_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/[id]/edit/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "edit_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/[id]/edit/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/gallery/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/gallery/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/gallery/page.tsx",
+      "target": "__components_imagelightbox"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "[name]_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/districts/[name]/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "[name]_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/districts/[name]/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "[name]_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/districts/[name]/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "dashboard_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "dashboard_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "dashboard_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "dashboard_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "target": "dashboard_page::getFlags"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "dashboard_page::getFlags",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "target": "push"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "dashboard_page::getFlags",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "target": "push"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "dashboard_page::getFlags",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "target": "push"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "dashboard_page::getFlags",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "target": "push"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/youth-hostels/page.tsx",
+      "target": "__components_admin_admininfrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/youth-hostels/page.tsx",
+      "target": "youth-hostels_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/layout.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/layout.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/layout.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/multipurpose-halls/page.tsx",
+      "target": "__components_admin_admininfrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/multipurpose-halls/page.tsx",
+      "target": "multipurpose-halls_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/khel-maidaan/page.tsx",
+      "target": "__components_admin_admininfrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/khel-maidaan/page.tsx",
+      "target": "khel-maidaan_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "admin_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/page.tsx",
+      "target": "admin_page::AdminIndex"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_page::AdminIndex",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/page.tsx",
+      "target": "redirect"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "downloads_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "downloads_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "downloads_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "target": "downloads_page::uploadToCloudinary"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "downloads_page::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "target": "append"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "downloads_page::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "target": "append"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "downloads_page::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "target": "startswith"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "downloads_page::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "downloads_page::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "target": "json"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/open-gym/page.tsx",
+      "target": "__components_admin_admininfrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/open-gym/page.tsx",
+      "target": "open-gym_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/login/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/login/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/login/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/indoor-gym/page.tsx",
+      "target": "__components_admin_admininfrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/indoor-gym/page.tsx",
+      "target": "indoor-gym_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "about_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/about/page.tsx",
+      "target": "next_image"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "about_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/about/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "about_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/about/page.tsx",
+      "target": "__components_districtofficerssection"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "register_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/register/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "register_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/register/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "register_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/register/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "register_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/register/page.tsx",
+      "target": "__contexts_authcontext"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "register_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/register/page.tsx",
+      "target": "__lib_api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "adventure-training_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/adventure-training/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "adventure-training_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/adventure-training/page.tsx",
+      "target": "__components_registrationform"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "adventure-training_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/adventure-training/page.tsx",
+      "target": "adventure-training_page::AdventureTrainingPage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-hostels/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-hostels/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-hostels/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-hostels/page.tsx",
+      "target": "__components_infracard"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-hostels/page.tsx",
+      "target": "__components_infradetailmodal"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-hostels/page.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "next_font_google"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "__components_govheader"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "__components_mainheader"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "__components_footer"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "__contexts_authcontext"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "__contexts_languagecontext"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "__lib_react_query"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "target": "__components_floatingelements"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "target": "next_server"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "gallery_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "target": "gallery_route::handler"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "gallery_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "target": "text"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "gallery_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "gallery_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "gallery_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "logout_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/logout/route.ts",
+      "target": "next_server"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "logout_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/logout/route.ts",
+      "target": "logout_route::POST"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "logout_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/logout/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "logout_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/logout/route.ts",
+      "target": "delete"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "[...path]_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "next_server"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "[...path]_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "next_headers"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "[...path]_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "[...path]_route::handler"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "join"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "cookies"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "includes"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "text"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "includes"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "target": "delete"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "next_server"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "login_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "login_route::POST"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "stringify"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "match"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "target": "set"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "logout_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/logout/route.ts",
+      "target": "next_server"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "logout_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/logout/route.ts",
+      "target": "logout_route::POST"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "logout_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/logout/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "logout_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/logout/route.ts",
+      "target": "delete"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "[...path]_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "next_server"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "[...path]_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "next_headers"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "[...path]_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "[...path]_route::handler"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "join"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "cookies"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "includes"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "text"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "includes"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "[...path]_route::handler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/[...path]/route.ts",
+      "target": "delete"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "next_server"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "login_route",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "login_route::POST"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "stringify"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "match"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "login_route::POST",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/officer/login/route.ts",
+      "target": "set"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/multipurpose-halls/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/multipurpose-halls/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/multipurpose-halls/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/multipurpose-halls/page.tsx",
+      "target": "__components_infracard"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/multipurpose-halls/page.tsx",
+      "target": "__components_infradetailmodal"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/multipurpose-halls/page.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/mini-stadiums/page.tsx",
+      "target": "__components_officer_infrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "mini-stadiums_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/mini-stadiums/page.tsx",
+      "target": "mini-stadiums_page::MiniStadiumsPage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "yuvak-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/yuvak-mangal-dal/page.tsx",
+      "target": "__components_officer_mangaldalpage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "yuvak-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/yuvak-mangal-dal/page.tsx",
+      "target": "yuvak-mangal-dal_page::YuvakMangalDalPage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/vocational-training-centers/page.tsx",
+      "target": "__components_officer_infrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "vocational-training-centers_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/vocational-training-centers/page.tsx",
+      "target": "vocational-training-centers_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "mahila-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/mahila-mangal-dal/page.tsx",
+      "target": "__components_officer_mangaldalpage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "mahila-mangal-dal_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/mahila-mangal-dal/page.tsx",
+      "target": "mahila-mangal-dal_page::MahilaMangalDalPage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/gallery/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/gallery/page.tsx",
+      "target": "__hooks_useofficer"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "gallery_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/gallery/page.tsx",
+      "target": "__components_imagelightbox"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "dashboard_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/dashboard/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "dashboard_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/dashboard/page.tsx",
+      "target": "__hooks_useofficer"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "dashboard_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/dashboard/page.tsx",
+      "target": "__lib_api_officerapi"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/youth-hostels/page.tsx",
+      "target": "__components_officer_infrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "youth-hostels_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/youth-hostels/page.tsx",
+      "target": "youth-hostels_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/layout.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/layout.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/layout.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_layout",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/layout.tsx",
+      "target": "_tanstack_react_query"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/multipurpose-halls/page.tsx",
+      "target": "__components_officer_infrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "multipurpose-halls_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/multipurpose-halls/page.tsx",
+      "target": "multipurpose-halls_page::MultipurposeHallsPage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/khel-maidaan/page.tsx",
+      "target": "__components_officer_infrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/khel-maidaan/page.tsx",
+      "target": "khel-maidaan_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "officer_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/page.tsx",
+      "target": "officer_page::OfficerIndex"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_page::OfficerIndex",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/page.tsx",
+      "target": "redirect"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/open-gym/page.tsx",
+      "target": "__components_officer_infrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/open-gym/page.tsx",
+      "target": "open-gym_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/login/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/login/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/login/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/login/page.tsx",
+      "target": "_tanstack_react_query"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/indoor-gym/page.tsx",
+      "target": "__components_officer_infrastructurepage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/indoor-gym/page.tsx",
+      "target": "indoor-gym_page::Page"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-maidaan/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-maidaan/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-maidaan/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-maidaan/page.tsx",
+      "target": "__components_infracard"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-maidaan/page.tsx",
+      "target": "__components_infradetailmodal"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-maidaan_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-maidaan/page.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_metadata",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/metadata.ts",
+      "target": "next"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-volunteering_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-volunteering/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "youth-volunteering_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-volunteering/page.tsx",
+      "target": "__components_registrationform"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "youth-volunteering_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-volunteering/page.tsx",
+      "target": "youth-volunteering_page::YouthVolunteeringPage"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "target": "next_image"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "target": "__components_carousel"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "target": "__components_floatingsearchui"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "target": "__components_faqsection"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "target": "lucide_react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "downloads_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "downloads_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "downloads_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "target": "__hooks_usedocuments"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "downloads_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "target": "__lib_api_documents"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "downloads_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "target": "downloads_page::toDownloadUrl"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "downloads_page::toDownloadUrl",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "target": "includes"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "downloads_page::toDownloadUrl",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "target": "includes"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "downloads_page::toDownloadUrl",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "target": "replace"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/open-gym/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/open-gym/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/open-gym/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/open-gym/page.tsx",
+      "target": "__components_infracard"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/open-gym/page.tsx",
+      "target": "__components_infradetailmodal"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "open-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/open-gym/page.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "app_globals",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/globals.css",
+      "target": "tailwindcss"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/login/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/login/page.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/login/page.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/login/page.tsx",
+      "target": "__contexts_authcontext"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "login_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/login/page.tsx",
+      "target": "__lib_api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/indoor-gym/page.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/indoor-gym/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/indoor-gym/page.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/indoor-gym/page.tsx",
+      "target": "__components_infracard"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/indoor-gym/page.tsx",
+      "target": "__components_infradetailmodal"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "indoor-gym_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/indoor-gym/page.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-mahakumbh_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-mahakumbh/page.tsx",
+      "target": "__components_pagehero"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "khel-mahakumbh_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-mahakumbh/page.tsx",
+      "target": "__components_registrationform"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "khel-mahakumbh_page",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-mahakumbh/page.tsx",
+      "target": "khel-mahakumbh_page::KhelMahakumbhPage"
+    }
+  ],
+  "nodes": [
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "mini-stadiums_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "react",
+      "label": "react",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_pagehero",
+      "label": "__components_pagehero",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__hooks_useinfrastructure",
+      "label": "__hooks_useinfrastructure",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_infracard",
+      "label": "__components_infracard",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_infradetailmodal",
+      "label": "__components_infradetailmodal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_infrastructure",
+      "label": "__lib_api_infrastructure",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 120,
+      "docstring": null,
+      "file_type": "code",
+      "id": "yuvak-mangal-dal_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/yuvak-mangal-dal/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "contact_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 90,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_image",
+      "label": "next_image",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_contact",
+      "label": "__lib_api_contact",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api",
+      "label": "__lib_api",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/contact/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "vocational-training-centers_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training-centers/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "callback_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 104,
+      "docstring": null,
+      "file_type": "code",
+      "id": "callback_page::AuthCallbackPage",
+      "label": "AuthCallbackPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "source_line": 6
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_navigation",
+      "label": "next_navigation",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 104,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "userouter",
+      "label": "userouter",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 104,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "useeffect",
+      "label": "useeffect",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 61,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "get",
+      "label": "get",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 72,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "set",
+      "label": "set",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 104,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "replace",
+      "label": "replace",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/auth/callback/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 115,
+      "docstring": null,
+      "file_type": "code",
+      "id": "vocational-training_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 115,
+      "docstring": null,
+      "file_type": "code",
+      "id": "vocational-training_page::VocationalTrainingPage",
+      "label": "VocationalTrainingPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training/page.tsx",
+      "source_line": 13
+    },
+    {
+      "community": 66,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_registrationform",
+      "label": "__components_registrationform",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/vocational-training/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 76,
+      "docstring": null,
+      "file_type": "code",
+      "id": "mahila-mangal-dal_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/mahila-mangal-dal/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 56,
+      "docstring": null,
+      "file_type": "code",
+      "id": "gallery_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/gallery/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 56,
+      "docstring": null,
+      "file_type": "code",
+      "id": "gallery_page::GalleryPage",
+      "label": "GalleryPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/gallery/page.tsx",
+      "source_line": 7
+    },
+    {
+      "community": 56,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_galleryclient",
+      "label": "__components_galleryclient",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/gallery/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "mini-stadiums_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/mini-stadiums/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_admin_admininfrastructurepage",
+      "label": "__components_admin_admininfrastructurepage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 120,
+      "docstring": null,
+      "file_type": "code",
+      "id": "yuvak-mangal-dal_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/yuvak-mangal-dal/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 120,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_admin_adminmangaldalpage",
+      "label": "__components_admin_adminmangaldalpage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/yuvak-mangal-dal/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "vocational-training-centers_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/vocational-training-centers/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 76,
+      "docstring": null,
+      "file_type": "code",
+      "id": "mahila-mangal-dal_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/mahila-mangal-dal/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "new_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/new/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_link",
+      "label": "next_link",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/new/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "edit_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/[id]/edit/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officers_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/officers/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 56,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_imagelightbox",
+      "label": "__components_imagelightbox",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/gallery/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "[name]_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/districts/[name]/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "dashboard_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 100,
+      "docstring": null,
+      "file_type": "code",
+      "id": "dashboard_page::getFlags",
+      "label": "getFlags()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "source_line": 20
+    },
+    {
+      "community": 100,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "push",
+      "label": "push",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/dashboard/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "youth-hostels_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/youth-hostels/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "youth-hostels_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/youth-hostels/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "admin_layout",
+      "label": "layout.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "multipurpose-halls_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/multipurpose-halls/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "multipurpose-halls_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/multipurpose-halls/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "khel-maidaan_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/khel-maidaan/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "khel-maidaan_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/khel-maidaan/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "admin_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "admin_page::AdminIndex",
+      "label": "AdminIndex()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "redirect",
+      "label": "redirect",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "downloads_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 53,
+      "docstring": null,
+      "file_type": "code",
+      "id": "downloads_page::uploadToCloudinary",
+      "label": "uploadToCloudinary()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "source_line": 51
+    },
+    {
+      "community": 53,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "append",
+      "label": "append",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 53,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "startswith",
+      "label": "startswith",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 72,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "fetch",
+      "label": "fetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 72,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "json",
+      "label": "json",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/downloads/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "open-gym_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/open-gym/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "open-gym_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/open-gym/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "login_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/login/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "indoor-gym_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/indoor-gym/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "indoor-gym_page::Page",
+      "label": "Page()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/admin/indoor-gym/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 90,
+      "docstring": null,
+      "file_type": "code",
+      "id": "about_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/about/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 90,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_districtofficerssection",
+      "label": "__components_districtofficerssection",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/about/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "register_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/register/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__contexts_authcontext",
+      "label": "__contexts_authcontext",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/register/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 37,
+      "docstring": null,
+      "file_type": "code",
+      "id": "adventure-training_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/adventure-training/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 37,
+      "docstring": null,
+      "file_type": "code",
+      "id": "adventure-training_page::AdventureTrainingPage",
+      "label": "AdventureTrainingPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/adventure-training/page.tsx",
+      "source_line": 13
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "code",
+      "id": "app_layout",
+      "label": "layout.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_font_google",
+      "label": "next_font_google",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_govheader",
+      "label": "__components_govheader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_mainheader",
+      "label": "__components_mainheader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_footer",
+      "label": "__components_footer",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__contexts_languagecontext",
+      "label": "__contexts_languagecontext",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_react_query",
+      "label": "__lib_react_query",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_floatingelements",
+      "label": "__components_floatingelements",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 93,
+      "docstring": null,
+      "file_type": "code",
+      "id": "gallery_route",
+      "label": "route.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 72,
+      "docstring": null,
+      "file_type": "code",
+      "id": "gallery_route::handler",
+      "label": "handler()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "source_line": 4
+    },
+    {
+      "community": 93,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_server",
+      "label": "next_server",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 61,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "text",
+      "label": "text",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/gallery/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 74,
+      "docstring": null,
+      "file_type": "code",
+      "id": "logout_route",
+      "label": "route.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/logout/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 74,
+      "docstring": null,
+      "file_type": "code",
+      "id": "logout_route::POST",
+      "label": "POST()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/logout/route.ts",
+      "source_line": 2
+    },
+    {
+      "community": 61,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "delete",
+      "label": "delete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/logout/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 1,
+      "docstring": null,
+      "file_type": "code",
+      "id": "[...path]_route",
+      "label": "route.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 61,
+      "docstring": null,
+      "file_type": "code",
+      "id": "[...path]_route::handler",
+      "label": "handler()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "source_line": 5
+    },
+    {
+      "community": 1,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_headers",
+      "label": "next_headers",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 61,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "join",
+      "label": "join",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 61,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "cookies",
+      "label": "cookies",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 61,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "includes",
+      "label": "includes",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/[...path]/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 93,
+      "docstring": null,
+      "file_type": "code",
+      "id": "login_route",
+      "label": "route.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 72,
+      "docstring": null,
+      "file_type": "code",
+      "id": "login_route::POST",
+      "label": "POST()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "source_line": 4
+    },
+    {
+      "community": 72,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "stringify",
+      "label": "stringify",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 72,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "match",
+      "label": "match",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/api/admin/login/route.ts",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "mini-stadiums_page::MiniStadiumsPage",
+      "label": "MiniStadiumsPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/mini-stadiums/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_officer_infrastructurepage",
+      "label": "__components_officer_infrastructurepage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/mini-stadiums/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 120,
+      "docstring": null,
+      "file_type": "code",
+      "id": "yuvak-mangal-dal_page::YuvakMangalDalPage",
+      "label": "YuvakMangalDalPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/yuvak-mangal-dal/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 76,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_officer_mangaldalpage",
+      "label": "__components_officer_mangaldalpage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/yuvak-mangal-dal/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 76,
+      "docstring": null,
+      "file_type": "code",
+      "id": "mahila-mangal-dal_page::MahilaMangalDalPage",
+      "label": "MahilaMangalDalPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/mahila-mangal-dal/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 56,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__hooks_useofficer",
+      "label": "__hooks_useofficer",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/gallery/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_officerapi",
+      "label": "__lib_api_officerapi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/dashboard/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_layout",
+      "label": "layout.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "_tanstack_react_query",
+      "label": "_tanstack_react_query",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/layout.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "multipurpose-halls_page::MultipurposeHallsPage",
+      "label": "MultipurposeHallsPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/multipurpose-halls/page.tsx",
+      "source_line": 3
+    },
+    {
+      "community": 96,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 96,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_page::OfficerIndex",
+      "label": "OfficerIndex()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/officer/page.tsx",
+      "source_line": 2
+    },
+    {
+      "community": 87,
+      "docstring": null,
+      "file_type": "code",
+      "id": "app_metadata",
+      "label": "metadata.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/metadata.ts",
+      "source_line": null
+    },
+    {
+      "community": 87,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next",
+      "label": "next",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/metadata.ts",
+      "source_line": null
+    },
+    {
+      "community": 114,
+      "docstring": null,
+      "file_type": "code",
+      "id": "youth-volunteering_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-volunteering/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 114,
+      "docstring": null,
+      "file_type": "code",
+      "id": "youth-volunteering_page::YouthVolunteeringPage",
+      "label": "YouthVolunteeringPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/youth-volunteering/page.tsx",
+      "source_line": 13
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "code",
+      "id": "app_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_carousel",
+      "label": "__components_carousel",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_floatingsearchui",
+      "label": "__components_floatingsearchui",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_faqsection",
+      "label": "__components_faqsection",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "lucide_react",
+      "label": "lucide_react",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 61,
+      "docstring": null,
+      "file_type": "code",
+      "id": "downloads_page::toDownloadUrl",
+      "label": "toDownloadUrl()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "source_line": 13
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__hooks_usedocuments",
+      "label": "__hooks_usedocuments",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 92,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_documents",
+      "label": "__lib_api_documents",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/downloads/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 39,
+      "docstring": null,
+      "file_type": "code",
+      "id": "app_globals",
+      "label": "globals.css",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/globals.css",
+      "source_line": null
+    },
+    {
+      "community": 39,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "tailwindcss",
+      "label": "tailwindcss",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/globals.css",
+      "source_line": null
+    },
+    {
+      "community": 66,
+      "docstring": null,
+      "file_type": "code",
+      "id": "khel-mahakumbh_page",
+      "label": "page.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-mahakumbh/page.tsx",
+      "source_line": null
+    },
+    {
+      "community": 66,
+      "docstring": null,
+      "file_type": "code",
+      "id": "khel-mahakumbh_page::KhelMahakumbhPage",
+      "label": "KhelMahakumbhPage()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/app/khel-mahakumbh/page.tsx",
+      "source_line": 13
+    }
+  ]
+}

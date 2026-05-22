@@ -1,0 +1,1976 @@
+{
+  "edges": [
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_PageHero",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PageHero.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_GalleryClient",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_GalleryClient",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "target": "next_image"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_GalleryClient",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "target": "_tanstack_react_query"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_GalleryClient",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "target": "__components_photosubmissionmodal"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_RegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_RegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "target": "__lib_api_registrations"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_RegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_RegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "target": "__lib_api_sports"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_RegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "target": "__lib_api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_GovHeader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GovHeader.tsx",
+      "target": "__contexts_languagecontext"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminInfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminInfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminInfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "target": "__hooks_useadminmodules"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminInfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "target": "__lib_api_officerapi"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminInfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "target": "__components_officer_infrastructureform"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminMangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminMangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "admin_AdminMangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "admin_AdminMangalDalPage::exportToCSV"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "map"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "tolocaledatestring"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "tolocaledatestring"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "join"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "map"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "join"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "map"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "replace"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "string"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "createobjecturl"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "createelement"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "click"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "admin_AdminMangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "revokeobjecturl"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminMangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "__hooks_useadminmodules"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "admin_AdminMangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "target": "__components_officer_mangaldalregistrationform"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_FaqSection",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FaqSection.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_MainHeader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_MainHeader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_MainHeader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "target": "next_image"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_MainHeader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_MainHeader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "target": "__contexts_languagecontext"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_MainHeader",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "target": "__hooks_useportalsession"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_FloatingSearchUI",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingSearchUI.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "components_FloatingSearchUI",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingSearchUI.tsx",
+      "target": "components_FloatingSearchUI::fmt"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_FloatingSearchUI::fmt",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingSearchUI.tsx",
+      "target": "tolocalestring"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_Footer",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Footer.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_Footer",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Footer.tsx",
+      "target": "next_link"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_Footer",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Footer.tsx",
+      "target": "next_image"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_Footer",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Footer.tsx",
+      "target": "__lib_api_newsletter"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_ImageLightbox",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/ImageLightbox.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_LocationMapModal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/LocationMapModal.tsx",
+      "target": "_vis_gl_react_google_maps"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_LocationPicker",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "target": "_vis_gl_react_google_maps"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_LocationPicker",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "officer_LocationPicker",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "target": "officer_LocationPicker::MapHandler"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_LocationPicker::MapHandler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "target": "usemap"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_LocationPicker::MapHandler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "target": "useeffect"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_LocationPicker::MapHandler",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "target": "panto"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "_vis_gl_react_google_maps"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "officer_PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "officer_PlaceAutocomplete::PlaceAutocomplete"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "usestate"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "useref"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "usemapslibrary"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "useeffect"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "addlistener"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "getplace"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "setinputvalue"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "onplaceselect"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "blur"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "clearinstancelisteners"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "useeffect"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "setinputvalue"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "useeffect"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "contains"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "blur"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "queryselectorall"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "foreach"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "addeventlistener"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "removeeventlistener"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "setinputvalue"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "target": "onplaceselect"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "__hooks_useofficer"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "__locationpicker"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "__placeautocomplete"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "_vis_gl_react_google_maps"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "__lib_api_officerapi"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "__lib_api_officerapi"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "officer_InfrastructureForm::uploadToCloudinary"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_InfrastructureForm::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "append"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_InfrastructureForm::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "append"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_InfrastructureForm::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_InfrastructureForm::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "json"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "officer_InfrastructureForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "officer_InfrastructureForm::onlyDigits"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_InfrastructureForm::onlyDigits",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "slice"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_InfrastructureForm::onlyDigits",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "target": "replace"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructurePage.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructurePage.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructurePage.tsx",
+      "target": "__hooks_useofficer"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructurePage.tsx",
+      "target": "__hooks_useofficer"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructurePage.tsx",
+      "target": "__lib_api_officerapi"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_InfrastructurePage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructurePage.tsx",
+      "target": "__infrastructureform"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_MangalDalRegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalRegistrationForm.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_MangalDalRegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalRegistrationForm.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_MangalDalRegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalRegistrationForm.tsx",
+      "target": "__hooks_useofficer"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_MangalDalRegistrationForm",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalRegistrationForm.tsx",
+      "target": "__lib_api_officerapi"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_MangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_MangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_MangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "__hooks_useofficer"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "officer_MangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "__mangaldalregistrationform"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "officer_MangalDalPage",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "officer_MangalDalPage::exportToCSV"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "map"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "tolocaledatestring"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "tolocaledatestring"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "join"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "map"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "join"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "map"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "replace"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "string"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "createobjecturl"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "createelement"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "click"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "officer_MangalDalPage::exportToCSV",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "target": "revokeobjecturl"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_FloatingElements",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "target": "next_navigation"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "components_FloatingElements",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "target": "components_FloatingElements::FloatingElements"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_FloatingElements::FloatingElements",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "target": "usepathname"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_FloatingElements::FloatingElements",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "target": "startswith"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_FloatingElements::FloatingElements",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "target": "startswith"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_DistrictOfficersSection",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/DistrictOfficersSection.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_DistrictOfficersSection",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/DistrictOfficersSection.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_InfraDetailModal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/InfraDetailModal.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_InfraDetailModal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/InfraDetailModal.tsx",
+      "target": "_vis_gl_react_google_maps"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_PhotoSubmissionModal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_PhotoSubmissionModal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "__lib_api_infrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_PhotoSubmissionModal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "__hooks_useinfrastructure"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_PhotoSubmissionModal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "__lib_api_officerapi"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "components_PhotoSubmissionModal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "components_PhotoSubmissionModal::uploadToCloudinary"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_PhotoSubmissionModal::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "append"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_PhotoSubmissionModal::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "append"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_PhotoSubmissionModal::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_PhotoSubmissionModal::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "startswith"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "components_PhotoSubmissionModal::uploadToCloudinary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "target": "json"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_Carousel",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Carousel.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "components_Carousel",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Carousel.tsx",
+      "target": "next_image"
+    }
+  ],
+  "nodes": [
+    {
+      "community": 58,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_PageHero",
+      "label": "PageHero.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PageHero.tsx",
+      "source_line": null
+    },
+    {
+      "community": 58,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_link",
+      "label": "next_link",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PageHero.tsx",
+      "source_line": null
+    },
+    {
+      "community": 37,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_GalleryClient",
+      "label": "GalleryClient.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "react",
+      "label": "react",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "source_line": null
+    },
+    {
+      "community": 57,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_image",
+      "label": "next_image",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "source_line": null
+    },
+    {
+      "community": 37,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "_tanstack_react_query",
+      "label": "_tanstack_react_query",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "source_line": null
+    },
+    {
+      "community": 37,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_photosubmissionmodal",
+      "label": "__components_photosubmissionmodal",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GalleryClient.tsx",
+      "source_line": null
+    },
+    {
+      "community": 47,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_RegistrationForm",
+      "label": "RegistrationForm.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 47,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_registrations",
+      "label": "__lib_api_registrations",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 34,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_infrastructure",
+      "label": "__lib_api_infrastructure",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 47,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_sports",
+      "label": "__lib_api_sports",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 47,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api",
+      "label": "__lib_api",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/RegistrationForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 40,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_InfraCard",
+      "label": "InfraCard.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/InfraCard.tsx",
+      "source_line": null
+    },
+    {
+      "community": 38,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_GovHeader",
+      "label": "GovHeader.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GovHeader.tsx",
+      "source_line": null
+    },
+    {
+      "community": 38,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__contexts_languagecontext",
+      "label": "__contexts_languagecontext",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/GovHeader.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "admin_AdminInfrastructurePage",
+      "label": "AdminInfrastructurePage.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__hooks_useinfrastructure",
+      "label": "__hooks_useinfrastructure",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 23,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__hooks_useadminmodules",
+      "label": "__hooks_useadminmodules",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_officerapi",
+      "label": "__lib_api_officerapi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_officer_infrastructureform",
+      "label": "__components_officer_infrastructureform",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminInfrastructurePage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 23,
+      "docstring": null,
+      "file_type": "code",
+      "id": "admin_AdminMangalDalPage",
+      "label": "AdminMangalDalPage.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "code",
+      "id": "admin_AdminMangalDalPage::exportToCSV",
+      "label": "exportToCSV()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": 5
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "map",
+      "label": "map",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "tolocaledatestring",
+      "label": "tolocaledatestring",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "join",
+      "label": "join",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "replace",
+      "label": "replace",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "string",
+      "label": "string",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "createobjecturl",
+      "label": "createobjecturl",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "createelement",
+      "label": "createelement",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "click",
+      "label": "click",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "revokeobjecturl",
+      "label": "revokeobjecturl",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 23,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__components_officer_mangaldalregistrationform",
+      "label": "__components_officer_mangaldalregistrationform",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/admin/AdminMangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_FaqSection",
+      "label": "FaqSection.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FaqSection.tsx",
+      "source_line": null
+    },
+    {
+      "community": 43,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_MainHeader",
+      "label": "MainHeader.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "source_line": null
+    },
+    {
+      "community": 59,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "next_navigation",
+      "label": "next_navigation",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "source_line": null
+    },
+    {
+      "community": 43,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__hooks_useportalsession",
+      "label": "__hooks_useportalsession",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/MainHeader.tsx",
+      "source_line": null
+    },
+    {
+      "community": 34,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_FloatingSearchUI",
+      "label": "FloatingSearchUI.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingSearchUI.tsx",
+      "source_line": null
+    },
+    {
+      "community": 34,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_FloatingSearchUI::fmt",
+      "label": "fmt()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingSearchUI.tsx",
+      "source_line": 4
+    },
+    {
+      "community": 34,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "tolocalestring",
+      "label": "tolocalestring",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingSearchUI.tsx",
+      "source_line": null
+    },
+    {
+      "community": 57,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_Footer",
+      "label": "Footer.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Footer.tsx",
+      "source_line": null
+    },
+    {
+      "community": 57,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__lib_api_newsletter",
+      "label": "__lib_api_newsletter",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Footer.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_ImageLightbox",
+      "label": "ImageLightbox.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/ImageLightbox.tsx",
+      "source_line": null
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_LocationMapModal",
+      "label": "LocationMapModal.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/LocationMapModal.tsx",
+      "source_line": null
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "_vis_gl_react_google_maps",
+      "label": "_vis_gl_react_google_maps",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/LocationMapModal.tsx",
+      "source_line": null
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_LocationPicker",
+      "label": "LocationPicker.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "source_line": null
+    },
+    {
+      "community": 85,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_LocationPicker::MapHandler",
+      "label": "MapHandler()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "source_line": 13
+    },
+    {
+      "community": 85,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "usemap",
+      "label": "usemap",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "useeffect",
+      "label": "useeffect",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "source_line": null
+    },
+    {
+      "community": 85,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "panto",
+      "label": "panto",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/LocationPicker.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_PlaceAutocomplete",
+      "label": "PlaceAutocomplete.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_PlaceAutocomplete::PlaceAutocomplete",
+      "label": "PlaceAutocomplete()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": 12
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "usestate",
+      "label": "usestate",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "useref",
+      "label": "useref",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "usemapslibrary",
+      "label": "usemapslibrary",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "addlistener",
+      "label": "addlistener",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "getplace",
+      "label": "getplace",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "setinputvalue",
+      "label": "setinputvalue",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "onplaceselect",
+      "label": "onplaceselect",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "blur",
+      "label": "blur",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "clearinstancelisteners",
+      "label": "clearinstancelisteners",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "contains",
+      "label": "contains",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "queryselectorall",
+      "label": "queryselectorall",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "foreach",
+      "label": "foreach",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "addeventlistener",
+      "label": "addeventlistener",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 70,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "removeeventlistener",
+      "label": "removeeventlistener",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/PlaceAutocomplete.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_InfrastructureForm",
+      "label": "InfrastructureForm.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 46,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_InfrastructureForm::uploadToCloudinary",
+      "label": "uploadToCloudinary()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": 38
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_InfrastructureForm::onlyDigits",
+      "label": "onlyDigits()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": 50
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__hooks_useofficer",
+      "label": "__hooks_useofficer",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__locationpicker",
+      "label": "__locationpicker",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__placeautocomplete",
+      "label": "__placeautocomplete",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 46,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "append",
+      "label": "append",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 46,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "fetch",
+      "label": "fetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 46,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "json",
+      "label": "json",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "slice",
+      "label": "slice",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructureForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_InfrastructurePage",
+      "label": "InfrastructurePage.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructurePage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__infrastructureform",
+      "label": "__infrastructureform",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/InfrastructurePage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_MangalDalRegistrationForm",
+      "label": "MangalDalRegistrationForm.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalRegistrationForm.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_MangalDalPage",
+      "label": "MangalDalPage.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 67,
+      "docstring": null,
+      "file_type": "code",
+      "id": "officer_MangalDalPage::exportToCSV",
+      "label": "exportToCSV()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "source_line": 7
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__mangaldalregistrationform",
+      "label": "__mangaldalregistrationform",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/officer/MangalDalPage.tsx",
+      "source_line": null
+    },
+    {
+      "community": 59,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_FloatingElements",
+      "label": "FloatingElements.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_FloatingElements::FloatingElements",
+      "label": "FloatingElements()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "source_line": 4
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "usepathname",
+      "label": "usepathname",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "source_line": null
+    },
+    {
+      "community": 80,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "startswith",
+      "label": "startswith",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/FloatingElements.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_DistrictOfficersSection",
+      "label": "DistrictOfficersSection.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/DistrictOfficersSection.tsx",
+      "source_line": null
+    },
+    {
+      "community": 42,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_InfraDetailModal",
+      "label": "InfraDetailModal.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/InfraDetailModal.tsx",
+      "source_line": null
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_PhotoSubmissionModal",
+      "label": "PhotoSubmissionModal.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "source_line": null
+    },
+    {
+      "community": 46,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_PhotoSubmissionModal::uploadToCloudinary",
+      "label": "uploadToCloudinary()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/PhotoSubmissionModal.tsx",
+      "source_line": 19
+    },
+    {
+      "community": 60,
+      "docstring": null,
+      "file_type": "code",
+      "id": "components_Carousel",
+      "label": "Carousel.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/components/Carousel.tsx",
+      "source_line": null
+    }
+  ]
+}

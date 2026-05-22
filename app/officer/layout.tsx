@@ -47,7 +47,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
       <div className="md:hidden bg-teal-800 text-white p-4 flex items-center justify-between z-[110] shadow-md">
         <div>
           <h1 className="text-base font-bold leading-none">Officer Portal</h1>
-          <p className="text-[10px] text-teal-300 mt-1">Yuva Shakti Portal</p>
+          <p className="text-[10px] text-teal-300 mt-1">Mero Yuva Portal</p>
         </div>
         <button 
           onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -73,7 +73,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
       `}>
         <div className="hidden md:block px-4 py-5 border-b border-teal-700">
           <h1 className="text-lg font-bold leading-tight">Officer Portal</h1>
-          <p className="text-xs text-teal-300 mt-0.5">Yuva Shakti Portal</p>
+          <p className="text-xs text-teal-300 mt-0.5">Mero Yuva Portal</p>
         </div>
         <nav className="flex-1 px-2 py-4 space-y-4 overflow-y-auto pt-20 md:pt-4">
           <div className="space-y-1">

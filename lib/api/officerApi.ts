@@ -61,6 +61,10 @@ export interface OfficerProfile {
   block: string | null;
   phone: string | null;
   profilePhotoUrl: string | null;
+  viName: string | null;
+  viEmail: string | null;
+  viPhone: string | null;
+  viPhotoUrl: string | null;
   isActive: boolean;
   createdAt: string;
   lastLogin: string | null;
@@ -129,6 +133,10 @@ export const officerApi = {
     profilePhotoUrl?: string;
     currentPassword?: string;
     newPassword?: string;
+    viName?: string | null;
+    viEmail?: string | null;
+    viPhone?: string | null;
+    viPhotoUrl?: string | null;
   }): Promise<{ success: boolean; officer: OfficerProfile }> =>
     officerFetch('profile', { method: 'PATCH', body: JSON.stringify(body) }),
 

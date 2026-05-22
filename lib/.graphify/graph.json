@@ -1,0 +1,774 @@
+{
+  "edges": [
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "lib_react-query",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "target": "_tanstack_react_query"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "lib_react-query",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "target": "react"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "lib_react-query",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "target": "lib_react-query::ReactQueryProvider"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_react-query::ReactQueryProvider",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "target": "usestate"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "lib_api",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "lib_api::ApiError"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "lib_api::ApiError",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "lib_api::ApiError::constructor"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::ApiError::constructor",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "super"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "lib_api",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "lib_api::refreshAccessToken"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::refreshAccessToken",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::refreshAccessToken",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::refreshAccessToken",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "set"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "lib_api",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "lib_api::apiFetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "entries"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "set"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "string"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "tostring"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "stringify"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "lib_api::refreshAccessToken"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "lib_api::apiFetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "clear"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "get"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "includes"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "lib_api::apiFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "target": "text"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "lib_translations",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/translations.ts",
+      "target": "lib_translations::translate"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_contact",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/contact.ts",
+      "target": "___api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_officerApi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "___api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "api_officerApi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "api_officerApi::officerFetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_officerApi::officerFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_officerApi::officerFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "api_officerApi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "api_officerApi::uploadOfficerPhoto"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_officerApi::uploadOfficerPhoto",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "append"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_officerApi::uploadOfficerPhoto",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "append"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_officerApi::uploadOfficerPhoto",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_officerApi::uploadOfficerPhoto",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_registrations",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/registrations.ts",
+      "target": "___api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_adminModulesApi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/adminModulesApi.ts",
+      "target": "___api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_adminModulesApi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/adminModulesApi.ts",
+      "target": "__officerapi"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "api_adminModulesApi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/adminModulesApi.ts",
+      "target": "api_adminModulesApi::adminFetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_adminModulesApi::adminFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/adminModulesApi.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_adminModulesApi::adminFetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/adminModulesApi.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_newsletter",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/newsletter.ts",
+      "target": "___api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_documents",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/documents.ts",
+      "target": "___api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_infrastructure",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/infrastructure.ts",
+      "target": "___api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "contains",
+      "source": "api_infrastructure",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/infrastructure.ts",
+      "target": "api_infrastructure::getInfraStats"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_infrastructure::getInfraStats",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/infrastructure.ts",
+      "target": "fetch"
+    },
+    {
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "relation": "calls",
+      "source": "api_infrastructure::getInfraStats",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/infrastructure.ts",
+      "target": "json"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_sports",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/sports.ts",
+      "target": "___api"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "relation": "imports",
+      "source": "api_auth",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/auth.ts",
+      "target": "___api"
+    }
+  ],
+  "nodes": [
+    {
+      "community": 28,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_react-query",
+      "label": "react-query.tsx",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "source_line": null
+    },
+    {
+      "community": 39,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_react-query::ReactQueryProvider",
+      "label": "ReactQueryProvider()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "source_line": 5
+    },
+    {
+      "community": 28,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "_tanstack_react_query",
+      "label": "_tanstack_react_query",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "source_line": null
+    },
+    {
+      "community": 28,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "react",
+      "label": "react",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "source_line": null
+    },
+    {
+      "community": 39,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "usestate",
+      "label": "usestate",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/react-query.tsx",
+      "source_line": null
+    },
+    {
+      "community": 24,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_api",
+      "label": "api.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 24,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_api::ApiError",
+      "label": "ApiError",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": 9
+    },
+    {
+      "community": 24,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_api::ApiError::constructor",
+      "label": "constructor()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": 13
+    },
+    {
+      "community": 24,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_api::refreshAccessToken",
+      "label": "refreshAccessToken()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": 43
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_api::apiFetch",
+      "label": "apiFetch()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": 66
+    },
+    {
+      "community": 24,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "super",
+      "label": "super",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 19,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "fetch",
+      "label": "fetch",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 22,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "json",
+      "label": "json",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 24,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "set",
+      "label": "set",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "entries",
+      "label": "entries",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "string",
+      "label": "string",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "tostring",
+      "label": "tostring",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "get",
+      "label": "get",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "stringify",
+      "label": "stringify",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "clear",
+      "label": "clear",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "includes",
+      "label": "includes",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 26,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "text",
+      "label": "text",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api.ts",
+      "source_line": null
+    },
+    {
+      "community": 31,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_translations",
+      "label": "translations.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/translations.ts",
+      "source_line": null
+    },
+    {
+      "community": 31,
+      "docstring": null,
+      "file_type": "code",
+      "id": "lib_translations::translate",
+      "label": "translate()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/translations.ts",
+      "source_line": 27
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_contact",
+      "label": "contact.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/contact.ts",
+      "source_line": null
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "___api",
+      "label": "___api",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/contact.ts",
+      "source_line": null
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_officerApi",
+      "label": "officerApi.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "source_line": null
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_officerApi::officerFetch",
+      "label": "officerFetch()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "source_line": 99
+    },
+    {
+      "community": 16,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_officerApi::uploadOfficerPhoto",
+      "label": "uploadOfficerPhoto()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "source_line": 274
+    },
+    {
+      "community": 16,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "append",
+      "label": "append",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/officerApi.ts",
+      "source_line": null
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_registrations",
+      "label": "registrations.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/registrations.ts",
+      "source_line": null
+    },
+    {
+      "community": 1,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_adminModulesApi",
+      "label": "adminModulesApi.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/adminModulesApi.ts",
+      "source_line": null
+    },
+    {
+      "community": 19,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_adminModulesApi::adminFetch",
+      "label": "adminFetch()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/adminModulesApi.ts",
+      "source_line": 19
+    },
+    {
+      "community": 1,
+      "docstring": null,
+      "file_type": "stub",
+      "id": "__officerapi",
+      "label": "__officerapi",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/adminModulesApi.ts",
+      "source_line": null
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_newsletter",
+      "label": "newsletter.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/newsletter.ts",
+      "source_line": null
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_documents",
+      "label": "documents.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/documents.ts",
+      "source_line": null
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_infrastructure",
+      "label": "infrastructure.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/infrastructure.ts",
+      "source_line": null
+    },
+    {
+      "community": 22,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_infrastructure::getInfraStats",
+      "label": "getInfraStats()",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/infrastructure.ts",
+      "source_line": 99
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_sports",
+      "label": "sports.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/sports.ts",
+      "source_line": null
+    },
+    {
+      "community": 11,
+      "docstring": null,
+      "file_type": "code",
+      "id": "api_auth",
+      "label": "auth.ts",
+      "source_file": "/Users/aryan/Documents/Mero Yuva/frontend/lib/api/auth.ts",
+      "source_line": null
+    }
+  ]
+}
