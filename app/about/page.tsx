@@ -30,10 +30,10 @@ const keyOfficials = [
     email: 'sps.ywprd.uk@gov.in',
   },
   {
-    name: 'Dr. Ashish Chauhan (IAS)',
+    name: 'Smt. Deepti Singh (IAS)',
     role: 'Director — Department of Youth Welfare and PRD',
     desc: 'Responsible for the day-to-day operations, implementation of schemes, and coordination of youth welfare activities across all districts of Uttarakhand.',
-    photo: '/images/ashishChauhan.jpeg',
+    photo: '/images/deeptisingh.png',
     phone: '+91 93687 76459',
     email: 'ykprd.uk@gmail.com',
   },
