@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import PhotoSubmissionModal from '@/components/PhotoSubmissionModal';
@@ -11,6 +11,17 @@ interface GalleryImage {
   description: string;
   mediaUrls: string[];
   district?: { name: string } | null;
+  blockName?: string | null;
+  createdAt: string;
+}
+
+interface FlatImage {
+  src: string;
+  alt: string;
+  name: string;
+  location: string | null;
+  blockName: string | null;
+  description: string;
   createdAt: string;
 }
 
@@ -24,6 +35,35 @@ const fetchGallery = (source: 'DEPARTMENT' | 'USER') =>
 export default function GalleryClient() {
   const [tab, setTab] = useState<GalleryTab>('department');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<FlatImage | null>(null);
+
+  const [fullscreen, setFullscreen] = useState(false);
+
+  const closeLightbox = useCallback(() => { setLightbox(null); setFullscreen(false); }, []);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { if (fullscreen) setFullscreen(false); else closeLightbox(); }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [lightbox, fullscreen, closeLightbox]);
+
+  const downloadImage = useCallback(async (src: string, name: string) => {
+    try {
+      const res = await fetch(src);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${name.replace(/\s+/g, '_')}.jpg`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      window.open(src, '_blank');
+    }
+  }, []);
 
   const { data: deptImages = [] } = useQuery({
     queryKey: ['gallery', 'DEPARTMENT'],
@@ -39,13 +79,15 @@ export default function GalleryClient() {
 
   const activeItems = tab === 'department' ? deptImages : userImages;
 
-  const flatImages = activeItems.flatMap((item) =>
+  const flatImages: FlatImage[] = activeItems.flatMap((item) =>
     item.mediaUrls.map((src) => ({
       src,
       alt: item.fullName,
       name: item.fullName,
       location: item.district?.name ?? null,
+      blockName: item.blockName ?? null,
       description: item.description,
+      createdAt: item.createdAt,
     }))
   );
 
@@ -111,6 +153,7 @@ export default function GalleryClient() {
             {flatImages.map((img, i) => (
               <div
                 key={i}
+                onClick={() => setLightbox(img)}
                 className="relative break-inside-avoid overflow-hidden rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-[#e2e8f0] hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
               >
                 <Image
@@ -148,6 +191,130 @@ export default function GalleryClient() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={closeLightbox}
+        >
+          <div
+            className="relative bg-white rounded-2xl overflow-hidden max-w-5xl w-full max-h-[90vh] flex flex-col md:flex-row shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors text-sm"
+              aria-label="Close"
+            >
+              <i className="fas fa-times" />
+            </button>
+
+            {/* Image */}
+            <div className="relative w-full md:w-[60%] bg-black flex-shrink-0 min-h-[250px] md:min-h-0">
+              <Image
+                src={lightbox.src}
+                alt={lightbox.alt}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+              {/* Image action toolbar */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                <button
+                  onClick={() => downloadImage(lightbox.src, lightbox.alt)}
+                  className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-colors"
+                  title="Download"
+                >
+                  <i className="fas fa-download text-[10px]" />
+                  Download
+                </button>
+                <button
+                  onClick={() => setFullscreen(true)}
+                  className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-colors"
+                  title="Full screen"
+                >
+                  <i className="fas fa-expand text-[10px]" />
+                  Full screen
+                </button>
+              </div>
+            </div>
+
+            {/* Details */}
+            <div className="flex flex-col gap-4 p-6 overflow-y-auto md:w-[40%]">
+              {lightbox.name && lightbox.name !== 'Department' && (
+                <div>
+                  <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Submitted by</p>
+                  <p className="text-gray-800 font-semibold flex items-center gap-2">
+                    <i className="fas fa-user text-[#10b981] text-sm" />
+                    {lightbox.name}
+                  </p>
+                </div>
+              )}
+
+              {(lightbox.location || lightbox.blockName) && (
+                <div>
+                  <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Location</p>
+                  <div className="flex flex-col gap-1">
+                    {lightbox.location && (
+                      <p className="text-gray-700 flex items-center gap-2 text-sm">
+                        <i className="fas fa-map-marker-alt text-[#10b981]" />
+                        {lightbox.location}
+                      </p>
+                    )}
+                    {lightbox.blockName && (
+                      <p className="text-gray-600 flex items-center gap-2 text-sm pl-5">
+                        {lightbox.blockName}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div>
+                <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Description</p>
+                <p className="text-gray-700 text-sm leading-relaxed">{lightbox.description}</p>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-gray-100">
+                <p className="text-xs text-gray-400 flex items-center gap-2">
+                  <i className="fas fa-calendar-alt" />
+                  {new Date(lightbox.createdAt).toLocaleDateString('en-IN', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fullscreen overlay */}
+      {lightbox && fullscreen && (
+        <div
+          className="fixed inset-0 z-[60] bg-black flex items-center justify-center"
+          onClick={() => setFullscreen(false)}
+        >
+          <Image
+            src={lightbox.src}
+            alt={lightbox.alt}
+            fill
+            className="object-contain"
+            sizes="100vw"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            onClick={() => setFullscreen(false)}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors"
+            aria-label="Exit full screen"
+          >
+            <i className="fas fa-compress" />
+          </button>
+        </div>
+      )}
     </>
   );
 }
