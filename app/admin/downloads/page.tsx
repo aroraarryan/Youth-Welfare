@@ -14,6 +14,7 @@ interface Document {
   fileType: FileType;
   fileUrl: string;
   pages: number | null;
+  documentDate: string | null;
   isPublished: boolean;
   uploadedAt: string;
 }
@@ -46,6 +47,7 @@ const emptyForm = {
   fileUrl: "",
   description: "",
   pages: "",
+  documentDate: "",
   isPublished: true,
 };
 
@@ -128,13 +130,14 @@ export default function AdminDownloadsPage() {
   const openEdit = (doc: Document) => {
     setEditingDoc(doc);
     setForm({
-      title:       doc.title,
-      category:    doc.category,
-      fileType:    doc.fileType,
-      fileUrl:     doc.fileUrl,
-      description: doc.description ?? "",
-      pages:       doc.pages != null ? String(doc.pages) : "",
-      isPublished: doc.isPublished,
+      title:        doc.title,
+      category:     doc.category,
+      fileType:     doc.fileType,
+      fileUrl:      doc.fileUrl,
+      description:  doc.description ?? "",
+      pages:        doc.pages != null ? String(doc.pages) : "",
+      documentDate: doc.documentDate ? doc.documentDate.slice(0, 10) : "",
+      isPublished:  doc.isPublished,
     });
     setSelectedFile(null);
     setUploadProgress("");
@@ -182,13 +185,14 @@ export default function AdminDownloadsPage() {
     setSaving(true);
     try {
       const payload: Record<string, any> = {
-        title:       form.title.trim(),
-        category:    form.category,
-        fileType:    form.fileType,
+        title:        form.title.trim(),
+        category:     form.category,
+        fileType:     form.fileType,
         fileUrl,
-        description: form.description.trim() || null,
-        pages:       form.pages ? parseInt(form.pages, 10) : null,
-        isPublished: form.isPublished,
+        description:  form.description.trim() || null,
+        pages:        form.pages ? parseInt(form.pages, 10) : null,
+        documentDate: form.documentDate ? `${form.documentDate}T00:00:00.000Z` : null,
+        isPublished:  form.isPublished,
       };
 
       const url    = editingDoc ? `/api/admin/documents/${editingDoc.id}` : "/api/admin/documents";
@@ -477,6 +481,12 @@ export default function AdminDownloadsPage() {
                 <label className="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wider">Description</label>
                 <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
                   placeholder="Optional brief description…" rows={2} className={inp + " resize-none"} />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wider">Document Date</label>
+                <input type="date" value={form.documentDate} onChange={(e) => setForm({ ...form, documentDate: e.target.value })}
+                  className={inp} />
               </div>
 
               <div className="grid grid-cols-2 gap-3">

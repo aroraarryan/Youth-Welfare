@@ -109,7 +109,7 @@ export default function DownloadsPage() {
                   <th className="text-left px-4 sm:px-6 py-4 text-sm font-semibold text-[#374151] border-b border-[#e2e8f0]">#</th>
                   <th className="text-left px-4 sm:px-6 py-4 text-sm font-semibold text-[#374151] border-b border-[#e2e8f0]">Document Title</th>
                   <th className="text-left px-4 sm:px-6 py-4 text-sm font-semibold text-[#374151] border-b border-[#e2e8f0]">Date</th>
-                  <th className="text-left px-4 sm:px-6 py-4 text-sm font-semibold text-[#374151] border-b border-[#e2e8f0]">Size</th>
+                  <th className="text-left px-4 sm:px-6 py-4 text-sm font-semibold text-[#374151] border-b border-[#e2e8f0]">Pages</th>
                   <th className="text-left px-4 sm:px-6 py-4 text-sm font-semibold text-[#374151] border-b border-[#e2e8f0]">Type</th>
                   <th className="text-left px-4 sm:px-6 py-4 text-sm font-semibold text-[#374151] border-b border-[#e2e8f0]">Action</th>
                 </tr>
@@ -131,7 +131,7 @@ export default function DownloadsPage() {
                   </tr>
                 ) : (
                   documents.map((doc, i) => {
-                    const displayDate = new Date(doc.uploadedAt).toLocaleDateString('en-IN', {
+                    const displayDate = new Date(doc.documentDate ?? doc.uploadedAt).toLocaleDateString('en-IN', {
                       day: '2-digit', month: 'short', year: 'numeric',
                     });
                     const fileIcon = doc.fileType === 'PDF' ? 'fa-file-pdf'

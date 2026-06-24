@@ -12,6 +12,7 @@ export interface Document {
   fileType: FileType;
   fileUrl: string;
   pages: number | null;
+  documentDate: string | null;
   isPublished: boolean;
   uploadedAt: string;
   updatedAt: string;
