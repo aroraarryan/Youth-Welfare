@@ -154,9 +154,11 @@ export default function DownloadsPage() {
             ) : (
               <div className="divide-y divide-[#f0f0f0]">
                 {documents.map((doc, i) => {
-                  const displayDate = new Date(doc.documentDate ?? doc.uploadedAt).toLocaleDateString('en-IN', {
-                    day: '2-digit', month: 'short', year: 'numeric',
-                  });
+                  const displayDate = doc.documentDate
+                    ? new Date(doc.documentDate).toLocaleDateString('en-IN', {
+                        day: '2-digit', month: 'short', year: 'numeric',
+                      })
+                    : null;
                   const fileIcon = doc.fileType === 'PDF' ? 'fa-file-pdf'
                     : doc.fileType === 'DOCX' ? 'fa-file-word'
                     : doc.fileType === 'XLSX' ? 'fa-file-excel'
@@ -169,7 +171,7 @@ export default function DownloadsPage() {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-[#1e293b] leading-snug">{doc.title}</p>
                         <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                          <span className="text-xs text-[#6b7280]">{displayDate}</span>
+                          {displayDate && <span className="text-xs text-[#6b7280]">{displayDate}</span>}
                           {doc.pages && <span className="text-xs text-[#6b7280]">{doc.pages} pg</span>}
                           <span className="bg-[#dbeafe] text-[#1e40af] text-[10px] font-semibold px-2 py-0.5 rounded-full">{doc.fileType}</span>
                         </div>
@@ -229,9 +231,11 @@ export default function DownloadsPage() {
                   </tr>
                 ) : (
                   documents.map((doc, i) => {
-                    const displayDate = new Date(doc.documentDate ?? doc.uploadedAt).toLocaleDateString('en-IN', {
-                      day: '2-digit', month: 'short', year: 'numeric',
-                    });
+                    const displayDate = doc.documentDate
+                      ? new Date(doc.documentDate).toLocaleDateString('en-IN', {
+                          day: '2-digit', month: 'short', year: 'numeric',
+                        })
+                      : null;
                     const fileIcon = doc.fileType === 'PDF' ? 'fa-file-pdf'
                       : doc.fileType === 'DOCX' ? 'fa-file-word'
                       : doc.fileType === 'XLSX' ? 'fa-file-excel'
@@ -247,7 +251,7 @@ export default function DownloadsPage() {
                             <span className="text-sm font-medium text-[#1e293b]">{doc.title}</span>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm text-[#6b7280]">{displayDate}</td>
+                        <td className="px-6 py-4 text-sm text-[#6b7280]">{displayDate ?? ''}</td>
                         <td className="px-6 py-4 text-sm text-[#6b7280]">{doc.pages ? `${doc.pages} pg` : '—'}</td>
                         <td className="px-6 py-4">
                           <span className="bg-[#dbeafe] text-[#1e40af] text-xs font-semibold px-2.5 py-1 rounded-full">
