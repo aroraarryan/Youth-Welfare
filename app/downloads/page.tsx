@@ -5,18 +5,6 @@ import PageHero from '@/components/PageHero';
 import { useDocuments } from '@/hooks/useDocuments';
 import { DocumentCategory } from '@/lib/api/documents';
 
-/**
- * For Cloudinary raw uploads (PDFs, DOCX, XLSX), the browser tries to
- * render them inline and often shows "Failed to load PDF document."
- * Adding fl_attachment forces the server to respond with
- * Content-Disposition: attachment, triggering a proper file download.
- */
-function toDownloadUrl(url: string): string {
-  if (url && url.includes('res.cloudinary.com') && url.includes('/raw/upload/')) {
-    return url.replace('/raw/upload/', '/raw/upload/fl_attachment/');
-  }
-  return url;
-}
 
 const categories: { key: DocumentCategory; label: string }[] = [
   { key: 'FORMS',             label: 'Forms' },
@@ -30,6 +18,15 @@ export default function DownloadsPage() {
   const [activeCategory, setActiveCategory] = useState<DocumentCategory>('FORMS');
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
+  const [selectedYear, setSelectedYear] = useState<number | undefined>(undefined);
+  const [selectedMonth, setSelectedMonth] = useState<number | undefined>(undefined);
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: currentYear - 1999 }, (_, i) => currentYear - i);
+  const months = [
+    'January','February','March','April','May','June',
+    'July','August','September','October','November','December',
+  ];
 
   // Simple debounce on search input
   let debounceTimer: ReturnType<typeof setTimeout>;
@@ -40,13 +37,19 @@ export default function DownloadsPage() {
   };
 
   const { documents, meta, loading, error, page, setPage } =
-    useDocuments(activeCategory, debouncedSearch);
+    useDocuments(activeCategory, debouncedSearch, selectedYear, selectedMonth);
 
   const handleCategoryChange = (key: DocumentCategory) => {
     setActiveCategory(key);
     setSearch('');
     setDebouncedSearch('');
     clearTimeout(debounceTimer);
+  };
+
+  const handleYearChange = (val: string) => {
+    const yr = val ? parseInt(val, 10) : undefined;
+    setSelectedYear(yr);
+    if (!yr) setSelectedMonth(undefined);
   };
 
   return (
@@ -93,6 +96,31 @@ export default function DownloadsPage() {
               className="w-full pl-11 pr-4 py-3 border-2 border-[#e5e7eb] rounded-lg text-sm text-[#374151] outline-none focus:border-[#1e3a8a] transition-colors"
             />
           </div>
+        </div>
+
+        {/* Year / Month filters */}
+        <div className="mb-8 flex justify-center gap-3 flex-wrap">
+          <select
+            value={selectedYear ?? ''}
+            onChange={e => handleYearChange(e.target.value)}
+            className="px-4 py-2.5 border-2 border-[#e5e7eb] rounded-lg text-sm text-[#374151] outline-none focus:border-[#1e3a8a] transition-colors bg-white min-w-[120px]"
+          >
+            <option value="">All Years</option>
+            {years.map(y => (
+              <option key={y} value={y}>{y}</option>
+            ))}
+          </select>
+          <select
+            value={selectedMonth ?? ''}
+            onChange={e => setSelectedMonth(e.target.value ? parseInt(e.target.value, 10) : undefined)}
+            disabled={!selectedYear}
+            className="px-4 py-2.5 border-2 border-[#e5e7eb] rounded-lg text-sm text-[#374151] outline-none focus:border-[#1e3a8a] transition-colors bg-white min-w-[140px] disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <option value="">All Months</option>
+            {months.map((m, i) => (
+              <option key={i + 1} value={i + 1}>{m}</option>
+            ))}
+          </select>
         </div>
 
         {/* Error state */}
@@ -158,7 +186,7 @@ export default function DownloadsPage() {
                         </td>
                         <td className="px-4 sm:px-6 py-4">
                           <a
-                            href={toDownloadUrl(doc.fileUrl)}
+                            href={doc.fileUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-1.5 text-[#1e3a8a] text-sm font-medium hover:text-[#1e40af] transition-colors"

@@ -24,6 +24,8 @@ export const documentsApi = {
     search?: string;
     page?: number;
     limit?: number;
+    year?: number;
+    month?: number;
   }) =>
     api.get<PaginatedResponse<Document>>('/documents', params),
 
