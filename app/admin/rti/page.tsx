@@ -58,6 +58,10 @@ function toDownloadUrl(url: string): string {
   return url;
 }
 
+function toViewerUrl(url: string): string {
+  return `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
+}
+
 async function uploadToCloudinary(file: File): Promise<string> {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const preset    = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
@@ -84,6 +88,7 @@ export default function AdminRtiPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [selectedYear, setSelectedYear] = useState<number | "">("");
+  const [showNoDate, setShowNoDate]     = useState(false);
   const [documents, setDocuments]  = useState<Document[]>([]);
   const [total, setTotal]          = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -265,7 +270,7 @@ export default function AdminRtiPage() {
   const inp = "w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 outline-none focus:border-blue-600 focus:bg-white transition-all";
 
   return (
-    <div className="p-6 max-w-5xl">
+    <div className="p-4 sm:p-6 max-w-5xl">
       <div className="flex justify-between items-start mb-6 gap-4 flex-wrap">
         <div>
           <h2 className="text-xl font-bold text-gray-800">RTI Management</h2>
@@ -296,15 +301,25 @@ export default function AdminRtiPage() {
       )}
 
       {/* Year filter */}
-      <div className="flex items-center gap-3 mb-5">
+      <div className="flex items-center gap-2 mb-5 flex-wrap">
         <select
           value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value ? parseInt(e.target.value, 10) : "")}
+          onChange={(e) => { setSelectedYear(e.target.value ? parseInt(e.target.value, 10) : ""); setShowNoDate(false); }}
           className="px-3 py-2 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 outline-none focus:border-blue-600 transition-all cursor-pointer"
         >
           <option value="">All Years</option>
           {yearOptions.map((y) => <option key={y} value={y}>{y}</option>)}
         </select>
+        <button
+          onClick={() => { setShowNoDate(v => !v); setSelectedYear(""); }}
+          className={`px-3 py-2 rounded-xl text-sm font-semibold border transition-all whitespace-nowrap ${
+            showNoDate
+              ? "bg-amber-500 text-white border-amber-500"
+              : "bg-white text-gray-600 border-gray-200 hover:bg-amber-50 hover:border-amber-300"
+          }`}
+        >
+          <i className="fas fa-calendar-times mr-1.5" />No Date
+        </button>
       </div>
 
       {/* Documents list */}
@@ -327,7 +342,7 @@ export default function AdminRtiPage() {
               </span>
             </div>
             <div className="divide-y divide-gray-100" id="docs-list">
-              {documents.map((doc) => (
+              {(showNoDate ? documents.filter(d => !d.documentDate) : documents).map((doc) => (
                 <div key={doc.id} className="p-4 flex items-start gap-4 hover:bg-gray-50 transition-colors">
                   <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                     <i className={`fas ${FILE_ICON[doc.fileType]} text-lg`} />
@@ -340,9 +355,11 @@ export default function AdminRtiPage() {
                         <div className="flex items-center gap-3 mt-1.5 flex-wrap">
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">{doc.fileType}</span>
                           {doc.pages && <span className="text-[11px] text-gray-400">{doc.pages} pages</span>}
-                          <span className="text-[11px] text-gray-400">
-                            {new Date(doc.documentDate ?? doc.uploadedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
-                          </span>
+                          {doc.documentDate && (
+                            <span className="text-[11px] text-gray-400">
+                              {new Date(doc.documentDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                            </span>
+                          )}
                           {doc.isPublished ? (
                             <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-green-100 text-green-700">Published</span>
                           ) : (
@@ -352,7 +369,7 @@ export default function AdminRtiPage() {
                       </div>
                       {/* Actions */}
                       <div className="flex items-center gap-1.5 flex-shrink-0">
-                        <a href={toDownloadUrl(doc.fileUrl)} target="_blank" rel="noopener noreferrer" title="Preview"
+                        <a href={toViewerUrl(doc.fileUrl)} target="_blank" rel="noopener noreferrer" title="Preview"
                           className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                           <i className="fas fa-external-link-alt text-xs" />
                         </a>

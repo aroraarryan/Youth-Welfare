@@ -1,9 +1,12 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+const BhashiniWidget = dynamic(() => import('./BhashiniWidget'), { ssr: false });
+
 export default function GovHeader() {
-  const { lang, toggleLang, t } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="bg-[#1e3a8a] text-white py-1.5 px-2 sm:px-10 z-[110] relative">
@@ -51,15 +54,7 @@ export default function GovHeader() {
         >
           <i className="fas fa-universal-access" />
         </button>
-        <button
-          onClick={toggleLang}
-          className="bg-transparent border border-white/40 text-white text-sm px-3 py-1.5 rounded-md cursor-pointer flex items-center gap-1.5 hover:bg-white/10 transition-colors"
-          title={lang === 'EN' ? 'Switch to Hindi' : 'Switch to English'}
-        >
-          <span>{lang === 'EN' ? 'हिं' : 'EN'}</span>
-          <span className="text-white/50">|</span>
-          <span className="text-white/60">{lang === 'EN' ? 'EN' : 'हिं'}</span>
-        </button>
+        <BhashiniWidget />
       </div>
       </div>
     </div>

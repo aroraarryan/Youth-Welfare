@@ -260,12 +260,12 @@ export default function OfficersPage() {
                   return (
                     <tr key={o.id} className="hover:bg-gray-50">
                       <td className="px-4 py-3 text-gray-800 font-medium">{o.name}</td>
-                      <td className="px-4 py-3 text-gray-600 font-mono text-xs">{o.username}</td>
+                      <td className="px-4 py-3 text-gray-600 font-mono text-xs">
+                        <span className="notranslate-val" data-val={o.username} />
+                      </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-1.5">
-                          <span className="font-mono text-xs text-gray-700">
-                            {pwVisible ? DEFAULT_PASSWORD : "••••••••••"}
-                          </span>
+                          <span className="notranslate-val font-mono text-xs text-gray-700" data-val={pwVisible ? DEFAULT_PASSWORD : "••••••••••"} />
                           <button
                             onClick={() => togglePasswordVisibility(o.id)}
                             className="text-gray-400 hover:text-gray-600 transition-colors"

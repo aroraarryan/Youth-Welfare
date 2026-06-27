@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Carousel from '@/components/Carousel';
 import FloatingSearchUI from '@/components/FloatingSearchUI';
 import FaqSection from '@/components/FaqSection';
+import SocialMediaSection from '@/components/SocialMediaSection';
 import { getInfraStats } from '@/lib/api/infrastructure';
 import { 
   Building2, 
@@ -243,6 +244,9 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* ── Social Media Section ─────────────────────────────── */}
+      <SocialMediaSection />
 
       {/* ── FAQ Section ─────────────────────────────────────── */}
       <FaqSection />

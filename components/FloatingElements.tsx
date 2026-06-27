@@ -15,11 +15,10 @@ export default function FloatingElements() {
       {/* Fixed social media sidebar */}
       <div className="fixed-social-media">
         {[
-          { href: 'https://facebook.com', icon: 'fab fa-facebook-f', bg: '#1877f2', title: 'Facebook' },
-          { href: 'https://twitter.com',  icon: 'fab fa-twitter',    bg: '#1da1f2', title: 'Twitter' },
-          { href: 'https://instagram.com',icon: 'fab fa-instagram',  bg: '#c13584', title: 'Instagram' },
-          { href: 'https://youtube.com',  icon: 'fab fa-youtube',    bg: '#ff0000', title: 'YouTube' },
-          { href: 'https://linkedin.com', icon: 'fab fa-linkedin-in',bg: '#0077b5', title: 'LinkedIn' },
+          { href: 'https://www.facebook.com/DepartmentofYouthWelfare?rdid=YciUTtsblIserOHt&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1Bfj54mfoK%2F%3Fref%3D1#', icon: 'fab fa-facebook-f', bg: '#1877f2', title: 'Facebook' },
+          { href: 'https://x.com/officialukprd', icon: 'fa-brands fa-x-twitter', bg: '#000000', title: 'X (Twitter)' },
+          { href: 'https://www.instagram.com/officialukprd?igsh=MWpvazJiZ2lxeDBvcQ%3D%3D', icon: 'fab fa-instagram', bg: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)', title: 'Instagram' },
+          { href: 'https://www.youtube.com/@yuvakalyanprd', icon: 'fab fa-youtube', bg: '#ff0000', title: 'YouTube' },
         ].map(s => (
           <a
             key={s.title}

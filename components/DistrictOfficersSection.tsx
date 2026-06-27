@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDistricts } from '@/hooks/useInfrastructure';
 
 interface Officer {
@@ -32,6 +32,19 @@ export default function DistrictOfficersSection() {
       .finally(() => setLoading(false));
   }, [selectedDistrict]);
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const doOfficer = officers.find(o => o.role === 'DO_PRD');
   const boOfficers = officers.filter(o => o.role === 'BO_PRD');
 
@@ -44,17 +57,35 @@ export default function DistrictOfficersSection() {
             Department of Youth Welfare and PRD — Field Officers
           </p>
         </div>
-        <div className="relative min-w-[220px]">
-          <select
-            value={selectedDistrict}
-            onChange={e => setSelectedDistrict(e.target.value)}
+        <div className="relative min-w-[220px]" ref={dropdownRef}>
+          <button
+            type="button"
+            onClick={() => !loadingDistricts && setDropdownOpen(o => !o)}
             disabled={loadingDistricts}
-            className="w-full px-4 py-2.5 border-2 border-[#e2e8f0] rounded-xl text-sm font-semibold text-gray-700 bg-white appearance-none focus:outline-none focus:border-[#1e3a8a] transition-colors cursor-pointer disabled:opacity-60"
+            className="w-full px-4 py-2.5 border-2 border-[#e2e8f0] rounded-xl text-sm font-semibold text-gray-700 bg-white text-left focus:outline-none focus:border-[#1e3a8a] transition-colors cursor-pointer disabled:opacity-60 flex items-center justify-between"
           >
-            <option value="">Select District</option>
-            {districts.map(d => <option key={d.id} value={d.name}>{d.name}</option>)}
-          </select>
-          <i className="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-[#9ca3af] text-xs pointer-events-none" />
+            <span>{selectedDistrict || 'Select District'}</span>
+            <i className={`fas fa-chevron-down text-[#9ca3af] text-xs transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+          </button>
+          {dropdownOpen && (
+            <div className="absolute z-50 mt-1 w-full bg-white border-2 border-[#e2e8f0] rounded-xl shadow-lg max-h-64 overflow-y-auto">
+              <div
+                className="px-4 py-2.5 text-sm text-[#9ca3af] cursor-pointer hover:bg-[#f8fafc]"
+                onClick={() => { setSelectedDistrict(''); setDropdownOpen(false); }}
+              >
+                Select District
+              </div>
+              {districts.map(d => (
+                <div
+                  key={d.id}
+                  className={`px-4 py-2.5 text-sm font-semibold cursor-pointer hover:bg-[#eff6ff] hover:text-[#1e3a8a] transition-colors ${selectedDistrict === d.name ? 'bg-[#eff6ff] text-[#1e3a8a]' : 'text-gray-700'}`}
+                  onClick={() => { setSelectedDistrict(d.name); setDropdownOpen(false); }}
+                >
+                  {d.name}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

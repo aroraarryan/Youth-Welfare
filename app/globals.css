@@ -375,3 +375,42 @@ footer {
 .pac-icon {
   margin-top: 4px;
 }
+
+/* ── Bhashini-proof no-translate: render via CSS, not DOM text ── */
+.notranslate-val {
+  display: inline-block;
+}
+.notranslate-val::before {
+  content: attr(data-val);
+}
+
+/* ── Bhashini disclaimer toast (suppress on language switch) ── */
+[class*="bhashini"][class*="notif"],
+[class*="bhashini"][class*="disclaimer"],
+[class*="bhashini"][class*="toast"],
+[class*="bhashini"][class*="alert"],
+[class*="bhashini"][class*="info"],
+[id*="bhashini"][class*="notif"],
+[id*="bhashini"][class*="disclaimer"] {
+  display: none !important;
+}
+
+/* ── Bhashini widget overrides (white trigger on blue header) ── */
+/* Target only the outermost trigger button, NOT the dropdown panel */
+.bhashini-plugin-container > div:first-child > button:first-child,
+.bhashini-plugin-container > div:first-child > a:first-child,
+.bhashini-plugin-container > button:first-child,
+.bhashini-plugin-container > div:first-child {
+  color: #ffffff !important;
+  background: transparent !important;
+  border: none !important;
+}
+.bhashini-plugin-container > div:first-child svg path,
+.bhashini-plugin-container > div:first-child svg polygon,
+.bhashini-plugin-container > div:first-child svg rect,
+.bhashini-plugin-container > div:first-child svg circle,
+.bhashini-plugin-container > div:first-child img {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  filter: brightness(0) invert(1);
+}
