@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 type Tab = 'instagram' | 'youtube' | 'facebook';
 
 const INSTAGRAM_HANDLE = 'officialukprd';
-const X_HANDLE = 'officialukprd';
 const FACEBOOK_PAGE = 'DepartmentofYouthWelfare';
 
 const YOUTUBE_VIDEOS = [
@@ -20,27 +19,9 @@ const TABS: { id: Tab; label: string; icon: string; color: string }[] = [
   { id: 'facebook', label: 'Facebook',  icon: 'fa-brands fa-facebook-f', color: '#1877F2' },
 ];
 
-declare global {
-  interface Window {
-    twttr?: { widgets?: { load?: () => void } };
-  }
-}
-
 export default function SocialMediaSection() {
   const [activeTab, setActiveTab] = useState<Tab>('instagram');
 
-  // Load Twitter widgets.js when X tab is active
-  useEffect(() => {
-    if (activeTab !== 'x') return;
-    if (!document.querySelector('script[src*="platform.twitter.com/widgets"]')) {
-      const s = document.createElement('script');
-      s.src = 'https://platform.twitter.com/widgets.js';
-      s.async = true;
-      document.body.appendChild(s);
-    } else {
-      window.twttr?.widgets?.load?.();
-    }
-  }, [activeTab]);
 
   const fbSrc = `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
     `https://www.facebook.com/${FACEBOOK_PAGE}`
@@ -91,24 +72,7 @@ export default function SocialMediaSection() {
           </div>
         )}
 
-        {/* X / Twitter timeline */}
-        {activeTab === 'x' && (
-          <div className="flex justify-center">
-            <div className="bg-white rounded-2xl shadow-sm overflow-hidden w-full max-w-[600px] p-4">
-              <a
-                className="twitter-timeline"
-                data-height="520"
-                data-theme="light"
-                data-chrome="noheader nofooter noborders"
-                href={`https://twitter.com/${X_HANDLE}`}
-              >
-                Tweets by {X_HANDLE}
-              </a>
-            </div>
-          </div>
-        )}
-
-        {/* YouTube grid */}
+{/* YouTube grid */}
         {activeTab === 'youtube' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {YOUTUBE_VIDEOS.map((vid, i) => (
