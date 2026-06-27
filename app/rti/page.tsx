@@ -3,15 +3,6 @@
 import { useState } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDocuments } from '@/hooks/useDocuments';
-import { DocumentCategory } from '@/lib/api/documents';
-
-
-const categories: { key: DocumentCategory; label: string }[] = [
-  { key: 'CIRCULARS',         label: 'Circular/GO' },
-  { key: 'SCHEME_GUIDELINES', label: 'Scheme Guidelines' },
-  { key: 'FORMS',             label: 'Forms' },
-  { key: 'REPORTS',           label: 'Reports/Info' },
-];
 
 
 function toDownloadUrl(url: string): string {
@@ -21,8 +12,7 @@ function toDownloadUrl(url: string): string {
   return url;
 }
 
-export default function DownloadsPage() {
-  const [activeCategory, setActiveCategory] = useState<DocumentCategory>('CIRCULARS');
+export default function RtiPage() {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [selectedYear, setSelectedYear] = useState<number | undefined>(undefined);
@@ -35,7 +25,6 @@ export default function DownloadsPage() {
     'July','August','September','October','November','December',
   ];
 
-  // Simple debounce on search input
   let debounceTimer: ReturnType<typeof setTimeout>;
   const handleSearch = (value: string) => {
     setSearch(value);
@@ -44,14 +33,7 @@ export default function DownloadsPage() {
   };
 
   const { documents, meta, loading, error, page, setPage } =
-    useDocuments(activeCategory, debouncedSearch, selectedYear, selectedMonth, 'DOWNLOADS');
-
-  const handleCategoryChange = (key: DocumentCategory) => {
-    setActiveCategory(key);
-    setSearch('');
-    setDebouncedSearch('');
-    clearTimeout(debounceTimer);
-  };
+    useDocuments(undefined, debouncedSearch, selectedYear, selectedMonth, 'RTI');
 
   const handleYearChange = (val: string) => {
     const yr = val ? parseInt(val, 10) : undefined;
@@ -62,10 +44,10 @@ export default function DownloadsPage() {
   return (
     <>
       <PageHero
-        hindiTitle="डाउनलोड"
-        title="Downloads — Youth Welfare & PRD Department"
-        subtitle="Access official forms, circular/GO, scheme documents & reports · Department of Youth Welfare and PRD, Uttarakhand"
-        breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Downloads' }]}
+        hindiTitle="सूचना का अधिकार"
+        title="RTI — Right to Information"
+        subtitle="Access RTI documents, disclosures, circulars & reports · Department of Youth Welfare and PRD, Uttarakhand"
+        breadcrumb={[{ label: 'Home', href: '/' }, { label: 'RTI' }]}
         stats={[
           { value: '13',  label: 'Districts' },
           { value: `${meta?.total ?? '—'}`, label: 'Documents' },
@@ -74,23 +56,6 @@ export default function DownloadsPage() {
       />
 
       <main className="max-w-[1200px] mx-auto px-5 py-12">
-        {/* Category selector */}
-        <div className="flex gap-3 mb-8 justify-center overflow-x-auto no-scrollbar pb-2 sm:pb-0 sm:flex-wrap">
-          {categories.map(cat => (
-            <button
-              key={cat.key}
-              onClick={() => handleCategoryChange(cat.key)}
-              className={`px-4 sm:px-5 py-2 sm:py-2.5 border-2 rounded-lg text-sm sm:text-base font-medium cursor-pointer transition-all whitespace-nowrap ${
-                activeCategory === cat.key
-                  ? 'bg-[#1e3a8a] text-white border-[#1e3a8a]'
-                  : 'bg-white text-[#333] border-[#e1e8ed] hover:bg-[#f8f9fa] hover:border-[#cbd5e1]'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
         {/* Search + filters */}
         <div className="mb-8 flex justify-center gap-3 flex-wrap">
           <div className="relative flex-1 min-w-[200px] max-w-[500px]">
@@ -99,7 +64,7 @@ export default function DownloadsPage() {
               type="text"
               value={search}
               onChange={e => handleSearch(e.target.value)}
-              placeholder="Search documents…"
+              placeholder="Search RTI documents…"
               className="w-full pl-11 pr-4 py-3 border-2 border-[#e5e7eb] rounded-lg text-sm text-[#374151] outline-none focus:border-[#1e3a8a] transition-colors"
             />
           </div>
@@ -157,7 +122,7 @@ export default function DownloadsPage() {
                     <td colSpan={6} className="text-center py-10 text-[#9ca3af] text-sm">
                       {debouncedSearch
                         ? `No documents found for "${debouncedSearch}"`
-                        : 'No documents available in this category.'}
+                        : 'No RTI documents available in this category.'}
                     </td>
                   </tr>
                 ) : (

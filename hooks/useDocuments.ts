@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { documentsApi, Document, DocumentCategory } from '@/lib/api/documents';
+import { documentsApi, Document, DocumentCategory, DocumentSection } from '@/lib/api/documents';
 import { PaginationMeta } from '@/lib/api';
 
 export function useDocuments(
@@ -9,6 +9,7 @@ export function useDocuments(
   search?: string,
   year?: number,
   month?: number,
+  section?: DocumentSection,
 ) {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [meta, setMeta] = useState<PaginationMeta | null>(null);
@@ -23,18 +24,19 @@ export function useDocuments(
     pg = 1,
     yr?: number,
     mo?: number,
+    sec?: DocumentSection,
   ) => {
     setLoading(true);
     setError(null);
-    documentsApi.list({ category: cat, search: q || undefined, page: pg, limit, year: yr, month: mo })
+    documentsApi.list({ category: cat, search: q || undefined, page: pg, limit, year: yr, month: mo, section: sec })
       .then(res => { setDocuments(res.data); setMeta(res.meta); setPageState(pg); })
       .catch(err => setError(err.message ?? 'Failed to load documents'))
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => { load(category, search, 1, year, month); }, [category, search, year, month, load]);
+  useEffect(() => { load(category, search, 1, year, month, section); }, [category, search, year, month, section, load]);
 
-  const setPage = (p: number) => load(category, search, p, year, month);
+  const setPage = (p: number) => load(category, search, p, year, month, section);
 
   return { documents, meta, loading, error, page, setPage };
 }

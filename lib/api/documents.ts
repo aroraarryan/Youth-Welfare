@@ -1,6 +1,7 @@
 import { api, PaginatedResponse } from '../api';
 
 export type DocumentCategory = 'FORMS' | 'CIRCULARS' | 'SCHEME_GUIDELINES' | 'REPORTS';
+export type DocumentSection = 'DOWNLOADS' | 'RTI';
 
 export type FileType = 'PDF' | 'DOCX' | 'XLSX' | 'OTHER';
 
@@ -21,6 +22,7 @@ export interface Document {
 export const documentsApi = {
   list: (params?: {
     category?: DocumentCategory;
+    section?: DocumentSection;
     search?: string;
     page?: number;
     limit?: number;

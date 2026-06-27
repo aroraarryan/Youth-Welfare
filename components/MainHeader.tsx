@@ -26,7 +26,7 @@ export default function MainHeader() {
     { href: '/', label: t('nav_home') },
     { href: '/about', label: t('nav_about') },
     { href: '/gallery', label: t('nav_gallery') },
-    { href: '#', label: t('nav_rti') },
+    { href: '/rti', label: t('nav_rti') },
     { href: '/downloads', label: t('nav_downloads') },
     { href: '/contact', label: t('nav_contact') },
   ];

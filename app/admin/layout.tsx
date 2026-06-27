@@ -77,6 +77,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {navLink("/admin/officers",  "Officers")}
           {navLink("/admin/gallery",   "Gallery Approvals")}
           {navLink("/admin/downloads", "Downloads")}
+          {navLink("/admin/rti",       "RTI")}
           {navLink("/admin/contact",   "Contact Messages")}
 
           {/* Mangal Dal */}

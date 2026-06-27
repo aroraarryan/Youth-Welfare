@@ -23,7 +23,7 @@ const CATEGORIES: { key: DocumentCategory; label: string }[] = [
   { key: "CIRCULARS",         label: "Circular / GO" },
   { key: "SCHEME_GUIDELINES", label: "Scheme Guidelines" },
   { key: "FORMS",             label: "Forms" },
-  { key: "REPORTS",           label: "Reports/Info" },
+  { key: "REPORTS",           label: "Reports" },
 ];
 
 const FILE_TYPES: { key: FileType; label: string; accept: string }[] = [
@@ -51,6 +51,13 @@ const emptyForm = {
   isPublished: true,
 };
 
+function toDownloadUrl(url: string): string {
+  if (url.includes('res.cloudinary.com') && url.includes('/raw/upload/')) {
+    return url.replace('/raw/upload/', '/raw/upload/fl_attachment/');
+  }
+  return url;
+}
+
 async function uploadToCloudinary(file: File): Promise<string> {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const preset    = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
@@ -60,7 +67,6 @@ async function uploadToCloudinary(file: File): Promise<string> {
   fd.append("file", file);
   fd.append("upload_preset", preset);
 
-  // Use 'raw' resource type for non-image files (PDFs, DOCX, XLSX)
   const resourceType = file.type.startsWith("image/") ? "image" : "raw";
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`,
@@ -73,12 +79,11 @@ async function uploadToCloudinary(file: File): Promise<string> {
   return data.secure_url as string;
 }
 
-export default function AdminDownloadsPage() {
+export default function AdminRtiPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [activeCategory, setActiveCategory] = useState<DocumentCategory>("CIRCULARS");
-  const [selectedYear, setSelectedYear]     = useState<number | "">("");
+  const [selectedYear, setSelectedYear] = useState<number | "">("");
   const [documents, setDocuments]  = useState<Document[]>([]);
   const [total, setTotal]          = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -106,11 +111,11 @@ export default function AdminDownloadsPage() {
     process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
   );
 
-  const load = useCallback(async (cat: DocumentCategory, page = 1, year?: number | "") => {
+  const load = useCallback(async (page = 1, year?: number | "") => {
     setLoading(true);
     setError(null);
     try {
-      const params = new URLSearchParams({ category: cat, section: "DOWNLOADS", limit: "10", page: String(page) });
+      const params = new URLSearchParams({ section: "RTI", limit: "10", page: String(page) });
       if (year) params.set("year", String(year));
       const res = await fetch(`/api/admin/documents?${params}`);
       if (res.status === 401) { router.push("/admin/login"); return; }
@@ -126,11 +131,11 @@ export default function AdminDownloadsPage() {
     }
   }, [router]);
 
-  useEffect(() => { load(activeCategory, 1, selectedYear); }, [activeCategory, selectedYear, load]);
+  useEffect(() => { load(1, selectedYear); }, [selectedYear, load]);
 
   const openAdd = () => {
     setEditingDoc(null);
-    setForm({ ...emptyForm, category: activeCategory });
+    setForm({ ...emptyForm });
     setSelectedFile(null);
     setUploadProgress("");
     setFormError("");
@@ -167,7 +172,6 @@ export default function AdminDownloadsPage() {
 
     let fileUrl = form.fileUrl.trim();
 
-    // If a file was selected, upload it first
     if (selectedFile) {
       if (!cloudinaryConfigured) {
         setFormError("Cloudinary is not configured. Please set NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET, or enter a URL manually.");
@@ -197,7 +201,7 @@ export default function AdminDownloadsPage() {
       const payload: Record<string, any> = {
         title:        form.title.trim(),
         category:     form.category,
-        section:      "DOWNLOADS",
+        section:      "RTI",
         fileType:     form.fileType,
         fileUrl,
         description:  form.description.trim() || null,
@@ -217,7 +221,7 @@ export default function AdminDownloadsPage() {
       if (!res.ok) throw new Error(data.error || data.message || "Failed to save.");
 
       setIsModalOpen(false);
-      load(activeCategory);
+      load();
     } catch (err: any) {
       setFormError(err.message);
     } finally {
@@ -248,9 +252,8 @@ export default function AdminDownloadsPage() {
       const res = await fetch(`/api/admin/documents/${id}`, { method: "DELETE" });
       if (!res.ok) { const d = await res.json(); throw new Error(d.error || "Failed"); }
       setConfirmDeleteId(null);
-      // If deleting last item on a non-first page, go back one page
       const nextPage = documents.length === 1 && currentPage > 1 ? currentPage - 1 : currentPage;
-      load(activeCategory, nextPage, selectedYear);
+      load(nextPage, selectedYear);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -265,8 +268,8 @@ export default function AdminDownloadsPage() {
     <div className="p-6 max-w-5xl">
       <div className="flex justify-between items-start mb-6 gap-4 flex-wrap">
         <div>
-          <h2 className="text-xl font-bold text-gray-800">Downloads Management</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Manage documents available for public download.</p>
+          <h2 className="text-xl font-bold text-gray-800">RTI Management</h2>
+          <p className="text-sm text-gray-500 mt-0.5">Manage RTI documents available for public access.</p>
         </div>
         <button
           onClick={openAdd}
@@ -292,25 +295,12 @@ export default function AdminDownloadsPage() {
         </div>
       )}
 
-      {/* Category tabs + year filter */}
-      <div className="flex items-center gap-3 mb-5 flex-wrap">
-        <div className="flex gap-1 bg-white border border-gray-200 rounded-xl p-1 flex-wrap flex-1 min-w-0">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all ${
-                activeCategory === cat.key ? "bg-blue-700 text-white shadow-sm" : "text-gray-600 hover:bg-gray-50"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+      {/* Year filter */}
+      <div className="flex items-center gap-3 mb-5">
         <select
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value ? parseInt(e.target.value, 10) : "")}
-          className="px-3 py-2 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 outline-none focus:border-blue-600 transition-all cursor-pointer flex-shrink-0"
+          className="px-3 py-2 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 outline-none focus:border-blue-600 transition-all cursor-pointer"
         >
           <option value="">All Years</option>
           {yearOptions.map((y) => <option key={y} value={y}>{y}</option>)}
@@ -326,14 +316,14 @@ export default function AdminDownloadsPage() {
         ) : documents.length === 0 ? (
           <div className="text-center py-16 text-gray-400">
             <i className="fas fa-file-download text-4xl mb-3 block text-gray-200" />
-            <p className="text-sm mb-3">No documents in this category.</p>
+            <p className="text-sm mb-3">No RTI documents in this category.</p>
             <button onClick={openAdd} className="text-blue-600 text-sm font-semibold hover:underline">Add the first document</button>
           </div>
         ) : (
           <div>
             <div className="px-5 py-3 border-b border-gray-100 bg-gray-50">
               <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                {CATEGORIES.find((c) => c.key === activeCategory)?.label} · {total} document{total !== 1 ? "s" : ""}
+                RTI Documents · {total} document{total !== 1 ? "s" : ""}
               </span>
             </div>
             <div className="divide-y divide-gray-100" id="docs-list">
@@ -362,7 +352,7 @@ export default function AdminDownloadsPage() {
                       </div>
                       {/* Actions */}
                       <div className="flex items-center gap-1.5 flex-shrink-0">
-                        <a href={doc.fileUrl} target="_blank" rel="noopener noreferrer" title="Preview"
+                        <a href={toDownloadUrl(doc.fileUrl)} target="_blank" rel="noopener noreferrer" title="Preview"
                           className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                           <i className="fas fa-external-link-alt text-xs" />
                         </a>
@@ -400,7 +390,7 @@ export default function AdminDownloadsPage() {
             {totalPages > 1 && (
               <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 bg-gray-50">
                 <button
-                  onClick={() => load(activeCategory, currentPage - 1, selectedYear)}
+                  onClick={() => load(currentPage - 1, selectedYear)}
                   disabled={currentPage <= 1 || loading}
                   className="px-3 py-1.5 rounded-lg text-sm font-semibold text-gray-600 border border-gray-200 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                 >
@@ -410,7 +400,7 @@ export default function AdminDownloadsPage() {
                   Page {currentPage} of {totalPages}
                 </span>
                 <button
-                  onClick={() => load(activeCategory, currentPage + 1, selectedYear)}
+                  onClick={() => load(currentPage + 1, selectedYear)}
                   disabled={currentPage >= totalPages || loading}
                   className="px-3 py-1.5 rounded-lg text-sm font-semibold text-gray-600 border border-gray-200 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                 >
@@ -427,7 +417,7 @@ export default function AdminDownloadsPage() {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl my-auto">
             <div className="bg-blue-700 p-5 text-white flex justify-between items-center rounded-t-2xl">
-              <h2 className="text-lg font-bold">{editingDoc ? "Edit Document" : "Add New Document"}</h2>
+              <h2 className="text-lg font-bold">{editingDoc ? "Edit RTI Document" : "Add New RTI Document"}</h2>
               <button onClick={() => setIsModalOpen(false)} className="text-white/80 hover:text-white w-8 h-8 flex items-center justify-center">
                 <i className="fas fa-times" />
               </button>
@@ -443,25 +433,16 @@ export default function AdminDownloadsPage() {
               <div>
                 <label className="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wider">Document Title <span className="text-red-500">*</span></label>
                 <input type="text" required value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })}
-                  placeholder="e.g. Annual Report 2025" className={inp} />
+                  placeholder="e.g. RTI Annual Disclosure 2025" className={inp} />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wider">Category <span className="text-red-500">*</span></label>
-                  <select required value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value as DocumentCategory })}
-                    className={inp + " appearance-none cursor-pointer"}>
-                    {CATEGORIES.map((c) => <option key={c.key} value={c.key}>{c.label}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wider">File Type <span className="text-red-500">*</span></label>
-                  <select required value={form.fileType}
-                    onChange={(e) => { setForm({ ...form, fileType: e.target.value as FileType }); setSelectedFile(null); if (fileInputRef.current) fileInputRef.current.value = ""; }}
-                    className={inp + " appearance-none cursor-pointer"}>
-                    {FILE_TYPES.map((f) => <option key={f.key} value={f.key}>{f.label}</option>)}
-                  </select>
-                </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wider">File Type <span className="text-red-500">*</span></label>
+                <select required value={form.fileType}
+                  onChange={(e) => { setForm({ ...form, fileType: e.target.value as FileType }); setSelectedFile(null); if (fileInputRef.current) fileInputRef.current.value = ""; }}
+                  className={inp + " appearance-none cursor-pointer"}>
+                  {FILE_TYPES.map((f) => <option key={f.key} value={f.key}>{f.label}</option>)}
+                </select>
               </div>
 
               {/* File upload section */}
@@ -471,7 +452,6 @@ export default function AdminDownloadsPage() {
                 </label>
                 {cloudinaryConfigured ? (
                   <div>
-                    {/* Cloudinary upload */}
                     <div
                       onClick={() => fileInputRef.current?.click()}
                       className={`w-full border-2 border-dashed rounded-xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer transition-all ${
