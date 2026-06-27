@@ -20,9 +20,9 @@ interface Document {
 }
 
 const CATEGORIES: { key: DocumentCategory; label: string }[] = [
-  { key: "FORMS",             label: "Forms" },
   { key: "CIRCULARS",         label: "Circular / GO" },
   { key: "SCHEME_GUIDELINES", label: "Scheme Guidelines" },
+  { key: "FORMS",             label: "Forms" },
   { key: "REPORTS",           label: "Reports" },
 ];
 
@@ -77,11 +77,17 @@ export default function AdminDownloadsPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [activeCategory, setActiveCategory] = useState<DocumentCategory>("FORMS");
+  const [activeCategory, setActiveCategory] = useState<DocumentCategory>("CIRCULARS");
+  const [selectedYear, setSelectedYear]     = useState<number | "">("");
   const [documents, setDocuments]  = useState<Document[]>([]);
   const [total, setTotal]          = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages]   = useState(1);
   const [loading, setLoading]      = useState(false);
   const [error, setError]          = useState<string | null>(null);
+
+  const currentYear = new Date().getFullYear();
+  const yearOptions = Array.from({ length: currentYear - 1999 }, (_, i) => currentYear - i);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingDoc, setEditingDoc]   = useState<Document | null>(null);
@@ -100,15 +106,19 @@ export default function AdminDownloadsPage() {
     process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
   );
 
-  const load = useCallback(async (cat: DocumentCategory) => {
+  const load = useCallback(async (cat: DocumentCategory, page = 1, year?: number | "") => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`/api/admin/documents?category=${cat}&limit=50`);
+      const params = new URLSearchParams({ category: cat, limit: "10", page: String(page) });
+      if (year) params.set("year", String(year));
+      const res = await fetch(`/api/admin/documents?${params}`);
       if (res.status === 401) { router.push("/admin/login"); return; }
       const data = await res.json();
       setDocuments(data.data ?? []);
       setTotal(data.meta?.total ?? data.data?.length ?? 0);
+      setTotalPages(data.meta?.totalPages ?? 1);
+      setCurrentPage(page);
     } catch {
       setError("Failed to load documents.");
     } finally {
@@ -116,7 +126,7 @@ export default function AdminDownloadsPage() {
     }
   }, [router]);
 
-  useEffect(() => { load(activeCategory); }, [activeCategory, load]);
+  useEffect(() => { load(activeCategory, 1, selectedYear); }, [activeCategory, selectedYear, load]);
 
   const openAdd = () => {
     setEditingDoc(null);
@@ -236,9 +246,10 @@ export default function AdminDownloadsPage() {
     try {
       const res = await fetch(`/api/admin/documents/${id}`, { method: "DELETE" });
       if (!res.ok) { const d = await res.json(); throw new Error(d.error || "Failed"); }
-      setDocuments((prev) => prev.filter((d) => d.id !== id));
-      setTotal((t) => Math.max(0, t - 1));
       setConfirmDeleteId(null);
+      // If deleting last item on a non-first page, go back one page
+      const nextPage = documents.length === 1 && currentPage > 1 ? currentPage - 1 : currentPage;
+      load(activeCategory, nextPage, selectedYear);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -280,19 +291,29 @@ export default function AdminDownloadsPage() {
         </div>
       )}
 
-      {/* Category tabs */}
-      <div className="flex gap-1 bg-white border border-gray-200 rounded-xl p-1 mb-5 flex-wrap">
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.key}
-            onClick={() => setActiveCategory(cat.key)}
-            className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all ${
-              activeCategory === cat.key ? "bg-blue-700 text-white shadow-sm" : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            {cat.label}
-          </button>
-        ))}
+      {/* Category tabs + year filter */}
+      <div className="flex items-center gap-3 mb-5 flex-wrap">
+        <div className="flex gap-1 bg-white border border-gray-200 rounded-xl p-1 flex-wrap flex-1 min-w-0">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.key}
+              onClick={() => setActiveCategory(cat.key)}
+              className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all ${
+                activeCategory === cat.key ? "bg-blue-700 text-white shadow-sm" : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+        <select
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value ? parseInt(e.target.value, 10) : "")}
+          className="px-3 py-2 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 outline-none focus:border-blue-600 transition-all cursor-pointer flex-shrink-0"
+        >
+          <option value="">All Years</option>
+          {yearOptions.map((y) => <option key={y} value={y}>{y}</option>)}
+        </select>
       </div>
 
       {/* Documents list */}
@@ -314,7 +335,7 @@ export default function AdminDownloadsPage() {
                 {CATEGORIES.find((c) => c.key === activeCategory)?.label} · {total} document{total !== 1 ? "s" : ""}
               </span>
             </div>
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y divide-gray-100" id="docs-list">
               {documents.map((doc) => (
                 <div key={doc.id} className="p-4 flex items-start gap-4 hover:bg-gray-50 transition-colors">
                   <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -329,7 +350,7 @@ export default function AdminDownloadsPage() {
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">{doc.fileType}</span>
                           {doc.pages && <span className="text-[11px] text-gray-400">{doc.pages} pages</span>}
                           <span className="text-[11px] text-gray-400">
-                            {new Date(doc.uploadedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                            {new Date(doc.documentDate ?? doc.uploadedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                           </span>
                           {doc.isPublished ? (
                             <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-green-100 text-green-700">Published</span>
@@ -375,6 +396,27 @@ export default function AdminDownloadsPage() {
                 </div>
               ))}
             </div>
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 bg-gray-50">
+                <button
+                  onClick={() => load(activeCategory, currentPage - 1, selectedYear)}
+                  disabled={currentPage <= 1 || loading}
+                  className="px-3 py-1.5 rounded-lg text-sm font-semibold text-gray-600 border border-gray-200 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                >
+                  <i className="fas fa-chevron-left mr-1 text-xs" /> Prev
+                </button>
+                <span className="text-xs text-gray-500 font-medium">
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  onClick={() => load(activeCategory, currentPage + 1, selectedYear)}
+                  disabled={currentPage >= totalPages || loading}
+                  className="px-3 py-1.5 rounded-lg text-sm font-semibold text-gray-600 border border-gray-200 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                >
+                  Next <i className="fas fa-chevron-right ml-1 text-xs" />
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

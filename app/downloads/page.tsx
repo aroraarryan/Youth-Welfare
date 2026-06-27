@@ -7,15 +7,15 @@ import { DocumentCategory } from '@/lib/api/documents';
 
 
 const categories: { key: DocumentCategory; label: string }[] = [
-  { key: 'FORMS',             label: 'Forms' },
   { key: 'CIRCULARS',         label: 'Circular/GO' },
   { key: 'SCHEME_GUIDELINES', label: 'Scheme Guidelines' },
+  { key: 'FORMS',             label: 'Forms' },
   { key: 'REPORTS',           label: 'Reports' },
 ];
 
 
 export default function DownloadsPage() {
-  const [activeCategory, setActiveCategory] = useState<DocumentCategory>('FORMS');
+  const [activeCategory, setActiveCategory] = useState<DocumentCategory>('CIRCULARS');
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [selectedYear, setSelectedYear] = useState<number | undefined>(undefined);
@@ -168,7 +168,7 @@ export default function DownloadsPage() {
                       : 'fa-file';
                     return (
                       <tr key={doc.id} className="border-b border-[#f0f0f0] hover:bg-[#f8fafc] transition-colors">
-                        <td className="px-4 sm:px-6 py-4 text-sm text-[#6b7280]">{(page - 1) * 20 + i + 1}</td>
+                        <td className="px-4 sm:px-6 py-4 text-sm text-[#6b7280]">{(page - 1) * 10 + i + 1}</td>
                         <td className="px-4 sm:px-6 py-4">
                           <div className="flex items-center gap-3">
                             <div className="w-9 h-9 bg-[#fee2e2] rounded-lg flex items-center justify-center flex-shrink-0">

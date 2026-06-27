@@ -15,7 +15,7 @@ export function useDocuments(
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPageState] = useState(1);
-  const limit = 20;
+  const limit = 10;
 
   const load = useCallback((
     cat?: DocumentCategory,
