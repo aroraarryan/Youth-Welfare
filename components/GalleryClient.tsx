@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import PhotoSubmissionModal from '@/components/PhotoSubmissionModal';
 
@@ -33,7 +35,9 @@ const fetchGallery = (source: 'DEPARTMENT' | 'USER') =>
     .then((d) => d.data as GalleryImage[]);
 
 export default function GalleryClient() {
-  const [tab, setTab] = useState<GalleryTab>('department');
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get('tab') === 'users' ? 'users' : 'department';
+  const [tab, setTab] = useState<GalleryTab>(initialTab);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lightbox, setLightbox] = useState<FlatImage | null>(null);
 
@@ -123,7 +127,7 @@ export default function GalleryClient() {
             }`}
           >
             <i className="fas fa-building mr-2" />
-            Uploaded by Department
+            Media Uploaded by Department
           </button>
           <button
             onClick={() => setTab('users')}
@@ -134,8 +138,15 @@ export default function GalleryClient() {
             }`}
           >
             <i className="fas fa-users mr-2" />
-            Uploaded by Users
+            Media Uploaded by Users
           </button>
+          <Link
+            href="/news"
+            className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-gray-200"
+          >
+            <i className="fas fa-newspaper mr-2" />
+            News
+          </Link>
         </div>
 
         {flatImages.length === 0 ? (

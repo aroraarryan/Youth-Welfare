@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDistricts, useOpenGyms } from '@/hooks/useInfrastructure';
 import InfraCard from '@/components/InfraCard';
 import InfraDetailModal from '@/components/InfraDetailModal';
-import { OpenGym } from '@/lib/api/infrastructure';
+import { OpenGym, infrastructureApi } from '@/lib/api/infrastructure';
 
 export default function OpenGymPage() {
   const { districts, loading: loadingDistricts } = useDistricts();
@@ -14,6 +14,11 @@ export default function OpenGymPage() {
 
   const { gyms, loading, error } = useOpenGyms(selectedDistrictId || undefined);
   const [selectedGym, setSelectedGym] = useState<OpenGym | null>(null);
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+  useEffect(() => {
+    infrastructureApi.getOpenGyms({ limit: 1 })
+      .then(res => setTotalCount(res.meta?.total ?? null)).catch(() => {});
+  }, []);
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function OpenGymPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Infrastructure' }, { label: 'Open Gyms' }]}
         stats={[
           { value: '13',  label: 'Districts' },
-          { value: '100+', label: 'Stallations' },
+          { value: totalCount !== null ? String(totalCount) : '—', label: 'Stallations' },
           { value: '2026', label: 'Updated' },
         ]}
       />

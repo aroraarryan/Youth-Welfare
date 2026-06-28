@@ -133,7 +133,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-4">
               {[
-                { href: '#',        label: 'Press Release' },
+                { href: '/news',    label: 'Press Release' },
                 { href: '/gallery', label: 'Photo Gallery' },
                 { href: '#',        label: 'Terms & Conditions' },
                 { href: '#',        label: 'Disclaimer' },

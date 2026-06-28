@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDistricts, useKhelMaidaans } from '@/hooks/useInfrastructure';
 import InfraCard from '@/components/InfraCard';
 import InfraDetailModal from '@/components/InfraDetailModal';
-import { KhelMaidaan } from '@/lib/api/infrastructure';
+import { KhelMaidaan, infrastructureApi } from '@/lib/api/infrastructure';
 
 export default function KhelMaidaanPage() {
   const { districts, loading: loadingDistricts } = useDistricts();
@@ -14,6 +14,11 @@ export default function KhelMaidaanPage() {
 
   const { maidaans, loading, error } = useKhelMaidaans(selectedDistrictId || undefined);
   const [selectedMaidaan, setSelectedMaidaan] = useState<KhelMaidaan | null>(null);
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+  useEffect(() => {
+    infrastructureApi.getKhelMaidaans({ limit: 1 })
+      .then(res => setTotalCount(res.meta?.total ?? null)).catch(() => {});
+  }, []);
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function KhelMaidaanPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Infrastructure' }, { label: 'Khel Maidaan' }]}
         stats={[
           { value: '13',  label: 'Districts' },
-          { value: '80+', label: 'Maidaans' },
+          { value: totalCount !== null ? String(totalCount) : '—', label: 'Maidaans' },
           { value: '2026', label: 'Updated' },
         ]}
       />

@@ -1,16 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDistricts, useMultipurposeHalls } from '@/hooks/useInfrastructure';
 import InfraCard from '@/components/InfraCard';
 import InfraDetailModal from '@/components/InfraDetailModal';
-import { MultipurposeHall } from '@/lib/api/infrastructure';
+import { MultipurposeHall, infrastructureApi } from '@/lib/api/infrastructure';
 
 export default function MultipurposeHallsPage() {
   const { districts, loading: loadingDistricts } = useDistricts();
   const [selectedDistrictId, setSelectedDistrictId] = useState('');
   const selectedDistrict = districts.find(d => d.id === selectedDistrictId);
+
+  const [totalHalls, setTotalHalls] = useState<number | null>(null);
+  useEffect(() => {
+    infrastructureApi.getMultipurposeHalls({ limit: 1 })
+      .then(res => setTotalHalls(res.meta?.total ?? null))
+      .catch(() => {});
+  }, []);
 
   const { halls, loading, error } = useMultipurposeHalls(selectedDistrictId || undefined);
   const [selectedHall, setSelectedHall] = useState<MultipurposeHall | null>(null);
@@ -24,7 +31,7 @@ export default function MultipurposeHallsPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Infrastructure' }, { label: 'Multipurpose Halls' }]}
         stats={[
           { value: '13',  label: 'Districts' },
-          { value: '80+', label: 'Halls' },
+          { value: totalHalls !== null ? String(totalHalls) : '—', label: 'Halls' },
           { value: '2026', label: 'Updated' },
         ]}
       />

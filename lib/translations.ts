@@ -9,6 +9,7 @@ export type TranslationKey =
   | 'nav_gallery'
   | 'nav_rti'
   | 'nav_downloads'
+  | 'nav_news'
   | 'nav_contact'
   | 'join_community';
 
@@ -21,6 +22,7 @@ const translations: Record<TranslationKey, Record<Lang, string>> = {
   nav_gallery:    { EN: 'Gallery',                                      HI: 'गैलरी' },
   nav_rti:        { EN: 'RTI',                                          HI: 'आरटीआई' },
   nav_downloads:  { EN: 'Downloads',                                    HI: 'डाउनलोड' },
+  nav_news:       { EN: 'News',                                         HI: 'समाचार' },
   nav_contact:    { EN: 'Contact Us',                                   HI: 'संपर्क करें' },
   join_community: { EN: 'Join the Community',                           HI: 'समुदाय से जुड़ें' },
 };

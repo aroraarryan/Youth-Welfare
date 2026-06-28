@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDistricts, useVocationalCenters } from '@/hooks/useInfrastructure';
 import InfraCard from '@/components/InfraCard';
 import InfraDetailModal from '@/components/InfraDetailModal';
-import { VocationalCenter } from '@/lib/api/infrastructure';
+import { VocationalCenter, infrastructureApi } from '@/lib/api/infrastructure';
 
 export default function VocationalTrainingCentersPage() {
   const { districts, loading: loadingDistricts } = useDistricts();
@@ -14,6 +14,11 @@ export default function VocationalTrainingCentersPage() {
 
   const { centers, loading, error } = useVocationalCenters(selectedDistrictId || undefined);
   const [selectedCenter, setSelectedCenter] = useState<VocationalCenter | null>(null);
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+  useEffect(() => {
+    infrastructureApi.getVocationalCenters({ limit: 1 })
+      .then(res => setTotalCount(res.meta?.total ?? null)).catch(() => {});
+  }, []);
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function VocationalTrainingCentersPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Infrastructure' }, { label: 'Vocational Training Centers' }]}
         stats={[
           { value: '13',  label: 'Districts' },
-          { value: '40+', label: 'Centers' },
+          { value: totalCount !== null ? String(totalCount) : '—', label: 'Centers' },
           { value: '2026', label: 'Updated' },
         ]}
       />

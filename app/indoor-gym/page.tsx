@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDistricts, useIndoorGyms } from '@/hooks/useInfrastructure';
 import InfraCard from '@/components/InfraCard';
 import InfraDetailModal from '@/components/InfraDetailModal';
-import { IndoorGym } from '@/lib/api/infrastructure';
+import { IndoorGym, infrastructureApi } from '@/lib/api/infrastructure';
 
 export default function IndoorGymPage() {
   const { districts, loading: loadingDistricts } = useDistricts();
@@ -14,6 +14,11 @@ export default function IndoorGymPage() {
 
   const { gyms, loading, error } = useIndoorGyms(selectedDistrictId || undefined);
   const [selectedGym, setSelectedGym] = useState<IndoorGym | null>(null);
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+  useEffect(() => {
+    infrastructureApi.getIndoorGyms({ limit: 1 })
+      .then(res => setTotalCount(res.meta?.total ?? null)).catch(() => {});
+  }, []);
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function IndoorGymPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Infrastructure' }, { label: 'Indoor Gyms' }]}
         stats={[
           { value: '13',  label: 'Districts' },
-          { value: '60+', label: 'Gyms' },
+          { value: totalCount !== null ? String(totalCount) : '—', label: 'Gyms' },
           { value: '2026', label: 'Updated' },
         ]}
       />

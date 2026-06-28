@@ -59,11 +59,6 @@ export default function AboutPage() {
         title="About Us — Department of Youth Welfare & PRD"
         subtitle="Uttarakhand's Premier Youth Development Department · Serving Youth Across All 13 Districts"
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'About Us' }]}
-        stats={[
-          { value: '13', label: 'Districts' },
-          { value: '118+', label: 'Schemes' },
-          { value: '12.5L+', label: 'Youth Registered' },
-        ]}
       />
 
       <main className="max-w-[1500px] mx-auto px-4 sm:px-10 py-8 sm:py-[50px] pb-15">

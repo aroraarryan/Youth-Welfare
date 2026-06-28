@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDistricts, useMiniStadiums } from '@/hooks/useInfrastructure';
 import InfraCard from '@/components/InfraCard';
 import InfraDetailModal from '@/components/InfraDetailModal';
-import { MiniStadium } from '@/lib/api/infrastructure';
+import { MiniStadium, infrastructureApi } from '@/lib/api/infrastructure';
 
 export default function MiniStadiumsPage() {
   const { districts, loading: loadingDistricts } = useDistricts();
@@ -14,6 +14,11 @@ export default function MiniStadiumsPage() {
 
   const { stadiums, loading, error } = useMiniStadiums(selectedDistrictId || undefined);
   const [selectedStadium, setSelectedStadium] = useState<MiniStadium | null>(null);
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+  useEffect(() => {
+    infrastructureApi.getMiniStadiums({ limit: 1 })
+      .then(res => setTotalCount(res.meta?.total ?? null)).catch(() => {});
+  }, []);
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function MiniStadiumsPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Infrastructure' }, { label: 'Mini Stadiums' }]}
         stats={[
           { value: '13',  label: 'Districts' },
-          { value: '50+', label: 'Stadiums' },
+          { value: totalCount !== null ? String(totalCount) : '—', label: 'Stadiums' },
           { value: '2026', label: 'Updated' },
         ]}
       />

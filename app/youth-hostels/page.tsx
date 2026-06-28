@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
 import { useDistricts, useYouthHostels } from '@/hooks/useInfrastructure';
 import InfraCard from '@/components/InfraCard';
 import InfraDetailModal from '@/components/InfraDetailModal';
-import { YouthHostel } from '@/lib/api/infrastructure';
+import { YouthHostel, infrastructureApi } from '@/lib/api/infrastructure';
 
 export default function YouthHostelsPage() {
   const { districts, loading: loadingDistricts } = useDistricts();
@@ -14,6 +14,11 @@ export default function YouthHostelsPage() {
 
   const { hostels, loading, error } = useYouthHostels(selectedDistrictId || undefined);
   const [selectedHostel, setSelectedHostel] = useState<YouthHostel | null>(null);
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+  useEffect(() => {
+    infrastructureApi.getYouthHostels({ limit: 1 })
+      .then(res => setTotalCount(res.meta?.total ?? null)).catch(() => {});
+  }, []);
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function YouthHostelsPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Infrastructure' }, { label: 'Youth Hostels' }]}
         stats={[
           { value: '13',  label: 'Districts' },
-          { value: '25+', label: 'Hostels' },
+          { value: totalCount !== null ? String(totalCount) : '—', label: 'Hostels' },
           { value: '2026', label: 'Updated' },
         ]}
       />

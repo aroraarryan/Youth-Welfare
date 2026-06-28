@@ -5,6 +5,7 @@ import Carousel from '@/components/Carousel';
 import FloatingSearchUI from '@/components/FloatingSearchUI';
 import FaqSection from '@/components/FaqSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
+import NewsNotificationsSection from '@/components/NewsNotificationsSection';
 import { getInfraStats } from '@/lib/api/infrastructure';
 import { 
   Building2, 
@@ -77,6 +78,9 @@ export default async function HomePage() {
 
       {/* ── Floating Search UI ───────────────────────────────── */}
       <FloatingSearchUI stats={stats} />
+
+      {/* ── News & Notifications Section ─────────────────────── */}
+      <NewsNotificationsSection />
 
       {/* ── Government Schemes Section ───────────────────────── */}
       <section className="pb-0 bg-white mt-[60px] sm:mt-[100px]">

@@ -11,7 +11,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  
+
   const handleLogout = async () => {
     await fetch(`/api/admin/logout`, { method: "POST" });
     router.push("/admin/login");
@@ -46,7 +46,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <h1 className="text-base font-bold leading-none">Admin Panel</h1>
           <p className="text-[10px] text-blue-300 mt-1">Yuva Shakti Portal</p>
         </div>
-        <button 
+        <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="text-xl p-2 hover:bg-blue-700 rounded-lg transition-colors"
         >
@@ -56,7 +56,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Sidebar Overlay */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-[120] md:hidden backdrop-blur-sm transition-opacity"
           onClick={() => setSidebarOpen(false)}
         />
@@ -78,6 +78,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {navLink("/admin/gallery",   "Gallery Approvals")}
           {navLink("/admin/downloads", "Downloads")}
           {navLink("/admin/rti",       "RTI")}
+
+          {/* Content Management */}
+          <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
+            Content Management
+          </p>
+          {navLink("/admin/news", "News")}
+          {navLink("/admin/notifications", "Notifications")}
+
           {navLink("/admin/contact",   "Contact Messages")}
 
           {/* Mangal Dal */}
