@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import PageHero from '@/components/PageHero';
 import GalleryClient from '@/components/GalleryClient';
 
@@ -15,7 +16,9 @@ export default function GalleryPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Gallery' }]}
       />
 
-      <GalleryClient />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <GalleryClient />
+      </Suspense>
     </>
   );
 }
