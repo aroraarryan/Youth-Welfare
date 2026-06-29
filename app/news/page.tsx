@@ -29,7 +29,7 @@ function NewsCard({ article }: NewsCardProps) {
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col hover:shadow-md transition-shadow">
       <div className="relative h-[240px] bg-gradient-to-br from-gray-200 to-gray-300 shrink-0">
         {article.imageUrl ? (
-          <Image src={article.imageUrl} alt={article.title} fill className="object-cover" />
+          <Image src={article.imageUrl} alt={article.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
             <i className="fas fa-newspaper text-5xl text-gray-400" />
@@ -140,7 +140,7 @@ export default function NewsPage() {
             <div className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col lg:flex-row">
               <div className="relative lg:w-1/2 aspect-video lg:aspect-auto min-h-[260px] bg-gradient-to-br from-gray-200 to-gray-300">
                 {featuredArticle.imageUrl ? (
-                  <Image src={featuredArticle.imageUrl} alt={featuredArticle.title} fill className="object-cover" />
+                  <Image src={featuredArticle.imageUrl} alt={featuredArticle.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <i className="fas fa-newspaper text-6xl text-gray-400" />

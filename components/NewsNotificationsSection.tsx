@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useNewsList } from '@/hooks/useNews';
 
 interface NotifItem {
@@ -129,8 +130,7 @@ export default function NewsNotificationsSection() {
                 >
                   <div className="w-[96px] h-[72px] rounded-xl overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center">
                     {item.imageUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
+                      <Image src={item.imageUrl} alt={item.title} width={96} height={72} className="w-full h-full object-cover" />
                     ) : (
                       <i className="fa-solid fa-image text-2xl text-gray-300" />
                     )}

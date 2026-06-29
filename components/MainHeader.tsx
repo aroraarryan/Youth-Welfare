@@ -38,10 +38,10 @@ export default function MainHeader() {
         <div className="flex items-center gap-1.5 lg:gap-5 min-w-0 flex-1">
           <div className="flex items-center gap-1 lg:gap-4 shrink-0">
             <div className="relative w-7 h-7 sm:w-9 sm:h-9 lg:w-[60px] lg:h-[60px]">
-              <Image src="/images/gov-logo.png" alt="Ashoka Chakra" fill className="object-contain" />
+              <Image src="/images/gov-logo.png" alt="Ashoka Chakra" fill sizes="60px" className="object-contain" />
             </div>
             <div className="relative w-9 h-9 sm:w-11 sm:h-11 lg:w-[70px] lg:h-[70px]">
-              <Image src="/images/logo.png" alt="Youth Welfare Logo" fill className="object-contain" />
+              <Image src="/images/logo.png" alt="Youth Welfare Logo" fill sizes="70px" className="object-contain" />
             </div>
           </div>
           <div className="min-w-0 flex flex-col justify-center">

@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 interface InfraCardProps {
   name: string;
   location?: string | null;
@@ -18,10 +20,12 @@ export default function InfraCard({ name, location, districtName, imageUrl, onCl
       {/* Image Container */}
       <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
         {imageUrl ? (
-          <img 
-            src={imageUrl} 
-            alt={name} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+          <Image
+            src={imageUrl}
+            alt={name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center text-gray-300 gap-3">

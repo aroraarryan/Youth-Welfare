@@ -74,7 +74,7 @@ export default function NewsDetailPage() {
             >
               <div className="relative w-20 h-14 rounded shrink-0 bg-gray-200 overflow-hidden">
                 {a.imageUrl && (
-                  <Image src={a.imageUrl} alt={a.title} fill className="object-cover" />
+                  <Image src={a.imageUrl} alt={a.title} fill sizes="80px" className="object-cover" />
                 )}
               </div>
               <div className="flex-1 min-w-0">
@@ -91,7 +91,7 @@ export default function NewsDetailPage() {
       <main className="flex-1 p-6 lg:p-12 max-w-4xl">
         {article.imageUrl && (
           <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-8">
-            <Image src={article.imageUrl} alt={article.title} fill className="object-cover" />
+            <Image src={article.imageUrl} alt={article.title} fill sizes="(max-width: 1024px) 100vw, calc(100vw - 320px)" className="object-cover" />
           </div>
         )}
         <span className="inline-block bg-[#1e3a8a] text-white text-xs font-bold px-3 py-1 mb-4">NEWS</span>
