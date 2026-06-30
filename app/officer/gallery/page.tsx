@@ -147,7 +147,7 @@ export default function OfficerGalleryPage() {
                         onClick={() => setLightbox({ images: item.mediaUrls, index: i })}
                         className="w-20 h-16 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 relative flex-shrink-0 hover:ring-2 hover:ring-teal-400 transition-all group"
                       >
-                        <img src={url} alt="" className="w-full h-full object-cover group-hover:brightness-90 transition-all" />
+                        <img src={url} alt={`Gallery thumbnail ${i + 1}`} className="w-full h-full object-cover group-hover:brightness-90 transition-all" />
                         {i === 2 && item.mediaUrls.length > 3 && (
                           <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-xs font-bold">
                             +{item.mediaUrls.length - 3}

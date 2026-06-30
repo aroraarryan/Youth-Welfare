@@ -418,7 +418,7 @@ export default function InfrastructureForm({
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                 {images.map((img, idx) => (
                   <div key={idx} className="relative aspect-square rounded-xl overflow-hidden border-2 border-[#e5e7eb] group bg-gray-50">
-                    <img src={img.preview} alt="preview" className="w-full h-full object-cover" />
+                    <img src={img.preview} alt={`Infrastructure image ${idx + 1}`} className="w-full h-full object-cover" />
                     {!img.uploadedUrl && img.file && (
                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                         <i className="fas fa-circle-notch fa-spin text-white" />

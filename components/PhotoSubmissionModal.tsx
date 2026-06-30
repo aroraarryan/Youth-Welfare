@@ -249,7 +249,7 @@ export default function PhotoSubmissionModal({ isOpen, onClose }: PhotoSubmissio
                       <p className="text-[10px] text-gray-500 font-medium truncate w-full">{item.file.name}</p>
                     </div>
                   ) : (
-                    <img src={item.preview} alt="upload" className="w-full h-full object-cover" />
+                    <img src={item.preview} alt={item.file?.name ? `Preview of ${item.file.name}` : 'Photo preview'} className="w-full h-full object-cover" />
                   )}
                   <button type="button" onClick={() => removeMedia(idx)} className="absolute top-2 right-2 w-7 h-7 bg-red-500 text-white rounded-lg flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
                     <i className="fas fa-trash-alt text-xs" />

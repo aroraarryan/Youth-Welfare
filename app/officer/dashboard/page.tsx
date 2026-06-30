@@ -251,7 +251,7 @@ export default function OfficerDashboardPage() {
                     <label className="text-xs text-gray-500 mb-1.5 block uppercase font-semibold">Profile Photo</label>
                     <div className="flex items-center gap-3">
                       {photoPreview ? (
-                        <img src={photoPreview} alt="preview" className="w-14 h-14 rounded-full object-cover border border-gray-200 flex-shrink-0" />
+                        <img src={photoPreview} alt="Profile photo preview" className="w-14 h-14 rounded-full object-cover border border-gray-200 flex-shrink-0" />
                       ) : (
                         <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-300 flex-shrink-0">
                           <i className="fas fa-user text-xl" />
@@ -286,7 +286,7 @@ export default function OfficerDashboardPage() {
                   {profileMsg && <p className="text-xs text-green-600 bg-green-50 p-2 rounded">{profileMsg}</p>}
                   {officer.profilePhotoUrl && (
                     <div className="flex justify-center mb-2">
-                      <img src={officer.profilePhotoUrl} alt="profile" className="w-16 h-16 rounded-full object-cover border-2 border-gray-200" />
+                      <img src={officer.profilePhotoUrl} alt={`${officer.name} profile photo`} className="w-16 h-16 rounded-full object-cover border-2 border-gray-200" />
                     </div>
                   )}
                   <Row label="Designation" value={designationLabel} />
@@ -322,7 +322,7 @@ export default function OfficerDashboardPage() {
                     <label className="text-xs text-gray-500 mb-1.5 block uppercase font-semibold">Profile Photo</label>
                     <div className="flex items-center gap-3">
                       {viPhotoPreview ? (
-                        <img src={viPhotoPreview} alt="preview" className="w-14 h-14 rounded-full object-cover border border-gray-200 flex-shrink-0" />
+                        <img src={viPhotoPreview} alt="VI officer photo preview" className="w-14 h-14 rounded-full object-cover border border-gray-200 flex-shrink-0" />
                       ) : (
                         <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-300 flex-shrink-0">
                           <i className="fas fa-user text-xl" />
@@ -356,7 +356,7 @@ export default function OfficerDashboardPage() {
                   {viMsg && <p className="text-xs text-green-600 bg-green-50 p-2 rounded">{viMsg}</p>}
                   {officer.viPhotoUrl && (
                     <div className="flex justify-center mb-2">
-                      <img src={officer.viPhotoUrl} alt="vi profile" className="w-16 h-16 rounded-full object-cover border-2 border-gray-200" />
+                      <img src={officer.viPhotoUrl} alt={`${officer.viName || 'VI officer'} profile photo`} className="w-16 h-16 rounded-full object-cover border-2 border-gray-200" />
                     </div>
                   )}
                   <Row label="Designation" value={viDesignationLabel} />
@@ -402,7 +402,7 @@ export default function OfficerDashboardPage() {
                   <label className="text-xs text-gray-500 mb-1.5 block uppercase font-semibold">Profile Photo</label>
                   <div className="flex items-center gap-3">
                     {photoPreview ? (
-                      <img src={photoPreview} alt="preview" className="w-14 h-14 rounded-full object-cover border border-gray-200 flex-shrink-0" />
+                      <img src={photoPreview} alt="Profile photo preview" className="w-14 h-14 rounded-full object-cover border border-gray-200 flex-shrink-0" />
                     ) : (
                       <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-300 flex-shrink-0">
                         <i className="fas fa-user text-xl" />
@@ -437,7 +437,7 @@ export default function OfficerDashboardPage() {
                 {profileMsg && <p className="text-xs text-green-600 bg-green-50 p-2 rounded">{profileMsg}</p>}
                 {officer.profilePhotoUrl && (
                   <div className="flex justify-center mb-2">
-                    <img src={officer.profilePhotoUrl} alt="profile" className="w-16 h-16 rounded-full object-cover border-2 border-gray-200" />
+                    <img src={officer.profilePhotoUrl} alt={`${officer.name} profile photo`} className="w-16 h-16 rounded-full object-cover border-2 border-gray-200" />
                   </div>
                 )}
                 <Row label="Designation" value={designationLabel} />
@@ -544,7 +544,7 @@ export default function OfficerDashboardPage() {
                 <div key={item.id} className="p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 items-start hover:bg-gray-50 transition-colors">
                   <div className="w-full sm:w-24 h-48 sm:h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
                     {item.mediaUrls?.[0] ? (
-                      <img src={item.mediaUrls[0]} alt="submission" className="w-full h-full object-cover" />
+                      <img src={item.mediaUrls[0]} alt={`Gallery submission by ${item.fullName || 'officer'}`} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-300"><i className="fas fa-image text-2xl" /></div>
                     )}
