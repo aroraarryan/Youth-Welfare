@@ -4,12 +4,36 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 
 const slides = [
-  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.08.jpeg', alt: 'Youth Welfare Event 1' },
-  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.09.jpeg', alt: 'Youth Welfare Event 2' },
-  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.12.jpeg', alt: 'Youth Welfare Event 3' },
-  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.13.jpeg', alt: 'Youth Welfare Event 4' },
-  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.14.jpeg', alt: 'Youth Welfare Event 5' },
-  { src: '/images/carousel/WhatsApp Image 2026-05-09 at 11.01.16.jpeg', alt: 'Youth Welfare Event 6' },
+  {
+    src: '/images/carousel/cm-championship-trophy-closing-ceremony-2026.jpeg',
+    alt: 'Chief Minister Pushkar Singh Dhami with youth athletes at the closing ceremony of Mukhyamantri Championship Trophy Uttarakhand 2025-26, February 2026',
+    caption: 'Mukhyamantri Championship Trophy 2025–26 · Closing Ceremony',
+  },
+  {
+    src: '/images/carousel/cm-championship-trophy-presentation-2026.jpeg',
+    alt: 'Trophy presentation at Mukhyamantri Championship Trophy 2025-26 closing ceremony with flower petals raining on stage',
+    caption: 'Mukhyamantri Championship Trophy 2025–26 · Trophy Presentation',
+  },
+  {
+    src: '/images/carousel/prd-personnel-parade-drill.jpeg',
+    alt: 'Prantiya Rakshak Dal (PRD) personnel in uniform performing parade drill formation on a sports ground',
+    caption: 'Prantiya Rakshak Dal · Annual Parade & Drill',
+  },
+  {
+    src: '/images/carousel/young-leaders-dialogue-2026-samvad-dehradun.jpeg',
+    alt: 'Uttarakhand youth delegation with CM Pushkar Singh Dhami at Mukhya Sevak Sadan, Dehradun, ahead of Viksit Bharat Young Leaders Dialogue 2026',
+    caption: 'Viksit Bharat Young Leaders Dialogue 2026 · Samvad with CM',
+  },
+  {
+    src: '/images/carousel/young-leaders-dialogue-2026-flag-off.jpeg',
+    alt: 'Flag-off ceremony for Uttarakhand youth delegation to Viksit Bharat Young Leaders Dialogue 2026 in New Delhi, with delegates in traditional regional attire',
+    caption: 'Viksit Bharat Young Leaders Dialogue 2026 · Flag-Off Ceremony',
+  },
+  {
+    src: '/images/carousel/young-leaders-dialogue-2026-youth-delegation.jpeg',
+    alt: 'Uttarakhand youth delegates in traditional Garhwali and Kumaoni attire at the Viksit Bharat Young Leaders Dialogue 2026 flag-off',
+    caption: 'Viksit Bharat Young Leaders Dialogue 2026 · Youth Delegation',
+  },
 ];
 
 export default function Carousel() {
@@ -55,6 +79,13 @@ export default function Carousel() {
               className="object-cover object-center"
               sizes="100vw"
             />
+            {i === current && slide.caption && (
+              <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/65 to-transparent pt-8 pb-4 px-4 sm:px-6">
+                <p className="text-white text-[11px] sm:text-xs lg:text-sm font-semibold tracking-wide drop-shadow-lg">
+                  {slide.caption}
+                </p>
+              </div>
+            )}
           </div>
         ))}
 
@@ -75,7 +106,7 @@ export default function Carousel() {
         </button>
 
         {/* Indicators */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        <div className="absolute bottom-10 sm:bottom-12 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, i) => (
             <button
               key={i}
