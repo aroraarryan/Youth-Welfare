@@ -61,6 +61,7 @@ export default function MainHeader() {
                 <Link
                   href={href}
                   aria-current={pathname === href ? 'page' : undefined}
+                  suppressHydrationWarning
                   className="no-underline text-[#2c3e50] font-bold text-[13px] uppercase tracking-tight py-2 hover:text-[#1e3a8a] transition-colors"
                 >
                   {label}
@@ -164,7 +165,7 @@ export default function MainHeader() {
           <ul className="list-none p-0 m-0 flex flex-col gap-6">
             {navLinks.map(({ href, label }) => (
               <li key={href}>
-                <Link href={href} onClick={() => setMenuOpen(false)} aria-current={pathname === href ? 'page' : undefined} className="no-underline text-[#1e293b] font-bold text-lg block py-2 border-b border-gray-50 hover:text-[#1e3a8a]">
+                <Link href={href} onClick={() => setMenuOpen(false)} aria-current={pathname === href ? 'page' : undefined} suppressHydrationWarning className="no-underline text-[#1e293b] font-bold text-lg block py-2 border-b border-gray-50 hover:text-[#1e3a8a]">
                   {label}
                 </Link>
               </li>
