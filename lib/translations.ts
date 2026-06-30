@@ -11,7 +11,13 @@ export type TranslationKey =
   | 'nav_downloads'
   | 'nav_news'
   | 'nav_contact'
-  | 'join_community';
+  | 'join_community'
+  | 'a11y_skip_main'
+  | 'a11y_font_decrease'
+  | 'a11y_font_normal'
+  | 'a11y_font_increase'
+  | 'a11y_high_contrast'
+  | 'a11y_toolbar_label';
 
 const translations: Record<TranslationKey, Record<Lang, string>> = {
   gov_name:       { EN: 'Government of Uttarakhand',                   HI: 'उत्तराखंड सरकार' },
@@ -25,6 +31,12 @@ const translations: Record<TranslationKey, Record<Lang, string>> = {
   nav_news:       { EN: 'News',                                         HI: 'समाचार' },
   nav_contact:    { EN: 'Contact Us',                                   HI: 'संपर्क करें' },
   join_community: { EN: 'Join the Community',                           HI: 'समुदाय से जुड़ें' },
+  a11y_skip_main: { EN: 'Skip to main content',                         HI: 'मुख्य सामग्री पर जाएं' },
+  a11y_font_decrease: { EN: 'Decrease text size',                       HI: 'टेक्स्ट आकार घटाएं' },
+  a11y_font_normal: { EN: 'Normal text size',                           HI: 'सामान्य टेक्स्ट आकार' },
+  a11y_font_increase: { EN: 'Increase text size',                       HI: 'टेक्स्ट आकार बढ़ाएं' },
+  a11y_high_contrast: { EN: 'High Contrast',                            HI: 'उच्च कंट्रास्ट' },
+  a11y_toolbar_label: { EN: 'Accessibility Options',                   HI: 'सुलभता विकल्प' },
 };
 
 export function translate(key: TranslationKey, lang: Lang): string {
