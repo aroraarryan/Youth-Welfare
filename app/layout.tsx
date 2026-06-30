@@ -7,8 +7,8 @@ import MainHeader from "@/components/MainHeader";
 import Footer from "@/components/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { AccessibilityProvider } from "@/contexts/AccessibilityContext";
 import { ReactQueryProvider } from "@/lib/react-query";
-import { usePathname } from "next/navigation";
 import FloatingElements from "@/components/FloatingElements";
 
 const roboto = Roboto({
@@ -35,12 +35,15 @@ export default function RootLayout({
         <ReactQueryProvider>
         <AuthProvider>
         <LanguageProvider>
+        <AccessibilityProvider>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <GovHeader />
         <MainHeader />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
         <Footer />
 
         <FloatingElements />
+        </AccessibilityProvider>
         </LanguageProvider>
         </AuthProvider>
         </ReactQueryProvider>
