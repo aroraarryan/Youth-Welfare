@@ -48,11 +48,17 @@ export default function FaqSection() {
           <div key={i} className="bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] overflow-hidden">
             <button
               onClick={() => toggle(i)}
-              className={`accordion-header w-full px-5 py-5 text-sm font-semibold text-left border-none outline-none bg-white text-[#2a2a2a] cursor-pointer relative pr-12 ${openIndex === i ? 'active' : ''}`}
+              id={`faq-btn-${i}`}
+              aria-expanded={openIndex === i}
+              aria-controls={`faq-content-${i}`}
+              className={`accordion-header w-full px-5 py-5 text-sm font-semibold text-left border-none bg-white text-[#2a2a2a] cursor-pointer relative pr-12 ${openIndex === i ? 'active' : ''}`}
             >
               {faq.q}
             </button>
             <div
+              id={`faq-content-${i}`}
+              role="region"
+              aria-labelledby={`faq-btn-${i}`}
               className="overflow-hidden bg-[#f6f6f6] transition-all duration-300 px-5"
               style={{ maxHeight: openIndex === i ? '200px' : '0' }}
             >

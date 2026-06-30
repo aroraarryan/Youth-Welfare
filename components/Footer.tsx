@@ -70,7 +70,7 @@ export default function Footer() {
                     onChange={e => setEmail(e.target.value)}
                     placeholder="Enter your email id"
                     required
-                    className="flex-1 px-5 bg-[#2d439a] text-white placeholder-white/40 text-sm outline-none"
+                    className="flex-1 px-5 bg-[#2d439a] text-white placeholder-white/40 text-sm outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-inset"
                   />
                   <button
                     type="submit"
