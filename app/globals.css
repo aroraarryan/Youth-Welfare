@@ -414,3 +414,71 @@ footer {
   stroke: #ffffff !important;
   filter: brightness(0) invert(1);
 }
+
+/* ── Accessibility Utilities ─────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -60px;
+  left: 8px;
+  z-index: 9999;
+  padding: 8px 18px;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 0 0 6px 6px;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #f7941d;
+  outline-offset: 2px;
+}
+
+html.font-large  { font-size: 112.5%; }
+html.font-larger { font-size: 125%; }
+
+html[data-high-contrast='true'] body {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+html[data-high-contrast='true'] a {
+  color: #00ffff !important;
+  text-decoration: underline !important;
+}
+html[data-high-contrast='true'] button,
+html[data-high-contrast='true'] input,
+html[data-high-contrast='true'] select {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+html[data-high-contrast='true'] nav,
+html[data-high-contrast='true'] header,
+html[data-high-contrast='true'] footer {
+  background-color: #000000 !important;
+  border-bottom: 1px solid #ffff00 !important;
+}
+html[data-high-contrast='true'] img {
+  filter: grayscale(100%) contrast(120%);
+}
+
+:focus-visible {
+  outline: 3px solid #f7941d !important;
+  outline-offset: 2px !important;
+  border-radius: 2px;
+}
