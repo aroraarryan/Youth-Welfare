@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { usePortalSession } from '@/hooks/usePortalSession';
 
@@ -13,6 +13,7 @@ export default function MainHeader() {
   const { t } = useLanguage();
   const router = useRouter();
   const { session, loading: sessionLoading, refresh: refreshSession } = usePortalSession();
+  const pathname = usePathname();
 
   const handlePortalLogout = async () => {
     if (!session) return;
@@ -59,6 +60,7 @@ export default function MainHeader() {
               <li key={href}>
                 <Link
                   href={href}
+                  aria-current={pathname === href ? 'page' : undefined}
                   className="no-underline text-[#2c3e50] font-bold text-[13px] uppercase tracking-tight py-2 hover:text-[#1e3a8a] transition-colors"
                 >
                   {label}
@@ -135,17 +137,20 @@ export default function MainHeader() {
             )}
           </div>
 
-          <button className="hidden lg:block text-gray-600 hover:text-[#1e3a8a] transition-colors p-1 lg:p-2">
-            <i className="fas fa-search text-base lg:text-lg" />
+          <button aria-label="Search" className="hidden lg:block text-gray-600 hover:text-[#1e3a8a] transition-colors p-1 lg:p-2">
+            <i aria-hidden="true" className="fas fa-search text-base lg:text-lg" />
           </button>
 
           {/* Mobile Hamburger */}
           <button
             id="menuToggle"
             onClick={() => setMenuOpen(o => !o)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             className="text-xl lg:hidden z-[110] p-1 text-[#1e3a8a]"
           >
-            <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`} />
+            <i aria-hidden="true" className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`} />
           </button>
         </div>
       </div>
@@ -154,12 +159,12 @@ export default function MainHeader() {
       {menuOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] lg:hidden" onClick={() => setMenuOpen(false)} />
       )}
-      <nav className={`fixed top-0 right-0 h-full w-[280px] bg-white shadow-2xl z-[105] transform transition-transform duration-300 ease-in-out lg:hidden ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <nav id="mobile-nav" aria-label="Mobile navigation" className={`fixed top-0 right-0 h-full w-[280px] bg-white shadow-2xl z-[105] transform transition-transform duration-300 ease-in-out lg:hidden ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="p-8 pt-24">
           <ul className="list-none p-0 m-0 flex flex-col gap-6">
             {navLinks.map(({ href, label }) => (
               <li key={href}>
-                <Link href={href} onClick={() => setMenuOpen(false)} className="no-underline text-[#1e293b] font-bold text-lg block py-2 border-b border-gray-50 hover:text-[#1e3a8a]">
+                <Link href={href} onClick={() => setMenuOpen(false)} aria-current={pathname === href ? 'page' : undefined} className="no-underline text-[#1e293b] font-bold text-lg block py-2 border-b border-gray-50 hover:text-[#1e3a8a]">
                   {label}
                 </Link>
               </li>
