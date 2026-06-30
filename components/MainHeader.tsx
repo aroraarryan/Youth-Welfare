@@ -138,7 +138,7 @@ export default function MainHeader() {
             )}
           </div>
 
-          <button aria-label="Search" className="hidden lg:block text-gray-600 hover:text-[#1e3a8a] transition-colors p-1 lg:p-2">
+          <button aria-label="Search" suppressHydrationWarning className="hidden lg:block text-gray-600 hover:text-[#1e3a8a] transition-colors p-1 lg:p-2">
             <i aria-hidden="true" className="fas fa-search text-base lg:text-lg" />
           </button>
 
