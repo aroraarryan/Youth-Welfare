@@ -55,12 +55,12 @@ export default function OfficerDashboardPage() {
 
   const designationLabel =
     officer.role === 'BO_PRD'
-      ? `BO PRD${officer.block ? ` – ${officer.block} Block` : ''}`
+      ? `Regional Youth Welfare & PRD Officer (BO PRD)${officer.block ? ` – ${officer.block} Block` : ''}`
       : officer.role === 'DO_PRD'
-      ? `DO PRD – ${officer.district} District`
+      ? `District Youth Welfare & PRD Officer (DO PRD) – ${officer.district} District`
       : 'Super Admin';
 
-  const viDesignationLabel = `VI – ${officer.block} Block`;
+  const viDesignationLabel = `Vyayam Instructor (VI) – ${officer.block} Block`;
 
   const joinDate = new Date(officer.createdAt).toLocaleDateString('en-IN', {
     day: 'numeric', month: 'long', year: 'numeric',

@@ -52,14 +52,14 @@ export default function DistrictOfficersSection() {
 
   return (
     <div className="mt-[52px] pt-9 border-t-2 border-[#e2e8f0]">
-      <div className="mb-7 pb-4 border-b-2 border-[#e2e8f0] flex flex-col sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-end gap-4">
+      <div className="mb-7 pb-4 border-b-2 border-[#e2e8f0] flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <h2 className="text-[28px] font-bold text-[#1e3a8a] mt-0 mb-1.5">District Officers</h2>
+          <h2 className="text-[28px] font-bold text-[#1e3a8a] mt-0 mb-1.5">District/Block Youth Welfare & PRD Officers</h2>
           <p className="text-[15px] text-[#6b7280] m-0">
             Department of Youth Welfare and PRD — District/Block Officers
           </p>
         </div>
-        <div className="relative min-w-[220px] sm:justify-self-center" ref={dropdownRef}>
+        <div className="relative min-w-[220px]" ref={dropdownRef}>
           <button
             type="button"
             onClick={() => !loadingDistricts && setDropdownOpen(o => !o)}
@@ -89,7 +89,6 @@ export default function DistrictOfficersSection() {
             </div>
           )}
         </div>
-        <div className="hidden sm:block" />
       </div>
 
       {!selectedDistrict ? (
@@ -121,7 +120,7 @@ export default function DistrictOfficersSection() {
                 </div>
                 <div className="flex-1 p-3 flex flex-col gap-1">
                   <h4 className="text-[13px] font-bold text-[#1a202c] m-0 leading-snug">{doOfficer.name}</h4>
-                  <p className="text-[11px] font-semibold text-[#1e3a8a] m-0 italic">District Officer (PRD)</p>
+                  <p className="text-[11px] font-semibold text-[#1e3a8a] m-0 italic">District Youth Welfare & PRD Officer</p>
                   <p className="text-[11px] text-[#6b7280] mt-0.5 flex items-center gap-1">
                     <i className="fas fa-map-marker-alt text-[10px]" /> {doOfficer.district}
                   </p>
@@ -143,7 +142,7 @@ export default function DistrictOfficersSection() {
                   const viCovering = !!off.viName?.trim();
                   const displayName = viCovering ? off.viName! : off.name;
                   const displayEmail = viCovering ? (off.viEmail || off.email) : off.email;
-                  const roleLabel = viCovering ? 'VI (Vyayam Instructor)' : 'Block Officer (PRD)';
+                  const roleLabel = viCovering ? 'VI (Vyayam Instructor)' : 'Regional Youth Welfare & PRD Officer';
                   return (
                     <div key={off.id} className="flex flex-row items-stretch border border-[#e2e8f0] rounded-xl bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] transition-all hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:-translate-y-1">
                       <div className="flex-none w-[64px] flex flex-col items-center justify-center rounded-l-xl text-white/30 text-2xl"
