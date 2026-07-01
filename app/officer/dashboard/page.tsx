@@ -4,6 +4,7 @@ import { useState } from 'react';
 import {
   useCurrentOfficer,
   useUpdateProfile,
+  useUpdateStats,
   useGalleryPending,
   useApproveGallery,
   useRejectGallery,
@@ -13,6 +14,7 @@ import { uploadOfficerPhoto } from '@/lib/api/officerApi';
 export default function OfficerDashboardPage() {
   const { data: officer, isLoading } = useCurrentOfficer();
   const updateProfile = useUpdateProfile();
+  const updateStats = useUpdateStats();
   const { data: pendingGallery } = useGalleryPending();
   const approveGallery = useApproveGallery();
   const rejectGallery = useRejectGallery();
@@ -34,6 +36,12 @@ export default function OfficerDashboardPage() {
   const [viPhotoUploading, setViPhotoUploading] = useState(false);
   const [viMsg, setViMsg] = useState('');
   const [viErr, setViErr] = useState('');
+
+  // Jurisdiction stats edit state
+  const [statsEditMode, setStatsEditMode] = useState(false);
+  const [statsForm, setStatsForm] = useState({ numBlocks: '', numNyayaPanchayats: '', numGramPanchayats: '' });
+  const [statsMsg, setStatsMsg] = useState('');
+  const [statsErr, setStatsErr] = useState('');
 
   // Change password state
   const [pwForm, setPwForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
@@ -86,7 +94,6 @@ export default function OfficerDashboardPage() {
     const payload: Record<string, unknown> = {};
     if (profileForm.name !== officer.name)         payload.name = profileForm.name;
     if (profileForm.email !== officer.email)       payload.email = profileForm.email;
-    if (profileForm.username !== officer.username) payload.username = profileForm.username;
     if (profileForm.phone !== (officer.phone ?? '')) payload.phone = profileForm.phone || null;
 
     if (photoFile) {
@@ -169,6 +176,38 @@ export default function OfficerDashboardPage() {
     }
   };
 
+  // ── Jurisdiction stats handlers ──
+  const startStatsEdit = () => {
+    setStatsForm({
+      numBlocks: officer.numBlocks?.toString() ?? '',
+      numNyayaPanchayats: officer.numNyayaPanchayats?.toString() ?? '',
+      numGramPanchayats: officer.numGramPanchayats?.toString() ?? '',
+    });
+    setStatsMsg('');
+    setStatsErr('');
+    setStatsEditMode(true);
+  };
+
+  const handleStatsSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatsMsg('');
+    setStatsErr('');
+    const toValue = (s: string) => (s.trim() === '' ? null : parseInt(s, 10));
+    const payload: Record<string, unknown> = {
+      numNyayaPanchayats: toValue(statsForm.numNyayaPanchayats),
+      numGramPanchayats: toValue(statsForm.numGramPanchayats),
+    };
+    if (officer.role === 'DO_PRD') payload.numBlocks = toValue(statsForm.numBlocks);
+
+    try {
+      await updateStats.mutateAsync(payload);
+      setStatsMsg('Jurisdiction stats updated successfully.');
+      setStatsEditMode(false);
+    } catch (err: unknown) {
+      setStatsErr(err instanceof Error ? err.message : 'Failed to update stats.');
+    }
+  };
+
   // ── Password handler ──
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -218,6 +257,51 @@ export default function OfficerDashboardPage() {
       <p className="text-2xl font-bold text-teal-700">{officer.district}</p>
       {officer.block && <p className="text-sm text-teal-600 mt-0.5">{officer.block} Block</p>}
       <p className="text-xs text-teal-500 mt-2">Uttarakhand PRD</p>
+    </div>
+  );
+
+  const StatsCard = (
+    <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-semibold text-gray-700">Jurisdiction Stats</h3>
+        {!statsEditMode && (
+          <button onClick={startStatsEdit} className="text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1">
+            <i className="fas fa-pen text-[10px]" /> Edit
+          </button>
+        )}
+      </div>
+      {statsEditMode ? (
+        <form onSubmit={handleStatsSave} className="space-y-3">
+          {statsErr && <p className="text-xs text-red-500 bg-red-50 p-2 rounded">{statsErr}</p>}
+          {officer.role === 'DO_PRD' && (
+            <div>
+              <label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Blocks in District</label>
+              <input type="number" min={0} max={9999} step={1} className={inp} value={statsForm.numBlocks} onChange={(e) => setStatsForm((f) => ({ ...f, numBlocks: e.target.value.replace(/\D/g, '') }))} />
+            </div>
+          )}
+          <div>
+            <label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Nyaya Panchayats {officer.role === 'DO_PRD' ? 'in District' : 'in Block'}</label>
+            <input type="number" min={0} max={9999} step={1} className={inp} value={statsForm.numNyayaPanchayats} onChange={(e) => setStatsForm((f) => ({ ...f, numNyayaPanchayats: e.target.value.replace(/\D/g, '') }))} />
+          </div>
+          <div>
+            <label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Gram Panchayats {officer.role === 'DO_PRD' ? 'in District' : 'in Block'}</label>
+            <input type="number" min={0} max={9999} step={1} className={inp} value={statsForm.numGramPanchayats} onChange={(e) => setStatsForm((f) => ({ ...f, numGramPanchayats: e.target.value.replace(/\D/g, '') }))} />
+          </div>
+          <div className="flex gap-2 pt-1">
+            <button type="submit" disabled={updateStats.isPending} className="flex-1 bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-800 disabled:opacity-60 flex items-center justify-center gap-2">
+              {updateStats.isPending ? <i className="fas fa-circle-notch fa-spin" /> : <i className="fas fa-save" />} Save
+            </button>
+            <button type="button" onClick={() => setStatsEditMode(false)} className="flex-1 py-2 rounded-lg text-sm font-semibold text-gray-500 border border-gray-200 hover:bg-gray-50">Cancel</button>
+          </div>
+        </form>
+      ) : (
+        <div className="space-y-3">
+          {statsMsg && <p className="text-xs text-green-600 bg-green-50 p-2 rounded">{statsMsg}</p>}
+          {officer.role === 'DO_PRD' && <Row label="Blocks in District" value={officer.numBlocks ?? '—'} />}
+          <Row label={officer.role === 'DO_PRD' ? 'Nyaya Panchayats in District' : 'Nyaya Panchayats in Block'} value={officer.numNyayaPanchayats ?? '—'} />
+          <Row label={officer.role === 'DO_PRD' ? 'Gram Panchayats in District' : 'Gram Panchayats in Block'} value={officer.numGramPanchayats ?? '—'} />
+        </div>
+      )}
     </div>
   );
 
@@ -272,7 +356,7 @@ export default function OfficerDashboardPage() {
                   </div>
                   <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Name</label><input className={inp} value={profileForm.name} onChange={(e) => setProfileForm((f) => ({ ...f, name: e.target.value }))} required /></div>
                   <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Email</label><input type="email" className={inp} value={profileForm.email} onChange={(e) => setProfileForm((f) => ({ ...f, email: e.target.value }))} required /></div>
-                  <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Username</label><input className={inp} value={profileForm.username} onChange={(e) => setProfileForm((f) => ({ ...f, username: e.target.value }))} required /></div>
+                  <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Username</label><input className={`${inp} bg-gray-100 cursor-not-allowed text-gray-500`} value={profileForm.username} disabled readOnly /></div>
                   <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Phone</label><input type="tel" className={inp} placeholder="10-digit mobile number" maxLength={10} value={profileForm.phone} onChange={(e) => setProfileForm((f) => ({ ...f, phone: e.target.value.replace(/\D/g, '') }))} /></div>
                   <div className="flex gap-2 pt-1">
                     <button type="submit" disabled={updateProfile.isPending || photoUploading} className="flex-1 bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-800 disabled:opacity-60 flex items-center justify-center gap-2">
@@ -380,6 +464,7 @@ export default function OfficerDashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {ActivityCard}
             {JurisdictionCard}
+            {StatsCard}
           </div>
         </>
       ) : (
@@ -423,7 +508,7 @@ export default function OfficerDashboardPage() {
                 </div>
                 <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Name</label><input className={inp} value={profileForm.name} onChange={(e) => setProfileForm((f) => ({ ...f, name: e.target.value }))} required /></div>
                 <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Email</label><input type="email" className={inp} value={profileForm.email} onChange={(e) => setProfileForm((f) => ({ ...f, email: e.target.value }))} required /></div>
-                <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Username</label><input className={inp} value={profileForm.username} onChange={(e) => setProfileForm((f) => ({ ...f, username: e.target.value }))} required /></div>
+                <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Username</label><input className={`${inp} bg-gray-100 cursor-not-allowed text-gray-500`} value={profileForm.username} disabled readOnly /></div>
                 <div><label className="text-xs text-gray-500 mb-1 block uppercase font-semibold">Phone</label><input type="tel" className={inp} placeholder="10-digit mobile number" maxLength={10} value={profileForm.phone} onChange={(e) => setProfileForm((f) => ({ ...f, phone: e.target.value.replace(/\D/g, '') }))} /></div>
                 <div className="flex gap-2 pt-1">
                   <button type="submit" disabled={updateProfile.isPending || photoUploading} className="flex-1 bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-800 disabled:opacity-60 flex items-center justify-center gap-2">
@@ -459,6 +544,7 @@ export default function OfficerDashboardPage() {
           <div className="space-y-4">
             {ActivityCard}
             {JurisdictionCard}
+            {StatsCard}
           </div>
         </div>
       )}

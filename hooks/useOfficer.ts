@@ -137,6 +137,16 @@ export function useUpdateProfile() {
   });
 }
 
+export function useUpdateStats() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: officerApi.updateStats,
+    onSuccess: (data) => {
+      qc.setQueryData(officerKeys.me, data.officer);
+    },
+  });
+}
+
 // ─── Gallery ──────────────────────────────────────────────────────────────────
 
 export function useGalleryPending() {

@@ -65,6 +65,9 @@ export interface OfficerProfile {
   viEmail: string | null;
   viPhone: string | null;
   viPhotoUrl: string | null;
+  numBlocks: number | null;
+  numNyayaPanchayats: number | null;
+  numGramPanchayats: number | null;
   isActive: boolean;
   createdAt: string;
   lastLogin: string | null;
@@ -139,6 +142,13 @@ export const officerApi = {
     viPhotoUrl?: string | null;
   }): Promise<{ success: boolean; officer: OfficerProfile }> =>
     officerFetch('profile', { method: 'PATCH', body: JSON.stringify(body) }),
+
+  updateStats: (body: {
+    numBlocks?: number | null;
+    numNyayaPanchayats?: number | null;
+    numGramPanchayats?: number | null;
+  }): Promise<{ success: boolean; officer: OfficerProfile }> =>
+    officerFetch('stats', { method: 'PATCH', body: JSON.stringify(body) }),
 
   // ─── Infrastructure ─────────────────────────────────────────────────────────
 
