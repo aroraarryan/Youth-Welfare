@@ -138,33 +138,36 @@ export default function DistrictOfficersSection() {
             <div>
               <p className="text-xs font-bold text-[#0d7e6b] uppercase tracking-widest mb-3">Block Officers ({boOfficers.length})</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {boOfficers.map(off => {
-                  const viCovering = !!off.viName?.trim();
-                  const displayName = viCovering ? off.viName! : off.name;
-                  const displayEmail = viCovering ? (off.viEmail || off.email) : off.email;
-                  const roleLabel = viCovering ? 'VI (Vyayam Instructor)' : 'Regional Youth Welfare & PRD Officer';
-                  return (
-                    <div key={off.id} className="flex flex-row items-stretch border border-[#e2e8f0] rounded-xl bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] transition-all hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:-translate-y-1">
+                {boOfficers.flatMap(off => {
+                  const hasVi = !!off.viName?.trim();
+                  const cards = [
+                    { key: `${off.id}-bo`, name: off.name, email: off.email, roleLabel: 'Regional Youth Welfare & PRD Officer' },
+                  ];
+                  if (hasVi) {
+                    cards.push({ key: `${off.id}-vi`, name: off.viName!, email: off.viEmail || off.email, roleLabel: 'VI (Vyayam Instructor)' });
+                  }
+                  return cards.map(card => (
+                    <div key={card.key} className="flex flex-row items-stretch border border-[#e2e8f0] rounded-xl bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] transition-all hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:-translate-y-1">
                       <div className="flex-none w-[64px] flex flex-col items-center justify-center rounded-l-xl text-white/30 text-2xl"
                         style={{ background: 'linear-gradient(135deg,#0d7e6b 0%,#15a589 100%)' }}>
                         <i className="fas fa-user-tie" />
                       </div>
                       <div className="flex-1 p-3 flex flex-col gap-1">
-                        <h4 className="text-[12.5px] font-bold text-[#1a202c] m-0 leading-snug break-words">{displayName}</h4>
-                        <p className="text-[11px] font-semibold text-[#0d7e6b] m-0 italic">{roleLabel}</p>
+                        <h4 className="text-[12.5px] font-bold text-[#1a202c] m-0 leading-snug break-words">{card.name}</h4>
+                        <p className="text-[11px] font-semibold text-[#0d7e6b] m-0 italic">{card.roleLabel}</p>
                         {off.block && (
                           <p className="text-[11px] text-[#6b7280] mt-0.5 flex items-center gap-1">
                             <i className="fas fa-map-marker-alt text-[10px]" /> {off.block}
                           </p>
                         )}
-                        {displayEmail && (
-                          <a href={`mailto:${displayEmail}`} className="text-[11px] text-[#4a5568] hover:text-[#1e3a8a] flex items-center gap-1 mt-1 break-all">
-                            <i className="fas fa-envelope text-[10px]" /> {displayEmail}
+                        {card.email && (
+                          <a href={`mailto:${card.email}`} className="text-[11px] text-[#4a5568] hover:text-[#1e3a8a] flex items-center gap-1 mt-1 break-all">
+                            <i className="fas fa-envelope text-[10px]" /> {card.email}
                           </a>
                         )}
                       </div>
                     </div>
-                  );
+                  ));
                 })}
               </div>
             </div>
