@@ -40,9 +40,9 @@ body {
   50%       { transform: translateY(-10px); }
 }
 
-@keyframes scroll-text {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* ── Carousel ──────────────────────────────────────────────── */
