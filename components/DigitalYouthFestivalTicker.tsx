@@ -3,7 +3,7 @@ const REPEAT_COUNT = 8;
 
 function TickerItem() {
   return (
-    <span className="flex items-center gap-3 shrink-0 px-6">
+    <span className="flex items-center gap-3 shrink-0 px-10">
       <span className="text-white font-bold text-sm tracking-tight">Digital Youth Festival</span>
       <span className="text-white/70">»</span>
       <a
@@ -14,7 +14,7 @@ function TickerItem() {
       >
         Click here
       </a>
-      <span className="text-white/50 pl-3">•</span>
+      <span className="text-white/50 pl-6">•</span>
     </span>
   );
 }
@@ -22,7 +22,7 @@ function TickerItem() {
 export default function DigitalYouthFestivalTicker() {
   return (
     <div className="w-full bg-[#1e3a8a] overflow-hidden">
-      <div className="flex w-max motion-safe:animate-[marquee-scroll_25s_linear_infinite] hover:[animation-play-state:paused] py-2.5">
+      <div className="flex w-max motion-safe:animate-[marquee-scroll_40s_linear_infinite] hover:[animation-play-state:paused] py-2.5">
         <div className="flex shrink-0">
           {Array.from({ length: REPEAT_COUNT }).map((_, i) => (
             <TickerItem key={`a-${i}`} />
