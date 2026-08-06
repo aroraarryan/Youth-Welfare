@@ -1,13 +1,17 @@
-const FESTIVAL_URL = 'https://khelouk.in/digital-youth-festival';
 const REPEAT_COUNT = 4;
 
-function TickerItem() {
+const ITEMS = [
+  { label: 'Digital Youth Festival', url: 'https://khelouk.in/digital-youth-festival' },
+  { label: 'CM Championship Trophy 2026-27', url: 'https://khelouk.in/registration' },
+];
+
+function TickerItem({ label, url }: { label: string; url: string }) {
   return (
     <span className="flex items-center gap-4 shrink-0 px-16">
-      <span className="text-white font-bold text-sm tracking-tight">Digital Youth Festival</span>
+      <span className="text-white font-bold text-sm tracking-tight">{label}</span>
       <span className="text-white/70">»</span>
       <a
-        href={FESTIVAL_URL}
+        href={url}
         target="_blank"
         rel="noopener noreferrer"
         className="text-white font-semibold text-sm underline underline-offset-2 hover:text-white/80 transition-colors"
@@ -24,14 +28,14 @@ export default function DigitalYouthFestivalTicker() {
     <div className="w-full bg-[#1e3a8a] overflow-hidden">
       <div className="flex w-max motion-safe:animate-[marquee-scroll_60s_linear_infinite] hover:[animation-play-state:paused] py-2.5">
         <div className="flex shrink-0">
-          {Array.from({ length: REPEAT_COUNT }).map((_, i) => (
-            <TickerItem key={`a-${i}`} />
-          ))}
+          {Array.from({ length: REPEAT_COUNT }).map((_, i) =>
+            ITEMS.map((item, j) => <TickerItem key={`a-${i}-${j}`} {...item} />)
+          )}
         </div>
         <div className="flex shrink-0" aria-hidden="true">
-          {Array.from({ length: REPEAT_COUNT }).map((_, i) => (
-            <TickerItem key={`b-${i}`} />
-          ))}
+          {Array.from({ length: REPEAT_COUNT }).map((_, i) =>
+            ITEMS.map((item, j) => <TickerItem key={`b-${i}-${j}`} {...item} />)
+          )}
         </div>
       </div>
     </div>
