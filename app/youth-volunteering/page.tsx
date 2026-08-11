@@ -1,11 +1,5 @@
 import PageHero from '@/components/PageHero';
-import RegistrationForm from '@/components/RegistrationForm';
-
-const preferences = [
-  'Environmental Protection', 'Disaster Relief', 'Community Health',
-  'Education Support', 'Rural Development', 'Women Empowerment',
-  'Blood Donation Camps', 'Tree Plantation', 'Digital Literacy', 'Sports Coaching',
-];
+import ComingSoon from '@/components/ComingSoon';
 
 export const metadata = {
   title: 'Youth Volunteering Registration | Youth Welfare, Uttarakhand',
@@ -29,7 +23,7 @@ export default function YouthVolunteeringPage() {
           { value: '2026',  label: 'Edition' },
         ]}
       />
-      <RegistrationForm type="youth-volunteering" sportOptions={preferences} />
+      <ComingSoon label="Youth Volunteering" />
     </>
   );
 }

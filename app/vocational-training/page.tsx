@@ -1,11 +1,5 @@
 import PageHero from '@/components/PageHero';
-import RegistrationForm from '@/components/RegistrationForm';
-
-const courses = [
-  'Computer Hardware & Networking', 'Beauty & Wellness', 'Electrical Installation',
-  'Plumbing', 'Construction Technology', 'Apparel & Garments',
-  'Food Processing', 'Hospitality', 'Healthcare Assistance', 'Automotive Service',
-];
+import ComingSoon from '@/components/ComingSoon';
 
 export const metadata = {
   title: 'Vocational Training Enrollment | Youth Welfare, Uttarakhand',
@@ -29,7 +23,7 @@ export default function VocationalTrainingPage() {
           { value: '2026', label: 'Batch' },
         ]}
       />
-      <RegistrationForm type="vocational-training" sportOptions={courses} />
+      <ComingSoon label="Vocational Training" />
     </>
   );
 }

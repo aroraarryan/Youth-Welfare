@@ -1,11 +1,5 @@
 import PageHero from '@/components/PageHero';
-import RegistrationForm from '@/components/RegistrationForm';
-
-const activities = [
-  'Rock Climbing', 'River Rafting', 'Trekking', 'Rappelling',
-  'Paragliding', 'Skiing', 'Mountaineering', 'Camping',
-  'Jungle Safari', 'Kayaking',
-];
+import ComingSoon from '@/components/ComingSoon';
 
 export const metadata = {
   title: 'Adventure Training Program | Youth Welfare, Uttarakhand',
@@ -29,7 +23,7 @@ export default function AdventureTrainingPage() {
           { value: '2026', label: 'Batch' },
         ]}
       />
-      <RegistrationForm type="adventure-training" sportOptions={activities} />
+      <ComingSoon label="Adventure Training Program" />
     </>
   );
 }
