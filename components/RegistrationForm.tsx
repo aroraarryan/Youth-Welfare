@@ -345,12 +345,7 @@ export default function RegistrationForm({
             <i className="fas fa-headset" /> Need Help?
           </h3>
           <p className="text-sm text-white/80 mb-2">Call our help desk:</p>
-          <a
-            href="tel:+919368776459"
-            className="text-white font-bold text-base no-underline"
-          >
-            +91 93687 76459
-          </a>
+          <span className="text-white font-bold text-base">N/A</span>
           <p className="text-sm text-white/80 mt-3 mb-1">Email:</p>
           <a
             href="mailto:ykprd.uk@gmail.com"

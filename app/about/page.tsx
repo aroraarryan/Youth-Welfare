@@ -34,7 +34,7 @@ const keyOfficials = [
     role: 'Director — Department of Youth Welfare and PRD',
     desc: 'Responsible for the day-to-day operations, implementation of schemes, and coordination of youth welfare activities across all districts of Uttarakhand.',
     photo: '/images/deeptisingh.png',
-    phone: '+91 93687 76459',
+    phone: 'N/A',
     email: 'ykprd.uk@gmail.com',
   },
 ];
@@ -92,9 +92,13 @@ export default function AboutPage() {
                 <div className="flex flex-col gap-1.5 mt-2.5 pt-2.5 border-t border-[#e2e8f0]">
                   <span className="flex items-start gap-1.5 text-xs text-[#4a5568]">
                     <i className="fas fa-phone-alt text-[#1e3a8a] w-3.5 text-center mt-0.5" />
-                    <a href={`tel:${official.phone}`} className="text-[#4a5568] no-underline hover:text-[#1e3a8a] hover:underline">
-                      {official.phone}
-                    </a>
+                    {official.phone === 'N/A' ? (
+                      <span className="text-[#4a5568]">N/A</span>
+                    ) : (
+                      <a href={`tel:${official.phone}`} className="text-[#4a5568] no-underline hover:text-[#1e3a8a] hover:underline">
+                        {official.phone}
+                      </a>
+                    )}
                   </span>
                   <span className="flex items-start gap-1.5 text-xs text-[#4a5568]">
                     <i className="fas fa-envelope text-[#1e3a8a] w-3.5 text-center mt-0.5" />

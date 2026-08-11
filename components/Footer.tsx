@@ -159,7 +159,7 @@ export default function Footer() {
               </p>
               <div className="flex flex-col gap-2">
                 <p className="text-slate-300 font-medium text-[14px]">
-                  <strong className="text-white">Phone: </strong>+91 93687 76459
+                  <strong className="text-white">Phone: </strong>N/A
                 </p>
                 <p className="text-slate-300 font-medium text-[14px]">
                   <strong className="text-white">Email: </strong>ykprd.uk@gmail.com

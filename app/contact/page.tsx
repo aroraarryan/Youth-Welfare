@@ -64,7 +64,7 @@ export default function ContactPage() {
             <div className="flex flex-col gap-5">
               {[
                 { icon: 'fas fa-home',     text: '05, Tapovan Ashram Rd, Ladpur, Dehradun, Uttarakhand 248008' },
-                { icon: 'fas fa-phone',    text: '+91-93687 76459' },
+                { icon: 'fas fa-phone',    text: 'N/A' },
                 { icon: 'fas fa-envelope', text: 'ykprd.uk@gmail.com' },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4">

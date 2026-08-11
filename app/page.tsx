@@ -266,7 +266,7 @@ export default async function HomePage() {
               Contact Us to get detailed information about schemes.
             </p>
             <button className="bg-[#C0CFE6] text-black border-none px-6 lg:px-10 py-3 lg:py-5 text-lg lg:text-2xl font-bold rounded-lg cursor-pointer w-full lg:w-auto">
-              Help Desk Number +91 93687 76459
+              Help Desk Number N/A
             </button>
           </div>
           <div className="w-full lg:w-auto">
