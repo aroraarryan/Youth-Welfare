@@ -141,18 +141,18 @@ export const registrationsApi = {
   // Khel Mahakumbh
   registerKhel: (payload: KhelMahakumbhPayload) =>
     api.post<RegisterResponse<KhelMahakumbhRegistration>>(
-      "/khel-mahakumbh/register",
+      "/cm-trophy/registration/register",
       payload,
     ),
 
   trackKhel: (registrationNo: string) =>
     api.get<TrackResponse<KhelMahakumbhRegistration>>(
-      `/khel-mahakumbh/track/${registrationNo}`,
+      `/cm-trophy/registration/track/${registrationNo}`,
     ),
 
   myKhelRegistrations: () =>
     api.get<{ success: boolean; data: KhelMahakumbhRegistration[] }>(
-      "/khel-mahakumbh/my",
+      "/cm-trophy/registration/my",
     ),
 
   // Youth Volunteering
@@ -198,7 +198,7 @@ export const registrationsApi = {
     status?: RegistrationStatus;
   }) =>
     api.get<PaginatedResponse<KhelMahakumbhRegistration>>(
-      "/khel-mahakumbh",
+      "/cm-trophy/registration",
       params,
     ),
 
@@ -223,7 +223,7 @@ export const registrationsApi = {
 
   // Admin / Officer — update status
   updateKhelStatus: (id: string, status: RegistrationStatus) =>
-    api.patch(`/khel-mahakumbh/${id}/status`, { status }),
+    api.patch(`/cm-trophy/registration/${id}/status`, { status }),
 
   updateVolunteerStatus: (id: string, status: RegistrationStatus) =>
     api.patch(`/volunteer/${id}/status`, { status }),
