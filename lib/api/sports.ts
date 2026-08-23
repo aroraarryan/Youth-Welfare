@@ -22,8 +22,8 @@ export interface CmTrophySportOption {
 }
 
 export const sportsApi = {
-  list: () =>
-    api.get<{ success: boolean; data: Sport[] }>('/sports'),
+  list: (params?: { limit?: number }) =>
+    api.get<{ success: boolean; data: Sport[] }>('/sports', { limit: params?.limit ?? 100 }),
 
   listByCmTrophyCategory: (ageCategory: string) =>
     api.get<{ success: boolean; data: CmTrophySportOption[] }>(

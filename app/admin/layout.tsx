@@ -74,6 +74,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
         <nav className="flex-1 px-2 py-4 overflow-y-auto pt-20 md:pt-4 space-y-0.5">
           {navLink("/admin/dashboard", "Dashboard")}
+          {navLink("/admin/cm-trophy", "CM Trophy")}
           {navLink("/admin/officers",  "Officers")}
           {navLink("/admin/gallery",   "Gallery Approvals")}
           {navLink("/admin/downloads", "Downloads")}

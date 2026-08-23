@@ -370,7 +370,7 @@ export default function KhelMahakumbhRegistrationForm() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
         {/* Section 1: Personal Details */}
         <fieldset className="bg-white rounded-2xl p-5 lg:p-8 border border-[#e2e8f0] shadow-sm">
-          <legend className="text-lg font-bold text-[#1e3a8a] mb-1 w-full">Personal Details</legend>
+          <div className="text-lg font-bold text-[#1e3a8a] mb-1 w-full">Personal Details</div>
           <p className="text-sm text-[#9ca3af] mb-6 pb-3 border-b border-[#e2e8f0] w-full">व्यक्तिगत विवरण</p>
           <div className="grid gap-5">
             <FileField
@@ -533,7 +533,7 @@ export default function KhelMahakumbhRegistrationForm() {
 
         {/* Section 2: Sport & Events */}
         <fieldset className="bg-white rounded-2xl p-5 lg:p-8 border border-[#e2e8f0] shadow-sm">
-          <legend className="text-lg font-bold text-[#1e3a8a] mb-1 w-full">Sport &amp; Events</legend>
+          <div className="text-lg font-bold text-[#1e3a8a] mb-1 w-full">Sport &amp; Events</div>
           <p className="text-sm text-[#9ca3af] mb-6 pb-3 border-b border-[#e2e8f0] w-full">खेल एवं प्रतियोगिताएं</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
             <Field label="Has Disability?" hindi="क्या दिव्यांग हैं?" required>
@@ -673,7 +673,7 @@ export default function KhelMahakumbhRegistrationForm() {
 
         {/* Section 3: Registration Level & Location */}
         <fieldset className="bg-white rounded-2xl p-5 lg:p-8 border border-[#e2e8f0] shadow-sm">
-          <legend className="text-lg font-bold text-[#1e3a8a] mb-1 w-full">Registration Level &amp; Location</legend>
+          <div className="text-lg font-bold text-[#1e3a8a] mb-1 w-full">Registration Level &amp; Location</div>
           <p className="text-sm text-[#9ca3af] mb-6 pb-3 border-b border-[#e2e8f0] w-full">पंजीकरण स्तर एवं स्थान</p>
           <Field label="Registration Level" hindi="पंजीकरण स्तर (auto)" required>
             <input
@@ -739,7 +739,7 @@ export default function KhelMahakumbhRegistrationForm() {
 
         {/* Section 4: Bank Details (unchanged) */}
         <fieldset className="bg-white rounded-2xl p-5 lg:p-8 border border-[#e2e8f0] shadow-sm">
-          <legend className="text-lg font-bold text-[#1e3a8a] mb-1 w-full">Bank Details</legend>
+          <div className="text-lg font-bold text-[#1e3a8a] mb-1 w-full">Bank Details</div>
           <p className="text-sm text-[#9ca3af] mb-6 pb-3 border-b border-[#e2e8f0] w-full">
             बैंक विवरण{bankRequired ? " (राज्य स्तर के लिए अनिवार्य)" : ""}
           </p>

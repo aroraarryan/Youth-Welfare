@@ -2,18 +2,18 @@ const REPEAT_COUNT = 4;
 
 const ITEMS = [
   { label: 'Digital Youth Festival', url: 'https://khelouk.in/digital-youth-festival' },
-  { label: 'CM Championship Trophy 2026-27', url: 'https://khelouk.in/registration' },
+  { label: 'CM Championship Trophy 2026-27', url: '/CM-Trophy/registration' },
 ];
 
 function TickerItem({ label, url }: { label: string; url: string }) {
+  const isExternal = url.startsWith('http');
   return (
     <span className="flex items-center gap-4 shrink-0 px-16">
       <span className="text-white font-bold text-sm tracking-tight">{label}</span>
       <span className="text-white/70">»</span>
       <a
         href={url}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         className="text-white font-semibold text-sm underline underline-offset-2 hover:text-white/80 transition-colors"
       >
         Click here
