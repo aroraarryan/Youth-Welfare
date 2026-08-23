@@ -2,7 +2,7 @@ const REPEAT_COUNT = 4;
 
 const ITEMS = [
   { label: 'Digital Youth Festival', url: 'https://khelouk.in/digital-youth-festival' },
-  { label: 'CM Championship Trophy 2026-27', url: '/CM-Trophy/registration' },
+  { label: 'CM Championship Trophy 2026-27', url: '/cm-trophy/registration' },
 ];
 
 function TickerItem({ label, url }: { label: string; url: string }) {

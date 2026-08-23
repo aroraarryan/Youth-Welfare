@@ -27,7 +27,7 @@ export default function MainHeader() {
     { href: '/', label: t('nav_home') },
     { href: '/about', label: t('nav_about') },
     { href: '/gallery', label: t('nav_gallery') },
-    { href: '/CM-Trophy/registration', label: t('nav_cm_trophy') },
+    { href: '/cm-trophy/registration', label: t('nav_cm_trophy') },
     { href: '/rti', label: t('nav_rti') },
     { href: '/downloads', label: t('nav_downloads') },
     { href: '/contact', label: t('nav_contact') },
