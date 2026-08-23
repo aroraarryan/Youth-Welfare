@@ -1,5 +1,5 @@
 import PageHero from '@/components/PageHero';
-import ComingSoon from '@/components/ComingSoon';
+import KhelMahakumbhRegistrationForm from '@/components/KhelMahakumbhRegistrationForm';
 
 export const metadata = {
   title: 'Khel Mahakumbh 2026 Registration | Youth Welfare, Uttarakhand',
@@ -23,7 +23,7 @@ export default function KhelMahakumbhPage() {
           { value: '2026', label: 'Edition' },
         ]}
       />
-      <ComingSoon label="Khel Mahakumbh 2026" />
+      <KhelMahakumbhRegistrationForm />
     </>
   );
 }

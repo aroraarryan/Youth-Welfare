@@ -41,16 +41,40 @@ export interface BaseRegistration {
   district: { id: string; name: string };
 }
 
-// ─── Khel Mahakumbh ───────────────────────────────────────────────────────────
+// ─── Khel Mahakumbh 2026 ──────────────────────────────────────────────────────
 
-export interface KhelMahakumbhPayload extends BaseRegistrationPayload {
+export interface KhelMahakumbhPayload {
+  hasDisability: boolean;
+  dob: Date; // ISO8601 date
   ageCategory: "JUNIOR" | "SENIOR";
-  sportIds: string[]; // 1-3 UUIDs
+  gender: "MALE" | "FEMALE";
+  sportId: string;
+
+  registrationLevel: string;
+
+  photoUrl: string;
+  fullName: string;
+  email?: string;
+  mobile: string;
+  aadharNumber: string;
+  fathersName: string;
+  mothersName: string;
+  address: string;
+  districtId: string;
+  blockId: string;
+  birthEducationCertificateUrl: string;
+  residenceProofUrl?: string;
+
+  bankName?: string;
+  accountHolderName?: string;
+  accountNumber?: string;
+  ifscCode?: string;
+  passbookOrChequeUrl?: string;
 }
 
 export interface KhelMahakumbhRegistration extends BaseRegistration {
   ageCategory: "JUNIOR" | "SENIOR";
-  sports: { id: string; name: string }[];
+  sport: { id: string; name: string };
 }
 
 // ─── Youth Volunteering ───────────────────────────────────────────────────────

@@ -7,27 +7,18 @@ import {
   Gender,
 } from "@/lib/api/registrations";
 import { infrastructureApi, District } from "@/lib/api/infrastructure";
-import { sportsApi, Sport } from "@/lib/api/sports";
 import { ApiError } from "@/lib/api";
 
 interface RegistrationFormProps {
   type:
-    | "khel-mahakumbh"
     | "youth-volunteering"
     | "vocational-training"
     | "adventure-training";
-  /** Only used by non-khel types as string labels for the selection dropdown */
+  /** Used as string labels for the selection dropdown */
   sportOptions?: string[];
 }
 
 const sidebarSteps: Record<string, string[]> = {
-  "khel-mahakumbh": [
-    "Personal Info",
-    "Location & Sport",
-    "Photo Upload",
-    "Emergency & Medical",
-    "Consent",
-  ],
   "youth-volunteering": [
     "Personal Info",
     "Location & Preference",
@@ -72,7 +63,6 @@ export default function RegistrationForm({
 }: RegistrationFormProps) {
   // ── Reference data ──────────────────────────────────────────────────────────
   const [districts, setDistricts] = useState<District[]>([]);
-  const [sports, setSports] = useState<Sport[]>([]);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -80,12 +70,6 @@ export default function RegistrationForm({
       .getDistricts()
       .then((r) => setDistricts(r.data))
       .catch(() => {});
-    if (type === "khel-mahakumbh") {
-      sportsApi
-        .list()
-        .then((r) => setSports(r.data.filter((s) => s.isActive)))
-        .catch(() => {});
-    }
   }, [type]);
 
   const toISODate = (date: string) => new Date(date + "T00:00:00.000Z");
@@ -98,9 +82,6 @@ export default function RegistrationForm({
     mobile: "",
     email: "",
     districtId: "",
-    // khel
-    ageCategory: "JUNIOR" as "JUNIOR" | "SENIOR",
-    sportIds: [] as string[],
     // volunteer
     serviceAreas: [] as string[],
     availability: "",
@@ -133,14 +114,6 @@ export default function RegistrationForm({
 
   const set = (k: string, v: string | boolean | string[]) =>
     setForm((f) => ({ ...f, [k]: v }));
-
-  const toggleSportId = (id: string) =>
-    set(
-      "sportIds",
-      form.sportIds.includes(id)
-        ? form.sportIds.filter((x) => x !== id)
-        : [...form.sportIds, id],
-    );
 
   const toggleServiceArea = (area: string) =>
     set(
@@ -178,14 +151,7 @@ export default function RegistrationForm({
     try {
       let regNo = "";
 
-      if (type === "khel-mahakumbh") {
-        const res = await registrationsApi.registerKhel({
-          ...base,
-          ageCategory: form.ageCategory,
-          sportIds: form.sportIds,
-        });
-        regNo = res.data.registrationNo;
-      } else if (type === "youth-volunteering") {
+      if (type === "youth-volunteering") {
         const res = await registrationsApi.registerVolunteer({
           ...base,
           serviceAreas: form.serviceAreas,
@@ -294,13 +260,11 @@ export default function RegistrationForm({
   const sel = inp + " appearance-none bg-white";
 
   const section2Label =
-    type === "khel-mahakumbh"
-      ? "Sport"
-      : type === "youth-volunteering"
-        ? "Preference"
-        : type === "vocational-training"
-          ? "Course"
-          : "Activity";
+    type === "youth-volunteering"
+      ? "Preference"
+      : type === "vocational-training"
+        ? "Course"
+        : "Activity";
 
   return (
     <div className="max-w-[1200px] mx-auto px-4 lg:px-5 py-6 lg:py-10 flex flex-col lg:flex-row gap-8">
@@ -483,55 +447,6 @@ export default function RegistrationForm({
                 ))}
               </select>
             </div>
-
-            {/* Khel Mahakumbh */}
-            {type === "khel-mahakumbh" && (
-              <>
-                <div>
-                  <label className="block text-sm font-semibold text-[#374151] mb-1.5">
-                    Age Category <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    value={form.ageCategory}
-                    onChange={(e) => set("ageCategory", e.target.value)}
-                    required
-                    className={sel}
-                  >
-                    <option value="JUNIOR">Junior</option>
-                    <option value="SENIOR">Senior</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-[#374151] mb-2">
-                    Select Sports (1–3) <span className="text-red-500">*</span>
-                  </label>
-                  {sports.length === 0 ? (
-                    <p className="text-sm text-[#9ca3af]">Loading sports…</p>
-                  ) : (
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                      {sports.map((s) => (
-                        <label
-                          key={s.id}
-                          className="flex items-center gap-2 text-sm text-[#374151] cursor-pointer"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={form.sportIds.includes(s.id)}
-                            onChange={() => toggleSportId(s.id)}
-                            disabled={
-                              !form.sportIds.includes(s.id) &&
-                              form.sportIds.length >= 3
-                            }
-                            className="w-4 h-4 accent-[#1e3a8a]"
-                          />
-                          {s.name}
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </>
-            )}
 
             {/* Youth Volunteering */}
             {type === "youth-volunteering" && (
