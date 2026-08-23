@@ -36,15 +36,15 @@ export function computeCmTrophyAgeCategory(params: {
 }
 
 export const CM_TROPHY_AGE_CATEGORY_LABELS: Record<CmTrophyAgeCategory, string> = {
-  UNDER_14: 'Under 14',
-  UNDER_19: 'Under 19',
-  WOMENS_19_25: "Women's only (19-25)",
-  PARA_OPEN: 'Para Athlete (Open)',
+  UNDER_14: 'Under 14 / 14 वर्ष से कम',
+  UNDER_19: 'Under 19 / 19 वर्ष से कम',
+  WOMENS_19_25: "Women's only (19-25) / केवल महिला (19-25)",
+  PARA_OPEN: 'Para Athlete (Open) / पैरा एथलीट (ओपन)',
 };
 
 export const CM_TROPHY_REGISTRATION_LEVEL_LABELS: Record<string, string> = {
-  NYAY_PANCHAYAT: 'Nyay Panchayat',
-  VIDHAN_SABHA: 'Vidhan Sabha',
-  SANSAD: 'Sansad',
-  STATE: 'State',
+  NYAY_PANCHAYAT: 'Nyay Panchayat / न्याय पंचायत',
+  VIDHAN_SABHA: 'Vidhan Sabha / विधान सभा',
+  SANSAD: 'Sansad / संसद',
+  STATE: 'State / राज्य',
 };

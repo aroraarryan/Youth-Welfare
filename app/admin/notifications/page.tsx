@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { uploadFile } from "@/lib/api/uploads";
 
 interface NotificationItem {
   id: string;
@@ -23,24 +24,9 @@ const emptyForm = {
 };
 
 async function uploadToCloudinary(file: File): Promise<string> {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const preset    = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-  if (!cloudName || !preset) throw new Error("Cloudinary is not configured.");
-
-  const fd = new FormData();
-  fd.append("file", file);
-  fd.append("upload_preset", preset);
-  fd.append("resource_type", "raw");
-
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${cloudName}/raw/upload`,
-    { method: "POST", body: fd }
-  );
-  const data = await res.json();
-  if (!res.ok || !data.secure_url) {
-    throw new Error(data.error?.message || "Cloudinary upload failed.");
-  }
-  return data.secure_url as string;
+  const url = await uploadFile(file, { folder: "notifications", resourceType: "raw" });
+  if (!url) throw new Error("Upload failed.");
+  return url;
 }
 
 function formatDate(iso: string): string {

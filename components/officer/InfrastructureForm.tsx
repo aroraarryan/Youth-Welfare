@@ -8,6 +8,7 @@ import PlaceAutocomplete from './PlaceAutocomplete';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import { InfraType, InfrastructureItem } from '@/lib/api/officerApi';
 import { OfficerProfile } from '@/lib/api/officerApi';
+import { uploadFile } from '@/lib/api/uploads';
 
 type InfraFormType = 'HALL' | 'STADIUM' | 'YOUTH_HOSTEL' | 'VOCATIONAL_CENTER' | 'INDOOR_GYM' | 'OPEN_GYM' | 'KHEL_MAIDAAN';
 
@@ -37,15 +38,7 @@ const typeLabels: Record<string, string> = {
 const sidebarSteps = ['Basic Information', 'Geographic Location', 'Point of Contact', 'Core Facilities'];
 
 async function uploadToCloudinary(file: File): Promise<string | null> {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const preset    = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-  if (!cloudName || !preset) return null;
-  const fd = new FormData();
-  fd.append('file', file);
-  fd.append('upload_preset', preset);
-  const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, { method: 'POST', body: fd });
-  const data = await res.json();
-  return data.secure_url ?? null;
+  return uploadFile(file, { folder: 'infrastructure', resourceType: 'image' });
 }
 
 function onlyDigits(val: string, max = 10) {

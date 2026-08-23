@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { infrastructureApi, District } from '@/lib/api/infrastructure';
 import { useBlocks } from '@/hooks/useInfrastructure';
 import { submitGallery } from '@/lib/api/officerApi';
+import { uploadFile } from '@/lib/api/uploads';
 
 interface PhotoSubmissionModalProps {
   isOpen: boolean;
@@ -18,20 +19,10 @@ interface MediaItem {
 }
 
 async function uploadToCloudinary(file: File): Promise<string | null> {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const preset    = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-  if (!cloudName || !preset) return null;
-
-  const fd = new FormData();
-  fd.append('file', file);
-  fd.append('upload_preset', preset);
-
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${cloudName}/${file.type.startsWith('video/') ? 'video' : 'image'}/upload`,
-    { method: 'POST', body: fd }
-  );
-  const data = await res.json();
-  return data.secure_url ?? null;
+  return uploadFile(file, {
+    folder: 'gallery',
+    resourceType: file.type.startsWith('video/') ? 'video' : 'image',
+  });
 }
 
 export default function PhotoSubmissionModal({ isOpen, onClose }: PhotoSubmissionModalProps) {

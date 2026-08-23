@@ -5,6 +5,7 @@
  */
 
 import { PaginatedResponse } from '../api';
+import { uploadFile } from './uploads';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -288,21 +289,12 @@ export const officerApi = {
     officerFetch(`gallery/${id}`, { method: 'DELETE' }),
 };
 
-// ─── Cloudinary photo upload ──────────────────────────────────────────────────
+// ─── Officer photo upload ──────────────────────────────────────────────────────
 
 export async function uploadOfficerPhoto(file: File): Promise<string> {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const preset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-  const fd = new FormData();
-  fd.append('file', file);
-  fd.append('upload_preset', preset!);
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-    { method: 'POST', body: fd }
-  );
-  const data = await res.json();
-  if (!data.secure_url) throw new Error('Photo upload failed');
-  return data.secure_url as string;
+  const url = await uploadFile(file, { folder: 'officer', resourceType: 'image' });
+  if (!url) throw new Error('Photo upload failed');
+  return url;
 }
 
 // ─── Public gallery submission ────────────────────────────────────────────────

@@ -12,26 +12,9 @@ import {
   CM_TROPHY_REGISTRATION_LEVEL_LABELS,
   CmTrophyAgeCategory,
 } from "@/lib/cmTrophyAgeCategory";
+import { sportDisplayName } from "@/lib/cmTrophySportNames";
 import { ApiError } from "@/lib/api";
-
-async function uploadToCloudinary(
-  file: File,
-  resourceType: "image" | "raw" = "image",
-): Promise<string | null> {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const preset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-  if (!cloudName || !preset) return null;
-  const fd = new FormData();
-  fd.append("file", file);
-  fd.append("upload_preset", preset);
-  if (resourceType === "raw") fd.append("resource_type", "raw");
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`,
-    { method: "POST", body: fd },
-  );
-  const data = await res.json();
-  return data.secure_url ?? null;
-}
+import { uploadFile } from "@/lib/api/uploads";
 
 interface FieldProps {
   label: string;
@@ -251,7 +234,7 @@ export default function KhelMahakumbhRegistrationForm() {
     resourceType: "image" | "raw" = "image",
   ) => {
     setUploading((u) => ({ ...u, [key]: true }));
-    const url = await uploadToCloudinary(file, resourceType);
+    const url = await uploadFile(file, { folder: "cm-trophy", resourceType });
     setUploading((u) => ({ ...u, [key]: false }));
     if (url) setter({ name: file.name, url });
   };
@@ -581,8 +564,8 @@ export default function KhelMahakumbhRegistrationForm() {
             <Field label="Gender" hindi="लिंग" required>
               <div className="flex items-center gap-6 pt-1">
                 {([
-                  { v: "MALE", l: "Male" },
-                  { v: "FEMALE", l: "Female" },
+                  { v: "MALE", l: "Male / पुरुष" },
+                  { v: "FEMALE", l: "Female / महिला" },
                 ] as const).map(({ v, l }) => (
                   <label key={v} className="flex items-center gap-2 text-sm text-[#374151] cursor-pointer">
                     <input
@@ -611,7 +594,7 @@ export default function KhelMahakumbhRegistrationForm() {
                   {sportOptionsLoading ? "Loading sports…" : !ageCategory ? "Select date of birth first" : "Select sport"}
                 </option>
                 {sportOptions.map((s) => (
-                  <option key={s.sportId} value={s.sportId}>{s.name}</option>
+                  <option key={s.sportId} value={s.sportId}>{sportDisplayName(s.name)}</option>
                 ))}
               </select>
             </Field>
