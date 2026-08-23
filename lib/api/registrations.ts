@@ -41,29 +41,47 @@ export interface BaseRegistration {
   district: { id: string; name: string };
 }
 
-// ─── Khel Mahakumbh 2026 ──────────────────────────────────────────────────────
+// ─── CM Trophy (Khel Mahakumbh 2026) ──────────────────────────────────────────
+
+export type CmTrophyAgeCategory =
+  | "UNDER_14"
+  | "UNDER_19"
+  | "WOMENS_19_25"
+  | "PARA_OPEN";
+export type CmTrophyRegistrationLevel =
+  | "NYAY_PANCHAYAT"
+  | "VIDHAN_SABHA"
+  | "SANSAD"
+  | "STATE";
 
 export interface KhelMahakumbhPayload {
   hasDisability: boolean;
   dob: Date; // ISO8601 date
-  ageCategory: "JUNIOR" | "SENIOR";
+  ageCategory: CmTrophyAgeCategory;
   gender: "MALE" | "FEMALE";
   sportId: string;
+  selectedEvents: string[];
 
-  registrationLevel: string;
+  registrationLevel: CmTrophyRegistrationLevel;
 
   photoUrl: string;
   fullName: string;
-  email?: string;
-  mobile: string;
+  email?: string; // either email or mobile is required
+  mobile?: string;
   aadharNumber: string;
   fathersName: string;
   mothersName: string;
   address: string;
   districtId: string;
   blockId: string;
+  // Requirement narrows with registrationLevel: NYAY_PANCHAYAT needs all 3,
+  // VIDHAN_SABHA needs the first 2, SANSAD needs just sansadId, STATE needs none.
+  sansadId?: string;
+  vidhanSabhaId?: string;
+  nyayPanchayatId?: string;
   birthEducationCertificateUrl: string;
   residenceProofUrl?: string;
+  disabilityCertificateUrl?: string;
 
   bankName?: string;
   accountHolderName?: string;
@@ -72,9 +90,18 @@ export interface KhelMahakumbhPayload {
   passbookOrChequeUrl?: string;
 }
 
-export interface KhelMahakumbhRegistration extends BaseRegistration {
-  ageCategory: "JUNIOR" | "SENIOR";
+export interface KhelMahakumbhRegistration {
+  id: string;
+  registrationNo: string;
+  fullName: string;
+  status: RegistrationStatus;
+  createdAt: string;
+  ageCategory: CmTrophyAgeCategory;
+  registrationLevel: CmTrophyRegistrationLevel;
   sport: { id: string; name: string };
+  sansad: { id: string; name: string };
+  vidhanSabha: { id: string; name: string };
+  nyayPanchayat: { id: string; name: string };
 }
 
 // ─── Youth Volunteering ───────────────────────────────────────────────────────
