@@ -847,14 +847,13 @@ export default function KhelMahakumbhRegistrationForm() {
               Save this ID — you&apos;ll need it to check your CM Trophy application status.
             </p>
             <div className="flex gap-3">
-              <button
-                type="button"
-                title="Coming soon"
-                className="flex-1 px-4 py-3 rounded-xl border-2 border-[#e5e7eb] text-[#9ca3af] font-semibold text-sm cursor-not-allowed"
+              <a
+                href={registrationsApi.downloadKhelApplicationPdf(registrationNo)}
+                className="flex-1 px-4 py-3 rounded-xl border-2 border-[#1e3a8a] text-[#1e3a8a] font-semibold text-sm text-center hover:bg-[#1e3a8a]/5 transition-colors"
               >
                 Download Application Form
                 <span className="block text-xs font-normal">आवेदन पत्र डाउनलोड करें</span>
-              </button>
+              </a>
               <button
                 type="button"
                 onClick={resetForm}

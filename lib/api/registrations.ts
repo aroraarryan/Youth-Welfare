@@ -248,6 +248,9 @@ export const registrationsApi = {
     status?: RegistrationStatus;
   }) => api.get<PaginatedResponse<AdventureRegistration>>("/adventure", params),
 
+  downloadKhelApplicationPdf: (registrationNo: string) =>
+    `${process.env.NEXT_PUBLIC_BASE_URL}/cm-trophy/registration/track/${registrationNo}/pdf`,
+
   // Admin / Officer — update status
   updateKhelStatus: (id: string, status: RegistrationStatus) =>
     api.patch(`/cm-trophy/registration/${id}/status`, { status }),
