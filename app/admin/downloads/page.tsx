@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { uploadFile } from "@/lib/api/uploads";
 
 type DocumentCategory = "FORMS" | "CIRCULARS" | "SCHEME_GUIDELINES" | "REPORTS";
 type FileType = "PDF" | "DOCX" | "XLSX" | "OTHER";
@@ -52,25 +53,11 @@ const emptyForm = {
 };
 
 async function uploadToCloudinary(file: File): Promise<string> {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const preset    = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-  if (!cloudName || !preset) throw new Error("Cloudinary is not configured.");
-
-  const fd = new FormData();
-  fd.append("file", file);
-  fd.append("upload_preset", preset);
-
   // Use 'raw' resource type for non-image files (PDFs, DOCX, XLSX)
   const resourceType = file.type.startsWith("image/") ? "image" : "raw";
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`,
-    { method: "POST", body: fd }
-  );
-  const data = await res.json();
-  if (!res.ok || !data.secure_url) {
-    throw new Error(data.error?.message || "Cloudinary upload failed.");
-  }
-  return data.secure_url as string;
+  const url = await uploadFile(file, { folder: "downloads", resourceType });
+  if (!url) throw new Error("Upload failed.");
+  return url;
 }
 
 export default function AdminDownloadsPage() {
@@ -102,10 +89,12 @@ export default function AdminDownloadsPage() {
   const [actionLoading, setActionLoading]     = useState<string | null>(null);
   const [showNoDate, setShowNoDate]           = useState(false);
 
-  const cloudinaryConfigured = !!(
-    process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME &&
-    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-  );
+  const cloudinaryConfigured =
+    process.env.NEXT_PUBLIC_STORAGE_PROVIDER === "azure" ||
+    !!(
+      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME &&
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+    );
 
   const load = useCallback(async (cat: DocumentCategory, page = 1, year?: number | "") => {
     setLoading(true);

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import ImageLightbox from "@/components/ImageLightbox";
+import { uploadFile } from "@/lib/api/uploads";
 
 type GalleryStatus = "DO_APPROVED" | "APPROVED" | "REJECTED";
 
@@ -77,20 +78,11 @@ function DepartmentUploadForm() {
     setUploadProgress(0);
 
     try {
-      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-      const preset    = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-
       const urls: string[] = [];
       for (let i = 0; i < files.length; i++) {
-        const fd = new FormData();
-        fd.append("file", files[i]);
-        fd.append("upload_preset", preset!);
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-          method: "POST", body: fd,
-        });
-        const data = await res.json();
-        if (!data.secure_url) throw new Error("Photo upload failed");
-        urls.push(data.secure_url as string);
+        const url = await uploadFile(files[i], { folder: "gallery", resourceType: "image" });
+        if (!url) throw new Error("Photo upload failed");
+        urls.push(url);
         setUploadProgress(Math.round(((i + 1) / files.length) * 80));
       }
 
