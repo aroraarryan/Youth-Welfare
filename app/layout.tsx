@@ -1,6 +1,7 @@
 'use client';
 
 import { Roboto } from "next/font/google";
+import { usePathname } from "next/navigation";
 import "./globals.css";
 import GovHeader from "@/components/GovHeader";
 import MainHeader from "@/components/MainHeader";
@@ -22,6 +23,8 @@ const roboto = Roboto({
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const pathname = usePathname();
+  const isPortalRoute = pathname?.startsWith('/admin') || pathname?.startsWith('/officer');
 
   return (
     <html lang="en" className={roboto.variable}>
@@ -40,11 +43,11 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <GovHeader />
         <MainHeader />
-        <DigitalYouthFestivalTicker />
+        {!isPortalRoute && <DigitalYouthFestivalTicker />}
         <main id="main-content" className="flex-1">{children}</main>
-        <Footer />
+        {!isPortalRoute && <Footer />}
 
-        <FloatingElements />
+        {!isPortalRoute && <FloatingElements />}
         </AccessibilityProvider>
         </LanguageProvider>
         </AuthProvider>
