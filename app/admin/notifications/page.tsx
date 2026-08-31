@@ -21,6 +21,7 @@ const emptyForm = {
   url: "",
   documentUrl: "",
   isPublished: true,
+  displayDate: "", // YYYY-MM-DD; blank on create = backend uses now()
 };
 
 async function uploadToCloudinary(file: File): Promise<string> {
@@ -105,6 +106,7 @@ export default function AdminNotificationsPage() {
       url:         item.url ?? "",
       documentUrl: item.documentUrl ?? "",
       isPublished: item.isPublished,
+      displayDate: item.createdAt.slice(0, 10),
     });
     setSelectedFile(null);
     setUploadProgress("");
@@ -145,6 +147,9 @@ export default function AdminNotificationsPage() {
         url:         form.url.trim() || null,
         documentUrl: documentUrl || null,
         isPublished: form.isPublished,
+        ...(form.displayDate
+          ? { createdAt: new Date(`${form.displayDate}T00:00:00`).toISOString() }
+          : {}),
       };
 
       const method = editingItem ? "PATCH" : "POST";
@@ -431,6 +436,19 @@ export default function AdminNotificationsPage() {
                   onChange={e => setForm(f => ({ ...f, url: e.target.value }))}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#1e3a8a]"
                   placeholder="https://..."
+                />
+              </div>
+
+              {/* Display date */}
+              <div>
+                <label className="block text-xs font-bold text-gray-600 uppercase tracking-widest mb-2">
+                  Date <span className="text-gray-400 font-normal normal-case text-xs">(shown on the notification)</span>
+                </label>
+                <input
+                  type="date"
+                  value={form.displayDate}
+                  onChange={e => setForm(f => ({ ...f, displayDate: e.target.value }))}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#1e3a8a]"
                 />
               </div>
 
