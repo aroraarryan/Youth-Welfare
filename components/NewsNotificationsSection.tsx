@@ -72,7 +72,7 @@ export default function NewsNotificationsSection() {
                 const day   = String(d.getDate()).padStart(2, '0');
                 const month = d.toLocaleString('en', { month: 'short' });
                 return (
-                  <div key={n.id} className="px-5 py-4 flex items-start gap-4 hover:bg-gray-50 transition-colors cursor-default">
+                  <Link key={n.id} href="/notifications" className="px-5 py-4 flex items-start gap-4 hover:bg-gray-50 transition-colors block">
                     <div className="w-14 h-14 bg-gray-100 rounded-xl flex flex-col items-center justify-center flex-shrink-0">
                       <span className="text-xl font-black text-[#1e293b] leading-none">{day}</span>
                       <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wide mt-0.5">{month}</span>
@@ -81,7 +81,7 @@ export default function NewsNotificationsSection() {
                       <p className="text-sm font-bold text-[#1e293b] leading-snug line-clamp-1 mb-1">{n.title}</p>
                       <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{n.message}</p>
                     </div>
-                  </div>
+                  </Link>
                 );
               })
             )}
