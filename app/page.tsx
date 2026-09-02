@@ -6,6 +6,7 @@ import FloatingSearchUI from '@/components/FloatingSearchUI';
 import FaqSection from '@/components/FaqSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
 import NewsNotificationsSection from '@/components/NewsNotificationsSection';
+import CmTrophyLeaderboardSection from '@/components/CmTrophyLeaderboardSection';
 import { getInfraStats } from '@/lib/api/infrastructure';
 import { 
   Building2, 
@@ -75,6 +76,9 @@ export default async function HomePage() {
       <div className="w-full">
         <Carousel />
       </div>
+
+      {/* ── CM Trophy Leaderboard Teaser ──────────────────────── */}
+      <CmTrophyLeaderboardSection />
 
       {/* ── Floating Search UI ───────────────────────────────── */}
       <FloatingSearchUI stats={stats} />

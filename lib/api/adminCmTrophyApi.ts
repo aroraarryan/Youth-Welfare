@@ -69,6 +69,24 @@ export interface CmTrophyWeeklyPoint {
   count: number;
 }
 
+export interface DistrictMedalTally {
+  districtId: string;
+  districtName: string;
+  districtHindiName: string | null;
+  gold: number;
+  silver: number;
+  bronze: number;
+  total: number;
+  updatedAt: string | null;
+}
+
+export interface MedalTallyEntry {
+  districtId: string;
+  gold: number;
+  silver: number;
+  bronze: number;
+}
+
 export interface CmTrophyListParams {
   page?: number;
   limit?: number;
@@ -105,4 +123,10 @@ export const adminCmTrophyApi = {
 
   weeklyTrend: (): Promise<{ success: boolean; data: CmTrophyWeeklyPoint[] }> =>
     adminFetch('cm-trophy/weekly-trend'),
+
+  getLeaderboard: (): Promise<{ success: boolean; data: DistrictMedalTally[] }> =>
+    adminFetch('cm-trophy/leaderboard'),
+
+  updateLeaderboard: (entries: MedalTallyEntry[]): Promise<{ success: boolean; data: DistrictMedalTally[] }> =>
+    adminFetch('cm-trophy/leaderboard', { method: 'PUT', body: JSON.stringify(entries) }),
 };
