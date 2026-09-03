@@ -1,8 +1,8 @@
 'use client';
 
 export interface LeaderboardRow {
-  districtId: string;
-  districtName: string;
+  entityId: string;
+  entityName: string;
   gold: number;
   silver: number;
   bronze: number;
@@ -12,13 +12,12 @@ export interface LeaderboardRow {
 interface Props {
   entries: LeaderboardRow[];
   limit?: number;
-  /** When provided, renders editable number inputs instead of static counts. */
-  onChange?: (districtId: string, field: 'gold' | 'silver' | 'bronze', value: number) => void;
+  /** Column header for the entity name (District, Nyay Panchayat, Vidhan Sabha, Sansad). */
+  entityLabel?: string;
 }
 
-export default function CmTrophyLeaderboardTable({ entries, limit, onChange }: Props) {
+export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel = 'District' }: Props) {
   const rows = limit ? entries.slice(0, limit) : entries;
-  const editable = !!onChange;
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
@@ -27,7 +26,7 @@ export default function CmTrophyLeaderboardTable({ entries, limit, onChange }: P
           <thead>
             <tr className="bg-[#1e3a8a] text-left">
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Rank</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">District</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">{entityLabel}</th>
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥇 Gold</th>
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥈 Silver</th>
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥉 Bronze</th>
@@ -41,27 +40,13 @@ export default function CmTrophyLeaderboardTable({ entries, limit, onChange }: P
               </tr>
             ) : (
               rows.map((r, idx) => (
-                <tr key={r.districtId} className="hover:bg-gray-50 transition-colors">
+                <tr key={r.entityId} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3 text-gray-900 font-semibold">{idx + 1}</td>
-                  <td className="px-4 py-3 text-gray-900 font-medium">{r.districtName}</td>
-                  {(['gold', 'silver', 'bronze'] as const).map((field) => (
-                    <td key={field} className="px-4 py-3 text-center">
-                      {editable ? (
-                        <input
-                          type="number"
-                          min={0}
-                          value={r[field]}
-                          onChange={(e) => onChange!(r.districtId, field, Math.max(0, Number(e.target.value)))}
-                          className="w-16 text-center border border-gray-300 rounded px-2 py-1"
-                        />
-                      ) : (
-                        r[field]
-                      )}
-                    </td>
-                  ))}
-                  <td className="px-4 py-3 text-center font-semibold text-gray-900">
-                    {editable ? r.gold + r.silver + r.bronze : r.total}
-                  </td>
+                  <td className="px-4 py-3 text-gray-900 font-medium">{r.entityName}</td>
+                  <td className="px-4 py-3 text-center">{r.gold}</td>
+                  <td className="px-4 py-3 text-center">{r.silver}</td>
+                  <td className="px-4 py-3 text-center">{r.bronze}</td>
+                  <td className="px-4 py-3 text-center font-semibold text-gray-900">{r.total}</td>
                 </tr>
               ))
             )}

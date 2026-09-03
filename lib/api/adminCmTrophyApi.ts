@@ -80,11 +80,93 @@ export interface DistrictMedalTally {
   updatedAt: string | null;
 }
 
-export interface MedalTallyEntry {
-  districtId: string;
+export type CmTrophyMedalLevel = 'DISTRICT' | 'NYAY_PANCHAYAT' | 'VIDHAN_SABHA' | 'SANSAD';
+export type CmTrophyMedal = 'GOLD' | 'SILVER' | 'BRONZE';
+
+export const MEDAL_LEVEL_URL: Record<CmTrophyMedalLevel, string> = {
+  DISTRICT: 'district',
+  NYAY_PANCHAYAT: 'nyay-panchayat',
+  VIDHAN_SABHA: 'vidhan-sabha',
+  SANSAD: 'sansad',
+};
+
+export interface MedalLeaderboardRow {
+  entityId: string;
+  entityName: string;
+  entityHindiName?: string | null;
   gold: number;
   silver: number;
   bronze: number;
+  total: number;
+}
+
+export interface RegistrationLookupResult {
+  id: string;
+  fullName: string;
+  fathersName: string;
+  email: string | null;
+  registrationNo: string;
+}
+
+export interface CreateMedalInput {
+  applicationCode: string;
+  sportId: string;
+  medal: CmTrophyMedal;
+  level: CmTrophyMedalLevel;
+  name?: string;
+  fathersName?: string;
+  email?: string;
+  districtId?: string;
+  sansadId?: string;
+  vidhanSabhaId?: string;
+  nyayPanchayatId?: string;
+}
+
+export interface MedalRecord {
+  id: string;
+  applicationCode: string;
+  name: string;
+  fathersName: string;
+  email: string | null;
+  sportId: string;
+  sportName: string;
+  medal: CmTrophyMedal;
+  level: CmTrophyMedalLevel;
+  entityName: string | null;
+  createdAt: string;
+}
+
+export interface MedalListParams {
+  sportId?: string;
+  level?: CmTrophyMedalLevel;
+  districtId?: string;
+  sansadId?: string;
+  vidhanSabhaId?: string;
+  nyayPanchayatId?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface MedalRejectRow {
+  row: number;
+  applicationCode?: string;
+  reason: string;
+}
+
+export const MEDAL_LEVEL_LABEL: Record<CmTrophyMedalLevel, string> = {
+  DISTRICT: 'District',
+  NYAY_PANCHAYAT: 'Nyay Panchayat',
+  VIDHAN_SABHA: 'Vidhan Sabha',
+  SANSAD: 'Sansad',
+};
+
+// One row of the bulk-upload Excel: human-readable text, resolved server-side.
+export interface MedalBulkRow {
+  applicationCode: string;
+  sport: string;
+  medal: string;
+  level: string;
+  entityName: string;
 }
 
 export interface CmTrophyListParams {
@@ -127,6 +209,27 @@ export const adminCmTrophyApi = {
   getLeaderboard: (): Promise<{ success: boolean; data: DistrictMedalTally[] }> =>
     adminFetch('cm-trophy/leaderboard'),
 
-  updateLeaderboard: (entries: MedalTallyEntry[]): Promise<{ success: boolean; data: DistrictMedalTally[] }> =>
-    adminFetch('cm-trophy/leaderboard', { method: 'PUT', body: JSON.stringify(entries) }),
+  getMedalLeaderboard: (level: CmTrophyMedalLevel): Promise<{ success: boolean; data: MedalLeaderboardRow[] }> =>
+    adminFetch(`cm-trophy/leaderboard/${MEDAL_LEVEL_URL[level]}`),
+
+  lookupRegistrationByCode: (code: string): Promise<{ success: boolean; data: RegistrationLookupResult }> =>
+    adminFetch(`cm-trophy/registrations/by-code/${encodeURIComponent(code)}`),
+
+  createMedal: (data: CreateMedalInput): Promise<{ success: boolean; data: MedalRecord }> =>
+    adminFetch('cm-trophy/medals', { method: 'POST', body: JSON.stringify(data) }),
+
+  bulkCreateMedals: (rows: MedalBulkRow[]): Promise<{ success: boolean; inserted: number; rejected: MedalRejectRow[] }> =>
+    adminFetch('cm-trophy/medals/bulk', { method: 'POST', body: JSON.stringify(rows) }),
+
+  listMedals: (params: MedalListParams = {}): Promise<{ success: boolean; total: number; page: number; limit: number; data: MedalRecord[] }> => {
+    const qs = new URLSearchParams();
+    Object.entries(params).forEach(([k, v]) => {
+      if (v !== undefined && v !== '') qs.set(k, String(v));
+    });
+    const query = qs.toString() ? `?${qs}` : '';
+    return adminFetch(`cm-trophy/medals${query}`);
+  },
+
+  deleteMedal: (id: string): Promise<{ success: boolean }> =>
+    adminFetch(`cm-trophy/medals/${id}`, { method: 'DELETE' }),
 };
