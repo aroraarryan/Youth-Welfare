@@ -41,7 +41,13 @@ export default function AdminMedalDashboardPage() {
   });
   const deleteMutation = useDeleteMedal();
 
-  const rows = data?.data ?? [];
+  const MEDAL_RANK: Record<string, number> = { GOLD: 1, SILVER: 2, BRONZE: 3 };
+  const rows = [...(data?.data ?? [])].sort(
+    (a, b) =>
+      (a.entityName ?? '').localeCompare(b.entityName ?? '') ||
+      MEDAL_RANK[a.medal] - MEDAL_RANK[b.medal] ||
+      a.name.localeCompare(b.name)
+  );
   const summary = rows.reduce(
     (acc, r) => {
       if (r.medal === 'GOLD') acc.gold++;
@@ -144,6 +150,7 @@ export default function AdminMedalDashboardPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50 text-left">
+                  <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Rank</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Name</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Sport</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Medal</th>
@@ -155,10 +162,11 @@ export default function AdminMedalDashboardPage() {
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {rows.length === 0 ? (
-                  <tr><td colSpan={7} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
+                  <tr><td colSpan={8} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
                 ) : (
                   rows.map((r) => (
                     <tr key={r.id} className="hover:bg-gray-50">
+                      <td className="px-4 py-3 text-gray-900 font-semibold">{MEDAL_RANK[r.medal]}</td>
                       <td className="px-4 py-3 text-gray-900 font-medium">{r.name}</td>
                       <td className="px-4 py-3 text-gray-700">{r.sportName}</td>
                       <td className="px-4 py-3">
