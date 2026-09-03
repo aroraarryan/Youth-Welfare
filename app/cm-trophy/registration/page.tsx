@@ -23,7 +23,8 @@ export default function KhelMahakumbhPage() {
           { value: '2026', label: 'Edition' },
         ]}
       />
-      <KhelMahakumbhRegistrationForm />
+      {/* <KhelMahakumbhRegistrationForm /> */}
+      <p className="text-center text-2xl font-semibold py-24">Coming Soon</p>
     </>
   );
 }
