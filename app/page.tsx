@@ -78,7 +78,7 @@ export default async function HomePage() {
       </div>
 
       {/* ── CM Trophy Leaderboard Teaser ──────────────────────── */}
-      <CmTrophyLeaderboardSection />
+      {/* <CmTrophyLeaderboardSection /> */}
 
       {/* ── Floating Search UI ───────────────────────────────── */}
       <FloatingSearchUI stats={stats} />
