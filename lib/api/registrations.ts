@@ -41,29 +41,47 @@ export interface BaseRegistration {
   district: { id: string; name: string };
 }
 
-// ─── Khel Mahakumbh 2026 ──────────────────────────────────────────────────────
+// ─── CM Trophy (Khel Mahakumbh 2026) ──────────────────────────────────────────
+
+export type CmTrophyAgeCategory =
+  | "UNDER_14"
+  | "UNDER_19"
+  | "WOMENS_19_25"
+  | "PARA_OPEN";
+export type CmTrophyRegistrationLevel =
+  | "NYAY_PANCHAYAT"
+  | "VIDHAN_SABHA"
+  | "SANSAD"
+  | "STATE";
 
 export interface KhelMahakumbhPayload {
   hasDisability: boolean;
   dob: Date; // ISO8601 date
-  ageCategory: "JUNIOR" | "SENIOR";
+  ageCategory: CmTrophyAgeCategory;
   gender: "MALE" | "FEMALE";
   sportId: string;
+  selectedEvents: string[];
 
-  registrationLevel: string;
+  registrationLevel: CmTrophyRegistrationLevel;
 
   photoUrl: string;
   fullName: string;
-  email?: string;
-  mobile: string;
+  email?: string; // either email or mobile is required
+  mobile?: string;
   aadharNumber: string;
   fathersName: string;
   mothersName: string;
   address: string;
   districtId: string;
   blockId: string;
+  // Requirement narrows with registrationLevel: NYAY_PANCHAYAT needs all 3,
+  // VIDHAN_SABHA needs the first 2, SANSAD needs just sansadId, STATE needs none.
+  sansadId?: string;
+  vidhanSabhaId?: string;
+  nyayPanchayatId?: string;
   birthEducationCertificateUrl: string;
   residenceProofUrl?: string;
+  disabilityCertificateUrl?: string;
 
   bankName?: string;
   accountHolderName?: string;
@@ -72,9 +90,18 @@ export interface KhelMahakumbhPayload {
   passbookOrChequeUrl?: string;
 }
 
-export interface KhelMahakumbhRegistration extends BaseRegistration {
-  ageCategory: "JUNIOR" | "SENIOR";
+export interface KhelMahakumbhRegistration {
+  id: string;
+  registrationNo: string;
+  fullName: string;
+  status: RegistrationStatus;
+  createdAt: string;
+  ageCategory: CmTrophyAgeCategory;
+  registrationLevel: CmTrophyRegistrationLevel;
   sport: { id: string; name: string };
+  sansad: { id: string; name: string };
+  vidhanSabha: { id: string; name: string };
+  nyayPanchayat: { id: string; name: string };
 }
 
 // ─── Youth Volunteering ───────────────────────────────────────────────────────
@@ -141,18 +168,18 @@ export const registrationsApi = {
   // Khel Mahakumbh
   registerKhel: (payload: KhelMahakumbhPayload) =>
     api.post<RegisterResponse<KhelMahakumbhRegistration>>(
-      "/khel-mahakumbh/register",
+      "/cm-trophy/registration/register",
       payload,
     ),
 
   trackKhel: (registrationNo: string) =>
     api.get<TrackResponse<KhelMahakumbhRegistration>>(
-      `/khel-mahakumbh/track/${registrationNo}`,
+      `/cm-trophy/registration/track/${registrationNo}`,
     ),
 
   myKhelRegistrations: () =>
     api.get<{ success: boolean; data: KhelMahakumbhRegistration[] }>(
-      "/khel-mahakumbh/my",
+      "/cm-trophy/registration/my",
     ),
 
   // Youth Volunteering
@@ -198,7 +225,7 @@ export const registrationsApi = {
     status?: RegistrationStatus;
   }) =>
     api.get<PaginatedResponse<KhelMahakumbhRegistration>>(
-      "/khel-mahakumbh",
+      "/cm-trophy/registration",
       params,
     ),
 
@@ -221,9 +248,12 @@ export const registrationsApi = {
     status?: RegistrationStatus;
   }) => api.get<PaginatedResponse<AdventureRegistration>>("/adventure", params),
 
+  downloadKhelApplicationPdf: (registrationNo: string) =>
+    `${process.env.NEXT_PUBLIC_BASE_URL}/cm-trophy/registration/track/${registrationNo}/pdf`,
+
   // Admin / Officer — update status
   updateKhelStatus: (id: string, status: RegistrationStatus) =>
-    api.patch(`/khel-mahakumbh/${id}/status`, { status }),
+    api.patch(`/cm-trophy/registration/${id}/status`, { status }),
 
   updateVolunteerStatus: (id: string, status: RegistrationStatus) =>
     api.patch(`/volunteer/${id}/status`, { status }),

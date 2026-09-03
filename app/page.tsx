@@ -6,6 +6,7 @@ import FloatingSearchUI from '@/components/FloatingSearchUI';
 import FaqSection from '@/components/FaqSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
 import NewsNotificationsSection from '@/components/NewsNotificationsSection';
+import CmTrophyLeaderboardSection from '@/components/CmTrophyLeaderboardSection';
 import { getInfraStats } from '@/lib/api/infrastructure';
 import { 
   Building2, 
@@ -45,7 +46,7 @@ const infraCards = [
 
 // ── Registration cards ──────────────────────────────────────
 const registrationCards = [
-  { icon: Trophy,    title: 'Sports (Khel Mahakumbh)',  desc: 'Register for sports programs and competitions',      href: '/khel-mahakumbh' },
+  { icon: Trophy,    title: 'Sports (CM Championship Trophy)',  desc: 'Register for sports programs and competitions',      href: '/cm-trophy/registration'},
   { icon: Handshake, title: 'Youth Volunteering',         desc: 'Join volunteer programs and community service',       href: '/youth-volunteering' },
   { icon: Wrench,    title: 'Vocational Training',         desc: 'Enroll in skill development and training programs',   href: '/vocational-training' },
   { icon: Flag,      title: 'Adventure Training Program',  desc: 'Join us for an exciting adventure training program.', href: '/adventure-training' },
@@ -75,6 +76,9 @@ export default async function HomePage() {
       <div className="w-full">
         <Carousel />
       </div>
+
+      {/* ── CM Trophy Leaderboard Teaser ──────────────────────── */}
+      {/* <CmTrophyLeaderboardSection /> */}
 
       {/* ── Floating Search UI ───────────────────────────────── */}
       <FloatingSearchUI stats={stats} />

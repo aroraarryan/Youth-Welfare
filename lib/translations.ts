@@ -7,6 +7,7 @@ export type TranslationKey =
   | 'nav_home'
   | 'nav_about'
   | 'nav_gallery'
+  | 'nav_cm_trophy'
   | 'nav_rti'
   | 'nav_downloads'
   | 'nav_news'
@@ -26,6 +27,7 @@ const translations: Record<TranslationKey, Record<Lang, string>> = {
   nav_home:       { EN: 'Home',                                         HI: 'होम' },
   nav_about:      { EN: 'About Us',                                     HI: 'हमारे बारे में' },
   nav_gallery:    { EN: 'Gallery',                                      HI: 'गैलरी' },
+  nav_cm_trophy:  { EN: 'CM Trophy',                                    HI: 'सीएम ट्रॉफी' },
   nav_rti:        { EN: 'RTI',                                          HI: 'आरटीआई' },
   nav_downloads:  { EN: 'Downloads',                                    HI: 'डाउनलोड' },
   nav_news:       { EN: 'News',                                         HI: 'समाचार' },

@@ -17,13 +17,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     router.push("/admin/login");
   };
 
-  const navLink = (href: string, label: string) => {
-    const active = pathname === href || pathname.startsWith(href + "/");
+  const navLink = (href: string, label: string, indent = false, excludeChildPrefixes: string[] = []) => {
+    const active =
+      pathname === href ||
+      (pathname.startsWith(href + "/") && !excludeChildPrefixes.some((p) => pathname.startsWith(p)));
     return (
       <Link
         href={href}
         onClick={() => setSidebarOpen(false)}
-        className={`block px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+        className={`block py-2 rounded-md text-sm font-medium transition-colors ${indent ? "pl-7 pr-4" : "px-4"} ${
           active
             ? "bg-blue-700 text-white"
             : "text-blue-100 hover:bg-blue-700 hover:text-white"
@@ -78,6 +80,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {navLink("/admin/gallery",   "Gallery Approvals")}
           {navLink("/admin/downloads", "Downloads")}
           {navLink("/admin/rti",       "RTI")}
+
+          {/* CM Trophy */}
+          <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
+            CM Trophy
+          </p>
+          {navLink("/admin/cm-trophy", "Registrations", true, ["/admin/cm-trophy/leaderboard", "/admin/cm-trophy/grievance"])}
+          {navLink("/admin/cm-trophy/leaderboard", "Leaderboard", true)}
+          {navLink("/admin/cm-trophy/grievance", "Grievances", true)}
 
           {/* Content Management */}
           <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">

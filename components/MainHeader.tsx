@@ -27,6 +27,7 @@ export default function MainHeader() {
     { href: '/', label: t('nav_home') },
     { href: '/about', label: t('nav_about') },
     { href: '/gallery', label: t('nav_gallery') },
+    { href: '/cm-trophy/registration', label: t('nav_cm_trophy') },
     { href: '/rti', label: t('nav_rti') },
     { href: '/downloads', label: t('nav_downloads') },
     { href: '/contact', label: t('nav_contact') },
@@ -62,7 +63,7 @@ export default function MainHeader() {
                   href={href}
                   aria-current={pathname === href ? 'page' : undefined}
                   suppressHydrationWarning
-                  className="no-underline text-[#2c3e50] font-bold text-[13px] uppercase tracking-tight py-2 hover:text-[#1e3a8a] transition-colors"
+                  className="no-underline text-[#2c3e50] font-bold text-[13px] uppercase tracking-tight py-2 hover:text-[#1e3a8a] transition-colors whitespace-nowrap"
                 >
                   {label}
                 </Link>

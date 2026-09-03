@@ -5,10 +5,11 @@ import { usePathname } from 'next/navigation';
 export default function FloatingElements() {
   const pathname = usePathname();
   
-  // Hide on admin and officer dashboards
+  // Hide on admin and officer dashboards, and the CM Trophy registration form
   const isDashboard = pathname?.startsWith('/admin') || pathname?.startsWith('/officer');
-  
-  if (isDashboard) return null;
+  const isCmTrophyForm = pathname?.startsWith('/cm-trophy');
+
+  if (isDashboard || isCmTrophyForm) return null;
 
   return (
     <>
