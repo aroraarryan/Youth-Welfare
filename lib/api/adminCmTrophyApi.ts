@@ -106,6 +106,10 @@ export interface RegistrationLookupResult {
   fathersName: string;
   email: string | null;
   registrationNo: string;
+  gender: Gender | null;
+  selectedEvents: string[];
+  sportId: string;
+  sportName: string | null;
 }
 
 export interface CreateMedalInput {
@@ -113,6 +117,8 @@ export interface CreateMedalInput {
   sportId: string;
   medal: CmTrophyMedal;
   level: CmTrophyMedalLevel;
+  gender?: Gender;
+  event?: string;
   name?: string;
   fathersName?: string;
   email?: string;
@@ -132,6 +138,8 @@ export interface MedalRecord {
   sportName: string;
   medal: CmTrophyMedal;
   level: CmTrophyMedalLevel;
+  gender: Gender | null;
+  event: string | null;
   entityName: string | null;
   createdAt: string;
 }
@@ -167,6 +175,8 @@ export interface MedalBulkRow {
   medal: string;
   level: string;
   entityName: string;
+  gender?: string;
+  event?: string;
 }
 
 export interface CmTrophyListParams {

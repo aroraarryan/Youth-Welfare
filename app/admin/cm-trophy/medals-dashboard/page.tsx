@@ -153,6 +153,8 @@ export default function AdminMedalDashboardPage() {
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Rank</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Name</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Sport</th>
+                  <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Gender</th>
+                  <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Event</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Medal</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Level</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Location</th>
@@ -162,13 +164,15 @@ export default function AdminMedalDashboardPage() {
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {rows.length === 0 ? (
-                  <tr><td colSpan={8} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
+                  <tr><td colSpan={10} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
                 ) : (
                   rows.map((r) => (
                     <tr key={r.id} className="hover:bg-gray-50">
                       <td className="px-4 py-3 text-gray-900 font-semibold">{MEDAL_RANK[r.medal]}</td>
                       <td className="px-4 py-3 text-gray-900 font-medium">{r.name}</td>
                       <td className="px-4 py-3 text-gray-700">{r.sportName}</td>
+                      <td className="px-4 py-3 text-gray-700">{r.gender ? r.gender.charAt(0) + r.gender.slice(1).toLowerCase() : '—'}</td>
+                      <td className="px-4 py-3 text-gray-700">{r.event ?? '—'}</td>
                       <td className="px-4 py-3">
                         {r.medal === 'GOLD' ? '🥇' : r.medal === 'SILVER' ? '🥈' : '🥉'} {r.medal.charAt(0) + r.medal.slice(1).toLowerCase()}
                       </td>

@@ -7,9 +7,15 @@ import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTro
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { adminCmTrophyApi, CmTrophyMedal, CmTrophyMedalLevel, MedalBulkRow, MEDAL_LEVEL_LABEL, RegistrationLookupResult } from '@/lib/api/adminCmTrophyApi';
 import { useCreateMedal, useBulkCreateMedals } from '@/hooks/useAdminCmTrophy';
+import { Gender } from '@/lib/api/registrations';
 
 const LEVELS: CmTrophyMedalLevel[] = ['DISTRICT', 'NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
 const MEDALS: CmTrophyMedal[] = ['GOLD', 'SILVER', 'BRONZE'];
+const GENDERS: { value: Gender; label: string }[] = [
+  { value: 'MALE', label: 'Male' },
+  { value: 'FEMALE', label: 'Female' },
+  { value: 'OTHER', label: 'Other' },
+];
 
 const selectClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm bg-white w-full disabled:opacity-50 disabled:bg-gray-50';
 const inputClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm w-full disabled:opacity-50 disabled:bg-gray-50';
@@ -23,6 +29,8 @@ export default function AdminAddMedalPage() {
   const [email, setEmail] = useState('');
 
   const [sportId, setSportId] = useState('');
+  const [gender, setGender] = useState<Gender>('MALE');
+  const [event, setEvent] = useState('');
   const [medal, setMedal] = useState<CmTrophyMedal>('GOLD');
   const [level, setLevel] = useState<CmTrophyMedalLevel>('DISTRICT');
   const [districtId, setDistrictId] = useState('');
@@ -60,6 +68,9 @@ export default function AdminAddMedalPage() {
       setName(res.data.fullName);
       setFathersName(res.data.fathersName);
       setEmail(res.data.email || '');
+      if (res.data.gender) setGender(res.data.gender);
+      setSportId(res.data.sportId);
+      setEvent(res.data.selectedEvents?.[0] ?? '');
       setLookupStatus('found');
     } catch {
       setRegistration(null);
@@ -74,6 +85,8 @@ export default function AdminAddMedalPage() {
     setVidhanSabhaId('');
     setNyayPanchayatId('');
   };
+
+  const registrationEvents = registration?.selectedEvents ?? [];
 
   const geoSelected =
     level === 'DISTRICT' ? !!districtId :
@@ -91,6 +104,8 @@ export default function AdminAddMedalPage() {
       await createMutation.mutateAsync({
         applicationCode: registration.registrationNo,
         sportId,
+        gender,
+        event: event.trim() || undefined,
         medal,
         level,
         name,
@@ -108,6 +123,9 @@ export default function AdminAddMedalPage() {
       setName('');
       setFathersName('');
       setEmail('');
+      setGender('MALE');
+      setSportId('');
+      setEvent('');
     } catch (err) {
       setMessage({ type: 'error', text: (err as Error).message ?? 'Failed to add medal record.' });
     }
@@ -131,6 +149,8 @@ export default function AdminAddMedalPage() {
       entityName: String(
         r['Nyay Panchayat'] ?? r['Vidhan Sabha'] ?? r['Sansad'] ?? r['District'] ?? r['entityName'] ?? ''
       ).trim(),
+      gender: String(r['Gender'] ?? r['gender'] ?? '').trim(),
+      event: String(r['Event'] ?? r['event'] ?? '').trim(),
     }));
 
     try {
@@ -193,11 +213,12 @@ export default function AdminAddMedalPage() {
           </div>
         </div>
 
+        {/* Sport, Gender, Event are all derived from the application code — not editable here. */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Sport *</label>
-            <select className={selectClass} value={sportId} onChange={(e) => setSportId(e.target.value)}>
-              <option value="">Select sport</option>
+            <select className={selectClass} value={sportId} disabled>
+              <option value="">{lookupStatus === 'found' ? 'Unknown sport' : 'Enter application code'}</option>
               {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           </div>
@@ -206,6 +227,30 @@ export default function AdminAddMedalPage() {
             <select className={selectClass} value={medal} onChange={(e) => setMedal(e.target.value as CmTrophyMedal)}>
               {MEDALS.map((m) => <option key={m} value={m}>{m.charAt(0) + m.slice(1).toLowerCase()}</option>)}
             </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
+            <select className={selectClass} value={gender} disabled>
+              {GENDERS.map((g) => <option key={g.value} value={g.value}>{g.label}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Event</label>
+            {registrationEvents.length > 0 ? (
+              <select
+                className={selectClass}
+                value={event}
+                onChange={(e) => setEvent(e.target.value)}
+                disabled={lookupStatus !== 'found' || registrationEvents.length === 1}
+              >
+                {registrationEvents.map((ev) => <option key={ev} value={ev}>{ev}</option>)}
+              </select>
+            ) : (
+              <input className={inputClass} value={event} disabled placeholder="—" />
+            )}
           </div>
         </div>
 
@@ -293,8 +338,8 @@ export default function AdminAddMedalPage() {
           </button>
         </div>
         <p className="text-xs text-gray-400">
-          Expected columns: <span className="font-mono">Application Code, Sport, Medal, Level, District/Sansad/Vidhan Sabha/Nyay Panchayat</span>{' '}
-          (fill the one geo column matching Level). Application codes that don&apos;t match an existing registration are rejected, not uploaded.
+          Expected columns: <span className="font-mono">Application Code, Sport, Medal, Level, District/Sansad/Vidhan Sabha/Nyay Panchayat, Gender, Event</span>{' '}
+          (fill the one geo column matching Level; Gender and Event optional — blank Gender falls back to the registration). Application codes that don&apos;t match an existing registration are rejected, not uploaded.
         </p>
 
         {bulkResult && (
