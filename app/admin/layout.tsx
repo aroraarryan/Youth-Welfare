@@ -97,6 +97,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </p>
           {navLink("/admin/news", "News")}
           {navLink("/admin/notifications", "Notifications")}
+          {navLink("/admin/send-email", "Send Email")}
 
           {navLink("/admin/contact",   "Contact Messages")}
 
