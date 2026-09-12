@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import * as XLSX from 'xlsx';
 import {
   useEmailTemplates,
@@ -14,6 +14,19 @@ import type { EmailTemplate, EmailSendResponse } from '@/lib/api/adminEmailApi';
 
 const inputClass =
   'border border-gray-300 rounded-md px-3 py-2 text-sm w-full disabled:opacity-50 disabled:bg-gray-50';
+
+// Extracts unique {{placeholder}} names from a template's subject+body, so
+// the manual-entry form can render one input per placeholder the template
+// actually uses.
+function extractPlaceholders(template: EmailTemplate): string[] {
+  const re = /\{\{\s*([^}]+?)\s*\}\}/g;
+  const found = new Set<string>();
+  for (const text of [template.subject, template.body]) {
+    let m;
+    while ((m = re.exec(text))) found.add(m[1]);
+  }
+  return Array.from(found);
+}
 
 function TemplateFormModal({
   initial,
@@ -97,10 +110,29 @@ export default function SendEmailPage() {
   const [selectedTemplateId, setSelectedTemplateId] = useState('');
   const [rows, setRows] = useState<Record<string, unknown>[]>([]);
   const [fileName, setFileName] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [sendResult, setSendResult] = useState<EmailSendResponse | null>(null);
+
+  const [manualEmail, setManualEmail] = useState('');
+  const [manualFields, setManualFields] = useState<Record<string, string>>({});
 
   const selectedTemplate = templates.find((t) => t.id === selectedTemplateId) ?? null;
   const columns = rows.length > 0 ? Object.keys(rows[0]) : [];
+  const placeholders = selectedTemplate
+    ? extractPlaceholders(selectedTemplate).filter((p) => p.toLowerCase() !== 'email')
+    : [];
+
+  function handleAddManualRecipient() {
+    if (!manualEmail.trim()) return;
+    setRows((prev) => [...prev, { Email: manualEmail.trim(), ...manualFields }]);
+    setManualEmail('');
+    setManualFields({});
+    setSendResult(null);
+  }
+
+  function handleRemoveRow(index: number) {
+    setRows((prev) => prev.filter((_, i) => i !== index));
+  }
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -112,10 +144,11 @@ export default function SendEmailPage() {
       const workbook = XLSX.read(data, { type: 'binary' });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       const parsed = XLSX.utils.sheet_to_json<Record<string, unknown>>(sheet);
-      setRows(parsed);
+      setRows((prev) => [...prev, ...parsed]);
       setFileName(file.name);
     };
     reader.readAsBinaryString(file);
+    e.target.value = ''; // allow re-selecting the same file to re-add its rows
   }
 
   async function handlePreview() {
@@ -206,11 +239,87 @@ export default function SendEmailPage() {
         <label className="block text-xs font-semibold text-gray-500 mt-4 mb-1">
           Excel file (.xlsx, .xls)
         </label>
-        <input type="file" accept=".xlsx,.xls" onChange={handleFile} className="text-sm" />
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".xlsx,.xls"
+          onChange={handleFile}
+          className="hidden"
+        />
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-50 flex items-center gap-2"
+          >
+            <i className="fas fa-file-excel text-green-600" />
+            Choose Excel File
+          </button>
+          {fileName && <span className="text-sm text-gray-500">{fileName}</span>}
+        </div>
         {rows.length > 0 && (
           <p className="text-xs text-gray-500 mt-2">
-            {rows.length} rows parsed from {fileName}. Columns: {columns.join(', ')}
+            {rows.length} rows parsed from {fileName || 'manual entry'}. Columns: {columns.join(', ')}
           </p>
+        )}
+
+        <p className="text-xs font-semibold text-gray-500 mt-5 mb-1">Or add a recipient manually</p>
+        {!selectedTemplate ? (
+          <p className="text-xs text-gray-400">Select a template above to add recipients manually.</p>
+        ) : (
+          <div className="flex flex-wrap gap-2 items-end">
+            <div className="min-w-[200px]">
+              <label className="block text-[11px] text-gray-500 mb-1">Email</label>
+              <input
+                className={inputClass}
+                value={manualEmail}
+                onChange={(e) => setManualEmail(e.target.value)}
+                placeholder="name@example.com"
+              />
+            </div>
+            {placeholders.map((p) => (
+              <div key={p} className="min-w-[160px]">
+                <label className="block text-[11px] text-gray-500 mb-1">{p}</label>
+                <input
+                  className={inputClass}
+                  value={manualFields[p] ?? ''}
+                  onChange={(e) => setManualFields((f) => ({ ...f, [p]: e.target.value }))}
+                />
+              </div>
+            ))}
+            <button
+              onClick={handleAddManualRecipient}
+              disabled={!manualEmail.trim()}
+              className="bg-[#1e3a8a] text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#1e2f6b] disabled:opacity-50"
+            >
+              + Add Recipient
+            </button>
+          </div>
+        )}
+
+        {rows.length > 0 && (
+          <div className="mt-4 border border-gray-200 rounded-md max-h-56 overflow-y-auto">
+            <table className="w-full text-xs">
+              <tbody className="divide-y divide-gray-100">
+                {rows.map((row, i) => (
+                  <tr key={i}>
+                    <td className="px-3 py-1.5 text-gray-700">
+                      {Object.entries(row)
+                        .map(([k, v]) => `${k}: ${v}`)
+                        .join(' · ')}
+                    </td>
+                    <td className="px-3 py-1.5 text-right">
+                      <button
+                        onClick={() => handleRemoveRow(i)}
+                        className="text-red-500 hover:underline"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
 
         <div className="flex gap-3 mt-4">
