@@ -95,7 +95,7 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
   const removeTeam = useRemoveTeam(event.id);
 
   const { sansads } = useSansads();
-  const { vidhanSabhas } = useVidhanSabhas(event.level === 'SANSAD' ? undefined : pickerSansadId || undefined);
+  const { vidhanSabhas } = useVidhanSabhas(event.level === 'SANSAD' ? event.sansadId ?? undefined : pickerSansadId || undefined);
   const { nyayPanchayats } = useNyayPanchayats(event.level === 'VIDHAN_SABHA' ? event.vidhanSabhaId ?? undefined : undefined);
 
   const addedIds = new Set(
