@@ -162,7 +162,7 @@ export interface MedalRejectRow {
 }
 
 export const MEDAL_LEVEL_LABEL: Record<CmTrophyMedalLevel, string> = {
-  DISTRICT: 'District',
+  DISTRICT: 'State',
   NYAY_PANCHAYAT: 'Nyay Panchayat',
   VIDHAN_SABHA: 'Vidhan Sabha',
   SANSAD: 'Sansad',

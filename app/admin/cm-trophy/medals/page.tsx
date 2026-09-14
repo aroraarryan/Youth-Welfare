@@ -31,7 +31,7 @@ export default function AdminAddMedalPage() {
   const [sportId, setSportId] = useState('');
   const [gender, setGender] = useState<Gender>('MALE');
   const [event, setEvent] = useState('');
-  const [medal, setMedal] = useState<CmTrophyMedal>('GOLD');
+  const [medal, setMedal] = useState<CmTrophyMedal | ''>('');
   const [level, setLevel] = useState<CmTrophyMedalLevel>('DISTRICT');
   const [districtId, setDistrictId] = useState('');
   const [sansadId, setSansadId] = useState('');
@@ -106,7 +106,7 @@ export default function AdminAddMedalPage() {
         sportId,
         gender,
         event: event.trim() || undefined,
-        medal,
+        medal: medal as CmTrophyMedal,
         level,
         name,
         fathersName,
@@ -225,6 +225,7 @@ export default function AdminAddMedalPage() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Medal *</label>
             <select className={selectClass} value={medal} onChange={(e) => setMedal(e.target.value as CmTrophyMedal)}>
+              <option value="">Select medal</option>
               {MEDALS.map((m) => <option key={m} value={m}>{m.charAt(0) + m.slice(1).toLowerCase()}</option>)}
             </select>
           </div>

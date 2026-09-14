@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 export interface LeaderboardRow {
   entityId: string;
   entityName: string;
@@ -16,8 +18,18 @@ interface Props {
   entityLabel?: string;
 }
 
+const PAGE_SIZE = 15;
+
 export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel = 'District' }: Props) {
-  const rows = limit ? entries.slice(0, limit) : entries;
+  const [page, setPage] = useState(1);
+
+  // Reset to page 1 whenever the tab (entity type) changes, not on every
+  // parent re-render — entries is a fresh array reference each fetch.
+  useEffect(() => setPage(1), [entityLabel]);
+
+  const all = limit ? entries.slice(0, limit) : entries;
+  const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+  const rows = all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
@@ -41,7 +53,7 @@ export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel =
             ) : (
               rows.map((r, idx) => (
                 <tr key={r.entityId} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-4 py-3 text-gray-900 font-semibold">{idx + 1}</td>
+                  <td className="px-4 py-3 text-gray-900 font-semibold">{(page - 1) * PAGE_SIZE + idx + 1}</td>
                   <td className="px-4 py-3 text-gray-900 font-medium">{r.entityName}</td>
                   <td className="px-4 py-3 text-center">{r.gold}</td>
                   <td className="px-4 py-3 text-center">{r.silver}</td>
@@ -53,6 +65,15 @@ export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel =
           </tbody>
         </table>
       </div>
+      {all.length > PAGE_SIZE && (
+        <div className="flex items-center justify-between px-4 py-3 border-t border-gray-100 text-sm text-gray-500">
+          <span>Page {page} of {totalPages} ({all.length} total)</span>
+          <div className="flex gap-2">
+            <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page <= 1} className="px-3 py-1 border border-gray-300 rounded disabled:opacity-40">Prev</button>
+            <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page >= totalPages} className="px-3 py-1 border border-gray-300 rounded disabled:opacity-40">Next</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
