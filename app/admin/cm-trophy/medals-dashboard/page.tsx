@@ -5,7 +5,7 @@ import { useDistricts } from '@/hooks/useInfrastructure';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
-import { useMedals, useDeleteMedal } from '@/hooks/useAdminCmTrophy';
+import { useMedals } from '@/hooks/useAdminCmTrophy';
 
 const LEVELS: CmTrophyMedalLevel[] = ['DISTRICT', 'NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
 const selectClass = 'border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[160px] disabled:opacity-50';
@@ -39,8 +39,6 @@ export default function AdminMedalDashboardPage() {
     page,
     limit: 50,
   });
-  const deleteMutation = useDeleteMedal();
-
   const MEDAL_RANK: Record<string, number> = { GOLD: 1, SILVER: 2, BRONZE: 3 };
   const rows = [...(data?.data ?? [])].sort(
     (a, b) =>
@@ -65,11 +63,6 @@ export default function AdminMedalDashboardPage() {
     setVidhanSabhaId('');
     setNyayPanchayatId('');
     setPage(1);
-  };
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('Delete this medal record?')) return;
-    await deleteMutation.mutateAsync(id);
   };
 
   return (
@@ -159,12 +152,11 @@ export default function AdminMedalDashboardPage() {
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Level</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Location</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Application Code</th>
-                  <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase text-right">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {rows.length === 0 ? (
-                  <tr><td colSpan={10} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
+                  <tr><td colSpan={9} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
                 ) : (
                   rows.map((r) => (
                     <tr key={r.id} className="hover:bg-gray-50">
@@ -179,15 +171,6 @@ export default function AdminMedalDashboardPage() {
                       <td className="px-4 py-3 text-gray-700">{MEDAL_LEVEL_LABEL[r.level]}</td>
                       <td className="px-4 py-3 text-gray-700">{r.entityName ?? '—'}</td>
                       <td className="px-4 py-3 font-mono text-xs text-gray-500">{r.applicationCode}</td>
-                      <td className="px-4 py-3 text-right">
-                        <button
-                          onClick={() => handleDelete(r.id)}
-                          disabled={deleteMutation.isPending}
-                          className="text-red-500 hover:text-red-700 text-xs font-medium disabled:opacity-50"
-                        >
-                          <i className="fas fa-trash mr-1" />Delete
-                        </button>
-                      </td>
                     </tr>
                   ))
                 )}
