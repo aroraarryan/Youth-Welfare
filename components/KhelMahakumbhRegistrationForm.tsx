@@ -288,8 +288,8 @@ export default function KhelMahakumbhRegistrationForm() {
     if (bankRequired && (!form.bankName || !form.accountHolderName || !form.accountNumber || !form.ifscCode || !passbookUrl)) {
       return setError("Bank details are required for State-level registration.");
     }
-    if (!form.districtId || !form.blockId) {
-      return setError("Please select your District and Block.");
+    if (!form.districtId) {
+      return setError("Please select your District.");
     }
     if (showSansad && !form.sansadId) return setError("Please select your Sansad.");
     if (showVidhanSabha && !form.vidhanSabhaId) return setError("Please select your Vidhan Sabha.");
@@ -314,7 +314,7 @@ export default function KhelMahakumbhRegistrationForm() {
         mothersName: form.mothersName,
         address: form.address,
         districtId: form.districtId,
-        blockId: form.blockId,
+        blockId: form.blockId || undefined,
         sansadId: showSansad ? form.sansadId : undefined,
         vidhanSabhaId: showVidhanSabha ? form.vidhanSabhaId : undefined,
         nyayPanchayatId: showNyayPanchayat ? form.nyayPanchayatId : undefined,
@@ -478,11 +478,10 @@ export default function KhelMahakumbhRegistrationForm() {
                   ))}
                 </select>
               </Field>
-              <Field label="Block" hindi="ब्लॉक" required>
+              <Field label="Block" hindi="ब्लॉक">
                 <select
                   value={form.blockId}
                   onChange={(e) => set("blockId", e.target.value)}
-                  required
                   disabled={!form.districtId || blocksLoading}
                   className={sel + " disabled:bg-[#f1f5f9]"}
                 >
