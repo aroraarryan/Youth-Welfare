@@ -17,6 +17,7 @@ export default function AdminMedalDashboardPage() {
   const [sansadId, setSansadId] = useState('');
   const [vidhanSabhaId, setVidhanSabhaId] = useState('');
   const [nyayPanchayatId, setNyayPanchayatId] = useState('');
+  const [event, setEvent] = useState('');
   const [page, setPage] = useState(1);
 
   const [sports, setSports] = useState<Sport[]>([]);
@@ -36,9 +37,24 @@ export default function AdminMedalDashboardPage() {
     sansadId: sansadId || undefined,
     vidhanSabhaId: vidhanSabhaId || undefined,
     nyayPanchayatId: nyayPanchayatId || undefined,
+    event: event || undefined,
     page,
     limit: 50,
   });
+
+  // Wider fetch (same filters, minus event) just to build the Event dropdown's option list.
+  const { data: eventOptionsData } = useMedals({
+    sportId: sportId || undefined,
+    level: level || undefined,
+    districtId: districtId || undefined,
+    sansadId: sansadId || undefined,
+    vidhanSabhaId: vidhanSabhaId || undefined,
+    nyayPanchayatId: nyayPanchayatId || undefined,
+    limit: 200,
+  });
+  const eventOptions = Array.from(
+    new Set((eventOptionsData?.data ?? []).map((r) => r.event).filter((e): e is string => !!e))
+  ).sort();
   const MEDAL_RANK: Record<string, number> = { GOLD: 1, SILVER: 2, BRONZE: 3 };
   const rows = [...(data?.data ?? [])].sort(
     (a, b) =>
@@ -62,6 +78,7 @@ export default function AdminMedalDashboardPage() {
     setSansadId('');
     setVidhanSabhaId('');
     setNyayPanchayatId('');
+    setEvent('');
     setPage(1);
   };
 
@@ -70,7 +87,7 @@ export default function AdminMedalDashboardPage() {
       <h1 className="text-xl font-bold text-gray-900 mb-6">CM Trophy 2026-27 — Medal Dashboard</h1>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <select className={selectClass} value={sportId} onChange={(e) => { setSportId(e.target.value); setPage(1); }}>
+        <select className={selectClass} value={sportId} onChange={(e) => { setSportId(e.target.value); setEvent(''); setPage(1); }}>
           <option value="">All Sports</option>
           {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
         </select>
@@ -78,6 +95,11 @@ export default function AdminMedalDashboardPage() {
         <select className={selectClass} value={level} onChange={(e) => handleLevelChange(e.target.value as CmTrophyMedalLevel | '')}>
           <option value="">All Levels</option>
           {LEVELS.map((l) => <option key={l} value={l}>{MEDAL_LEVEL_LABEL[l]}</option>)}
+        </select>
+
+        <select className={selectClass} value={event} onChange={(e) => { setEvent(e.target.value); setPage(1); }}>
+          <option value="">All Events</option>
+          {eventOptions.map((ev) => <option key={ev} value={ev}>{ev}</option>)}
         </select>
 
         {level === 'DISTRICT' && (

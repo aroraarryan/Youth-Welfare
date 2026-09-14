@@ -151,6 +151,7 @@ export interface MedalListParams {
   sansadId?: string;
   vidhanSabhaId?: string;
   nyayPanchayatId?: string;
+  event?: string;
   page?: number;
   limit?: number;
 }
