@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 
@@ -11,6 +11,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [role, setRole] = useState<string | null>(null);
+  const isCmTrophyOnly = role === "CM_TROPHY";
+
+  useEffect(() => {
+    if (pathname === "/admin/login") return;
+    fetch(`/api/admin/me`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        const r = data?.admin?.role ?? null;
+        setRole(r);
+        if (r === "CM_TROPHY" && !pathname.startsWith("/admin/cm-trophy")) {
+          router.replace("/admin/cm-trophy");
+        }
+      })
+      .catch(() => {});
+  }, [pathname, router]);
 
   const handleLogout = async () => {
     await fetch(`/api/admin/logout`, { method: "POST" });
@@ -75,11 +91,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <p className="text-xs text-blue-300 mt-0.5">Yuva Shakti Portal</p>
         </div>
         <nav className="flex-1 px-2 py-4 overflow-y-auto pt-20 md:pt-4 space-y-0.5">
-          {navLink("/admin/dashboard", "Dashboard")}
-          {navLink("/admin/officers",  "Officers")}
-          {navLink("/admin/gallery",   "Gallery Approvals")}
-          {navLink("/admin/downloads", "Downloads")}
-          {navLink("/admin/rti",       "RTI")}
+          {!isCmTrophyOnly && navLink("/admin/dashboard", "Dashboard")}
+          {!isCmTrophyOnly && navLink("/admin/officers",  "Officers")}
+          {!isCmTrophyOnly && navLink("/admin/gallery",   "Gallery Approvals")}
+          {!isCmTrophyOnly && navLink("/admin/downloads", "Downloads")}
+          {!isCmTrophyOnly && navLink("/admin/rti",       "RTI")}
 
           {/* CM Trophy */}
           <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
@@ -93,33 +109,45 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {navLink("/admin/cm-trophy/grievance", "Grievances", true)}
 
           {/* Content Management */}
-          <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
-            Content Management
-          </p>
-          {navLink("/admin/news", "News")}
-          {navLink("/admin/notifications", "Notifications")}
-          {navLink("/admin/send-email", "Send Email")}
+          {!isCmTrophyOnly && (
+            <>
+              <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
+                Content Management
+              </p>
+              {navLink("/admin/news", "News")}
+              {navLink("/admin/notifications", "Notifications")}
+              {navLink("/admin/send-email", "Send Email")}
 
-          {navLink("/admin/contact",   "Contact Messages")}
+              {navLink("/admin/contact",   "Contact Messages")}
+            </>
+          )}
 
           {/* Mangal Dal */}
-          <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
-            Mangal Dal
-          </p>
-          {navLink("/admin/yuvak-mangal-dal",  "Yuvak Mangal Dal")}
-          {navLink("/admin/mahila-mangal-dal", "Mahila Mangal Dal")}
+          {!isCmTrophyOnly && (
+            <>
+              <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
+                Mangal Dal
+              </p>
+              {navLink("/admin/yuvak-mangal-dal",  "Yuvak Mangal Dal")}
+              {navLink("/admin/mahila-mangal-dal", "Mahila Mangal Dal")}
+            </>
+          )}
 
           {/* Infrastructure */}
-          <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
-            Infrastructure
-          </p>
-          {navLink("/admin/multipurpose-halls",           "Multipurpose Halls")}
-          {navLink("/admin/mini-stadiums",                "Mini Stadiums")}
-          {navLink("/admin/youth-hostels",                "Youth Hostels")}
-          {navLink("/admin/vocational-training-centers",  "Vocational Centers")}
-          {navLink("/admin/indoor-gym",                   "Indoor Gym")}
-          {navLink("/admin/open-gym",                     "Open Gym")}
-          {navLink("/admin/khel-maidaan",                 "Khel Maidaan")}
+          {!isCmTrophyOnly && (
+            <>
+              <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
+                Infrastructure
+              </p>
+              {navLink("/admin/multipurpose-halls",           "Multipurpose Halls")}
+              {navLink("/admin/mini-stadiums",                "Mini Stadiums")}
+              {navLink("/admin/youth-hostels",                "Youth Hostels")}
+              {navLink("/admin/vocational-training-centers",  "Vocational Centers")}
+              {navLink("/admin/indoor-gym",                   "Indoor Gym")}
+              {navLink("/admin/open-gym",                     "Open Gym")}
+              {navLink("/admin/khel-maidaan",                 "Khel Maidaan")}
+            </>
+          )}
         </nav>
         <div className="px-2 py-4 border-t border-blue-700 mb-safe">
           <button
