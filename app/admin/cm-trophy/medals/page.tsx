@@ -32,7 +32,7 @@ export default function AdminAddMedalPage() {
   const [gender, setGender] = useState<Gender>('MALE');
   const [event, setEvent] = useState('');
   const [medal, setMedal] = useState<CmTrophyMedal | ''>('');
-  const [level, setLevel] = useState<CmTrophyMedalLevel>('DISTRICT');
+  const [level, setLevel] = useState<CmTrophyMedalLevel | ''>('');
   const [districtId, setDistrictId] = useState('');
   const [sansadId, setSansadId] = useState('');
   const [vidhanSabhaId, setVidhanSabhaId] = useState('');
@@ -92,7 +92,8 @@ export default function AdminAddMedalPage() {
     level === 'DISTRICT' ? !!districtId :
     level === 'SANSAD' ? !!sansadId :
     level === 'VIDHAN_SABHA' ? !!vidhanSabhaId :
-    !!nyayPanchayatId;
+    level === 'NYAY_PANCHAYAT' ? !!nyayPanchayatId :
+    false;
 
   const canSubmit = lookupStatus === 'found' && !!sportId && !!medal && geoSelected && !createMutation.isPending;
 
@@ -107,7 +108,7 @@ export default function AdminAddMedalPage() {
         gender,
         event: event.trim() || undefined,
         medal: medal as CmTrophyMedal,
-        level,
+        level: level as CmTrophyMedalLevel,
         name,
         fathersName,
         email: email || undefined,
@@ -258,6 +259,7 @@ export default function AdminAddMedalPage() {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Level *</label>
           <select className={selectClass} value={level} onChange={(e) => handleLevelChange(e.target.value as CmTrophyMedalLevel)}>
+            <option value="">Select level</option>
             {LEVELS.map((l) => <option key={l} value={l}>{MEDAL_LEVEL_LABEL[l]}</option>)}
           </select>
         </div>
@@ -272,7 +274,7 @@ export default function AdminAddMedalPage() {
           </div>
         )}
 
-        {level !== 'DISTRICT' && (
+        {level !== '' && level !== 'DISTRICT' && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Sansad *</label>
