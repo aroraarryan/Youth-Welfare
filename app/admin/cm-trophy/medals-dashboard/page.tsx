@@ -6,8 +6,10 @@ import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTro
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
 import { useMedals } from '@/hooks/useAdminCmTrophy';
+import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 
 const LEVELS: CmTrophyMedalLevel[] = ['DISTRICT', 'NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
+const AGE_CATEGORIES: CmTrophyAgeCategory[] = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
 const selectClass = 'border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[160px] disabled:opacity-50';
 
 export default function AdminMedalDashboardPage() {
@@ -18,6 +20,7 @@ export default function AdminMedalDashboardPage() {
   const [vidhanSabhaId, setVidhanSabhaId] = useState('');
   const [nyayPanchayatId, setNyayPanchayatId] = useState('');
   const [event, setEvent] = useState('');
+  const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | ''>('');
   const [page, setPage] = useState(1);
 
   const [sports, setSports] = useState<Sport[]>([]);
@@ -38,6 +41,7 @@ export default function AdminMedalDashboardPage() {
     vidhanSabhaId: vidhanSabhaId || undefined,
     nyayPanchayatId: nyayPanchayatId || undefined,
     event: event || undefined,
+    ageCategory: ageCategory || undefined,
     page,
     limit: 50,
   });
@@ -100,6 +104,11 @@ export default function AdminMedalDashboardPage() {
         <select className={selectClass} value={event} onChange={(e) => { setEvent(e.target.value); setPage(1); }}>
           <option value="">All Events</option>
           {eventOptions.map((ev) => <option key={ev} value={ev}>{ev}</option>)}
+        </select>
+
+        <select className={selectClass} value={ageCategory} onChange={(e) => { setAgeCategory(e.target.value as CmTrophyAgeCategory | ''); setPage(1); }}>
+          <option value="">All Age Categories</option>
+          {AGE_CATEGORIES.map((c) => <option key={c} value={c}>{CM_TROPHY_AGE_CATEGORY_LABELS[c]}</option>)}
         </select>
 
         {level === 'DISTRICT' && (
@@ -170,6 +179,7 @@ export default function AdminMedalDashboardPage() {
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Sport</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Gender</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Event</th>
+                  <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Age Category</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Medal</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Level</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Location</th>
@@ -178,7 +188,7 @@ export default function AdminMedalDashboardPage() {
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {rows.length === 0 ? (
-                  <tr><td colSpan={9} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
+                  <tr><td colSpan={10} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
                 ) : (
                   rows.map((r) => (
                     <tr key={r.id} className="hover:bg-gray-50">
@@ -187,6 +197,7 @@ export default function AdminMedalDashboardPage() {
                       <td className="px-4 py-3 text-gray-700">{r.sportName}</td>
                       <td className="px-4 py-3 text-gray-700">{r.gender ? r.gender.charAt(0) + r.gender.slice(1).toLowerCase() : '—'}</td>
                       <td className="px-4 py-3 text-gray-700">{r.event ?? '—'}</td>
+                      <td className="px-4 py-3 text-gray-700">{r.ageCategory ? CM_TROPHY_AGE_CATEGORY_LABELS[r.ageCategory] : '—'}</td>
                       <td className="px-4 py-3">
                         {r.medal === 'GOLD' ? '🥇' : r.medal === 'SILVER' ? '🥈' : '🥉'} {r.medal.charAt(0) + r.medal.slice(1).toLowerCase()}
                       </td>

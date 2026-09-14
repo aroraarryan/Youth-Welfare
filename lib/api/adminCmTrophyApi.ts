@@ -108,6 +108,7 @@ export interface RegistrationLookupResult {
   registrationNo: string;
   gender: Gender | null;
   selectedEvents: string[];
+  ageCategory: CmTrophyAgeCategory | null;
   sportId: string;
   sportName: string | null;
 }
@@ -119,6 +120,7 @@ export interface CreateMedalInput {
   level: CmTrophyMedalLevel;
   gender?: Gender;
   event?: string;
+  ageCategory?: CmTrophyAgeCategory;
   name?: string;
   fathersName?: string;
   email?: string;
@@ -140,6 +142,7 @@ export interface MedalRecord {
   level: CmTrophyMedalLevel;
   gender: Gender | null;
   event: string | null;
+  ageCategory: CmTrophyAgeCategory | null;
   entityName: string | null;
   createdAt: string;
 }
@@ -152,6 +155,7 @@ export interface MedalListParams {
   vidhanSabhaId?: string;
   nyayPanchayatId?: string;
   event?: string;
+  ageCategory?: CmTrophyAgeCategory;
   page?: number;
   limit?: number;
 }
@@ -178,6 +182,7 @@ export interface MedalBulkRow {
   entityName: string;
   gender?: string;
   event?: string;
+  ageCategory?: string;
 }
 
 export interface CmTrophyListParams {

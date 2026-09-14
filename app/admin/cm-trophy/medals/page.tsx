@@ -8,6 +8,7 @@ import { sportsApi, Sport } from '@/lib/api/sports';
 import { adminCmTrophyApi, CmTrophyMedal, CmTrophyMedalLevel, MedalBulkRow, MEDAL_LEVEL_LABEL, RegistrationLookupResult } from '@/lib/api/adminCmTrophyApi';
 import { useCreateMedal, useBulkCreateMedals } from '@/hooks/useAdminCmTrophy';
 import { Gender } from '@/lib/api/registrations';
+import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 
 const LEVELS: CmTrophyMedalLevel[] = ['DISTRICT', 'NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
 const MEDALS: CmTrophyMedal[] = ['GOLD', 'SILVER', 'BRONZE'];
@@ -31,6 +32,7 @@ export default function AdminAddMedalPage() {
   const [sportId, setSportId] = useState('');
   const [gender, setGender] = useState<Gender>('MALE');
   const [event, setEvent] = useState('');
+  const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | ''>('');
   const [medal, setMedal] = useState<CmTrophyMedal | ''>('');
   const [level, setLevel] = useState<CmTrophyMedalLevel | ''>('');
   const [districtId, setDistrictId] = useState('');
@@ -71,6 +73,7 @@ export default function AdminAddMedalPage() {
       if (res.data.gender) setGender(res.data.gender);
       setSportId(res.data.sportId);
       setEvent(res.data.selectedEvents?.[0] ?? '');
+      setAgeCategory(res.data.ageCategory ?? '');
       setLookupStatus('found');
     } catch {
       setRegistration(null);
@@ -107,6 +110,7 @@ export default function AdminAddMedalPage() {
         sportId,
         gender,
         event: event.trim() || undefined,
+        ageCategory: ageCategory || undefined,
         medal: medal as CmTrophyMedal,
         level: level as CmTrophyMedalLevel,
         name,
@@ -127,6 +131,7 @@ export default function AdminAddMedalPage() {
       setGender('MALE');
       setSportId('');
       setEvent('');
+      setAgeCategory('');
     } catch (err) {
       setMessage({ type: 'error', text: (err as Error).message ?? 'Failed to add medal record.' });
     }
@@ -152,6 +157,7 @@ export default function AdminAddMedalPage() {
       ).trim(),
       gender: String(r['Gender'] ?? r['gender'] ?? '').trim(),
       event: String(r['Event'] ?? r['event'] ?? '').trim(),
+      ageCategory: String(r['Age Category'] ?? r['ageCategory'] ?? '').trim(),
     }));
 
     try {
@@ -232,7 +238,7 @@ export default function AdminAddMedalPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
             <select className={selectClass} value={gender} disabled>
@@ -253,6 +259,20 @@ export default function AdminAddMedalPage() {
             ) : (
               <input className={inputClass} value={event} disabled placeholder="—" />
             )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Age Category</label>
+            <select
+              className={selectClass}
+              value={ageCategory}
+              onChange={(e) => setAgeCategory(e.target.value as CmTrophyAgeCategory)}
+              disabled={lookupStatus !== 'found'}
+            >
+              <option value="">—</option>
+              {(Object.keys(CM_TROPHY_AGE_CATEGORY_LABELS) as CmTrophyAgeCategory[]).map((c) => (
+                <option key={c} value={c}>{CM_TROPHY_AGE_CATEGORY_LABELS[c]}</option>
+              ))}
+            </select>
           </div>
         </div>
 
@@ -341,8 +361,8 @@ export default function AdminAddMedalPage() {
           </button>
         </div>
         <p className="text-xs text-gray-400">
-          Expected columns: <span className="font-mono">Application Code, Sport, Medal, Level, District/Sansad/Vidhan Sabha/Nyay Panchayat, Gender, Event</span>{' '}
-          (fill the one geo column matching Level; Gender and Event optional — blank Gender falls back to the registration). Application codes that don&apos;t match an existing registration are rejected, not uploaded.
+          Expected columns: <span className="font-mono">Application Code, Sport, Medal, Level, District/Sansad/Vidhan Sabha/Nyay Panchayat, Gender, Event, Age Category</span>{' '}
+          (fill the one geo column matching Level; Gender, Event and Age Category optional — blank falls back to the registration). Application codes that don&apos;t match an existing registration are rejected, not uploaded.
         </p>
 
         {bulkResult && (
