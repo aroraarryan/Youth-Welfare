@@ -73,7 +73,7 @@ export interface KhelMahakumbhPayload {
   mothersName: string;
   address: string;
   districtId: string;
-  blockId: string;
+  blockId?: string;
   // Requirement narrows with registrationLevel: NYAY_PANCHAYAT needs all 3,
   // VIDHAN_SABHA needs the first 2, SANSAD needs just sansadId, STATE needs none.
   sansadId?: string;
