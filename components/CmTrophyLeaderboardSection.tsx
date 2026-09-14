@@ -38,7 +38,10 @@ export default function CmTrophyLeaderboardSection() {
               <p className="text-sm">Loading leaderboard…</p>
             </div>
           ) : (
-            <CmTrophyLeaderboardTable entries={entries} limit={5} />
+            <CmTrophyLeaderboardTable
+              entries={entries.map((e) => ({ entityId: e.districtId, entityName: e.districtName, gold: e.gold, silver: e.silver, bronze: e.bronze, total: e.total }))}
+              limit={5}
+            />
           )}
         </div>
       </div>

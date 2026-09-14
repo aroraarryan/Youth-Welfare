@@ -33,7 +33,9 @@ export default function CmTrophyLeaderboardPage() {
             <p className="text-red-500 text-sm">{error}</p>
           </div>
         ) : (
-          <CmTrophyLeaderboardTable entries={entries} />
+          <CmTrophyLeaderboardTable
+            entries={entries.map((e) => ({ entityId: e.districtId, entityName: e.districtName, gold: e.gold, silver: e.silver, bronze: e.bronze, total: e.total }))}
+          />
         )}
       </div>
     </>

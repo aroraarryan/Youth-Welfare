@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 export interface LeaderboardRow {
-  districtId: string;
-  districtName: string;
+  entityId: string;
+  entityName: string;
   gold: number;
   silver: number;
   bronze: number;
@@ -12,13 +14,22 @@ export interface LeaderboardRow {
 interface Props {
   entries: LeaderboardRow[];
   limit?: number;
-  /** When provided, renders editable number inputs instead of static counts. */
-  onChange?: (districtId: string, field: 'gold' | 'silver' | 'bronze', value: number) => void;
+  /** Column header for the entity name (District, Nyay Panchayat, Vidhan Sabha, Sansad). */
+  entityLabel?: string;
 }
 
-export default function CmTrophyLeaderboardTable({ entries, limit, onChange }: Props) {
-  const rows = limit ? entries.slice(0, limit) : entries;
-  const editable = !!onChange;
+const PAGE_SIZE = 15;
+
+export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel = 'District' }: Props) {
+  const [page, setPage] = useState(1);
+
+  // Reset to page 1 whenever the tab (entity type) changes, not on every
+  // parent re-render — entries is a fresh array reference each fetch.
+  useEffect(() => setPage(1), [entityLabel]);
+
+  const all = limit ? entries.slice(0, limit) : entries;
+  const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+  const rows = all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
@@ -27,7 +38,7 @@ export default function CmTrophyLeaderboardTable({ entries, limit, onChange }: P
           <thead>
             <tr className="bg-[#1e3a8a] text-left">
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Rank</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">District</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">{entityLabel}</th>
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥇 Gold</th>
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥈 Silver</th>
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥉 Bronze</th>
@@ -41,33 +52,28 @@ export default function CmTrophyLeaderboardTable({ entries, limit, onChange }: P
               </tr>
             ) : (
               rows.map((r, idx) => (
-                <tr key={r.districtId} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-4 py-3 text-gray-900 font-semibold">{idx + 1}</td>
-                  <td className="px-4 py-3 text-gray-900 font-medium">{r.districtName}</td>
-                  {(['gold', 'silver', 'bronze'] as const).map((field) => (
-                    <td key={field} className="px-4 py-3 text-center">
-                      {editable ? (
-                        <input
-                          type="number"
-                          min={0}
-                          value={r[field]}
-                          onChange={(e) => onChange!(r.districtId, field, Math.max(0, Number(e.target.value)))}
-                          className="w-16 text-center border border-gray-300 rounded px-2 py-1"
-                        />
-                      ) : (
-                        r[field]
-                      )}
-                    </td>
-                  ))}
-                  <td className="px-4 py-3 text-center font-semibold text-gray-900">
-                    {editable ? r.gold + r.silver + r.bronze : r.total}
-                  </td>
+                <tr key={r.entityId} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-4 py-3 text-gray-900 font-semibold">{(page - 1) * PAGE_SIZE + idx + 1}</td>
+                  <td className="px-4 py-3 text-gray-900 font-medium">{r.entityName}</td>
+                  <td className="px-4 py-3 text-center">{r.gold}</td>
+                  <td className="px-4 py-3 text-center">{r.silver}</td>
+                  <td className="px-4 py-3 text-center">{r.bronze}</td>
+                  <td className="px-4 py-3 text-center font-semibold text-gray-900">{r.total}</td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
       </div>
+      {all.length > PAGE_SIZE && (
+        <div className="flex items-center justify-between px-4 py-3 border-t border-gray-100 text-sm text-gray-500">
+          <span>Page {page} of {totalPages} ({all.length} total)</span>
+          <div className="flex gap-2">
+            <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page <= 1} className="px-3 py-1 border border-gray-300 rounded disabled:opacity-40">Prev</button>
+            <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page >= totalPages} className="px-3 py-1 border border-gray-300 rounded disabled:opacity-40">Next</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
