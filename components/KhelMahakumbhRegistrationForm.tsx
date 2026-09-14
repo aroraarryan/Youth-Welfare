@@ -7,7 +7,6 @@ import { sportsApi, CmTrophySportOption } from "@/lib/api/sports";
 import { useDistricts, useBlocks } from "@/hooks/useInfrastructure";
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from "@/hooks/useCmTrophyGeo";
 import {
-  computeCmTrophyAgeCategory,
   CM_TROPHY_AGE_CATEGORY_LABELS,
   CM_TROPHY_REGISTRATION_LEVEL_LABELS,
   CmTrophyAgeCategory,
@@ -119,19 +118,8 @@ export default function KhelMahakumbhRegistrationForm() {
   const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(form.sansadId || undefined);
   const { nyayPanchayats, loading: nyayPanchayatsLoading } = useNyayPanchayats(form.vidhanSabhaId || undefined);
 
-  // ── Age Category: auto-computed from DOB + gender, overridden by disability ──
+  // ── Age Category: manually selected ──────────────────────────────────────────
   const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | "">("");
-  const [ageCategoryError, setAgeCategoryError] = useState("");
-
-  useEffect(() => {
-    const result = computeCmTrophyAgeCategory({
-      dob: form.dob,
-      gender: form.gender,
-      hasDisability: form.hasDisability === "yes",
-    });
-    setAgeCategory(result.category ?? "");
-    setAgeCategoryError(result.reason ?? "");
-  }, [form.dob, form.gender, form.hasDisability]);
 
   // ── Sport options depend on the resolved age category ────────────────────────
   const [sportOptions, setSportOptions] = useState<CmTrophySportOption[]>([]);
@@ -271,7 +259,7 @@ export default function KhelMahakumbhRegistrationForm() {
       return setError("Please upload the disability certificate.");
     }
     if (!ageCategory) {
-      return setError(ageCategoryError || "Please complete Date of Birth and Gender to determine your age category.");
+      return setError("Please select an age category.");
     }
     if (form.contactMethod === "PHONE" && form.mobile.length !== 10) {
       return setError("Please enter a valid 10-digit phone number.");
@@ -546,18 +534,18 @@ export default function KhelMahakumbhRegistrationForm() {
               />
             </Field>
 
-            <Field label="Age Category" hindi="आयु वर्ग (auto)" required>
-              <input
-                type="text"
-                readOnly
-                disabled
-                value={ageCategory ? CM_TROPHY_AGE_CATEGORY_LABELS[ageCategory] : ""}
-                placeholder={form.hasDisability === "yes" ? "Para Athlete (Open)" : "Select date of birth"}
-                className={disabledSel + " cursor-not-allowed"}
-              />
-              {ageCategoryError && (
-                <p className="text-[11px] text-red-500 mt-1">{ageCategoryError}</p>
-              )}
+            <Field label="Age Category" hindi="आयु वर्ग" required>
+              <select
+                value={ageCategory}
+                onChange={(e) => setAgeCategory(e.target.value as CmTrophyAgeCategory | "")}
+                required
+                className={sel}
+              >
+                <option value="">Select age category</option>
+                {(Object.keys(CM_TROPHY_AGE_CATEGORY_LABELS) as CmTrophyAgeCategory[]).map((c) => (
+                  <option key={c} value={c}>{CM_TROPHY_AGE_CATEGORY_LABELS[c]}</option>
+                ))}
+              </select>
             </Field>
 
             <Field label="Gender" hindi="लिंग" required>
@@ -590,7 +578,7 @@ export default function KhelMahakumbhRegistrationForm() {
                 className={sel + " disabled:bg-[#f1f5f9]"}
               >
                 <option value="">
-                  {sportOptionsLoading ? "Loading sports…" : !ageCategory ? "Select date of birth first" : "Select sport"}
+                  {sportOptionsLoading ? "Loading sports…" : !ageCategory ? "Select age category first" : "Select sport"}
                 </option>
                 {sportOptions.map((s) => (
                   <option key={s.sportId} value={s.sportId}>{sportDisplayName(s.name)}</option>
