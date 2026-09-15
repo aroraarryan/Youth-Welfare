@@ -122,6 +122,7 @@ export default function CmTrophyAdminPage() {
   const [status, setStatus] = useState('');
   const [sportId, setSportId] = useState('');
   const [gender, setGender] = useState('');
+  const [event, setEvent] = useState('');
   const [ageCategory, setAgeCategory] = useState('');
   const [registrationLevel, setRegistrationLevel] = useState('');
   const [sansadId, setSansadId] = useState('');
@@ -150,6 +151,7 @@ export default function CmTrophyAdminPage() {
     status: (status || undefined) as CmTrophyListParams['status'],
     sportId: sportId || undefined,
     gender: (gender || undefined) as CmTrophyListParams['gender'],
+    event: event || undefined,
     ageCategory: (ageCategory || undefined) as CmTrophyListParams['ageCategory'],
     registrationLevel: (registrationLevel || undefined) as CmTrophyListParams['registrationLevel'],
     sansadId: sansadId || undefined,
@@ -165,6 +167,14 @@ export default function CmTrophyAdminPage() {
   const { data: statsRes } = useAdminCmTrophyStats();
   const { data: trendRes } = useAdminCmTrophyWeeklyTrend();
 
+  // Wider fetch (same filters, minus event) just to build the Event dropdown's option list.
+  const { data: eventOptionsData } = useAdminCmTrophyList({ ...filters, event: undefined, page: 1, limit: 200 });
+  const eventOptions = Array.from(
+    new Set(
+      (eventOptionsData?.data ?? []).flatMap((r) => r.selectedEvents || [])
+    )
+  ).sort();
+
   const rows = data?.data ?? [];
   const meta = data?.meta;
   const stats = statsRes?.data ?? { total: 0, underReview: 0, approved: 0, rejected: 0 };
@@ -173,11 +183,11 @@ export default function CmTrophyAdminPage() {
   const resetPage = () => setPage(1);
 
   const hasActiveFilters =
-    search || status || sportId || gender || ageCategory || registrationLevel ||
+    search || status || sportId || gender || event || ageCategory || registrationLevel ||
     sansadId || vidhanSabhaId || nyayPanchayatId || districtId || blockId || dateFrom || dateTo;
 
   const clearFilters = () => {
-    setSearch(''); setStatus(''); setSportId(''); setGender(''); setAgeCategory(''); setRegistrationLevel('');
+    setSearch(''); setStatus(''); setSportId(''); setGender(''); setEvent(''); setAgeCategory(''); setRegistrationLevel('');
     setSansadId(''); setVidhanSabhaId(''); setNyayPanchayatId('');
     setDistrictId(''); setBlockId(''); setDateFrom(''); setDateTo('');
     resetPage();
@@ -264,7 +274,7 @@ export default function CmTrophyAdminPage() {
             <option value="REJECTED">Rejected</option>
           </select>
 
-          <select value={sportId} onChange={(e) => { setSportId(e.target.value); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[140px]">
+          <select value={sportId} onChange={(e) => { setSportId(e.target.value); setEvent(''); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[140px]">
             <option value="">All Sports</option>
             {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
           </select>
@@ -273,6 +283,11 @@ export default function CmTrophyAdminPage() {
             <option value="">All Genders</option>
             <option value="MALE">Male</option>
             <option value="FEMALE">Female</option>
+          </select>
+
+          <select value={event} onChange={(e) => { setEvent(e.target.value); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[140px]">
+            <option value="">All Events</option>
+            {eventOptions.map((ev) => <option key={ev} value={ev}>{ev}</option>)}
           </select>
 
           <select value={ageCategory} onChange={(e) => { setAgeCategory(e.target.value); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[160px]">
