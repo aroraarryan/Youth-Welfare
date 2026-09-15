@@ -21,7 +21,14 @@ export default function AdminMedalDashboardPage() {
   const [nyayPanchayatId, setNyayPanchayatId] = useState('');
   const [event, setEvent] = useState('');
   const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | ''>('');
+  const [search, setSearch] = useState('');
+  const [searchInput, setSearchInput] = useState('');
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const t = setTimeout(() => { setSearch(searchInput.trim()); setPage(1); }, 300);
+    return () => clearTimeout(t);
+  }, [searchInput]);
 
   const [sports, setSports] = useState<Sport[]>([]);
   const { districts } = useDistricts();
@@ -42,6 +49,7 @@ export default function AdminMedalDashboardPage() {
     nyayPanchayatId: nyayPanchayatId || undefined,
     event: event || undefined,
     ageCategory: ageCategory || undefined,
+    search: search || undefined,
     page,
     limit: 50,
   });
@@ -91,6 +99,14 @@ export default function AdminMedalDashboardPage() {
       <h1 className="text-xl font-bold text-gray-900 mb-6">CM Trophy 2026-27 — Medal Dashboard</h1>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
+        <input
+          type="text"
+          className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[220px]"
+          placeholder="Search by name or application code…"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
+
         <select className={selectClass} value={sportId} onChange={(e) => { setSportId(e.target.value); setEvent(''); setPage(1); }}>
           <option value="">All Sports</option>
           {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
