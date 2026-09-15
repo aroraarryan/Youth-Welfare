@@ -193,6 +193,7 @@ export interface CmTrophyListParams {
   status?: RegistrationStatus;
   sportId?: string;
   gender?: Gender;
+  event?: string;
   ageCategory?: CmTrophyAgeCategory;
   registrationLevel?: CmTrophyRegistrationLevel;
   sansadId?: string;
