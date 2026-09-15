@@ -279,15 +279,20 @@ export default function CmTrophyAdminPage() {
             {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
           </select>
 
+          <select
+            value={event}
+            onChange={(e) => { setEvent(e.target.value); resetPage(); }}
+            disabled={!sportId}
+            className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[140px] disabled:opacity-50"
+          >
+            <option value="">All Events</option>
+            {eventOptions.map((ev) => <option key={ev} value={ev}>{ev}</option>)}
+          </select>
+
           <select value={gender} onChange={(e) => { setGender(e.target.value); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[140px]">
             <option value="">All Genders</option>
             <option value="MALE">Male</option>
             <option value="FEMALE">Female</option>
-          </select>
-
-          <select value={event} onChange={(e) => { setEvent(e.target.value); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[140px]">
-            <option value="">All Events</option>
-            {eventOptions.map((ev) => <option key={ev} value={ev}>{ev}</option>)}
           </select>
 
           <select value={ageCategory} onChange={(e) => { setAgeCategory(e.target.value); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[160px]">
