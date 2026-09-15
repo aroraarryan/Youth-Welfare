@@ -11,21 +11,21 @@ export default function CmTrophyLeaderboardSection() {
     <section className="py-12 px-4 sm:px-10 bg-[#f8fafc]">
       <div className="max-w-[1400px] mx-auto">
         <div className="rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
-          <div className="bg-[#0f172a] px-6 py-4 flex items-center justify-between">
-            <span className="text-white text-xl font-bold flex items-center gap-3">
-              <i className="fa-solid fa-trophy text-lg" />
+          <div className="bg-[#0f172a] px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <span className="text-white text-base sm:text-xl font-bold flex items-center gap-2 sm:gap-3">
+              <i className="fa-solid fa-trophy text-base sm:text-lg shrink-0" />
               CM Championship Trophy 2026-27 — District Leaderboard
             </span>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Link
                 href="/cm-trophy/leaderboard"
-                className="border border-white/30 text-white/90 text-sm font-semibold px-4 py-2 rounded-xl hover:bg-white/10 flex items-center gap-2 transition-colors"
+                className="flex-1 sm:flex-none justify-center border border-white/30 text-white/90 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-xl hover:bg-white/10 flex items-center gap-2 transition-colors"
               >
                 View All <i className="fa-solid fa-arrow-up-right-from-square text-xs" />
               </Link>
               <Link
                 href="/cm-trophy/grievance"
-                className="border border-white/30 text-white/90 text-sm font-semibold px-4 py-2 rounded-xl hover:bg-white/10 flex items-center gap-2 transition-colors"
+                className="flex-1 sm:flex-none justify-center border border-white/30 text-white/90 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-xl hover:bg-white/10 flex items-center gap-2 transition-colors"
               >
                 Grievance <i className="fa-solid fa-circle-exclamation text-xs" />
               </Link>
@@ -38,10 +38,7 @@ export default function CmTrophyLeaderboardSection() {
               <p className="text-sm">Loading leaderboard…</p>
             </div>
           ) : (
-            <CmTrophyLeaderboardTable
-              entries={entries.map((e) => ({ entityId: e.districtId, entityName: e.districtName, gold: e.gold, silver: e.silver, bronze: e.bronze, total: e.total }))}
-              limit={5}
-            />
+            <CmTrophyLeaderboardTable entries={entries} limit={5} />
           )}
         </div>
       </div>
