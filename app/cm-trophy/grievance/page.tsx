@@ -108,13 +108,13 @@ export default function CmTrophyGrievancePage() {
 
             <div>
               <label className="block text-sm font-semibold text-[#374151] mb-1.5">
-                Atom Id <span className="text-gray-400 font-normal">(optional)</span>
+                CMT ID <span className="text-gray-400 font-normal">(optional)</span>
               </label>
               <input
                 type="text"
                 value={form.atomId}
                 onChange={e => setForm({ ...form, atomId: e.target.value })}
-                placeholder="Atom Id"
+                placeholder="CMT ID"
                 className="w-full px-4 py-3 border-2 border-[#e5e7eb] rounded-lg text-sm text-[#374151] outline-none focus:border-[#1e3a8a] transition-colors"
               />
             </div>
