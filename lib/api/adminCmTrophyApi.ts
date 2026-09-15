@@ -150,6 +150,7 @@ export interface MedalRecord {
 export interface MedalListParams {
   sportId?: string;
   level?: CmTrophyMedalLevel;
+  medal?: CmTrophyMedal;
   districtId?: string;
   sansadId?: string;
   vidhanSabhaId?: string;

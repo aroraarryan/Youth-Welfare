@@ -4,19 +4,21 @@ import { useState, useEffect } from 'react';
 import { useDistricts } from '@/hooks/useInfrastructure';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { sportsApi, Sport } from '@/lib/api/sports';
-import { CmTrophyMedalLevel, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
+import { CmTrophyMedalLevel, CmTrophyMedal, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
 import { useMedals } from '@/hooks/useAdminCmTrophy';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 import { adminCmTrophyApi, MedalRecord } from '@/lib/api/adminCmTrophyApi';
 import * as XLSX from 'xlsx';
 
 const LEVELS: CmTrophyMedalLevel[] = ['DISTRICT', 'NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
+const MEDALS: CmTrophyMedal[] = ['GOLD', 'SILVER', 'BRONZE'];
 const AGE_CATEGORIES: CmTrophyAgeCategory[] = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
 const selectClass = 'border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[160px] disabled:opacity-50';
 
 export default function AdminMedalDashboardPage() {
   const [sportId, setSportId] = useState('');
   const [level, setLevel] = useState<CmTrophyMedalLevel | ''>('');
+  const [medal, setMedal] = useState<CmTrophyMedal | ''>('');
   const [districtId, setDistrictId] = useState('');
   const [sansadId, setSansadId] = useState('');
   const [vidhanSabhaId, setVidhanSabhaId] = useState('');
@@ -46,6 +48,7 @@ export default function AdminMedalDashboardPage() {
   const { data, isLoading, isError, error } = useMedals({
     sportId: sportId || undefined,
     level: level || undefined,
+    medal: medal || undefined,
     districtId: districtId || undefined,
     sansadId: sansadId || undefined,
     vidhanSabhaId: vidhanSabhaId || undefined,
@@ -61,6 +64,7 @@ export default function AdminMedalDashboardPage() {
   const { data: eventOptionsData } = useMedals({
     sportId: sportId || undefined,
     level: level || undefined,
+    medal: medal || undefined,
     districtId: districtId || undefined,
     sansadId: sansadId || undefined,
     vidhanSabhaId: vidhanSabhaId || undefined,
@@ -90,6 +94,7 @@ export default function AdminMedalDashboardPage() {
   const exportFilters = {
     sportId: sportId || undefined,
     level: level || undefined,
+    medal: medal || undefined,
     districtId: districtId || undefined,
     sansadId: sansadId || undefined,
     vidhanSabhaId: vidhanSabhaId || undefined,
@@ -181,6 +186,11 @@ export default function AdminMedalDashboardPage() {
         <select className={selectClass} value={level} onChange={(e) => handleLevelChange(e.target.value as CmTrophyMedalLevel | '')}>
           <option value="">All Levels</option>
           {LEVELS.map((l) => <option key={l} value={l}>{MEDAL_LEVEL_LABEL[l]}</option>)}
+        </select>
+
+        <select className={selectClass} value={medal} onChange={(e) => { setMedal(e.target.value as CmTrophyMedal | ''); setPage(1); }}>
+          <option value="">All Medals</option>
+          {MEDALS.map((m) => <option key={m} value={m}>{m.charAt(0) + m.slice(1).toLowerCase()}</option>)}
         </select>
 
         <select className={selectClass} value={event} onChange={(e) => { setEvent(e.target.value); setPage(1); }}>
