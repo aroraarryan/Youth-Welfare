@@ -7,6 +7,8 @@ import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
 import { useMedals } from '@/hooks/useAdminCmTrophy';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
+import { adminCmTrophyApi, MedalRecord } from '@/lib/api/adminCmTrophyApi';
+import * as XLSX from 'xlsx';
 
 const LEVELS: CmTrophyMedalLevel[] = ['DISTRICT', 'NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
 const AGE_CATEGORIES: CmTrophyAgeCategory[] = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
@@ -24,6 +26,7 @@ export default function AdminMedalDashboardPage() {
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [page, setPage] = useState(1);
+  const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => { setSearch(searchInput.trim()); setPage(1); }, 300);
@@ -84,6 +87,59 @@ export default function AdminMedalDashboardPage() {
     { gold: 0, silver: 0, bronze: 0 }
   );
 
+  const exportFilters = {
+    sportId: sportId || undefined,
+    level: level || undefined,
+    districtId: districtId || undefined,
+    sansadId: sansadId || undefined,
+    vidhanSabhaId: vidhanSabhaId || undefined,
+    nyayPanchayatId: nyayPanchayatId || undefined,
+    event: event || undefined,
+    ageCategory: ageCategory || undefined,
+    search: search || undefined,
+  };
+
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      const limit = 200;
+      let page = 1;
+      let total = Infinity;
+      const all: MedalRecord[] = [];
+      while (all.length < total) {
+        const res = await adminCmTrophyApi.listMedals({ ...exportFilters, page, limit });
+        all.push(...res.data);
+        total = res.total;
+        if (res.data.length === 0) break;
+        page++;
+      }
+      const sorted = [...all].sort(
+        (a, b) =>
+          (a.entityName ?? '').localeCompare(b.entityName ?? '') ||
+          MEDAL_RANK[a.medal] - MEDAL_RANK[b.medal] ||
+          a.name.localeCompare(b.name)
+      );
+      const sheetRows = sorted.map((r) => ({
+        Rank: MEDAL_RANK[r.medal],
+        Name: r.name,
+        Sport: r.sportName,
+        Gender: r.gender ? r.gender.charAt(0) + r.gender.slice(1).toLowerCase() : '',
+        Event: r.event ?? '',
+        'Age Category': r.ageCategory ? CM_TROPHY_AGE_CATEGORY_LABELS[r.ageCategory] : '',
+        Medal: r.medal.charAt(0) + r.medal.slice(1).toLowerCase(),
+        Level: MEDAL_LEVEL_LABEL[r.level],
+        Location: r.entityName ?? '',
+        'Application Code': r.applicationCode,
+      }));
+      const ws = XLSX.utils.json_to_sheet(sheetRows);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Medals');
+      XLSX.writeFile(wb, `cm-trophy-medals-${new Date().toISOString().slice(0, 10)}.xlsx`);
+    } finally {
+      setExporting(false);
+    }
+  };
+
   const handleLevelChange = (next: CmTrophyMedalLevel | '') => {
     setLevel(next);
     setDistrictId('');
@@ -96,7 +152,17 @@ export default function AdminMedalDashboardPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-xl font-bold text-gray-900 mb-6">CM Trophy 2026-27 — Medal Dashboard</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-xl font-bold text-gray-900">CM Trophy 2026-27 — Medal Dashboard</h1>
+        <button
+          onClick={handleExport}
+          disabled={exporting}
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-md disabled:opacity-50"
+        >
+          <i className={`fas ${exporting ? 'fa-circle-notch fa-spin' : 'fa-file-excel'}`} />
+          {exporting ? 'Exporting…' : 'Export to Excel'}
+        </button>
+      </div>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
         <input
