@@ -156,6 +156,7 @@ export interface MedalListParams {
   nyayPanchayatId?: string;
   event?: string;
   ageCategory?: CmTrophyAgeCategory;
+  search?: string;
   page?: number;
   limit?: number;
 }
