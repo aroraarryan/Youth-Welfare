@@ -5,7 +5,7 @@ import { useDistricts } from '@/hooks/useInfrastructure';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, CmTrophyMedal, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
-import { useMedals } from '@/hooks/useAdminCmTrophy';
+import { useMedals, useDeleteMedal } from '@/hooks/useAdminCmTrophy';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 import { adminCmTrophyApi, MedalRecord } from '@/lib/api/adminCmTrophyApi';
 import * as XLSX from 'xlsx';
@@ -29,6 +29,19 @@ export default function AdminMedalDashboardPage() {
   const [searchInput, setSearchInput] = useState('');
   const [page, setPage] = useState(1);
   const [exporting, setExporting] = useState(false);
+  const [username, setUsername] = useState('');
+  const [deleteTarget, setDeleteTarget] = useState<MedalRecord | null>(null);
+  const deleteMedal = useDeleteMedal();
+
+  useEffect(() => {
+    fetch('/api/admin/me').then((r) => r.json()).then((d) => setUsername(d?.admin?.username ?? '')).catch(() => {});
+  }, []);
+  const canDelete = username === 'superadmin';
+
+  const handleDeleteConfirm = () => {
+    if (!deleteTarget) return;
+    deleteMedal.mutate(deleteTarget.id, { onSuccess: () => setDeleteTarget(null) });
+  };
 
   useEffect(() => {
     const t = setTimeout(() => { setSearch(searchInput.trim()); setPage(1); }, 300);
@@ -276,11 +289,12 @@ export default function AdminMedalDashboardPage() {
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Level</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Location</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Application Code</th>
+                  {canDelete && <th className="px-4 py-3 text-[11px] font-semibold text-gray-500 uppercase">Actions</th>}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {rows.length === 0 ? (
-                  <tr><td colSpan={10} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
+                  <tr><td colSpan={canDelete ? 11 : 10} className="text-center py-10 text-gray-400 text-sm">No medal records match this filter.</td></tr>
                 ) : (
                   rows.map((r) => (
                     <tr key={r.id} className="hover:bg-gray-50">
@@ -296,6 +310,16 @@ export default function AdminMedalDashboardPage() {
                       <td className="px-4 py-3 text-gray-700">{MEDAL_LEVEL_LABEL[r.level]}</td>
                       <td className="px-4 py-3 text-gray-700">{r.entityName ?? '—'}</td>
                       <td className="px-4 py-3 font-mono text-xs text-gray-500">{r.applicationCode}</td>
+                      {canDelete && (
+                        <td className="px-4 py-3">
+                          <button
+                            onClick={() => setDeleteTarget(r)}
+                            className="text-red-600 hover:text-red-800 text-xs font-semibold"
+                          >
+                            <i className="fas fa-trash mr-1" />Delete
+                          </button>
+                        </td>
+                      )}
                     </tr>
                   ))
                 )}
@@ -311,6 +335,34 @@ export default function AdminMedalDashboardPage() {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {deleteTarget && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-sm w-full p-6">
+            <h3 className="text-base font-semibold text-gray-900 mb-2">Delete medal record?</h3>
+            <p className="text-sm text-gray-600 mb-5">
+              This will permanently remove <span className="font-semibold">{deleteTarget.name}</span>&apos;s{' '}
+              {deleteTarget.medal.charAt(0) + deleteTarget.medal.slice(1).toLowerCase()} medal ({deleteTarget.applicationCode}). This cannot be undone.
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setDeleteTarget(null)}
+                disabled={deleteMedal.isPending}
+                className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                disabled={deleteMedal.isPending}
+                className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md disabled:opacity-50"
+              >
+                {deleteMedal.isPending ? 'Deleting…' : 'Delete'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

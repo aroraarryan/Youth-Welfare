@@ -25,6 +25,18 @@ export function useAdminCmTrophyDetail(id: string) {
   });
 }
 
+export function useUpdateRegistration() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Record<string, unknown> }) =>
+      adminCmTrophyApi.updateRegistration(id, data),
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'cmTrophy', 'detail', id] });
+      queryClient.invalidateQueries({ queryKey: ['admin', 'cmTrophy', 'list'] });
+    },
+  });
+}
+
 export function useAdminCmTrophyStats() {
   return useQuery({
     queryKey: ['admin', 'cmTrophy', 'stats'],
