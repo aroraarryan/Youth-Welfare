@@ -251,4 +251,7 @@ export const adminCmTrophyApi = {
 
   deleteMedal: (id: string): Promise<{ success: boolean }> =>
     adminFetch(`cm-trophy/medals/${id}`, { method: 'DELETE' }),
+
+  updateRegistration: (id: string, data: Record<string, unknown>): Promise<{ success: boolean; data: AdminKhelMahakumbhRegistration }> =>
+    adminFetch(`cm-trophy/registrations/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
 };
