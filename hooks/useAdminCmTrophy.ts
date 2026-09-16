@@ -3,6 +3,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   adminCmTrophyApi,
+  CmTrophyAttendanceListParams,
   CmTrophyListParams,
   CmTrophyMedalLevel,
   CreateMedalInput,
@@ -94,10 +95,42 @@ export function useBulkCreateMedals() {
   });
 }
 
+export function useUpdateMedal() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: CreateMedalInput }) => adminCmTrophyApi.updateMedal(id, data),
+    onSuccess: () => invalidateMedalQueries(queryClient),
+  });
+}
+
 export function useDeleteMedal() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: string) => adminCmTrophyApi.deleteMedal(id),
     onSuccess: () => invalidateMedalQueries(queryClient),
+  });
+}
+
+export function useAttendanceList(filters: CmTrophyAttendanceListParams) {
+  return useQuery({
+    queryKey: ['admin', 'cmTrophy', 'attendance', 'list', filters],
+    queryFn: () => adminCmTrophyApi.listAttendance(filters),
+  });
+}
+
+export function useMarkAttendance() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ registrationId, isPresent }: { registrationId: string; isPresent: boolean }) =>
+      adminCmTrophyApi.markAttendance(registrationId, isPresent),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'cmTrophy', 'attendance', 'list'] }),
+  });
+}
+
+export function useBulkMarkPresent() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (registrationIds: string[]) => adminCmTrophyApi.bulkMarkPresent(registrationIds),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'cmTrophy', 'attendance', 'list'] }),
   });
 }

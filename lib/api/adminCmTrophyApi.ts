@@ -144,6 +144,10 @@ export interface MedalRecord {
   event: string | null;
   ageCategory: CmTrophyAgeCategory | null;
   entityName: string | null;
+  districtId: string | null;
+  sansadId: string | null;
+  vidhanSabhaId: string | null;
+  nyayPanchayatId: string | null;
   createdAt: string;
 }
 
@@ -249,9 +253,53 @@ export const adminCmTrophyApi = {
     return adminFetch(`cm-trophy/medals${query}`);
   },
 
+  updateMedal: (id: string, data: CreateMedalInput): Promise<{ success: boolean; data: MedalRecord }> =>
+    adminFetch(`cm-trophy/medals/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+
   deleteMedal: (id: string): Promise<{ success: boolean }> =>
     adminFetch(`cm-trophy/medals/${id}`, { method: 'DELETE' }),
 
   updateRegistration: (id: string, data: Record<string, unknown>): Promise<{ success: boolean; data: AdminKhelMahakumbhRegistration }> =>
     adminFetch(`cm-trophy/registrations/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+
+  listAttendance: (params: CmTrophyAttendanceListParams = {}): Promise<{ success: boolean; total: number; page: number; limit: number; data: AttendanceRow[] }> => {
+    const qs = new URLSearchParams();
+    Object.entries(params).forEach(([k, v]) => {
+      if (v !== undefined && v !== '') qs.set(k, String(v));
+    });
+    const query = qs.toString() ? `?${qs}` : '';
+    return adminFetch(`cm-trophy/attendance${query}`);
+  },
+
+  markAttendance: (registrationId: string, isPresent: boolean): Promise<{ success: boolean; data: unknown }> =>
+    adminFetch(`cm-trophy/attendance/${registrationId}`, { method: 'PATCH', body: JSON.stringify({ isPresent }) }),
+
+  bulkMarkPresent: (registrationIds: string[]): Promise<{ success: boolean; inserted: number; rejected: { registrationId: string; reason: string }[] }> =>
+    adminFetch('cm-trophy/attendance/bulk-present', { method: 'POST', body: JSON.stringify({ registrationIds }) }),
 };
+
+export interface CmTrophyAttendanceListParams {
+  sportId?: string;
+  event?: string;
+  registrationLevel?: CmTrophyRegistrationLevel;
+  gender?: Gender;
+  ageCategory?: CmTrophyAgeCategory;
+  search?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface AttendanceRow {
+  id: string;
+  registrationNo: string;
+  fullName: string;
+  fathersName: string;
+  gender: Gender;
+  ageCategory: CmTrophyAgeCategory;
+  sportId: string;
+  sportName: string;
+  registrationLevel: CmTrophyRegistrationLevel;
+  selectedEvents: string[];
+  isPresent: boolean | null;
+  markedAt: string | null;
+}
