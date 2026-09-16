@@ -5,9 +5,9 @@ import { useDistricts } from '@/hooks/useInfrastructure';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, CmTrophyMedal, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
-import { useMedals, useDeleteMedal } from '@/hooks/useAdminCmTrophy';
+import { useMedals, useDeleteMedal, useUpdateMedal } from '@/hooks/useAdminCmTrophy';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
-import { adminCmTrophyApi, MedalRecord } from '@/lib/api/adminCmTrophyApi';
+import { adminCmTrophyApi, CreateMedalInput, MedalRecord } from '@/lib/api/adminCmTrophyApi';
 import * as XLSX from 'xlsx';
 
 const LEVELS: CmTrophyMedalLevel[] = ['DISTRICT', 'NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
@@ -31,12 +31,14 @@ export default function AdminMedalDashboardPage() {
   const [exporting, setExporting] = useState(false);
   const [username, setUsername] = useState('');
   const [deleteTarget, setDeleteTarget] = useState<MedalRecord | null>(null);
+  const [editTarget, setEditTarget] = useState<MedalRecord | null>(null);
   const deleteMedal = useDeleteMedal();
 
   useEffect(() => {
     fetch('/api/admin/me').then((r) => r.json()).then((d) => setUsername(d?.admin?.username ?? '')).catch(() => {});
   }, []);
   const canDelete = username === 'superadmin';
+  const canEdit = username === 'superadmin';
 
   const handleDeleteConfirm = () => {
     if (!deleteTarget) return;
@@ -312,12 +314,22 @@ export default function AdminMedalDashboardPage() {
                       <td className="px-4 py-3 font-mono text-xs text-gray-500">{r.applicationCode}</td>
                       {canDelete && (
                         <td className="px-4 py-3">
-                          <button
-                            onClick={() => setDeleteTarget(r)}
-                            className="text-red-600 hover:text-red-800 text-xs font-semibold"
-                          >
-                            <i className="fas fa-trash mr-1" />Delete
-                          </button>
+                          <div className="flex items-center gap-3">
+                            {canEdit && (
+                              <button
+                                onClick={() => setEditTarget(r)}
+                                className="text-blue-600 hover:text-blue-800 text-xs font-semibold"
+                              >
+                                <i className="fas fa-pen mr-1" />Edit
+                              </button>
+                            )}
+                            <button
+                              onClick={() => setDeleteTarget(r)}
+                              className="text-red-600 hover:text-red-800 text-xs font-semibold"
+                            >
+                              <i className="fas fa-trash mr-1" />Delete
+                            </button>
+                          </div>
                         </td>
                       )}
                     </tr>
@@ -365,6 +377,185 @@ export default function AdminMedalDashboardPage() {
           </div>
         </div>
       )}
+
+      {editTarget && (
+        <EditMedalModal
+          record={editTarget}
+          onClose={() => setEditTarget(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () => void }) {
+  const [medal, setMedal] = useState<CmTrophyMedal>(record.medal);
+  const [event, setEvent] = useState(record.event ?? '');
+  const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | ''>(record.ageCategory ?? '');
+  const [level, setLevel] = useState<CmTrophyMedalLevel>(record.level);
+  const [districtId, setDistrictId] = useState(record.districtId ?? '');
+  const [sansadId, setSansadId] = useState(record.sansadId ?? '');
+  const [vidhanSabhaId, setVidhanSabhaId] = useState(record.vidhanSabhaId ?? '');
+  const [nyayPanchayatId, setNyayPanchayatId] = useState(record.nyayPanchayatId ?? '');
+  const [error, setError] = useState('');
+
+  const { districts } = useDistricts();
+  const { sansads } = useSansads();
+  const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(sansadId || undefined);
+  const { nyayPanchayats, loading: nyayPanchayatsLoading } = useNyayPanchayats(vidhanSabhaId || undefined);
+  const updateMedal = useUpdateMedal();
+
+  const handleLevelChange = (next: CmTrophyMedalLevel) => {
+    setLevel(next);
+    setDistrictId('');
+    setSansadId('');
+    setVidhanSabhaId('');
+    setNyayPanchayatId('');
+  };
+
+  const geoSelected =
+    level === 'DISTRICT' ? !!districtId :
+    level === 'SANSAD' ? !!sansadId :
+    level === 'VIDHAN_SABHA' ? !!vidhanSabhaId :
+    level === 'NYAY_PANCHAYAT' ? !!nyayPanchayatId :
+    false;
+
+  const handleSave = () => {
+    if (!geoSelected) { setError('Select a location for this level.'); return; }
+    setError('');
+    const data: CreateMedalInput = {
+      applicationCode: record.applicationCode,
+      sportId: record.sportId,
+      medal,
+      level,
+      event: event.trim() || undefined,
+      ageCategory: ageCategory || undefined,
+      districtId: level === 'DISTRICT' ? districtId : undefined,
+      sansadId: level === 'SANSAD' ? sansadId : undefined,
+      vidhanSabhaId: level === 'VIDHAN_SABHA' ? vidhanSabhaId : undefined,
+      nyayPanchayatId: level === 'NYAY_PANCHAYAT' ? nyayPanchayatId : undefined,
+    };
+    updateMedal.mutate(
+      { id: record.id, data },
+      {
+        onSuccess: onClose,
+        onError: (e) => setError((e as Error).message ?? 'Failed to save changes.'),
+      }
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6">
+        <h3 className="text-base font-semibold text-gray-900 mb-1">Edit medal record</h3>
+        <p className="text-xs text-gray-500 mb-4">{record.name} ({record.applicationCode})</p>
+
+        {error && <p className="text-xs text-red-600 mb-3">{error}</p>}
+
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Medal *</label>
+            <select className={selectClass} value={medal} onChange={(e) => setMedal(e.target.value as CmTrophyMedal)}>
+              {MEDALS.map((m) => <option key={m} value={m}>{m.charAt(0) + m.slice(1).toLowerCase()}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Event</label>
+            <input
+              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm w-full"
+              value={event}
+              onChange={(e) => setEvent(e.target.value)}
+              placeholder="—"
+            />
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Age Category</label>
+          <select className={selectClass} value={ageCategory} onChange={(e) => setAgeCategory(e.target.value as CmTrophyAgeCategory)}>
+            <option value="">—</option>
+            {AGE_CATEGORIES.map((c) => <option key={c} value={c}>{CM_TROPHY_AGE_CATEGORY_LABELS[c]}</option>)}
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Level *</label>
+          <select className={selectClass} value={level} onChange={(e) => handleLevelChange(e.target.value as CmTrophyMedalLevel)}>
+            {LEVELS.map((l) => <option key={l} value={l}>{MEDAL_LEVEL_LABEL[l]}</option>)}
+          </select>
+        </div>
+
+        {level === 'DISTRICT' && (
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">District *</label>
+            <select className={selectClass} value={districtId} onChange={(e) => setDistrictId(e.target.value)}>
+              <option value="">Select district</option>
+              {districts.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}
+            </select>
+          </div>
+        )}
+
+        {level !== 'DISTRICT' && (
+          <div className="grid grid-cols-3 gap-4 mb-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Sansad *</label>
+              <select
+                className={selectClass}
+                value={sansadId}
+                onChange={(e) => { setSansadId(e.target.value); setVidhanSabhaId(''); setNyayPanchayatId(''); }}
+              >
+                <option value="">Select Sansad</option>
+                {sansads.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
+              </select>
+            </div>
+            {(level === 'VIDHAN_SABHA' || level === 'NYAY_PANCHAYAT') && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vidhan Sabha *</label>
+                <select
+                  className={selectClass}
+                  value={vidhanSabhaId}
+                  onChange={(e) => { setVidhanSabhaId(e.target.value); setNyayPanchayatId(''); }}
+                  disabled={!sansadId || vidhanSabhasLoading}
+                >
+                  <option value="">Select Vidhan Sabha</option>
+                  {vidhanSabhas.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
+                </select>
+              </div>
+            )}
+            {level === 'NYAY_PANCHAYAT' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Nyay Panchayat *</label>
+                <select
+                  className={selectClass}
+                  value={nyayPanchayatId}
+                  onChange={(e) => setNyayPanchayatId(e.target.value)}
+                  disabled={!vidhanSabhaId || nyayPanchayatsLoading}
+                >
+                  <option value="">Select Nyay Panchayat</option>
+                  {nyayPanchayats.map((n) => <option key={n.id} value={n.id}>{n.name}</option>)}
+                </select>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="flex justify-end gap-3 mt-2">
+          <button
+            onClick={onClose}
+            disabled={updateMedal.isPending}
+            className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={updateMedal.isPending}
+            className="px-4 py-2 text-sm font-semibold bg-[#1e3a8a] text-white rounded-md hover:bg-[#1e2f6b] disabled:opacity-50"
+          >
+            {updateMedal.isPending ? 'Saving…' : 'Save Changes'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
