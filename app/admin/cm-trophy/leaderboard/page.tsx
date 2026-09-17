@@ -6,17 +6,20 @@ import CmTrophyLeaderboardTable from '@/components/CmTrophyLeaderboardTable';
 import { useAdminMedalLeaderboard } from '@/hooks/useAdminCmTrophy';
 import { CmTrophyMedalLevel } from '@/lib/api/adminCmTrophyApi';
 
-const TABS: { level: CmTrophyMedalLevel; label: string }[] = [
-  { level: 'DISTRICT', label: 'District' },
-  { level: 'NYAY_PANCHAYAT', label: 'Nyay Panchayat' },
-  { level: 'VIDHAN_SABHA', label: 'Vidhan Sabha' },
-  { level: 'SANSAD', label: 'Sansad' },
+// `label` names the section tab; `columnLabel` names the table's entity
+// column — these differ only for DISTRICT, whose tab is titled "State" but
+// whose rows are still individual districts.
+const TABS: { level: CmTrophyMedalLevel; label: string; columnLabel: string }[] = [
+  { level: 'DISTRICT', label: 'State', columnLabel: 'District' },
+  { level: 'NYAY_PANCHAYAT', label: 'Nyay Panchayat', columnLabel: 'Nyay Panchayat' },
+  { level: 'VIDHAN_SABHA', label: 'Vidhan Sabha', columnLabel: 'Vidhan Sabha' },
+  { level: 'SANSAD', label: 'Sansad', columnLabel: 'Sansad' },
 ];
 
 export default function AdminCmTrophyLeaderboardPage() {
   const [level, setLevel] = useState<CmTrophyMedalLevel>('DISTRICT');
   const { data, isLoading, isError, error } = useAdminMedalLeaderboard(level);
-  const activeLabel = TABS.find((t) => t.level === level)!.label;
+  const activeTab = TABS.find((t) => t.level === level)!;
 
   return (
     <div className="p-6">
@@ -62,7 +65,7 @@ export default function AdminCmTrophyLeaderboardPage() {
           <p className="text-red-500 text-sm">{(error as Error).message}</p>
         </div>
       ) : (
-        <CmTrophyLeaderboardTable entries={data?.data ?? []} entityLabel={activeLabel} />
+        <CmTrophyLeaderboardTable entries={data?.data ?? []} entityLabel={activeTab.columnLabel} />
       )}
     </div>
   );

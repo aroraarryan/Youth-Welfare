@@ -70,7 +70,7 @@ export default function AdminCmTrophyFixturesPage() {
                     </Link>
                   </td>
                   <td className="px-4 py-3 text-gray-600">{FIXTURE_LEVEL_LABEL[ev.level].split(' (')[0]}</td>
-                  <td className="px-4 py-3 text-gray-600">{ev.scopeName}</td>
+                  <td className="px-4 py-3 text-gray-600">{ev.entrantType === 'PLAYER' ? (ev.event || 'Individual players') : ev.scopeName}</td>
                   <td className="px-4 py-3 text-gray-600">{ev.ageCategory.replace('_', ' ')}</td>
                   <td className="px-4 py-3 text-gray-600">{ev.teamCount}</td>
                   <td className="px-4 py-3">

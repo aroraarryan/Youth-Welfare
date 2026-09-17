@@ -17,6 +17,7 @@ export type CmTrophyFixtureLevel = 'VIDHAN_SABHA' | 'SANSAD' | 'STATE';
 export type CmTrophyFixtureStatus = 'DRAFT' | 'DRAWN' | 'LIVE' | 'COMPLETED' | 'CANCELLED';
 export type CmTrophyFixtureMatchStage = 'PRELIMINARY' | 'ROUND' | 'QUARTER_FINAL' | 'SEMI_FINAL' | 'THIRD_PLACE' | 'FINAL';
 export type CmTrophyFixtureMatchStatus = 'PENDING' | 'SCHEDULED' | 'FINAL';
+export type CmTrophyFixtureEntrantType = 'PLACE' | 'PLAYER';
 
 export const FIXTURE_LEVEL_LABEL: Record<CmTrophyFixtureLevel, string> = {
   VIDHAN_SABHA: 'Vidhan Sabha (entrants: its Nyay Panchayats)',
@@ -37,6 +38,8 @@ export interface FixtureEventSummary {
   id: string;
   level: CmTrophyFixtureLevel;
   status: CmTrophyFixtureStatus;
+  entrantType: CmTrophyFixtureEntrantType;
+  event: string | null;
   ageCategory: string;
   gender: string | null;
   sportId: string;
@@ -53,8 +56,14 @@ export interface FixtureTeam {
   nyayPanchayatId: string | null;
   vidhanSabhaId: string | null;
   sansadId: string | null;
+  registrationId: string | null;
   displayName: string;
   seedOrder: number | null;
+}
+
+export interface EntrantCandidate {
+  id: string;
+  label: string;
 }
 
 export interface FixtureVenue {
@@ -110,6 +119,8 @@ export interface CreateFixtureEventInput {
   gender?: string;
   vidhanSabhaId?: string;
   sansadId?: string;
+  entrantType?: CmTrophyFixtureEntrantType;
+  event?: string;
 }
 
 export interface FixtureStandings {
@@ -132,8 +143,33 @@ export const adminCmTrophyFixturesApi = {
   create: (data: CreateFixtureEventInput): Promise<{ success: boolean; data: FixtureEventSummary }> =>
     adminFetch('cm-trophy/fixtures', { method: 'POST', body: JSON.stringify(data) }),
 
-  addTeam: (eventId: string, geoId: string): Promise<{ success: boolean; data: FixtureTeam }> =>
-    adminFetch(`cm-trophy/fixtures/${eventId}/teams`, { method: 'POST', body: JSON.stringify({ geoId }) }),
+  addTeam: (eventId: string, entrantId: string): Promise<{ success: boolean; data: FixtureTeam }> =>
+    adminFetch(`cm-trophy/fixtures/${eventId}/teams`, { method: 'POST', body: JSON.stringify({ entrantId }) }),
+
+  // Only PLAYER-entrant fixtures call this from the UI today (PLACE candidates
+  // are derived locally from the existing geo hooks — see TeamsTab).
+  getEntrantPool: (params: {
+    level: CmTrophyFixtureLevel;
+    entrantType: CmTrophyFixtureEntrantType;
+    sportId?: string;
+    ageCategory?: string;
+    gender?: string;
+    event?: string;
+    vidhanSabhaId?: string;
+    sansadId?: string;
+  }): Promise<{ success: boolean; data: EntrantCandidate[] }> => {
+    const qs = new URLSearchParams();
+    Object.entries(params).forEach(([k, v]) => { if (v) qs.set(k, String(v)); });
+    return adminFetch(`cm-trophy/fixtures/entrant-pool?${qs}`);
+  },
+
+  // Manual override for getEntrantPool: finds any approved player by
+  // application code (registrationNo), regardless of geo scope — e.g. a
+  // Nyay Panchayat-level winner advancing into a Vidhan Sabha fixture.
+  searchRegistrations: (params: { registrationNo: string; sportId: string; ageCategory: string }): Promise<{ success: boolean; data: EntrantCandidate[] }> => {
+    const qs = new URLSearchParams(params);
+    return adminFetch(`cm-trophy/fixtures/search-registrations?${qs}`);
+  },
 
   addAllTeams: (eventId: string): Promise<{ success: boolean; data: { created: number } }> =>
     adminFetch(`cm-trophy/fixtures/${eventId}/teams/add-all`, { method: 'POST' }),

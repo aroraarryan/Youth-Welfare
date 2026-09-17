@@ -16,7 +16,7 @@ export interface LeaderboardRow {
 interface Props {
   entries: LeaderboardRow[];
   limit?: number;
-  /** Column header for the entity name (District, Nyay Panchayat, Vidhan Sabha, Sansad). */
+  /** Column header for the entity name (State, Nyay Panchayat, Vidhan Sabha, Sansad). */
   entityLabel?: string;
   /** Required when expandable — which geo level entries belong to, for the sport-breakdown lookup. */
   level?: CmTrophyMedalLevel;
@@ -70,7 +70,7 @@ function SportBreakdownRow({ level, entityId }: { level: CmTrophyMedalLevel; ent
   );
 }
 
-export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel = 'District', level, expandable = false }: Props) {
+export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel = 'State', level, expandable = false }: Props) {
   const [page, setPage] = useState(1);
   const [expandedId, setExpandedId] = useState<string | null>(null);
 

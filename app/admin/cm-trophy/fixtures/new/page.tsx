@@ -5,9 +5,13 @@ import { useRouter } from 'next/navigation';
 import { sportsApi, CmTrophySportOption } from '@/lib/api/sports';
 import { useSansads, useVidhanSabhas } from '@/hooks/useCmTrophyGeo';
 import { useCreateFixtureEvent } from '@/hooks/useAdminCmTrophyFixtures';
-import { CmTrophyFixtureLevel, FIXTURE_LEVEL_LABEL } from '@/lib/api/adminCmTrophyFixturesApi';
+import { CmTrophyFixtureEntrantType, CmTrophyFixtureLevel, FIXTURE_LEVEL_LABEL } from '@/lib/api/adminCmTrophyFixturesApi';
 
 const LEVELS: CmTrophyFixtureLevel[] = ['VIDHAN_SABHA', 'SANSAD', 'STATE'];
+const ENTRANT_TYPES: { value: CmTrophyFixtureEntrantType; label: string }[] = [
+  { value: 'PLACE', label: 'Place (Nyay Panchayat / Vidhan Sabha / Sansad)' },
+  { value: 'PLAYER', label: 'Individual player' },
+];
 const AGE_CATEGORIES = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
 const GENDERS = [
   { value: '', label: 'Not split by gender' },
@@ -28,14 +32,23 @@ const selectClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm bg-whit
 
 export default function NewFixtureEventPage() {
   const router = useRouter();
+  const [entrantType, setEntrantType] = useState<CmTrophyFixtureEntrantType>('PLACE');
   const [level, setLevel] = useState<CmTrophyFixtureLevel>('VIDHAN_SABHA');
   const [ageCategory, setAgeCategory] = useState('UNDER_19');
   const [gender, setGender] = useState('');
+  const [eventName, setEventName] = useState('');
   const [sportOptions, setSportOptions] = useState<CmTrophySportOption[]>([]);
   const [sportId, setSportId] = useState('');
   const [sansadId, setSansadId] = useState('');
   const [vidhanSabhaId, setVidhanSabhaId] = useState('');
   const [error, setError] = useState<string | null>(null);
+
+  const isPlayerEntrant = entrantType === 'PLAYER';
+
+  const handleEntrantTypeChange = (next: CmTrophyFixtureEntrantType) => {
+    setEntrantType(next);
+    setEventName('');
+  };
 
   const { sansads } = useSansads();
   const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(sansadId || undefined);
@@ -44,12 +57,21 @@ export default function NewFixtureEventPage() {
   useEffect(() => {
     sportsApi.listByCmTrophyCategory(ageCategory).then((res) => setSportOptions(res.data)).catch(() => setSportOptions([]));
     setSportId('');
+    setEventName('');
   }, [ageCategory]);
 
   const eligibleSports = sportOptions.filter((s) => {
     const expected = EXPECTED_REGISTRATION_LEVEL[level];
     return !expected || s.registrationLevel === expected;
   });
+
+  const selectedSport = sportOptions.find((s) => s.sportId === sportId) ?? null;
+  const eventOptionsForSport = (selectedSport?.events ?? []).filter((e) => !e.gender || !gender || e.gender === gender);
+
+  const handleSportChange = (next: string) => {
+    setSportId(next);
+    setEventName('');
+  };
 
   const scopeSelected = level === 'VIDHAN_SABHA' ? !!vidhanSabhaId : level === 'SANSAD' ? !!sansadId : true;
   const canSubmit = !!sportId && !!ageCategory && scopeSelected && !createMutation.isPending;
@@ -59,6 +81,7 @@ export default function NewFixtureEventPage() {
     setSansadId('');
     setVidhanSabhaId('');
     setSportId('');
+    setEventName('');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,6 +96,8 @@ export default function NewFixtureEventPage() {
         gender: gender || undefined,
         vidhanSabhaId: level === 'VIDHAN_SABHA' ? vidhanSabhaId : undefined,
         sansadId: level === 'SANSAD' ? sansadId : undefined,
+        entrantType,
+        event: isPlayerEntrant ? eventName.trim() || undefined : undefined,
       });
       router.push(`/admin/cm-trophy/fixtures/${res.data.id}`);
     } catch (err) {
@@ -90,10 +115,24 @@ export default function NewFixtureEventPage() {
 
       <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-lg p-6 space-y-5">
         <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Entrant Type *</label>
+          <select className={selectClass} value={entrantType} onChange={(e) => handleEntrantTypeChange(e.target.value as CmTrophyFixtureEntrantType)}>
+            {ENTRANT_TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
+          </select>
+        </div>
+
+        <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Level *</label>
           <select className={selectClass} value={level} onChange={(e) => handleLevelChange(e.target.value as CmTrophyFixtureLevel)}>
             {LEVELS.map((l) => <option key={l} value={l}>{FIXTURE_LEVEL_LABEL[l]}</option>)}
           </select>
+          {isPlayerEntrant && (
+            <p className="text-xs text-gray-400 mt-1">
+              {level === 'STATE'
+                ? 'Entrant pool is every approved registration statewide.'
+                : `Entrant pool is scoped to players registered under the ${level === 'VIDHAN_SABHA' ? 'Vidhan Sabha' : 'Sansad'} selected below.`}
+            </p>
+          )}
         </div>
 
         {level === 'SANSAD' && (
@@ -147,7 +186,7 @@ export default function NewFixtureEventPage() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Sport *</label>
-          <select className={selectClass} value={sportId} onChange={(e) => setSportId(e.target.value)} disabled={!eligibleSports.length}>
+          <select className={selectClass} value={sportId} onChange={(e) => handleSportChange(e.target.value)} disabled={!eligibleSports.length}>
             <option value="">{eligibleSports.length ? 'Select sport' : 'No eligible team sport at this level/category'}</option>
             {eligibleSports.map((s) => <option key={s.sportId} value={s.sportId}>{s.name}</option>)}
           </select>
@@ -156,6 +195,17 @@ export default function NewFixtureEventPage() {
             Vidhan Sabha, Volleyball/Pitthu at Sansad).
           </p>
         </div>
+
+        {isPlayerEntrant && sportId && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Event / Discipline</label>
+            <select className={selectClass} value={eventName} onChange={(e) => setEventName(e.target.value)} disabled={!eventOptionsForSport.length}>
+              <option value="">{eventOptionsForSport.length ? 'All events in this sport' : 'No events configured for this sport'}</option>
+              {eventOptionsForSport.map((ev) => <option key={ev.name} value={ev.name}>{ev.name}</option>)}
+            </select>
+            <p className="text-xs text-gray-400 mt-1">Leave unselected to pool every event in this sport.</p>
+          </div>
+        )}
 
         <button
           type="submit"

@@ -7,24 +7,27 @@ import CmTrophyLeaderboardTable from '@/components/CmTrophyLeaderboardTable';
 import { useCmTrophyLeaderboard } from '@/hooks/useLeaderboard';
 import { CmTrophyMedalLevel } from '@/lib/api/adminCmTrophyApi';
 
-const TABS: { level: CmTrophyMedalLevel; label: string }[] = [
-  { level: 'DISTRICT', label: 'District' },
-  { level: 'SANSAD', label: 'Sansad' },
-  { level: 'VIDHAN_SABHA', label: 'Vidhan Sabha' },
-  { level: 'NYAY_PANCHAYAT', label: 'Nyay Panchayat' },
+// `label` names the section tab; `columnLabel` names the table's entity
+// column — these differ only for DISTRICT, whose tab is titled "State" but
+// whose rows are still individual districts.
+const TABS: { level: CmTrophyMedalLevel; label: string; columnLabel: string }[] = [
+  { level: 'DISTRICT', label: 'State', columnLabel: 'District' },
+  { level: 'SANSAD', label: 'Sansad', columnLabel: 'Sansad' },
+  { level: 'VIDHAN_SABHA', label: 'Vidhan Sabha', columnLabel: 'Vidhan Sabha' },
+  { level: 'NYAY_PANCHAYAT', label: 'Nyay Panchayat', columnLabel: 'Nyay Panchayat' },
 ];
 
 export default function CmTrophyLeaderboardPage() {
   const [level, setLevel] = useState<CmTrophyMedalLevel>('DISTRICT');
   const { entries, loading, error } = useCmTrophyLeaderboard(level);
-  const activeLabel = TABS.find((t) => t.level === level)!.label;
+  const activeTab = TABS.find((t) => t.level === level)!;
 
   return (
     <>
       <PageHero
         hindiTitle="सीएम चैंपियनशिप ट्रॉफी 2026-27 — मेडल तालिका"
         title="CM Championship Trophy 2026-27 — Medal Tally"
-        subtitle="Medal tally ranking by District, Sansad, Vidhan Sabha and Nyay Panchayat"
+        subtitle="Medal tally ranking by State, Sansad, Vidhan Sabha and Nyay Panchayat"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: 'CM Championship Trophy 2026-27 Leaderboard' },
@@ -72,7 +75,7 @@ export default function CmTrophyLeaderboardPage() {
             <p className="text-red-500 text-sm">{error}</p>
           </div>
         ) : (
-          <CmTrophyLeaderboardTable entries={entries} entityLabel={activeLabel} level={level} expandable />
+          <CmTrophyLeaderboardTable entries={entries} entityLabel={activeTab.columnLabel} level={level} expandable />
         )}
       </div>
     </>

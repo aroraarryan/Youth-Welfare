@@ -3,6 +3,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   adminCmTrophyFixturesApi,
+  CmTrophyFixtureEntrantType,
   CmTrophyFixtureLevel,
   CmTrophyFixtureStatus,
   CreateFixtureEventInput,
@@ -43,6 +44,31 @@ function useEventMutation(eventId: string) {
   const qc = useQueryClient();
   const invalidate = () => qc.invalidateQueries({ queryKey: ['admin', 'cmTrophyFixtures', 'detail', eventId] });
   return { qc, invalidate };
+}
+
+export function useEntrantPool(params: {
+  level: CmTrophyFixtureLevel;
+  entrantType: CmTrophyFixtureEntrantType;
+  sportId?: string;
+  ageCategory?: string;
+  gender?: string;
+  event?: string;
+  vidhanSabhaId?: string;
+  sansadId?: string;
+} | null) {
+  return useQuery({
+    queryKey: ['admin', 'cmTrophyFixtures', 'entrantPool', params],
+    queryFn: () => adminCmTrophyFixturesApi.getEntrantPool(params!),
+    enabled: !!params,
+  });
+}
+
+export function useSearchRegistrations(params: { registrationNo: string; sportId: string; ageCategory: string } | null) {
+  return useQuery({
+    queryKey: ['admin', 'cmTrophyFixtures', 'searchRegistrations', params],
+    queryFn: () => adminCmTrophyFixturesApi.searchRegistrations(params!),
+    enabled: !!params && params.registrationNo.trim().length > 0,
+  });
 }
 
 export function useAddTeam(eventId: string) {
