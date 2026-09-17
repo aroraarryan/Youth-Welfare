@@ -14,7 +14,7 @@ export default function CmTrophyLeaderboardSection() {
           <div className="bg-[#0f172a] px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <span className="text-white text-base sm:text-xl font-bold flex items-center gap-2 sm:gap-3">
               <i className="fa-solid fa-trophy text-base sm:text-lg shrink-0" />
-              CM Championship Trophy 2026-27 — District Leaderboard
+              CM Championship Trophy 2026-27 — State Leaderboard
             </span>
             <div className="flex items-center gap-2 sm:gap-3">
               <Link
@@ -38,7 +38,7 @@ export default function CmTrophyLeaderboardSection() {
               <p className="text-sm">Loading leaderboard…</p>
             </div>
           ) : (
-            <CmTrophyLeaderboardTable entries={entries} limit={5} />
+            <CmTrophyLeaderboardTable entries={entries} limit={5} entityLabel="District" />
           )}
         </div>
       </div>

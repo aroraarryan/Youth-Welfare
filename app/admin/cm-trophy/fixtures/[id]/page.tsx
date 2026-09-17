@@ -12,6 +12,8 @@ import {
   useCreateVenue,
   useCreateField,
   usePatchMatch,
+  useEntrantPool,
+  useSearchRegistrations,
 } from '@/hooks/useAdminCmTrophyFixtures';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { FixtureMatch, FixtureTeam, MATCH_STAGE_LABEL, FIXTURE_LEVEL_LABEL } from '@/lib/api/adminCmTrophyFixturesApi';
@@ -58,6 +60,7 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
           <h1 className="text-xl font-bold text-gray-900">{ev.sportName} — {ev.scopeName}</h1>
           <p className="text-xs text-gray-400 mt-0.5">
             {FIXTURE_LEVEL_LABEL[ev.level].split(' (')[0]} · {ev.ageCategory.replace('_', ' ')}{ev.gender ? ` · ${ev.gender}` : ''}
+            {ev.entrantType === 'PLAYER' && ` · Individual player${ev.event ? ` · ${ev.event}` : ''}`}
           </p>
         </div>
         <span className="text-xs font-semibold px-2 py-1 rounded bg-gray-100 text-gray-700">{ev.status}</span>
@@ -88,8 +91,13 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
 
 // ─── Teams ──────────────────────────────────────────────────────────────────
 function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi').FixtureEventDetail }) {
+  const isPlayerEntrant = event.entrantType === 'PLAYER';
   const [pickerSansadId, setPickerSansadId] = useState('');
   const [selectedGeoId, setSelectedGeoId] = useState('');
+  const [searchCode, setSearchCode] = useState('');
+  const { data: searchRes, isFetching: isSearching } = useSearchRegistrations(
+    isPlayerEntrant ? { registrationNo: searchCode, sportId: event.sportId, ageCategory: event.ageCategory } : null
+  );
   const addTeam = useAddTeam(event.id);
   const addAll = useAddAllTeams(event.id);
   const removeTeam = useRemoveTeam(event.id);
@@ -98,12 +106,21 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
   const { vidhanSabhas } = useVidhanSabhas(event.level === 'SANSAD' ? event.sansadId ?? undefined : pickerSansadId || undefined);
   const { nyayPanchayats } = useNyayPanchayats(event.level === 'VIDHAN_SABHA' ? event.vidhanSabhaId ?? undefined : undefined);
 
-  const addedIds = new Set(
-    event.teams.map((t) => t.nyayPanchayatId || t.vidhanSabhaId || t.sansadId).filter(Boolean) as string[]
+  const { data: playerPoolRes } = useEntrantPool(
+    isPlayerEntrant
+      ? { level: event.level, entrantType: 'PLAYER', sportId: event.sportId, ageCategory: event.ageCategory, gender: event.gender ?? undefined, event: event.event ?? undefined }
+      : null
   );
 
-  const candidates =
-    event.level === 'VIDHAN_SABHA'
+  const addedIds = new Set(
+    isPlayerEntrant
+      ? (event.teams.map((t) => t.registrationId).filter(Boolean) as string[])
+      : (event.teams.map((t) => t.nyayPanchayatId || t.vidhanSabhaId || t.sansadId).filter(Boolean) as string[])
+  );
+
+  const candidates = isPlayerEntrant
+    ? (playerPoolRes?.data ?? []).filter((c) => !addedIds.has(c.id))
+    : event.level === 'VIDHAN_SABHA'
       ? nyayPanchayats.filter((n) => !addedIds.has(n.id))
       : event.level === 'SANSAD'
       ? vidhanSabhas.filter((v) => !addedIds.has(v.id))
@@ -146,7 +163,44 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
         <div className="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
           <h2 className="text-sm font-semibold text-gray-900">Add entrants</h2>
 
-          {event.level === 'SANSAD' || event.level === 'STATE' ? null : (
+          {isPlayerEntrant && (
+            <div className="space-y-2 border-b border-gray-100 pb-4">
+              <label className="block text-xs font-medium text-gray-700">
+                Add any player registered for this sport/age category by application code (e.g. a lower-level winner advancing to this fixture)
+              </label>
+              <input
+                type="text"
+                className={inputClass}
+                placeholder="Search by application code (CMT-...)"
+                value={searchCode}
+                onChange={(e) => setSearchCode(e.target.value)}
+              />
+              {searchCode.trim() && (
+                <div className="border border-gray-200 rounded-md divide-y divide-gray-100 max-h-48 overflow-y-auto">
+                  {isSearching ? (
+                    <div className="px-3 py-2 text-xs text-gray-400">Searching…</div>
+                  ) : (searchRes?.data ?? []).filter((c) => !addedIds.has(c.id)).length === 0 ? (
+                    <div className="px-3 py-2 text-xs text-gray-400">No matching players for this sport/age category.</div>
+                  ) : (
+                    (searchRes?.data ?? []).filter((c) => !addedIds.has(c.id)).map((c) => (
+                      <div key={c.id} className="flex items-center justify-between px-3 py-2 text-sm">
+                        <span className="text-gray-800">{c.label}</span>
+                        <button
+                          onClick={() => { addTeam.mutate(c.id); setSearchCode(''); }}
+                          disabled={addTeam.isPending}
+                          className="text-xs font-semibold text-[#1e3a8a] hover:underline disabled:opacity-40"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {!isPlayerEntrant && event.level !== 'SANSAD' && event.level !== 'STATE' && (
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-1">Filter by Sansad (optional)</label>
               <select className={selectClass} value={pickerSansadId} onChange={(e) => setPickerSansadId(e.target.value)}>
@@ -159,7 +213,7 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
           <div className="flex gap-2">
             <select className={selectClass} value={selectedGeoId} onChange={(e) => setSelectedGeoId(e.target.value)}>
               <option value="">Select entrant</option>
-              {candidates.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+              {candidates.map((c) => <option key={c.id} value={c.id}>{'label' in c ? c.label : c.name}</option>)}
             </select>
             <button
               onClick={() => { if (selectedGeoId) { addTeam.mutate(selectedGeoId); setSelectedGeoId(''); } }}
@@ -175,7 +229,9 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
             disabled={addAll.isPending}
             className="text-sm font-medium border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 disabled:opacity-50"
           >
-            {addAll.isPending ? 'Adding…' : `Add all ${event.level === 'VIDHAN_SABHA' ? "Nyay Panchayats" : event.level === 'SANSAD' ? 'Vidhan Sabhas' : 'Sansads'}`}
+            {addAll.isPending
+              ? 'Adding…'
+              : `Add all ${isPlayerEntrant ? 'eligible players' : event.level === 'VIDHAN_SABHA' ? 'Nyay Panchayats' : event.level === 'SANSAD' ? 'Vidhan Sabhas' : 'Sansads'}`}
           </button>
         </div>
       )}
