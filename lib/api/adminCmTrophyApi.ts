@@ -57,6 +57,25 @@ export interface AdminKhelMahakumbhRegistration {
   sport: { id: string; name: string; slug: string } | null;
 }
 
+export interface AdminKhelMahakumbhExportRow {
+  id: string;
+  registrationNo: string;
+  fullName: string;
+  email: string | null;
+  mobile: string | null;
+  dob: string;
+  gender: Gender;
+  selectedEvents: string[];
+  ageCategory: CmTrophyAgeCategory;
+  registrationLevel: CmTrophyRegistrationLevel;
+  sport: { name: string } | null;
+  sansad: { name: string } | null;
+  vidhanSabha: { name: string } | null;
+  nyayPanchayat: { name: string } | null;
+  district: { name: string } | null;
+  block: { name: string } | null;
+}
+
 export interface CmTrophyStats {
   total: number;
   underReview: number;
@@ -218,6 +237,21 @@ export const adminCmTrophyApi = {
     });
     const query = qs.toString() ? `?${qs}` : '';
     return adminFetch(`cm-trophy/registrations${query}`);
+  },
+
+  // One cursor-paginated batch of the lean export field set. Same filter params
+  // as `list` (page/limit ignored); pass back `nextCursor` until it's null.
+  exportBatch: (
+    params: CmTrophyListParams,
+    cursor?: string | null,
+    limit = 2000,
+  ): Promise<{ success: boolean; data: AdminKhelMahakumbhExportRow[]; nextCursor: string | null }> => {
+    const qs = new URLSearchParams();
+    Object.entries({ ...params, page: undefined, limit }).forEach(([k, v]) => {
+      if (v !== undefined && v !== '') qs.set(k, String(v));
+    });
+    if (cursor) qs.set('cursor', cursor);
+    return adminFetch(`cm-trophy/registrations-export?${qs}`);
   },
 
   getById: (id: string): Promise<{ success: boolean; data: AdminKhelMahakumbhRegistration }> =>
