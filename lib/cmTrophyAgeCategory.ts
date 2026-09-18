@@ -6,31 +6,35 @@ export interface AgeCategoryResult {
 }
 
 const NO_CATEGORY_REASON =
-  "No CM Trophy age category applies to this applicant. Women's category (19–25) is open to female applicants only; applicants outside the 0–18 age range without a disability certificate are not eligible for CM Trophy 2026.";
+  "No CM Trophy age category applies to this date of birth. Women's category (19–25) is open to female applicants only; applicants outside the eligible DOB windows without a disability certificate are not eligible for CM Trophy 2026.";
+
+// CM Trophy 2026 eligibility windows (fixed, not rolling age-from-today).
+// Inclusive on both ends, 'YYYY-MM-DD'.
+const UNDER_14_RANGE = ['2012-04-01', '2016-03-31'];
+const UNDER_19_RANGE = ['2007-04-01', '2011-03-31'];
+const WOMENS_19_25_RANGE = ['2001-04-01', '2006-03-31'];
+
+function inRange(dob: string, [start, end]: string[]): boolean {
+  return dob >= start && dob <= end;
+}
 
 export function computeCmTrophyAgeCategory(params: {
   dob: string; // 'YYYY-MM-DD'
   gender: 'MALE' | 'FEMALE' | '';
   hasDisability: boolean;
-  today?: Date; // injectable for testing; defaults to new Date()
 }): AgeCategoryResult {
-  const { dob, gender, hasDisability, today = new Date() } = params;
+  const { dob, gender, hasDisability } = params;
 
   if (hasDisability) return { category: 'PARA_OPEN' };
   if (!dob) return { category: null };
+  if (Number.isNaN(new Date(dob + 'T00:00:00.000Z').getTime())) return { category: null };
 
-  const birth = new Date(dob + 'T00:00:00.000Z');
-  if (Number.isNaN(birth.getTime())) return { category: null };
-
-  let age = today.getUTCFullYear() - birth.getUTCFullYear();
-  const beforeBirthdayThisYear =
-    today.getUTCMonth() < birth.getUTCMonth() ||
-    (today.getUTCMonth() === birth.getUTCMonth() && today.getUTCDate() < birth.getUTCDate());
-  if (beforeBirthdayThisYear) age -= 1;
-
-  if (age <= 13) return { category: 'UNDER_14' };
-  if (age >= 14 && age <= 18) return { category: 'UNDER_19' };
-  if (age >= 19 && age <= 25 && gender === 'FEMALE') return { category: 'WOMENS_19_25' };
+  if (inRange(dob, UNDER_14_RANGE)) return { category: 'UNDER_14' };
+  if (inRange(dob, UNDER_19_RANGE)) return { category: 'UNDER_19' };
+  if (inRange(dob, WOMENS_19_25_RANGE)) {
+    if (gender === 'FEMALE') return { category: 'WOMENS_19_25' };
+    return { category: null, reason: NO_CATEGORY_REASON };
+  }
 
   return { category: null, reason: NO_CATEGORY_REASON };
 }
