@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { usePortalSession } from '@/hooks/usePortalSession';
 
 const API = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -13,6 +14,8 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const queryClient = useQueryClient();
+  const { session } = usePortalSession();
+  const isBoPrd = session?.kind === 'officer' && session.role === 'BO_PRD';
 
   if (pathname === '/officer/login') {
     return <>{children}</>;
@@ -80,6 +83,19 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
             {navLink('/officer/dashboard', 'Dashboard')}
             {navLink('/officer/gallery', 'Gallery')}
           </div>
+
+          {isBoPrd && (
+            <div className="space-y-1">
+              <h3 className="px-4 text-[10px] font-bold text-teal-300 uppercase tracking-widest mb-2">CM Trophy</h3>
+              {navLink('/officer/cm-trophy', 'Registrations')}
+              {navLink('/officer/cm-trophy/leaderboard', 'Leaderboard')}
+              {navLink('/officer/cm-trophy/medals', 'Add Medal')}
+              {navLink('/officer/cm-trophy/medals-dashboard', 'Medal Dashboard')}
+              {navLink('/officer/cm-trophy/attendance', 'Attendance')}
+              {navLink('/officer/cm-trophy/fixtures', 'Fixtures')}
+              {navLink('/officer/cm-trophy/grievance', 'Grievances')}
+            </div>
+          )}
 
           <div className="space-y-1">
             <h3 className="px-4 text-[10px] font-bold text-teal-300 uppercase tracking-widest mb-2">Mangal Dal</h3>

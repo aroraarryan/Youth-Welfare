@@ -39,7 +39,7 @@ export function useVidhanSabhas(sansadId?: string) {
   return { vidhanSabhas, loading, error };
 }
 
-export function useNyayPanchayats(vidhanSabhaId?: string) {
+export function useNyayPanchayats(vidhanSabhaId?: string, blockId?: string) {
   const [nyayPanchayats, setNyayPanchayats] = useState<NyayPanchayat[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,11 +51,11 @@ export function useNyayPanchayats(vidhanSabhaId?: string) {
     }
     setLoading(true);
     setError(null);
-    cmTrophyGeoApi.getNyayPanchayats(vidhanSabhaId)
+    cmTrophyGeoApi.getNyayPanchayats(vidhanSabhaId, blockId)
       .then((res) => setNyayPanchayats(res.data))
       .catch((err) => setError(err.message ?? 'Failed to load Nyay Panchayats'))
       .finally(() => setLoading(false));
-  }, [vidhanSabhaId]);
+  }, [vidhanSabhaId, blockId]);
 
   return { nyayPanchayats, loading, error };
 }

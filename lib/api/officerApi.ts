@@ -60,6 +60,7 @@ export interface OfficerProfile {
   role: 'DO_PRD' | 'BO_PRD' | 'SUPER_ADMIN';
   district: string;
   block: string | null;
+  blockId: string | null;
   phone: string | null;
   profilePhotoUrl: string | null;
   viName: string | null;
