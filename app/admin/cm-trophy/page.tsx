@@ -22,7 +22,7 @@ import {
   useAdminCmTrophyStats,
   useAdminCmTrophyWeeklyTrend,
 } from '@/hooks/useAdminCmTrophy';
-import { CmTrophyListParams, AdminKhelMahakumbhRegistration } from '@/lib/api/adminCmTrophyApi';
+import { CmTrophyListParams, AdminKhelMahakumbhExportRow, adminCmTrophyApi } from '@/lib/api/adminCmTrophyApi';
 import { sportsApi, Sport } from '@/lib/api/sports';
 
 const AGE_CATEGORIES = [
@@ -69,14 +69,19 @@ function calcAge(dob: string): number | null {
   return age;
 }
 
-function exportToCSV(rows: AdminKhelMahakumbhRegistration[], filename: string) {
-  const headers = [
-    'Sr No', 'Rejection Reason', 'Name', 'Application Code', 'Email', 'Phone',
-    'DOB', 'Gender', 'Sport', 'Events', 'Age', 'Status', 'District', 'Block',
-  ];
-  const csvRows = rows.map((r, i) => [
-    i + 1,
-    '',
+const CSV_HEADERS = [
+  'Sr No', 'Name', 'Application Code', 'Email', 'Phone', 'DOB', 'Gender',
+  'Sport', 'Events', 'Age Category', 'Registration Level', 'Sansad',
+  'Vidhan Sabha', 'Nyay Panchayat', 'District', 'Block',
+];
+
+const csvCell = (v: unknown) => `"${String(v).replace(/"/g, '""')}"`;
+
+// One export batch -> CSV text. `offset` keeps Sr No running across batches.
+function exportRowsToCsv(rows: AdminKhelMahakumbhExportRow[], offset: number): string {
+  return rows
+    .map((r, i) => [
+    offset + i + 1,
     r.fullName,
     r.registrationNo,
     r.email ?? '',
@@ -85,21 +90,26 @@ function exportToCSV(rows: AdminKhelMahakumbhRegistration[], filename: string) {
     r.gender,
     r.sport?.name ?? '',
     (r.selectedEvents || []).join('; '),
-    calcAge(r.dob) ?? '',
-    r.status,
+    AGE_CATEGORIES.find((a) => a.value === r.ageCategory)?.label ?? r.ageCategory,
+    REGISTRATION_LEVELS.find((l) => l.value === r.registrationLevel)?.label ?? r.registrationLevel,
+    r.sansad?.name ?? '',
+    r.vidhanSabha?.name ?? '',
+    r.nyayPanchayat?.name ?? '',
     r.district?.name ?? '',
     r.block?.name ?? '',
-  ]);
-  const csv = [headers, ...csvRows]
-    .map((row) => row.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(','))
+    ].map(csvCell).join(','))
     .join('\n');
-  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+}
+
+function downloadCsv(parts: string[], filename: string) {
+  const blob = new Blob(parts, { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = filename;
   a.click();
-  URL.revokeObjectURL(url);
+  // Deferred: revoking synchronously can cancel a large download in some browsers.
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
 
 function StatCard({ label, value }: { label: string; value: number }) {
@@ -182,6 +192,34 @@ export default function CmTrophyAdminPage() {
 
   const resetPage = () => setPage(1);
 
+  // Exports EVERY record matching the current filters (not just this page),
+  // fetched in cursor-paginated batches and stitched into one CSV.
+  const [exporting, setExporting] = useState<{ done: number } | null>(null);
+  const [exportError, setExportError] = useState('');
+
+  const handleExport = async () => {
+    if (exporting) return;
+    setExportError('');
+    setExporting({ done: 0 });
+    try {
+      const parts: string[] = ['﻿' + CSV_HEADERS.map(csvCell).join(',') + '\n'];
+      let cursor: string | null = null;
+      let done = 0;
+      do {
+        const res = await adminCmTrophyApi.exportBatch(filters, cursor);
+        if (res.data.length > 0) parts.push(exportRowsToCsv(res.data, done) + '\n');
+        done += res.data.length;
+        cursor = res.nextCursor;
+        setExporting({ done });
+      } while (cursor);
+      downloadCsv(parts, 'CM_Trophy_Registrations.csv');
+    } catch (e) {
+      setExportError(e instanceof Error ? e.message : 'Export failed. Please try again.');
+    } finally {
+      setExporting(null);
+    }
+  };
+
   const hasActiveFilters =
     search || status || sportId || gender || event || ageCategory || registrationLevel ||
     sansadId || vidhanSabhaId || nyayPanchayatId || districtId || blockId || dateFrom || dateTo;
@@ -251,12 +289,23 @@ export default function CmTrophyAdminPage() {
             className="border border-gray-300 rounded-md px-3 py-1.5 text-sm flex-1 min-w-[180px]"
           />
           <button
-            onClick={() => exportToCSV(rows, 'CM_Trophy_Registrations.csv')}
-            disabled={rows.length === 0}
+            onClick={handleExport}
+            disabled={rows.length === 0 || !!exporting}
             className="bg-green-600 text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors shadow-sm flex items-center gap-2 disabled:opacity-50"
           >
-            <i className="fas fa-file-csv" /> Export
+            {exporting ? (
+              <>
+                <i className="fas fa-spinner fa-spin" />
+                Exporting {exporting.done.toLocaleString('en-IN')}
+                {meta ? ` / ${meta.total.toLocaleString('en-IN')}` : ''}…
+              </>
+            ) : (
+              <>
+                <i className="fas fa-file-csv" /> Export
+              </>
+            )}
           </button>
+          {exportError && <span className="text-xs text-red-600">{exportError}</span>}
           <button
             onClick={() => refetch()}
             className="bg-[#1e3a8a] text-white w-9 h-9 rounded-lg flex items-center justify-center hover:bg-[#1e2f6b] transition-colors shadow-sm"
