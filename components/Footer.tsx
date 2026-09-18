@@ -137,7 +137,7 @@ export default function Footer() {
                 { href: '/gallery', label: 'Photo Gallery' },
                 { href: '#',        label: 'Terms & Conditions' },
                 { href: '#',        label: 'Disclaimer' },
-                { href: '#',        label: 'Privacy Policy' },
+                { href: '/privacy-policy', label: 'Privacy Policy' },
               ].map(l => (
                 <li key={l.label}>
                   <Link href={l.href} className="text-slate-300 hover:text-white transition-all font-medium text-[14px]">

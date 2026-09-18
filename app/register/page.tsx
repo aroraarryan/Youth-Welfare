@@ -145,7 +145,7 @@ export default function RegisterPage() {
               I agree to the{' '}
               <a href="#" className="text-[#6366f1] no-underline font-medium hover:underline">Terms & Conditions</a>
               {' '}and{' '}
-              <a href="#" className="text-[#6366f1] no-underline font-medium hover:underline">Privacy Policy</a>
+              <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#6366f1] no-underline font-medium hover:underline">Privacy Policy</a>
             </label>
           </div>
 
