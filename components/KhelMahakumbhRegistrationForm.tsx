@@ -10,6 +10,7 @@ import {
   CM_TROPHY_AGE_CATEGORY_LABELS,
   CM_TROPHY_REGISTRATION_LEVEL_LABELS,
   CmTrophyAgeCategory,
+  computeCmTrophyAgeCategory,
 } from "@/lib/cmTrophyAgeCategory";
 import { sportDisplayName } from "@/lib/cmTrophySportNames";
 import { ApiError } from "@/lib/api";
@@ -118,8 +119,13 @@ export default function KhelMahakumbhRegistrationForm() {
   const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(form.sansadId || undefined);
   const { nyayPanchayats, loading: nyayPanchayatsLoading } = useNyayPanchayats(form.vidhanSabhaId || undefined);
 
-  // ── Age Category: manually selected ──────────────────────────────────────────
-  const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | "">("");
+  // ── Age Category: auto-derived from DOB + gender + disability, never user-set ──
+  const ageCategoryResult = computeCmTrophyAgeCategory({
+    dob: form.dob,
+    gender: form.gender,
+    hasDisability: form.hasDisability === "yes",
+  });
+  const ageCategory = ageCategoryResult.category ?? "";
 
   // ── Sport options depend on the resolved age category ────────────────────────
   const [sportOptions, setSportOptions] = useState<CmTrophySportOption[]>([]);
@@ -259,7 +265,7 @@ export default function KhelMahakumbhRegistrationForm() {
       return setError("Please upload the disability certificate.");
     }
     if (!ageCategory) {
-      return setError("Please select an age category.");
+      return setError(ageCategoryResult.reason || "No age category applies to this date of birth.");
     }
     if (form.contactMethod === "PHONE" && form.mobile.length !== 10) {
       return setError("Please enter a valid 10-digit phone number.");
@@ -534,18 +540,15 @@ export default function KhelMahakumbhRegistrationForm() {
               />
             </Field>
 
-            <Field label="Age Category" hindi="आयु वर्ग" required>
-              <select
-                value={ageCategory}
-                onChange={(e) => setAgeCategory(e.target.value as CmTrophyAgeCategory | "")}
-                required
-                className={sel}
-              >
-                <option value="">Select age category</option>
-                {(Object.keys(CM_TROPHY_AGE_CATEGORY_LABELS) as CmTrophyAgeCategory[]).map((c) => (
-                  <option key={c} value={c}>{CM_TROPHY_AGE_CATEGORY_LABELS[c]}</option>
-                ))}
-              </select>
+            <Field label="Age Category (auto)" hindi="आयु वर्ग (स्वतः)">
+              <div className={disabledSel}>
+                {ageCategory
+                  ? CM_TROPHY_AGE_CATEGORY_LABELS[ageCategory as CmTrophyAgeCategory]
+                  : "Enter date of birth and gender"}
+              </div>
+              {!ageCategory && ageCategoryResult.reason && (
+                <p className="text-xs text-red-600 mt-1">{ageCategoryResult.reason}</p>
+              )}
             </Field>
 
             <Field label="Gender" hindi="लिंग" required>
