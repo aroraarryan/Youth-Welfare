@@ -69,6 +69,8 @@ export interface RegistrationsDashboardProps {
   lockedDistrictId?: string;
   /** Block officers: their own block — narrows the Nyay Panchayat dropdown to it (fail-open to all if unmapped). */
   lockedBlockId?: string;
+  /** Sansad + Vidhan Sabha filters (hidden for block officers: just the Nyay Panchayat filter, unlocked). Default true. */
+  showSansadVidhanSabhaFilters?: boolean;
   /** Colour theme: 'admin' (blue, default) or 'officer' (teal). */
   accent?: DashboardAccent;
 }
@@ -185,6 +187,7 @@ export default function RegistrationsDashboard({
   showDistrictFilters = true,
   lockedDistrictId,
   lockedBlockId,
+  showSansadVidhanSabhaFilters = true,
   accent = 'admin',
 }: RegistrationsDashboardProps) {
   const a = ACCENTS[accent];
@@ -420,29 +423,33 @@ export default function RegistrationsDashboard({
             </select>
           )}
 
-          <select
-            value={sansadId}
-            onChange={(e) => { setSansadId(e.target.value); setVidhanSabhaId(''); setNyayPanchayatId(''); resetPage(); }}
-            className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[140px]"
-          >
-            <option value="">All Sansad</option>
-            {sansads.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
-          </select>
+          {showSansadVidhanSabhaFilters && (
+            <>
+              <select
+                value={sansadId}
+                onChange={(e) => { setSansadId(e.target.value); setVidhanSabhaId(''); setNyayPanchayatId(''); resetPage(); }}
+                className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[140px]"
+              >
+                <option value="">All Sansad</option>
+                {sansads.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
+              </select>
 
-          <select
-            value={vidhanSabhaId}
-            onChange={(e) => { setVidhanSabhaId(e.target.value); setNyayPanchayatId(''); resetPage(); }}
-            disabled={!sansadId}
-            className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[150px] disabled:opacity-50"
-          >
-            <option value="">All Vidhan Sabha</option>
-            {vidhanSabhas.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
-          </select>
+              <select
+                value={vidhanSabhaId}
+                onChange={(e) => { setVidhanSabhaId(e.target.value); setNyayPanchayatId(''); resetPage(); }}
+                disabled={!sansadId}
+                className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[150px] disabled:opacity-50"
+              >
+                <option value="">All Vidhan Sabha</option>
+                {vidhanSabhas.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
+              </select>
+            </>
+          )}
 
           <select
             value={nyayPanchayatId}
             onChange={(e) => { setNyayPanchayatId(e.target.value); resetPage(); }}
-            disabled={!vidhanSabhaId}
+            disabled={showSansadVidhanSabhaFilters && !vidhanSabhaId}
             className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[150px] disabled:opacity-50"
           >
             <option value="">All Nyay Panchayat</option>

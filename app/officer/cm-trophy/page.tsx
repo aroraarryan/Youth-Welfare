@@ -46,6 +46,7 @@ export default function OfficerCmTrophyRegistrationsPage() {
       showDistrictFilters={me.isDistrictOfficer}
       lockedDistrictId={me.isDistrictOfficer ? me.districtId : undefined}
       lockedBlockId={!me.isDistrictOfficer ? me.blockId : undefined}
+      showSansadVidhanSabhaFilters={me.isDistrictOfficer}
       accent="officer"
     />
   );
