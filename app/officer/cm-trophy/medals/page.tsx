@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
+import SearchableSelect from '@/components/ui/SearchableSelect';
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { officerCmTrophyApi, CmTrophyMedal, RegistrationLookupResult, OfficerMedalLevel, LEVEL_LABEL } from '@/lib/api/officerCmTrophyApi';
 import { officerApi } from '@/lib/api/officerApi';
@@ -87,7 +88,10 @@ export default function OfficerCmTrophyPage() {
   const registrationEvents = registration?.selectedEvents ?? [];
   const showVidhanSabha = level !== 'SANSAD';
   const showNyayPanchayat = level === 'NYAY_PANCHAYAT';
-  const geoComplete = !!sansadId && (!showVidhanSabha || !!vidhanSabhaId) && (!showNyayPanchayat || !!nyayPanchayatId);
+  // Block officers only ever pick a Nyay Panchayat; Sansad/Vidhan Sabha are hidden for them.
+  const geoComplete = isDistrictOfficer
+    ? !!sansadId && (!showVidhanSabha || !!vidhanSabhaId) && (!showNyayPanchayat || !!nyayPanchayatId)
+    : !!nyayPanchayatId;
   const canSubmit = lookupStatus === 'found' && !!sportId && !!medal && geoComplete && !submitting;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -262,6 +266,7 @@ export default function OfficerCmTrophyPage() {
         )}
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {isDistrictOfficer && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Sansad *</label>
             <select
@@ -273,7 +278,8 @@ export default function OfficerCmTrophyPage() {
               {sansads.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           </div>
-          {showVidhanSabha && (
+          )}
+          {isDistrictOfficer && showVidhanSabha && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Vidhan Sabha *</label>
             <select
@@ -287,21 +293,20 @@ export default function OfficerCmTrophyPage() {
             </select>
           </div>
           )}
-          {showNyayPanchayat && (
+          {(!isDistrictOfficer || showNyayPanchayat) && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Nyay Panchayat *</label>
-            <select
-              className={selectClass}
+            <SearchableSelect
+              inputClassName={selectClass}
               value={nyayPanchayatId}
-              onChange={(e) => setNyayPanchayatId(e.target.value)}
-              disabled={!vidhanSabhaId || nyayPanchayatsLoading}
-            >
-              <option value="">Select Nyay Panchayat</option>
-              {nyayPanchayats.map((n) => <option key={n.id} value={n.id}>{n.name}</option>)}
-            </select>
-            {vidhanSabhaId && !nyayPanchayatsLoading && nyayPanchayats.length === 0 && (
+              onChange={(id) => setNyayPanchayatId(id)}
+              options={nyayPanchayats}
+              placeholder="Select Nyay Panchayat"
+              disabled={(isDistrictOfficer && !vidhanSabhaId) || nyayPanchayatsLoading}
+            />
+            {(!isDistrictOfficer || vidhanSabhaId) && !nyayPanchayatsLoading && nyayPanchayats.length === 0 && (
               <p className="text-xs text-gray-500 mt-1">
-                {isDistrictOfficer ? 'No Nyay Panchayats under this Vidhan Sabha.' : 'No Nyay Panchayats from your block under this Vidhan Sabha.'}
+                {isDistrictOfficer ? 'No Nyay Panchayats under this Vidhan Sabha.' : 'No Nyay Panchayats mapped to your block.'}
               </p>
             )}
           </div>

@@ -27,6 +27,7 @@ import type {
   CmTrophyWeeklyPoint,
 } from '@/lib/api/adminCmTrophyApi';
 import { sportsApi, Sport } from '@/lib/api/sports';
+import SearchableSelect from '@/components/ui/SearchableSelect';
 
 // Shared by the admin page (app/admin/cm-trophy/page.tsx) and the officer page
 // (app/officer/cm-trophy/page.tsx) so the two can't drift. They differ only in which
@@ -446,15 +447,14 @@ export default function RegistrationsDashboard({
             </>
           )}
 
-          <select
+          <SearchableSelect
             value={nyayPanchayatId}
-            onChange={(e) => { setNyayPanchayatId(e.target.value); resetPage(); }}
+            onChange={(id) => { setNyayPanchayatId(id); resetPage(); }}
+            options={nyayPanchayats}
+            placeholder="All Nyay Panchayat"
             disabled={showSansadVidhanSabhaFilters && !vidhanSabhaId}
-            className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[150px] disabled:opacity-50"
-          >
-            <option value="">All Nyay Panchayat</option>
-            {nyayPanchayats.map((n) => <option key={n.id} value={n.id}>{n.name}</option>)}
-          </select>
+            className="min-w-[180px]"
+          />
 
           <input type="date" value={dateFrom} onChange={(e) => { setDateFrom(e.target.value); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white" />
           <input type="date" value={dateTo} onChange={(e) => { setDateTo(e.target.value); resetPage(); }} className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white" />

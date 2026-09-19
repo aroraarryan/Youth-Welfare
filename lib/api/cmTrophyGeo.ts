@@ -30,10 +30,11 @@ export const cmTrophyGeoApi = {
   // blockId scopes to a BO officer's own block (and, alone, lists that block's
   // Nyay Panchayats directly with no Vidhan Sabha needed); NyayPanchayats not
   // yet reconciled to a block are always included regardless (fail-open,
-  // enforced server-side in nyayPanchayatService.findAll).
+  // enforced server-side in nyayPanchayatService.findAll). The endpoint
+  // returns the full unpaginated list — a statewide/fail-open query can span
+  // hundreds of rows and any page-size cap would cut it off alphabetically.
   getNyayPanchayats: (vidhanSabhaId?: string, blockId?: string) =>
     api.get<{ success: boolean; data: NyayPanchayat[] }>('/nyay-panchayats', {
-      limit: 100,
       ...(vidhanSabhaId && { vidhanSabhaId }),
       ...(blockId && { blockId }),
     }),

@@ -6,6 +6,7 @@ import { registrationsApi } from "@/lib/api/registrations";
 import { sportsApi, CmTrophySportOption } from "@/lib/api/sports";
 import { useDistricts, useBlocks } from "@/hooks/useInfrastructure";
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from "@/hooks/useCmTrophyGeo";
+import SearchableSelect from "@/components/ui/SearchableSelect";
 import {
   CM_TROPHY_AGE_CATEGORY_LABELS,
   CM_TROPHY_REGISTRATION_LEVEL_LABELS,
@@ -692,18 +693,14 @@ export default function KhelMahakumbhRegistrationForm() {
               )}
               {showNyayPanchayat && (
                 <Field label="Nyay Panchayat" hindi="न्याय पंचायत" required>
-                  <select
+                  <SearchableSelect
                     value={form.nyayPanchayatId}
-                    onChange={(e) => set("nyayPanchayatId", e.target.value)}
-                    required
+                    onChange={(id) => set("nyayPanchayatId", id)}
+                    options={nyayPanchayats}
+                    placeholder="Select Nyay Panchayat"
                     disabled={!form.vidhanSabhaId || nyayPanchayatsLoading}
-                    className={sel + " disabled:bg-[#f1f5f9]"}
-                  >
-                    <option value="">Select Nyay Panchayat</option>
-                    {nyayPanchayats.map((n) => (
-                      <option key={n.id} value={n.id}>{n.name}</option>
-                    ))}
-                  </select>
+                    inputClassName={sel + " disabled:bg-[#f1f5f9]"}
+                  />
                 </Field>
               )}
             </div>
