@@ -38,7 +38,9 @@ export default function OfficerCmTrophyPage() {
   const [nyayPanchayatId, setNyayPanchayatId] = useState('');
 
   const [sports, setSports] = useState<Sport[]>([]);
-  const [officerBlockId, setOfficerBlockId] = useState<string | undefined>(undefined);
+  // Every Vidhan Sabha linked to a block officer's block (a block can serve
+  // 2+ — see block_vidhan_sabhas); "" in vidhanSabhaId means "all of them".
+  const [officerVidhanSabhas, setOfficerVidhanSabhas] = useState<{ id: string; name: string }[]>([]);
   // District officers (DO_PRD) pick a medal level and are limited to their own district;
   // block officers keep the fixed Nyay Panchayat flow.
   const [isDistrictOfficer, setIsDistrictOfficer] = useState(false);
@@ -46,7 +48,12 @@ export default function OfficerCmTrophyPage() {
   const [level, setLevel] = useState<OfficerMedalLevel>('NYAY_PANCHAYAT');
   const { sansads } = useSansads(officerDistrictId);
   const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(sansadId || undefined, officerDistrictId);
-  const { nyayPanchayats, loading: nyayPanchayatsLoading } = useNyayPanchayats(vidhanSabhaId || undefined, officerBlockId);
+  const officerVidhanSabhaIds = officerVidhanSabhas.map((v) => v.id);
+  const { nyayPanchayats, loading: nyayPanchayatsLoading } = useNyayPanchayats(
+    vidhanSabhaId || undefined,
+    undefined,
+    !isDistrictOfficer && !vidhanSabhaId && officerVidhanSabhaIds.length > 0 ? officerVidhanSabhaIds : undefined,
+  );
 
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -54,7 +61,7 @@ export default function OfficerCmTrophyPage() {
   useEffect(() => {
     sportsApi.list().then((res) => setSports(res.data)).catch(() => {});
     officerApi.me().then((res) => {
-      setOfficerBlockId(res.officer.blockId ?? undefined);
+      setOfficerVidhanSabhas(res.officer.vidhanSabhas ?? []);
       setIsDistrictOfficer(res.officer.role === 'DO_PRD');
       setOfficerDistrictId(res.officer.role === 'DO_PRD' ? (res.officer.districtId ?? undefined) : undefined);
     }).catch(() => {});
@@ -293,6 +300,19 @@ export default function OfficerCmTrophyPage() {
             </select>
           </div>
           )}
+          {!isDistrictOfficer && officerVidhanSabhas.length > 1 && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Vidhan Sabha</label>
+            <select
+              className={selectClass}
+              value={vidhanSabhaId}
+              onChange={(e) => { setVidhanSabhaId(e.target.value); setNyayPanchayatId(''); }}
+            >
+              <option value="">All Vidhan Sabha</option>
+              {officerVidhanSabhas.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
+            </select>
+          </div>
+          )}
           {(!isDistrictOfficer || showNyayPanchayat) && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Nyay Panchayat *</label>
@@ -306,7 +326,7 @@ export default function OfficerCmTrophyPage() {
             />
             {(!isDistrictOfficer || vidhanSabhaId) && !nyayPanchayatsLoading && nyayPanchayats.length === 0 && (
               <p className="text-xs text-gray-500 mt-1">
-                {isDistrictOfficer ? 'No Nyay Panchayats under this Vidhan Sabha.' : 'No Nyay Panchayats mapped to your block.'}
+                {isDistrictOfficer || vidhanSabhaId ? 'No Nyay Panchayats under this Vidhan Sabha.' : 'No Nyay Panchayats in your linked Vidhan Sabha.'}
               </p>
             )}
           </div>

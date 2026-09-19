@@ -72,6 +72,15 @@ export interface RegistrationsDashboardProps {
   lockedBlockId?: string;
   /** Sansad + Vidhan Sabha filters (hidden for block officers: just the Nyay Panchayat filter, unlocked). Default true. */
   showSansadVidhanSabhaFilters?: boolean;
+  /**
+   * Block officers whose block serves 2+ Vidhan Sabha: their full linked set
+   * (server enforces this as the access scope regardless of filter choice).
+   * When length > 1, shows a plain Vidhan Sabha dropdown ("All" + each
+   * linked one) that narrows both the list and the Nyay Panchayat dropdown
+   * to a single pick. Single-VS blocks (the common case) pass length 1 or
+   * omit this — no dropdown shown, same as before.
+   */
+  officerVidhanSabhaOptions?: { id: string; name: string }[];
   /** Colour theme: 'admin' (blue, default) or 'officer' (teal). */
   accent?: DashboardAccent;
 }
@@ -189,6 +198,7 @@ export default function RegistrationsDashboard({
   lockedDistrictId,
   lockedBlockId,
   showSansadVidhanSabhaFilters = true,
+  officerVidhanSabhaOptions = [],
   accent = 'admin',
 }: RegistrationsDashboardProps) {
   const a = ACCENTS[accent];
@@ -220,7 +230,17 @@ export default function RegistrationsDashboard({
   const { blocks } = useBlocks(effectiveDistrictId || undefined);
   const { sansads } = useSansads(lockedDistrictId);
   const { vidhanSabhas } = useVidhanSabhas(sansadId || undefined, lockedDistrictId);
-  const { nyayPanchayats } = useNyayPanchayats(vidhanSabhaId || undefined, lockedBlockId ?? blockId ?? undefined);
+  // A BO whose block serves 2+ Vidhan Sabha can narrow to one via the picker
+  // below (writes into the same vidhanSabhaId state as the admin/DO Sansad
+  // cascade); left on "All", the Nyay Panchayat dropdown covers their whole
+  // linked set instead — the server enforces this set as the access scope
+  // either way, this only changes what the dropdown/list are narrowed to.
+  const officerVidhanSabhaIds = officerVidhanSabhaOptions.map((v) => v.id);
+  const { nyayPanchayats } = useNyayPanchayats(
+    vidhanSabhaId || undefined,
+    lockedBlockId ?? blockId ?? undefined,
+    !vidhanSabhaId && officerVidhanSabhaIds.length > 0 ? officerVidhanSabhaIds : undefined,
+  );
 
   const filters: CmTrophyListParams = {
     page,
@@ -445,6 +465,17 @@ export default function RegistrationsDashboard({
                 {vidhanSabhas.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
               </select>
             </>
+          )}
+
+          {!showSansadVidhanSabhaFilters && officerVidhanSabhaOptions.length > 1 && (
+            <select
+              value={vidhanSabhaId}
+              onChange={(e) => { setVidhanSabhaId(e.target.value); setNyayPanchayatId(''); resetPage(); }}
+              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[150px]"
+            >
+              <option value="">All Vidhan Sabha</option>
+              {officerVidhanSabhaOptions.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
+            </select>
           )}
 
           <SearchableSelect

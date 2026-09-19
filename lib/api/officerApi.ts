@@ -62,6 +62,9 @@ export interface OfficerProfile {
   block: string | null;
   blockId: string | null;
   districtId?: string | null;
+  // BO_PRD only: every Vidhan Sabha linked to their block via the
+  // block_vidhan_sabhas crosswalk (a block can serve 2+). Empty for DO_PRD.
+  vidhanSabhas: { id: string; name: string }[];
   phone: string | null;
   profilePhotoUrl: string | null;
   viName: string | null;
