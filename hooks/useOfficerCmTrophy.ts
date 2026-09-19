@@ -6,12 +6,28 @@ import {
   CmTrophyListParams,
   CmTrophyAttendanceListParams,
   CreateOfficerMedalInput,
+  OfficerLeaderboardLevel,
+  OfficerMedalListParams,
 } from '@/lib/api/officerCmTrophyApi';
 
 export function useOfficerCmTrophyList(filters: CmTrophyListParams) {
   return useQuery({
     queryKey: ['officer', 'cmTrophy', 'list', filters],
     queryFn: () => officerCmTrophyApi.listRegistrations(filters),
+  });
+}
+
+export function useOfficerCmTrophyStats() {
+  return useQuery({
+    queryKey: ['officer', 'cmTrophy', 'stats'],
+    queryFn: () => officerCmTrophyApi.stats(),
+  });
+}
+
+export function useOfficerCmTrophyWeeklyTrend() {
+  return useQuery({
+    queryKey: ['officer', 'cmTrophy', 'weeklyTrend'],
+    queryFn: () => officerCmTrophyApi.weeklyTrend(),
   });
 }
 
@@ -35,14 +51,14 @@ export function useOfficerUpdateRegistration() {
   });
 }
 
-export function useOfficerMedalLeaderboard() {
+export function useOfficerMedalLeaderboard(level: OfficerLeaderboardLevel = 'nyay-panchayat') {
   return useQuery({
-    queryKey: ['officer', 'cmTrophy', 'medalLeaderboard'],
-    queryFn: () => officerCmTrophyApi.getLeaderboard(),
+    queryKey: ['officer', 'cmTrophy', 'medalLeaderboard', level],
+    queryFn: () => officerCmTrophyApi.getLeaderboard(level),
   });
 }
 
-export function useOfficerMedals(params: { page?: number; limit?: number; search?: string }) {
+export function useOfficerMedals(params: OfficerMedalListParams) {
   return useQuery({
     queryKey: ['officer', 'cmTrophy', 'medals', params],
     queryFn: () => officerCmTrophyApi.listMedals(params),

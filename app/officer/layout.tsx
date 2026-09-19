@@ -16,6 +16,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
   const queryClient = useQueryClient();
   const { session } = usePortalSession();
   const isBoPrd = session?.kind === 'officer' && session.role === 'BO_PRD';
+  const isCmTrophyOfficer = isBoPrd || (session?.kind === 'officer' && session.role === 'DO_PRD');
 
   if (pathname === '/officer/login') {
     return <>{children}</>;
@@ -84,7 +85,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
             {navLink('/officer/gallery', 'Gallery')}
           </div>
 
-          {isBoPrd && (
+          {isCmTrophyOfficer && (
             <div className="space-y-1">
               <h3 className="px-4 text-[10px] font-bold text-teal-300 uppercase tracking-widest mb-2">CM Trophy</h3>
               {navLink('/officer/cm-trophy', 'Registrations')}
@@ -93,7 +94,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
               {navLink('/officer/cm-trophy/medals-dashboard', 'Medal Dashboard')}
               {navLink('/officer/cm-trophy/attendance', 'Attendance')}
               {navLink('/officer/cm-trophy/fixtures', 'Fixtures')}
-              {navLink('/officer/cm-trophy/grievance', 'Grievances')}
+              {isBoPrd && navLink('/officer/cm-trophy/grievance', 'Grievances')}
             </div>
           )}
 

@@ -61,6 +61,7 @@ export interface OfficerProfile {
   district: string;
   block: string | null;
   blockId: string | null;
+  districtId?: string | null;
   phone: string | null;
   profilePhotoUrl: string | null;
   viName: string | null;

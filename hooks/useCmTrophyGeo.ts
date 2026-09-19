@@ -3,22 +3,24 @@
 import { useState, useEffect } from 'react';
 import { cmTrophyGeoApi, Sansad, VidhanSabha, NyayPanchayat } from '@/lib/api/cmTrophyGeo';
 
-export function useSansads() {
+export function useSansads(districtId?: string) {
   const [sansads, setSansads] = useState<Sansad[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    cmTrophyGeoApi.getSansads()
-      .then((res) => setSansads(res.data))
-      .catch((err) => setError(err.message ?? 'Failed to load Sansads'))
-      .finally(() => setLoading(false));
-  }, []);
+    let cancelled = false;
+    cmTrophyGeoApi.getSansads(districtId)
+      .then((res) => { if (!cancelled) setSansads(res.data); })
+      .catch((err) => { if (!cancelled) setError(err.message ?? 'Failed to load Sansads'); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [districtId]);
 
   return { sansads, loading, error };
 }
 
-export function useVidhanSabhas(sansadId?: string) {
+export function useVidhanSabhas(sansadId?: string, districtId?: string) {
   const [vidhanSabhas, setVidhanSabhas] = useState<VidhanSabha[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -30,11 +32,11 @@ export function useVidhanSabhas(sansadId?: string) {
     }
     setLoading(true);
     setError(null);
-    cmTrophyGeoApi.getVidhanSabhas(sansadId)
+    cmTrophyGeoApi.getVidhanSabhas(sansadId, districtId)
       .then((res) => setVidhanSabhas(res.data))
       .catch((err) => setError(err.message ?? 'Failed to load Vidhan Sabhas'))
       .finally(() => setLoading(false));
-  }, [sansadId]);
+  }, [sansadId, districtId]);
 
   return { vidhanSabhas, loading, error };
 }

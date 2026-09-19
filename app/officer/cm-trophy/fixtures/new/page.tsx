@@ -6,6 +6,7 @@ import { sportsApi, CmTrophySportOption } from '@/lib/api/sports';
 import { useSansads, useVidhanSabhas } from '@/hooks/useCmTrophyGeo';
 import { useCreateFixtureEvent } from '@/hooks/useOfficerCmTrophyFixtures';
 import { CmTrophyFixtureEntrantType } from '@/lib/api/adminCmTrophyFixturesApi';
+import { officerApi } from '@/lib/api/officerApi';
 
 const ENTRANT_TYPES: { value: CmTrophyFixtureEntrantType; label: string }[] = [
   { value: 'PLACE', label: 'Team (Nyay Panchayat)' },
@@ -43,8 +44,16 @@ export default function OfficerNewFixtureEventPage() {
     setEventName('');
   };
 
-  const { sansads } = useSansads();
-  const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(sansadId || undefined);
+  // District officers only see Sansads / Vidhan Sabhas that sit in their own district
+  // (the server enforces this too); block officers get the unfiltered pickers.
+  const [officerDistrictId, setOfficerDistrictId] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    officerApi.me()
+      .then((res) => setOfficerDistrictId(res.officer.role === 'DO_PRD' ? (res.officer.districtId ?? undefined) : undefined))
+      .catch(() => {});
+  }, []);
+  const { sansads } = useSansads(officerDistrictId);
+  const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(sansadId || undefined, officerDistrictId);
   const createMutation = useCreateFixtureEvent();
 
   useEffect(() => {
@@ -87,7 +96,10 @@ export default function OfficerNewFixtureEventPage() {
   return (
     <div className="p-6 max-w-2xl">
       <h1 className="text-xl font-bold text-gray-900 mb-1">New Fixture Event</h1>
-      <p className="text-sm text-gray-500 mb-6">Vidhan Sabha level — entrants are its Nyay Panchayats.</p>
+      <p className="text-sm text-gray-500 mb-6">
+        Vidhan Sabha level — entrants are its Nyay Panchayats.
+        {officerDistrictId && ' Only Vidhan Sabhas in your district are listed.'}
+      </p>
 
       {error && (
         <div className="mb-4 text-sm rounded-lg px-4 py-2 border bg-red-50 border-red-200 text-red-700">{error}</div>

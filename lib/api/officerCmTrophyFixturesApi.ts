@@ -1,7 +1,8 @@
 /**
- * Officer API layer for CM Trophy Fixtures (BO_PRD only, server-enforced to
+ * Officer API layer for CM Trophy Fixtures (BO_PRD and DO_PRD, server-enforced to
  * VIDHAN_SABHA level — the one fixture tier whose entrants are Nyay
- * Panchayats, see backend/src/routes/officerRoutes.js). Mirrors
+ * Panchayats; district officers are further limited to Vidhan Sabhas in their
+ * district, see backend/src/routes/officerRoutes.js). Mirrors
  * lib/api/adminCmTrophyFixturesApi.ts, whose types are reused directly.
  */
 
