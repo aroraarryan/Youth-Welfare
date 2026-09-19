@@ -81,6 +81,10 @@ export interface CmTrophyStats {
   underReview: number;
   approved: number;
   rejected: number;
+  // BO officers only: their own block's count, separate from `total` (which
+  // for a multi-Vidhan-Sabha block is the whole Vidhan Sabha). Null for
+  // admin/DO views and for a BO with no resolvable block.
+  blockTotal?: number | null;
 }
 
 export interface CmTrophyWeeklyPoint {

@@ -152,11 +152,21 @@ export default function OfficerCmTrophyPage() {
       <h1 className="text-xl font-bold text-gray-900 mb-1">
         CM Trophy 2026-27 — Add Medal{isDistrictOfficer ? '' : ' (Nyay Panchayat)'}
       </h1>
-      <p className="text-sm text-gray-500 mb-6">
+      <p className={`text-sm text-gray-500 ${!isDistrictOfficer && officerVidhanSabhas.length > 0 ? 'mb-2' : 'mb-6'}`}>
         {isDistrictOfficer
           ? 'District Officers can add Nyay Panchayat, Vidhan Sabha and Sansad-level medal records for players registered in their district.'
           : 'Block Officers can add Nyay Panchayat-level medal records only.'}
       </p>
+      {!isDistrictOfficer && officerVidhanSabhas.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 mb-6">
+          <span className="text-xs font-semibold text-gray-500">Vidhan Sabha:</span>
+          {officerVidhanSabhas.map((v) => (
+            <span key={v.id} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-gradient-to-br from-[#115e59] to-[#0d9488] text-white">
+              {v.name}
+            </span>
+          ))}
+        </div>
+      )}
 
       {message && (
         <div

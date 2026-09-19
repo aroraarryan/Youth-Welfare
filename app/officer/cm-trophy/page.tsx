@@ -37,6 +37,7 @@ export default function OfficerCmTrophyRegistrationsPage() {
     <RegistrationsDashboard
       title="CM Trophy — Registrations"
       subtitle={me.isDistrictOfficer ? 'Registrations from your district, all levels.' : 'Nyay Panchayat-level registrations only.'}
+      vidhanSabhaBadges={!me.isDistrictOfficer ? me.vidhanSabhas.map((v) => v.name) : undefined}
       detailHref={(id) => `/officer/cm-trophy/${id}`}
       actionLabel="View / Edit"
       useList={useOfficerCmTrophyList}
@@ -46,7 +47,6 @@ export default function OfficerCmTrophyRegistrationsPage() {
       showLevelFilter={me.isDistrictOfficer}
       showDistrictFilters={me.isDistrictOfficer}
       lockedDistrictId={me.isDistrictOfficer ? me.districtId : undefined}
-      lockedBlockId={!me.isDistrictOfficer ? me.blockId : undefined}
       showSansadVidhanSabhaFilters={me.isDistrictOfficer}
       officerVidhanSabhaOptions={!me.isDistrictOfficer ? me.vidhanSabhas : undefined}
       accent="officer"

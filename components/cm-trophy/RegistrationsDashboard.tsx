@@ -83,6 +83,8 @@ export interface RegistrationsDashboardProps {
   officerVidhanSabhaOptions?: { id: string; name: string }[];
   /** Colour theme: 'admin' (blue, default) or 'officer' (teal). */
   accent?: DashboardAccent;
+  /** Block officers: their linked Vidhan Sabha name(s), shown as badges under the subtitle. */
+  vidhanSabhaBadges?: string[];
 }
 
 const AGE_CATEGORIES = [
@@ -199,6 +201,7 @@ export default function RegistrationsDashboard({
   lockedBlockId,
   showSansadVidhanSabhaFilters = true,
   officerVidhanSabhaOptions = [],
+  vidhanSabhaBadges,
   accent = 'admin',
 }: RegistrationsDashboardProps) {
   const a = ACCENTS[accent];
@@ -324,11 +327,26 @@ export default function RegistrationsDashboard({
       <div className="mb-5">
         <h2 className="text-xl font-bold text-gray-800">{title}</h2>
         <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>
+        {vidhanSabhaBadges && vidhanSabhaBadges.length > 0 && (
+          <div className="flex flex-wrap items-center gap-2 mt-2">
+            <span className="text-xs font-semibold text-gray-500">Vidhan Sabha:</span>
+            {vidhanSabhaBadges.map((name) => (
+              <span key={name} className={`text-xs font-semibold px-2.5 py-1 rounded-full ${a.card} bg-gradient-to-br text-white`}>
+                {name}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Stat cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-        <StatCard label="Total Applications" value={stats.total} gradient={a.card} />
+      {/* Stat cards. A BO whose block serves 2+ Vidhan Sabha sees a much
+          bigger "total" than their own block contributed (it's the whole
+          Vidhan Sabha) — show both numbers so that isn't mistaken for a bug. */}
+      <div className={`grid grid-cols-1 sm:grid-cols-2 ${stats.blockTotal != null ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} gap-4 mb-5`}>
+        {stats.blockTotal != null && (
+          <StatCard label="Total Block Registration" value={stats.blockTotal} gradient={a.card} />
+        )}
+        <StatCard label={stats.blockTotal != null ? 'Total Vidhan Sabha Registration' : 'Total Applications'} value={stats.total} gradient={a.card} />
         <StatCard label="Under Review" value={stats.underReview} gradient={a.card} />
         <StatCard label="Approved" value={stats.approved} gradient={a.card} />
         <StatCard label="Rejected" value={stats.rejected} gradient={a.card} />
