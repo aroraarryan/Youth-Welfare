@@ -9,7 +9,7 @@ import { CmTrophyFixtureEntrantType, CmTrophyFixtureLevel, FIXTURE_LEVEL_LABEL }
 
 const LEVELS: CmTrophyFixtureLevel[] = ['VIDHAN_SABHA', 'SANSAD', 'STATE'];
 const ENTRANT_TYPES: { value: CmTrophyFixtureEntrantType; label: string }[] = [
-  { value: 'PLACE', label: 'Place (Nyay Panchayat / Vidhan Sabha / Sansad)' },
+  { value: 'PLACE', label: 'Team (Nyay Panchayat / Vidhan Sabha / Sansad)' },
   { value: 'PLAYER', label: 'Individual player' },
 ];
 const AGE_CATEGORIES = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];

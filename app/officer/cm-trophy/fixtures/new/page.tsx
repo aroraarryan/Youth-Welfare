@@ -8,7 +8,7 @@ import { useCreateFixtureEvent } from '@/hooks/useOfficerCmTrophyFixtures';
 import { CmTrophyFixtureEntrantType } from '@/lib/api/adminCmTrophyFixturesApi';
 
 const ENTRANT_TYPES: { value: CmTrophyFixtureEntrantType; label: string }[] = [
-  { value: 'PLACE', label: 'Place (Nyay Panchayat)' },
+  { value: 'PLACE', label: 'Team (Nyay Panchayat)' },
   { value: 'PLAYER', label: 'Individual player' },
 ];
 const AGE_CATEGORIES = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
