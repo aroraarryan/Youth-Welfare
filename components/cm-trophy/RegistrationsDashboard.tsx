@@ -67,6 +67,8 @@ export interface RegistrationsDashboardProps {
   showDistrictFilters?: boolean;
   /** District officers: their own district — the District filter is locked to it, Block/Sansad/Vidhan Sabha narrow to it. */
   lockedDistrictId?: string;
+  /** Block officers: their own block — narrows the Nyay Panchayat dropdown to it (fail-open to all if unmapped). */
+  lockedBlockId?: string;
   /** Colour theme: 'admin' (blue, default) or 'officer' (teal). */
   accent?: DashboardAccent;
 }
@@ -182,6 +184,7 @@ export default function RegistrationsDashboard({
   showLevelFilter = true,
   showDistrictFilters = true,
   lockedDistrictId,
+  lockedBlockId,
   accent = 'admin',
 }: RegistrationsDashboardProps) {
   const a = ACCENTS[accent];
@@ -213,7 +216,7 @@ export default function RegistrationsDashboard({
   const { blocks } = useBlocks(effectiveDistrictId || undefined);
   const { sansads } = useSansads(lockedDistrictId);
   const { vidhanSabhas } = useVidhanSabhas(sansadId || undefined, lockedDistrictId);
-  const { nyayPanchayats } = useNyayPanchayats(vidhanSabhaId || undefined);
+  const { nyayPanchayats } = useNyayPanchayats(vidhanSabhaId || undefined, lockedBlockId ?? blockId ?? undefined);
 
   const filters: CmTrophyListParams = {
     page,
