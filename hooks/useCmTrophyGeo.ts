@@ -47,7 +47,7 @@ export function useNyayPanchayats(vidhanSabhaId?: string, blockId?: string) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!vidhanSabhaId) {
+    if (!vidhanSabhaId && !blockId) {
       setNyayPanchayats([]);
       return;
     }

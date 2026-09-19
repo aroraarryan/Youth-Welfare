@@ -14,13 +14,17 @@ import { officerApi } from '@/lib/api/officerApi';
 // scopes every call to the officer's block (BO_PRD) or district (DO_PRD); the flags below
 // only hide/lock the controls that would be meaningless for that officer.
 export default function OfficerCmTrophyRegistrationsPage() {
-  const [me, setMe] = useState<{ isDistrictOfficer: boolean; districtId?: string } | null>(null);
+  const [me, setMe] = useState<{ isDistrictOfficer: boolean; districtId?: string; blockId?: string } | null>(null);
 
   useEffect(() => {
     officerApi
       .me()
       .then((res) =>
-        setMe({ isDistrictOfficer: res.officer.role === 'DO_PRD', districtId: res.officer.districtId ?? undefined }),
+        setMe({
+          isDistrictOfficer: res.officer.role === 'DO_PRD',
+          districtId: res.officer.districtId ?? undefined,
+          blockId: res.officer.blockId ?? undefined,
+        }),
       )
       .catch(() => setMe({ isDistrictOfficer: false }));
   }, []);
@@ -41,6 +45,8 @@ export default function OfficerCmTrophyRegistrationsPage() {
       showLevelFilter={me.isDistrictOfficer}
       showDistrictFilters={me.isDistrictOfficer}
       lockedDistrictId={me.isDistrictOfficer ? me.districtId : undefined}
+      lockedBlockId={!me.isDistrictOfficer ? me.blockId : undefined}
+      showSansadVidhanSabhaFilters={me.isDistrictOfficer}
       accent="officer"
     />
   );
