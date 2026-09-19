@@ -9,6 +9,7 @@ export interface DistrictMedalTally {
   silver: number;
   bronze: number;
   total: number;
+  points: number;
   updatedAt: string | null;
 }
 
@@ -19,6 +20,7 @@ export interface SportMedalBreakdown {
   silver: number;
   bronze: number;
   total: number;
+  points: number;
 }
 
 export const leaderboardApi = {

@@ -11,6 +11,8 @@ export interface LeaderboardRow {
   silver: number;
   bronze: number;
   total: number;
+  /** Gold 3 + Silver 2 + Bronze 1 — decides the rank (ties: more golds first). Computed by the server. */
+  points: number;
 }
 
 interface Props {
@@ -31,7 +33,7 @@ function SportBreakdownRow({ level, entityId }: { level: CmTrophyMedalLevel; ent
 
   return (
     <tr>
-      <td colSpan={7} className="p-0 bg-[#f8fafc]">
+      <td colSpan={8} className="p-0 bg-[#f8fafc]">
         {loading ? (
           <div className="py-6 text-center text-gray-400 text-sm">
             <i className="fas fa-circle-notch fa-spin mr-2" />
@@ -48,7 +50,8 @@ function SportBreakdownRow({ level, entityId }: { level: CmTrophyMedalLevel; ent
                 <th className="px-4 py-2 text-[10px] font-semibold text-white uppercase tracking-wider text-center">🥇 Gold</th>
                 <th className="px-4 py-2 text-[10px] font-semibold text-white uppercase tracking-wider text-center">🥈 Silver</th>
                 <th className="px-4 py-2 text-[10px] font-semibold text-white uppercase tracking-wider text-center">🥉 Bronze</th>
-                <th className="px-4 py-2 text-[10px] font-semibold text-white uppercase tracking-wider text-center">Total</th>
+                <th className="px-4 py-2 text-[10px] font-semibold text-white uppercase tracking-wider text-center">Total Medals</th>
+                <th className="px-4 py-2 text-[10px] font-semibold text-white uppercase tracking-wider text-center">Points</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -59,7 +62,8 @@ function SportBreakdownRow({ level, entityId }: { level: CmTrophyMedalLevel; ent
                   <td className="px-4 py-2 text-center">{r.gold}</td>
                   <td className="px-4 py-2 text-center">{r.silver}</td>
                   <td className="px-4 py-2 text-center">{r.bronze}</td>
-                  <td className="px-4 py-2 text-center font-semibold text-gray-900">{r.total}</td>
+                  <td className="px-4 py-2 text-center text-gray-700">{r.total}</td>
+                  <td className="px-4 py-2 text-center font-bold text-[#1e3a8a]">{r.points}</td>
                 </tr>
               ))}
             </tbody>
@@ -96,14 +100,15 @@ export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel =
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥇 Gold</th>
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥈 Silver</th>
               <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">🥉 Bronze</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">Total</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">Total Medals</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider text-center">Points</th>
               {expandable && <th className="px-4 py-3 w-10" />}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {rows.length === 0 ? (
               <tr>
-                <td colSpan={expandable ? 7 : 6} className="text-center py-10 text-gray-400 text-sm">No leaderboard data yet.</td>
+                <td colSpan={expandable ? 8 : 7} className="text-center py-10 text-gray-400 text-sm">No leaderboard data yet.</td>
               </tr>
             ) : (
               rows.map((r, idx) => {
@@ -119,7 +124,8 @@ export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel =
                       <td className="px-4 py-3 text-center">{r.gold}</td>
                       <td className="px-4 py-3 text-center">{r.silver}</td>
                       <td className="px-4 py-3 text-center">{r.bronze}</td>
-                      <td className="px-4 py-3 text-center font-semibold text-gray-900">{r.total}</td>
+                      <td className="px-4 py-3 text-center text-gray-700">{r.total}</td>
+                      <td className="px-4 py-3 text-center font-bold text-[#1e3a8a]">{r.points}</td>
                       {expandable && (
                         <td className="px-4 py-3 text-center">
                           <i className={`fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} text-[10px] text-gray-400`} />
@@ -134,6 +140,9 @@ export default function CmTrophyLeaderboardTable({ entries, limit, entityLabel =
           </tbody>
         </table>
       </div>
+      <p className="px-4 py-2 border-t border-gray-100 text-[11px] text-gray-400">
+        Points: 🥇 Gold 3 · 🥈 Silver 2 · 🥉 Bronze 1. Ranked by total points; ties go to the entry with more golds.
+      </p>
       {all.length > PAGE_SIZE && (
         <div className="flex items-center justify-between px-4 py-3 border-t border-gray-100 text-sm text-gray-500">
           <span>Page {page} of {totalPages} ({all.length} total)</span>
