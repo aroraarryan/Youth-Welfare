@@ -41,23 +41,27 @@ export function useVidhanSabhas(sansadId?: string, districtId?: string) {
   return { vidhanSabhas, loading, error };
 }
 
-export function useNyayPanchayats(vidhanSabhaId?: string, blockId?: string) {
+// vidhanSabhaIds: a BO officer's block can serve 2+ Vidhan Sabha (see
+// block_vidhan_sabhas) — pass every linked id to get their whole Nyay
+// Panchayat pool. Ignored once vidhanSabhaId (a single explicit pick) is set.
+export function useNyayPanchayats(vidhanSabhaId?: string, blockId?: string, vidhanSabhaIds?: string[]) {
   const [nyayPanchayats, setNyayPanchayats] = useState<NyayPanchayat[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const vsIdsKey = vidhanSabhaIds?.join(',') ?? '';
 
   useEffect(() => {
-    if (!vidhanSabhaId && !blockId) {
+    if (!vidhanSabhaId && !blockId && !vsIdsKey) {
       setNyayPanchayats([]);
       return;
     }
     setLoading(true);
     setError(null);
-    cmTrophyGeoApi.getNyayPanchayats(vidhanSabhaId, blockId)
+    cmTrophyGeoApi.getNyayPanchayats(vidhanSabhaId, blockId, vsIdsKey ? vsIdsKey.split(',') : undefined)
       .then((res) => setNyayPanchayats(res.data))
       .catch((err) => setError(err.message ?? 'Failed to load Nyay Panchayats'))
       .finally(() => setLoading(false));
-  }, [vidhanSabhaId, blockId]);
+  }, [vidhanSabhaId, blockId, vsIdsKey]);
 
   return { nyayPanchayats, loading, error };
 }
