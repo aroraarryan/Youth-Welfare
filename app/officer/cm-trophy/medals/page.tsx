@@ -3,12 +3,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { sportsApi, Sport } from '@/lib/api/sports';
-import { officerCmTrophyApi, CmTrophyMedal, RegistrationLookupResult } from '@/lib/api/officerCmTrophyApi';
+import { officerCmTrophyApi, CmTrophyMedal, RegistrationLookupResult, OfficerMedalLevel, LEVEL_LABEL } from '@/lib/api/officerCmTrophyApi';
 import { officerApi } from '@/lib/api/officerApi';
 import { Gender } from '@/lib/api/registrations';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 
 const MEDALS: CmTrophyMedal[] = ['GOLD', 'SILVER', 'BRONZE'];
+const DO_LEVELS: OfficerMedalLevel[] = ['NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
 const GENDERS: { value: Gender; label: string }[] = [
   { value: 'MALE', label: 'Male' },
   { value: 'FEMALE', label: 'Female' },
@@ -37,8 +38,13 @@ export default function OfficerCmTrophyPage() {
 
   const [sports, setSports] = useState<Sport[]>([]);
   const [officerBlockId, setOfficerBlockId] = useState<string | undefined>(undefined);
-  const { sansads } = useSansads();
-  const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(sansadId || undefined);
+  // District officers (DO_PRD) pick a medal level and are limited to their own district;
+  // block officers keep the fixed Nyay Panchayat flow.
+  const [isDistrictOfficer, setIsDistrictOfficer] = useState(false);
+  const [officerDistrictId, setOfficerDistrictId] = useState<string | undefined>(undefined);
+  const [level, setLevel] = useState<OfficerMedalLevel>('NYAY_PANCHAYAT');
+  const { sansads } = useSansads(officerDistrictId);
+  const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(sansadId || undefined, officerDistrictId);
   const { nyayPanchayats, loading: nyayPanchayatsLoading } = useNyayPanchayats(vidhanSabhaId || undefined, officerBlockId);
 
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -46,7 +52,11 @@ export default function OfficerCmTrophyPage() {
 
   useEffect(() => {
     sportsApi.list().then((res) => setSports(res.data)).catch(() => {});
-    officerApi.me().then((res) => setOfficerBlockId(res.officer.blockId ?? undefined)).catch(() => {});
+    officerApi.me().then((res) => {
+      setOfficerBlockId(res.officer.blockId ?? undefined);
+      setIsDistrictOfficer(res.officer.role === 'DO_PRD');
+      setOfficerDistrictId(res.officer.role === 'DO_PRD' ? (res.officer.districtId ?? undefined) : undefined);
+    }).catch(() => {});
   }, []);
 
   const runLookup = useCallback(async (code: string) => {
@@ -75,7 +85,10 @@ export default function OfficerCmTrophyPage() {
   }, []);
 
   const registrationEvents = registration?.selectedEvents ?? [];
-  const canSubmit = lookupStatus === 'found' && !!sportId && !!medal && !!nyayPanchayatId && !submitting;
+  const showVidhanSabha = level !== 'SANSAD';
+  const showNyayPanchayat = level === 'NYAY_PANCHAYAT';
+  const geoComplete = !!sansadId && (!showVidhanSabha || !!vidhanSabhaId) && (!showNyayPanchayat || !!nyayPanchayatId);
+  const canSubmit = lookupStatus === 'found' && !!sportId && !!medal && geoComplete && !submitting;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,7 +106,16 @@ export default function OfficerCmTrophyPage() {
         name,
         fathersName,
         email: email || undefined,
-        nyayPanchayatId,
+        // Block officers send nyayPanchayatId only (level is forced server-side);
+        // district officers send the chosen level plus the id that level needs.
+        ...(isDistrictOfficer
+          ? {
+              level,
+              ...(level === 'NYAY_PANCHAYAT' && { nyayPanchayatId }),
+              ...(level === 'VIDHAN_SABHA' && { vidhanSabhaId }),
+              ...(level === 'SANSAD' && { sansadId }),
+            }
+          : { nyayPanchayatId }),
       });
       setMessage({ type: 'success', text: 'Medal record added.' });
       setApplicationCode('');
@@ -116,9 +138,13 @@ export default function OfficerCmTrophyPage() {
 
   return (
     <div className="p-6 max-w-3xl">
-      <h1 className="text-xl font-bold text-gray-900 mb-1">CM Trophy 2026-27 — Add Medal (Nyay Panchayat)</h1>
+      <h1 className="text-xl font-bold text-gray-900 mb-1">
+        CM Trophy 2026-27 — Add Medal{isDistrictOfficer ? '' : ' (Nyay Panchayat)'}
+      </h1>
       <p className="text-sm text-gray-500 mb-6">
-        Block Officers can add Nyay Panchayat-level medal records only.
+        {isDistrictOfficer
+          ? 'District Officers can add Nyay Panchayat, Vidhan Sabha and Sansad-level medal records for players registered in their district.'
+          : 'Block Officers can add Nyay Panchayat-level medal records only.'}
       </p>
 
       {message && (
@@ -222,6 +248,19 @@ export default function OfficerCmTrophyPage() {
           </div>
         </div>
 
+        {isDistrictOfficer && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Medal Level *</label>
+            <select
+              className={selectClass}
+              value={level}
+              onChange={(e) => { setLevel(e.target.value as OfficerMedalLevel); setSansadId(''); setVidhanSabhaId(''); setNyayPanchayatId(''); }}
+            >
+              {DO_LEVELS.map((l) => <option key={l} value={l}>{LEVEL_LABEL[l]}</option>)}
+            </select>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Sansad *</label>
@@ -234,6 +273,7 @@ export default function OfficerCmTrophyPage() {
               {sansads.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           </div>
+          {showVidhanSabha && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Vidhan Sabha *</label>
             <select
@@ -246,6 +286,8 @@ export default function OfficerCmTrophyPage() {
               {vidhanSabhas.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
             </select>
           </div>
+          )}
+          {showNyayPanchayat && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Nyay Panchayat *</label>
             <select
@@ -258,9 +300,12 @@ export default function OfficerCmTrophyPage() {
               {nyayPanchayats.map((n) => <option key={n.id} value={n.id}>{n.name}</option>)}
             </select>
             {vidhanSabhaId && !nyayPanchayatsLoading && nyayPanchayats.length === 0 && (
-              <p className="text-xs text-gray-500 mt-1">No Nyay Panchayats from your block under this Vidhan Sabha.</p>
+              <p className="text-xs text-gray-500 mt-1">
+                {isDistrictOfficer ? 'No Nyay Panchayats under this Vidhan Sabha.' : 'No Nyay Panchayats from your block under this Vidhan Sabha.'}
+              </p>
             )}
           </div>
+          )}
         </div>
 
         <button
