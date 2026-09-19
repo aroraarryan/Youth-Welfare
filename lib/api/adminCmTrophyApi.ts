@@ -117,6 +117,7 @@ export interface MedalLeaderboardRow {
   silver: number;
   bronze: number;
   total: number;
+  points: number;
 }
 
 export interface RegistrationLookupResult {
