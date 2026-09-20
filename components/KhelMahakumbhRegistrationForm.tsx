@@ -174,9 +174,24 @@ export default function KhelMahakumbhRegistrationForm() {
   const maxEventsSelectable = selectedSport?.maxEventsSelectable ?? 1;
   const normalSelectedCount = selectedEvents.filter((v) => v !== bonusEvent?.name).length;
 
+  // Sports with multiple distinct events (e.g. Wushu: Sanda/Taolu, Wrestling: Freestyle/Greco-Roman)
+  // encode the event name as the first word of the option (e.g. "Sanda 36 kg"). When more than one
+  // such group exists, show a group picker first, then only that group's sub-options.
+  const groupOf = (name: string) => name.split(" ")[0];
+  const eventGroups = Array.from(new Set(normalEvents.map((ev) => groupOf(ev.name))));
+  const [selectedEventGroup, setSelectedEventGroup] = useState("");
+  const subEvents = eventGroups.length > 1
+    ? normalEvents.filter((ev) => groupOf(ev.name) === selectedEventGroup)
+    : normalEvents;
+
   useEffect(() => {
     setSelectedEvents([]);
+    setSelectedEventGroup("");
   }, [form.sportId, form.gender]);
+
+  useEffect(() => {
+    setSelectedEvents([]);
+  }, [selectedEventGroup]);
 
   const toggleNormalEvent = (name: string) => {
     setSelectedEvents((prev) => {
@@ -590,16 +605,36 @@ export default function KhelMahakumbhRegistrationForm() {
               </select>
             </Field>
 
-            {normalEvents.length > 0 && (
+            {eventGroups.length > 1 && (
+              <Field label="Event" hindi="प्रतियोगिता" required>
+                <div className="flex flex-col gap-1.5 pt-1">
+                  {eventGroups.map((g) => (
+                    <label key={g} className="flex items-center gap-2 text-sm text-[#374151] cursor-pointer">
+                      <input
+                        type="radio"
+                        name="eventGroup"
+                        checked={selectedEventGroup === g}
+                        onChange={() => setSelectedEventGroup(g)}
+                        className="w-4 h-4 accent-[#1e3a8a]"
+                      />
+                      {g}
+                    </label>
+                  ))}
+                </div>
+              </Field>
+            )}
+
+            {subEvents.length > 0 && (eventGroups.length <= 1 || selectedEventGroup) && (
               <Field
-                label={`Event${maxEventsSelectable > 1 ? "s" : ""} (choose ${maxEventsSelectable})`}
+                label={`${eventGroups.length > 1 ? "Category" : `Event${maxEventsSelectable > 1 ? "s" : ""}`} (choose ${maxEventsSelectable})`}
                 hindi="प्रतियोगिता चुनें"
                 required
               >
                 <div className="flex flex-col gap-1.5 pt-1">
-                  {normalEvents.map((ev) => {
+                  {subEvents.map((ev) => {
                     const checked = selectedEvents.includes(ev.name);
                     const capReached = maxEventsSelectable > 1 && !checked && normalSelectedCount >= maxEventsSelectable;
+                    const label = eventGroups.length > 1 ? ev.name.slice(groupOf(ev.name).length).trim() : ev.name;
                     return (
                       <label
                         key={ev.name}
@@ -613,7 +648,7 @@ export default function KhelMahakumbhRegistrationForm() {
                           onChange={() => toggleNormalEvent(ev.name)}
                           className="w-4 h-4 accent-[#1e3a8a]"
                         />
-                        {ev.name}
+                        {label}
                       </label>
                     );
                   })}
