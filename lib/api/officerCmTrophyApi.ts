@@ -211,9 +211,6 @@ export const officerCmTrophyApi = {
   getRegistration: (id: string): Promise<{ success: boolean; data: AdminKhelMahakumbhRegistration }> =>
     officerFetch(`cm-trophy/registrations/${id}`),
 
-  updateRegistration: (id: string, data: Record<string, unknown>): Promise<{ success: boolean; data: AdminKhelMahakumbhRegistration }> =>
-    officerFetch(`cm-trophy/registrations/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
-
   // Attendance (BO: Nyay Panchayat-level in own block; DO: all levels in own district — forced server-side)
   listAttendance: (params: CmTrophyAttendanceListParams = {}): Promise<PaginatedResult<AttendanceRow>> =>
     officerFetch(`cm-trophy/attendance${qs(params)}`),

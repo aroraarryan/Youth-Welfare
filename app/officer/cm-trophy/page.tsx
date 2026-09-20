@@ -36,10 +36,10 @@ export default function OfficerCmTrophyRegistrationsPage() {
   return (
     <RegistrationsDashboard
       title="CM Trophy — Registrations"
-      subtitle={me.isDistrictOfficer ? 'Registrations from your district, all levels.' : 'Nyay Panchayat-level registrations only.'}
+      subtitle={me.isDistrictOfficer ? 'Registrations from your district, all levels.' : 'All levels in your block.'}
       vidhanSabhaBadges={!me.isDistrictOfficer ? me.vidhanSabhas.map((v) => v.name) : undefined}
       detailHref={(id) => `/officer/cm-trophy/${id}`}
-      actionLabel="View / Edit"
+      actionLabel="View"
       useList={useOfficerCmTrophyList}
       useStats={useOfficerCmTrophyStats}
       useTrend={useOfficerCmTrophyWeeklyTrend}
