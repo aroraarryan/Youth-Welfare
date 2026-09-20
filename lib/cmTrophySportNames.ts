@@ -43,6 +43,7 @@ export const CM_TROPHY_SPORT_NAME_HI: Record<string, string> = {
   Volleyball: 'वॉलीबॉल',
   Weightlifting: 'भारोत्तोलन',
   Wrestling: 'कुश्ती',
+  Wushu: 'वुशु',
   Yogasan: 'योगासन',
 };
 
