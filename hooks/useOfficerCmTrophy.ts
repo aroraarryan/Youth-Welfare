@@ -39,18 +39,6 @@ export function useOfficerCmTrophyDetail(id: string) {
   });
 }
 
-export function useOfficerUpdateRegistration() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Record<string, unknown> }) =>
-      officerCmTrophyApi.updateRegistration(id, data),
-    onSuccess: (_, { id }) => {
-      queryClient.invalidateQueries({ queryKey: ['officer', 'cmTrophy', 'detail', id] });
-      queryClient.invalidateQueries({ queryKey: ['officer', 'cmTrophy', 'list'] });
-    },
-  });
-}
-
 export function useOfficerMedalLeaderboard(level: OfficerLeaderboardLevel = 'nyay-panchayat') {
   return useQuery({
     queryKey: ['officer', 'cmTrophy', 'medalLeaderboard', level],
