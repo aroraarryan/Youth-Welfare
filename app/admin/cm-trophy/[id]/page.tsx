@@ -2,7 +2,8 @@
 
 import { use, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useAdminCmTrophyDetail, useUpdateRegistration } from '@/hooks/useAdminCmTrophy';
+import { useAdminCmTrophyDetail, useUpdateRegistration, useUpdateRegistrationStatus } from '@/hooks/useAdminCmTrophy';
+import { RejectReasonModal } from '@/components/cm-trophy/RejectReasonModal';
 import { useDistricts, useBlocks } from '@/hooks/useInfrastructure';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { sportsApi, CmTrophySportOption } from '@/lib/api/sports';
@@ -79,6 +80,8 @@ export default function CmTrophyApplicationDetailPage({ params }: { params: Prom
   const { id } = use(params);
   const { data, isLoading, isError, error } = useAdminCmTrophyDetail(id);
   const updateRegistration = useUpdateRegistration();
+  const updateStatus = useUpdateRegistrationStatus();
+  const [showRejectModal, setShowRejectModal] = useState(false);
   const r = data?.data;
 
   const [username, setUsername] = useState('');
@@ -197,10 +200,28 @@ export default function CmTrophyApplicationDetailPage({ params }: { params: Prom
           <Link href="/admin/cm-trophy" className="text-[#1e3a8a] font-semibold hover:underline">CM Trophy</Link>
           <span className="text-gray-400"> / Application Detail</span>
         </div>
-        {canEdit && r && !editing && (
-          <button onClick={startEdit} className="bg-[#1e3a8a] hover:bg-[#162c68] text-white text-sm font-medium px-4 py-1.5 rounded-md">
-            <i className="fas fa-pen mr-2" />Edit
-          </button>
+        {r && !editing && (
+          <div className="flex gap-2">
+            {canEdit && (
+              <button onClick={startEdit} className="bg-[#1e3a8a] hover:bg-[#162c68] text-white text-sm font-medium px-4 py-1.5 rounded-md">
+                <i className="fas fa-pen mr-2" />Edit
+              </button>
+            )}
+            <button
+              onClick={() => updateStatus.mutate({ id, status: 'APPROVED' })}
+              disabled={updateStatus.isPending}
+              className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-1.5 rounded-md disabled:opacity-50"
+            >
+              Approve
+            </button>
+            <button
+              onClick={() => setShowRejectModal(true)}
+              disabled={updateStatus.isPending}
+              className="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-1.5 rounded-md disabled:opacity-50"
+            >
+              Reject
+            </button>
+          </div>
         )}
         {editing && (
           <div className="flex gap-2">
@@ -224,6 +245,9 @@ export default function CmTrophyApplicationDetailPage({ params }: { params: Prom
 
       {updateRegistration.isError && (
         <p className="text-red-500 text-sm mb-4">{(updateRegistration.error as Error).message}</p>
+      )}
+      {updateStatus.isError && (
+        <p className="text-red-500 text-sm mb-4">{(updateStatus.error as Error).message}</p>
       )}
 
       {isLoading ? (
@@ -362,6 +386,9 @@ export default function CmTrophyApplicationDetailPage({ params }: { params: Prom
 
             <Field label="Events" value={(r.selectedEvents || []).join(', ')} />
             <Field label="Status" value={r.status?.toLowerCase()} />
+            {r.status === 'REJECTED' && r.rejectionReason && (
+              <Field label="Rejection Reason" value={r.rejectionReason} />
+            )}
             <Field
               label="Applied On"
               value={r.createdAt ? new Date(r.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : null}
@@ -379,6 +406,19 @@ export default function CmTrophyApplicationDetailPage({ params }: { params: Prom
             </div>
           </div>
         </div>
+      )}
+
+      {showRejectModal && (
+        <RejectReasonModal
+          isSubmitting={updateStatus.isPending}
+          onCancel={() => setShowRejectModal(false)}
+          onConfirm={(reason) =>
+            updateStatus.mutate(
+              { id, status: 'REJECTED', rejectionReason: reason },
+              { onSuccess: () => setShowRejectModal(false) }
+            )
+          }
+        />
       )}
     </div>
   );

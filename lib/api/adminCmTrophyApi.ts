@@ -36,6 +36,7 @@ export interface AdminKhelMahakumbhRegistration {
   selectedEvents: string[];
   photoUrl: string;
   status: RegistrationStatus;
+  rejectionReason: string | null;
   createdAt: string;
   aadharNumber: string;
   fathersName: string;
@@ -300,6 +301,16 @@ export const adminCmTrophyApi = {
 
   updateRegistration: (id: string, data: Record<string, unknown>): Promise<{ success: boolean; data: AdminKhelMahakumbhRegistration }> =>
     adminFetch(`cm-trophy/registrations/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+
+  updateRegistrationStatus: (
+    id: string,
+    status: string,
+    rejectionReason?: string | null
+  ): Promise<{ success: boolean; data: AdminKhelMahakumbhRegistration }> =>
+    adminFetch(`cm-trophy/registrations/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status, rejectionReason }),
+    }),
 
   listAttendance: (params: CmTrophyAttendanceListParams = {}): Promise<{ success: boolean; total: number; page: number; limit: number; data: AttendanceRow[] }> => {
     const qs = new URLSearchParams();
