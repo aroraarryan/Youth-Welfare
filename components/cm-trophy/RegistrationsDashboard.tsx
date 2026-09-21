@@ -585,7 +585,7 @@ export default function RegistrationsDashboard({
                 {rows.map((r, idx) => (
                   <tr key={r.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-4 py-3 text-gray-600">{(page - 1) * limit + idx + 1}</td>
-                    <td className="px-4 py-3 text-gray-400">—</td>
+                    <td className="px-4 py-3 text-gray-600">{r.rejectionReason || '—'}</td>
                     <td className="px-4 py-3">
                       {r.photoUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element

@@ -38,6 +38,18 @@ export function useUpdateRegistration() {
   });
 }
 
+export function useUpdateRegistrationStatus() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, status, rejectionReason }: { id: string; status: string; rejectionReason?: string | null }) =>
+      adminCmTrophyApi.updateRegistrationStatus(id, status, rejectionReason),
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'cmTrophy', 'detail', id] });
+      queryClient.invalidateQueries({ queryKey: ['admin', 'cmTrophy', 'list'] });
+    },
+  });
+}
+
 export function useAdminCmTrophyStats() {
   return useQuery({
     queryKey: ['admin', 'cmTrophy', 'stats'],
