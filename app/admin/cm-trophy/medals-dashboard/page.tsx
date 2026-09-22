@@ -5,6 +5,7 @@ import { useDistricts } from '@/hooks/useInfrastructure';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, CmTrophyMedal, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
+import { Gender } from '@/lib/api/registrations';
 import { useMedals, useDeleteMedal, useUpdateMedal } from '@/hooks/useAdminCmTrophy';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 import { adminCmTrophyApi, CreateMedalInput, MedalRecord } from '@/lib/api/adminCmTrophyApi';
@@ -13,6 +14,13 @@ import * as XLSX from 'xlsx';
 const LEVELS: CmTrophyMedalLevel[] = ['DISTRICT', 'NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD'];
 const MEDALS: CmTrophyMedal[] = ['GOLD', 'SILVER', 'BRONZE'];
 const AGE_CATEGORIES: CmTrophyAgeCategory[] = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
+const GENDERS: Gender[] = ['MALE', 'FEMALE', 'OTHER', 'PREFER_NOT_TO_SAY'];
+const GENDER_LABEL: Record<Gender, string> = {
+  MALE: 'Male',
+  FEMALE: 'Female',
+  OTHER: 'Other',
+  PREFER_NOT_TO_SAY: 'Prefer not to say',
+};
 const selectClass = 'border border-gray-300 rounded-md px-3 py-1.5 text-sm bg-white min-w-[160px] disabled:opacity-50';
 
 export default function AdminMedalDashboardPage() {
@@ -390,6 +398,7 @@ export default function AdminMedalDashboardPage() {
 
 function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () => void }) {
   const [medal, setMedal] = useState<CmTrophyMedal>(record.medal);
+  const [gender, setGender] = useState<Gender | ''>(record.gender ?? '');
   const [event, setEvent] = useState(record.event ?? '');
   const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | ''>(record.ageCategory ?? '');
   const [level, setLevel] = useState<CmTrophyMedalLevel>(record.level);
@@ -428,6 +437,7 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
       sportId: record.sportId,
       medal,
       level,
+      gender: gender || undefined,
       event: event.trim() || undefined,
       ageCategory: ageCategory || undefined,
       districtId: level === 'DISTRICT' ? districtId : undefined,
@@ -468,6 +478,14 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
               placeholder="—"
             />
           </div>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+          <select className={selectClass} value={gender} onChange={(e) => setGender(e.target.value as Gender)}>
+            <option value="">—</option>
+            {GENDERS.map((g) => <option key={g} value={g}>{GENDER_LABEL[g]}</option>)}
+          </select>
         </div>
 
         <div className="mb-4">
