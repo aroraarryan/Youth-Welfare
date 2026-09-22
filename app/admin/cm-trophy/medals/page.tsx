@@ -24,6 +24,7 @@ const inputClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm w-full d
 export default function AdminAddMedalPage() {
   const [applicationCode, setApplicationCode] = useState('');
   const [lookupStatus, setLookupStatus] = useState<'idle' | 'checking' | 'found' | 'not_found'>('idle');
+  const [lookupError, setLookupError] = useState('Application code not found. Cannot add medal.');
   const [registration, setRegistration] = useState<RegistrationLookupResult | null>(null);
   const [name, setName] = useState('');
   const [fathersName, setFathersName] = useState('');
@@ -75,8 +76,9 @@ export default function AdminAddMedalPage() {
       setEvent(res.data.selectedEvents?.[0] ?? '');
       setAgeCategory(res.data.ageCategory ?? '');
       setLookupStatus('found');
-    } catch {
+    } catch (e) {
       setRegistration(null);
+      setLookupError(e instanceof Error ? e.message : 'Application code not found. Cannot add medal.');
       setLookupStatus('not_found');
     }
   }, []);
@@ -201,7 +203,7 @@ export default function AdminAddMedalPage() {
             <p className="text-xs text-green-600 mt-1"><i className="fas fa-check-circle mr-1" />Found: {registration.fullName}</p>
           )}
           {lookupStatus === 'not_found' && (
-            <p className="text-xs text-red-500 mt-1"><i className="fas fa-times-circle mr-1" />Application code not found. Cannot add medal.</p>
+            <p className="text-xs text-red-500 mt-1"><i className="fas fa-times-circle mr-1" />{lookupError}</p>
           )}
         </div>
 
