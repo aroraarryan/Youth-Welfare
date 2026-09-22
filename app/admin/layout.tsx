@@ -101,13 +101,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
             CM Trophy
           </p>
-          {navLink("/admin/cm-trophy", "Registrations", true, ["/admin/cm-trophy/leaderboard", "/admin/cm-trophy/grievance", "/admin/cm-trophy/medals", "/admin/cm-trophy/medals-dashboard", "/admin/cm-trophy/attendance", "/admin/cm-trophy/fixtures"])}
+          {navLink("/admin/cm-trophy", "Registrations", true, ["/admin/cm-trophy/leaderboard", "/admin/cm-trophy/grievance", "/admin/cm-trophy/medals", "/admin/cm-trophy/medals-dashboard", "/admin/cm-trophy/attendance", "/admin/cm-trophy/fixtures", "/admin/cm-trophy/media"])}
           {navLink("/admin/cm-trophy/leaderboard", "Leaderboard", true)}
           {navLink("/admin/cm-trophy/medals", "Add Medal", true)}
           {navLink("/admin/cm-trophy/medals-dashboard", "Medal Dashboard", true)}
           {navLink("/admin/cm-trophy/attendance", "Attendance", true)}
           {navLink("/admin/cm-trophy/fixtures", "Fixtures", true)}
           {navLink("/admin/cm-trophy/grievance", "Grievances", true)}
+          {navLink("/admin/cm-trophy/media", "Media", true)}
 
           {/* Content Management */}
           {!isCmTrophyOnly && (
