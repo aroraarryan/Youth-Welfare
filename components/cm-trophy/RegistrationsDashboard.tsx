@@ -85,6 +85,9 @@ export interface RegistrationsDashboardProps {
   accent?: DashboardAccent;
   /** Block officers: their linked Vidhan Sabha name(s), shown as badges under the subtitle. */
   vidhanSabhaBadges?: string[];
+  // Adds bank columns to the CSV export (admin accounts allowed them; the server only
+  // returns the fields to those accounts anyway).
+  showBankColumns?: boolean;
 }
 
 const AGE_CATEGORIES = [
@@ -136,11 +139,13 @@ const CSV_HEADERS = [
   'Sport', 'Events', 'Age Category', 'Registration Level', 'Sansad',
   'Vidhan Sabha', 'Nyay Panchayat', 'District', 'Block',
 ];
+// Only for accounts the server returns bank fields to (showBankColumns).
+const BANK_CSV_HEADERS = ['Bank Name', 'Account Holder Name', 'Account Number', 'IFSC Code'];
 
 const csvCell = (v: unknown) => `"${String(v).replace(/"/g, '""')}"`;
 
 // One export batch -> CSV text. `offset` keeps Sr No running across batches.
-function exportRowsToCsv(rows: AdminKhelMahakumbhExportRow[], offset: number): string {
+function exportRowsToCsv(rows: AdminKhelMahakumbhExportRow[], offset: number, withBank = false): string {
   return rows
     .map((r, i) => [
     offset + i + 1,
@@ -159,6 +164,7 @@ function exportRowsToCsv(rows: AdminKhelMahakumbhExportRow[], offset: number): s
     r.nyayPanchayat?.name ?? '',
     r.district?.name ?? '',
     r.block?.name ?? '',
+    ...(withBank ? [r.bankName ?? '', r.accountHolderName ?? '', r.accountNumber ?? '', r.ifscCode ?? ''] : []),
     ].map(csvCell).join(','))
     .join('\n');
 }
@@ -202,6 +208,7 @@ export default function RegistrationsDashboard({
   showSansadVidhanSabhaFilters = true,
   officerVidhanSabhaOptions = [],
   vidhanSabhaBadges,
+  showBankColumns = false,
   accent = 'admin',
 }: RegistrationsDashboardProps) {
   const a = ACCENTS[accent];
@@ -293,12 +300,13 @@ export default function RegistrationsDashboard({
     setExportError('');
     setExporting({ done: 0 });
     try {
-      const parts: string[] = ['﻿' + CSV_HEADERS.map(csvCell).join(',') + '\n'];
+      const headers = showBankColumns ? [...CSV_HEADERS, ...BANK_CSV_HEADERS] : CSV_HEADERS;
+      const parts: string[] = ['﻿' + headers.map(csvCell).join(',') + '\n'];
       let cursor: string | null = null;
       let done = 0;
       do {
         const res = await exportBatch(filters, cursor);
-        if (res.data.length > 0) parts.push(exportRowsToCsv(res.data, done) + '\n');
+        if (res.data.length > 0) parts.push(exportRowsToCsv(res.data, done, showBankColumns) + '\n');
         done += res.data.length;
         cursor = res.nextCursor;
         setExporting({ done });

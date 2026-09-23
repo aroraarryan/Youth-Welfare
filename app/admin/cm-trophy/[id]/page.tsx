@@ -2,7 +2,7 @@
 
 import { use, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useAdminCmTrophyDetail, useUpdateRegistration, useUpdateRegistrationStatus } from '@/hooks/useAdminCmTrophy';
+import { useAdminCmTrophyDetail, useUpdateRegistration, useUpdateRegistrationStatus, useAdminPermissions } from '@/hooks/useAdminCmTrophy';
 import { RejectReasonModal } from '@/components/cm-trophy/RejectReasonModal';
 import { useDistricts, useBlocks } from '@/hooks/useInfrastructure';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
@@ -89,6 +89,7 @@ export default function CmTrophyApplicationDetailPage({ params }: { params: Prom
     fetch('/api/admin/me').then((res) => res.json()).then((d) => setUsername(d?.admin?.username ?? '')).catch(() => {});
   }, []);
   const canEdit = username === 'superadmin';
+  const { canChangeStatus } = useAdminPermissions();
 
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState<FormState | null>(null);
@@ -207,20 +208,24 @@ export default function CmTrophyApplicationDetailPage({ params }: { params: Prom
                 <i className="fas fa-pen mr-2" />Edit
               </button>
             )}
-            <button
-              onClick={() => updateStatus.mutate({ id, status: 'APPROVED' })}
-              disabled={updateStatus.isPending}
-              className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-1.5 rounded-md disabled:opacity-50"
-            >
-              Approve
-            </button>
-            <button
-              onClick={() => setShowRejectModal(true)}
-              disabled={updateStatus.isPending}
-              className="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-1.5 rounded-md disabled:opacity-50"
-            >
-              Reject
-            </button>
+            {canChangeStatus && (
+              <>
+                <button
+                  onClick={() => updateStatus.mutate({ id, status: 'APPROVED' })}
+                  disabled={updateStatus.isPending}
+                  className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-1.5 rounded-md disabled:opacity-50"
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={() => setShowRejectModal(true)}
+                  disabled={updateStatus.isPending}
+                  className="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-1.5 rounded-md disabled:opacity-50"
+                >
+                  Reject
+                </button>
+              </>
+            )}
           </div>
         )}
         {editing && (

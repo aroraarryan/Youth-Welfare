@@ -11,6 +11,21 @@ import {
   MedalListParams,
 } from '@/lib/api/adminCmTrophyApi';
 
+// Per-account flags from GET /admin/me (backend utils/adminPermissions.js). UI hints only —
+// the server enforces them. Defaults are the least-privileged view until loaded.
+export interface AdminPermissions {
+  canChangeStatus: boolean;
+  canExportBankDetails: boolean;
+}
+export function useAdminPermissions(): AdminPermissions {
+  const { data } = useQuery({
+    queryKey: ['admin', 'me', 'permissions'],
+    queryFn: () => fetch('/api/admin/me').then((r) => r.json()),
+    staleTime: 5 * 60_000,
+  });
+  return data?.permissions ?? { canChangeStatus: false, canExportBankDetails: false };
+}
+
 export function useAdminCmTrophyList(filters: CmTrophyListParams) {
   return useQuery({
     queryKey: ['admin', 'cmTrophy', 'list', filters],

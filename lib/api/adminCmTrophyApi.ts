@@ -58,7 +58,16 @@ export interface AdminKhelMahakumbhRegistration {
   sport: { id: string; name: string; slug: string } | null;
 }
 
-export interface AdminKhelMahakumbhExportRow {
+// Only present in export/medal rows for accounts allowed bank details (server-decided;
+// see backend utils/adminPermissions.js).
+export interface BankDetails {
+  bankName?: string | null;
+  accountHolderName?: string | null;
+  accountNumber?: string | null;
+  ifscCode?: string | null;
+}
+
+export interface AdminKhelMahakumbhExportRow extends BankDetails {
   id: string;
   registrationNo: string;
   fullName: string;
@@ -155,7 +164,7 @@ export interface CreateMedalInput {
   nyayPanchayatId?: string;
 }
 
-export interface MedalRecord {
+export interface MedalRecord extends BankDetails {
   id: string;
   applicationCode: string;
   name: string;
