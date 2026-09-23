@@ -423,7 +423,7 @@ export default function AdminAddMedalPage() {
           Expected columns: <span className="font-mono">Application Code, Sport, Medal, Level, District/Sansad/Vidhan Sabha/Nyay Panchayat, Gender, Event, Age Category, Team</span>{' '}
           (fill the one geo column matching Level; Gender, Event and Age Category optional — blank falls back to the registration). Application codes that don&apos;t match an existing registration are rejected, not uploaded.
           <br />
-          <span className="font-mono">Team</span> (optional): give every player of one team the same value (e.g. <span className="font-mono">Cricket-DDN-U19</span>) — they get the medal but it counts as 1. Leave blank for individual medals.
+          <span className="font-mono">Team</span>: give every player of one team the same value (e.g. <span className="font-mono">Cricket-DDN-U19</span>) — they get the medal but it counts as 1. <b>Required</b> for team sports and Doubles / Relay / Pair events (rows without it are rejected); leave blank for individual medals.
         </p>
 
         {bulkResult && (

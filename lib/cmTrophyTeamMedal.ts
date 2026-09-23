@@ -42,6 +42,7 @@ export function teamLabel(r: {
 }
 
 // Sports where every medal is a team medal (slugs from the sports table).
+// Keep in sync with backend src/utils/teamMedal.js (enforces the Team column in bulk upload).
 const TEAM_SPORT_SLUGS = new Set([
   'cricket', 'football', 'hockey', 'kabaddi', 'kho_kho', 'volleyball', 'basketball', 'handball',
   'netball', 'baseball', 'tug_of_war', 'pitthu', 'goli_block', 'rowing', 'lawn_tennis', 'tennis',
