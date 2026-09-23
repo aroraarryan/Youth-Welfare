@@ -34,6 +34,8 @@ export default function AdminMedalDashboardPage() {
   const [nyayPanchayatId, setNyayPanchayatId] = useState('');
   const [event, setEvent] = useState('');
   const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | ''>('');
+  // '' = all; 'team' = only team medals (Doubles, Cricket …); 'individual' = the rest.
+  const [medalType, setMedalType] = useState<'' | 'team' | 'individual'>('');
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [page, setPage] = useState(1);
@@ -85,6 +87,7 @@ export default function AdminMedalDashboardPage() {
     nyayPanchayatId: nyayPanchayatId || undefined,
     event: event || undefined,
     ageCategory: ageCategory || undefined,
+    medalType: medalType || undefined,
     search: search || undefined,
     page,
     limit: 50,
@@ -125,6 +128,7 @@ export default function AdminMedalDashboardPage() {
     nyayPanchayatId: nyayPanchayatId || undefined,
     event: event || undefined,
     ageCategory: ageCategory || undefined,
+    medalType: medalType || undefined,
     search: search || undefined,
   };
 
@@ -233,6 +237,12 @@ export default function AdminMedalDashboardPage() {
         <select className={selectClass} value={ageCategory} onChange={(e) => { setAgeCategory(e.target.value as CmTrophyAgeCategory | ''); setPage(1); }}>
           <option value="">All Age Categories</option>
           {AGE_CATEGORIES.map((c) => <option key={c} value={c}>{CM_TROPHY_AGE_CATEGORY_LABELS[c]}</option>)}
+        </select>
+
+        <select className={selectClass} value={medalType} onChange={(e) => { setMedalType(e.target.value as '' | 'team' | 'individual'); setPage(1); }}>
+          <option value="">All Medal Types</option>
+          <option value="team">Team medals only</option>
+          <option value="individual">Individual medals only</option>
         </select>
 
         {level === 'DISTRICT' && (

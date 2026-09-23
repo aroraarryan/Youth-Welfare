@@ -198,6 +198,7 @@ export interface MedalListParams {
   event?: string;
   ageCategory?: CmTrophyAgeCategory;
   search?: string;
+  medalType?: 'team' | 'individual';
   page?: number;
   limit?: number;
 }
