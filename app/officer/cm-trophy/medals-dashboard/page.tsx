@@ -34,6 +34,8 @@ const sortRows = (rows: MedalRecord[]) =>
 
 export default function OfficerMedalDashboardPage() {
   const [isDistrictOfficer, setIsDistrictOfficer] = useState<boolean | null>(null);
+  // Block officer who is nodal in-charge of a Vidhan Sabha: also sees that seat's Vidhan Sabha-level medals.
+  const [isNodal, setIsNodal] = useState(false);
   const [sportId, setSportId] = useState('');
   const [level, setLevel] = useState<OfficerMedalLevel | ''>('');
   const [medal, setMedal] = useState<CmTrophyMedal | ''>('');
@@ -46,7 +48,10 @@ export default function OfficerMedalDashboardPage() {
   const [sports, setSports] = useState<Sport[]>([]);
 
   useEffect(() => {
-    officerApi.me().then((res) => setIsDistrictOfficer(res.officer.role === 'DO_PRD')).catch(() => setIsDistrictOfficer(false));
+    officerApi.me().then((res) => {
+      setIsDistrictOfficer(res.officer.role === 'DO_PRD');
+      setIsNodal(res.officer.role === 'BO_PRD' && (res.officer.nodalVidhanSabhas?.length ?? 0) > 0);
+    }).catch(() => setIsDistrictOfficer(false));
     sportsApi.list().then((res) => setSports(res.data)).catch(() => {});
   }, []);
 
@@ -136,7 +141,11 @@ export default function OfficerMedalDashboardPage() {
         </button>
       </div>
       <p className="text-sm text-gray-500 mb-6">
-        {isDistrictOfficer ? 'Medal records for players from your district, all levels.' : 'Nyay Panchayat-level medal records only.'}
+        {isDistrictOfficer
+          ? 'Medal records for players from your district, all levels.'
+          : isNodal
+            ? 'Nyay Panchayat-level medal records, plus Vidhan Sabha-level records for your nodal Vidhan Sabha.'
+            : 'Nyay Panchayat-level medal records only.'}
       </p>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -153,10 +162,10 @@ export default function OfficerMedalDashboardPage() {
           {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
         </select>
 
-        {isDistrictOfficer && (
+        {(isDistrictOfficer || isNodal) && (
           <select className={selectClass} value={level} onChange={(e) => { setLevel(e.target.value as OfficerMedalLevel | ''); setEvent(''); setPage(1); }}>
             <option value="">All Levels</option>
-            {LEVELS.map((l) => <option key={l} value={l}>{LEVEL_LABEL[l]}</option>)}
+            {(isDistrictOfficer ? LEVELS : LEVELS.filter((l) => l !== 'SANSAD')).map((l) => <option key={l} value={l}>{LEVEL_LABEL[l]}</option>)}
           </select>
         )}
 

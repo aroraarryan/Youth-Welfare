@@ -54,7 +54,8 @@ export interface CreateOfficerMedalInput {
   name?: string;
   fathersName?: string;
   email?: string;
-  // Block officers: nyayPanchayatId only. District officers: `level` + the matching id.
+  // Block officers: nyayPanchayatId, or level VIDHAN_SABHA + vidhanSabhaId for a nodal seat.
+  // District officers: `level` + the matching id.
   level?: OfficerMedalLevel;
   nyayPanchayatId?: string;
   vidhanSabhaId?: string;

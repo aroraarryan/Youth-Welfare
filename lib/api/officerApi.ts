@@ -63,9 +63,13 @@ export interface OfficerProfile {
   blockId: string | null;
   districtId?: string | null;
   // BO_PRD only: every Vidhan Sabha linked to their block via the
-  // block_vidhan_sabhas crosswalk (a block can serve 2+). Empty/absent for
-  // DO_PRD and for the admin's local SUPER_ADMIN mock profile.
+  // block_vidhan_sabhas crosswalk (a block can serve 2+) plus every seat the
+  // block is nodal in-charge of. Empty/absent for DO_PRD and for the admin's
+  // local SUPER_ADMIN mock profile.
   vidhanSabhas?: { id: string; name: string }[];
+  // BO_PRD only: seats this block is nodal in-charge of — unlocks
+  // Vidhan Sabha-level medals for exactly these.
+  nodalVidhanSabhas?: { id: string; name: string; nodalOfficerName: string | null }[];
   phone: string | null;
   profilePhotoUrl: string | null;
   viName: string | null;
