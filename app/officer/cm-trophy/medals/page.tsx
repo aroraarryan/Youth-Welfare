@@ -6,6 +6,8 @@ import SearchableSelect from '@/components/ui/SearchableSelect';
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { officerCmTrophyApi, CmTrophyMedal, RegistrationLookupResult, OfficerMedalLevel, LEVEL_LABEL } from '@/lib/api/officerCmTrophyApi';
 import { officerApi } from '@/lib/api/officerApi';
+import { isTeamMedal, TeamMedalError } from '@/lib/cmTrophyTeamMedal';
+import TeamPlayersField, { TeamPlayer } from '@/components/cm-trophy/TeamPlayersField';
 import { Gender } from '@/lib/api/registrations';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 
@@ -23,6 +25,10 @@ const selectClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm bg-whit
 const inputClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm w-full disabled:opacity-50 disabled:bg-gray-50';
 
 export default function OfficerCmTrophyPage() {
+  // Extra players when the looked-up player's sport/event is a team one (isTeamMedal):
+  // saved as one team medal — every player gets a record, the tally counts it once.
+  const [teamPlayers, setTeamPlayers] = useState<TeamPlayer[]>([]);
+  const [teamErrors, setTeamErrors] = useState<TeamMedalError[]>([]);
   const [applicationCode, setApplicationCode] = useState('');
   const [lookupStatus, setLookupStatus] = useState<'idle' | 'checking' | 'found' | 'not_found'>('idle');
   const [lookupError, setLookupError] = useState('Application code not found. Cannot add medal.');
@@ -108,11 +114,61 @@ export default function OfficerCmTrophyPage() {
   const geoComplete = isDistrictOfficer
     ? !!sansadId && (!showVidhanSabha || !!vidhanSabhaId) && (!showNyayPanchayat || !!nyayPanchayatId)
     : level === 'VIDHAN_SABHA' ? !!vidhanSabhaId : !!nyayPanchayatId;
-  const canSubmit = lookupStatus === 'found' && !!sportId && !!medal && geoComplete && !submitting;
+  const isTeam = lookupStatus === 'found' && isTeamMedal(sports.find((s) => s.id === sportId)?.slug, event);
+  const canSubmit =
+    lookupStatus === 'found' && !!sportId && !!medal && geoComplete && !submitting && (!isTeam || teamPlayers.length >= 1);
+
+  // Block officers send nyayPanchayatId (level defaults server-side), or a nodal
+  // in-charge's Vidhan Sabha level + seat; district officers send the chosen
+  // level plus the id that level needs.
+  const geoPayload = isDistrictOfficer
+    ? {
+        level,
+        ...(level === 'NYAY_PANCHAYAT' && { nyayPanchayatId }),
+        ...(level === 'VIDHAN_SABHA' && { vidhanSabhaId }),
+        ...(level === 'SANSAD' && { sansadId }),
+      }
+    : level === 'VIDHAN_SABHA'
+      ? { level, vidhanSabhaId }
+      : { nyayPanchayatId };
+
+  const handleTeamSubmit = async () => {
+    if (!registration) return;
+    setMessage(null);
+    setTeamErrors([]);
+    setSubmitting(true);
+    try {
+      const res = await officerCmTrophyApi.createTeamMedal({
+        applicationCodes: [registration.registrationNo, ...teamPlayers.map((p) => p.code)],
+        sportId,
+        gender,
+        event: event.trim() || undefined,
+        ageCategory: ageCategory || undefined,
+        medal: medal as CmTrophyMedal,
+        ...geoPayload,
+      });
+      setMessage({ type: 'success', text: `Team medal added for ${res.data.inserted} players (counts as 1 medal).` });
+      setTeamPlayers([]);
+      setApplicationCode('');
+      setLookupStatus('idle');
+      setRegistration(null);
+      setSportId('');
+      setEvent('');
+      setAgeCategory('');
+      setMedal('');
+    } catch (err) {
+      setTeamErrors((err as { details?: TeamMedalError[] }).details ?? []);
+      setMessage({ type: 'error', text: (err as Error).message ?? 'Failed to add team medal.' });
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canSubmit || !registration) return;
+    if (!canSubmit) return;
+    if (isTeam) return handleTeamSubmit();
+    if (!registration) return;
     setMessage(null);
     setSubmitting(true);
     try {
@@ -126,19 +182,7 @@ export default function OfficerCmTrophyPage() {
         name,
         fathersName,
         email: email || undefined,
-        // Block officers send nyayPanchayatId (level defaults server-side), or a nodal
-        // in-charge's Vidhan Sabha level + seat; district officers send the chosen
-        // level plus the id that level needs.
-        ...(isDistrictOfficer
-          ? {
-              level,
-              ...(level === 'NYAY_PANCHAYAT' && { nyayPanchayatId }),
-              ...(level === 'VIDHAN_SABHA' && { vidhanSabhaId }),
-              ...(level === 'SANSAD' && { sansadId }),
-            }
-          : level === 'VIDHAN_SABHA'
-            ? { level, vidhanSabhaId }
-            : { nyayPanchayatId }),
+        ...geoPayload,
       });
       setMessage({ type: 'success', text: 'Medal record added.' });
       setApplicationCode('');
@@ -203,7 +247,7 @@ export default function OfficerCmTrophyPage() {
           <input
             className={inputClass}
             value={applicationCode}
-            onChange={(e) => { setApplicationCode(e.target.value); setLookupStatus('idle'); }}
+            onChange={(e) => { setApplicationCode(e.target.value); setLookupStatus('idle'); setTeamPlayers([]); setTeamErrors([]); }}
             onBlur={() => runLookup(applicationCode)}
             placeholder="CMT-XXXXXXXX"
           />
@@ -219,17 +263,29 @@ export default function OfficerCmTrophyPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} disabled={lookupStatus !== 'found'} />
+            <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} disabled={lookupStatus !== 'found' || isTeam} />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Father&apos;s Name</label>
-            <input className={inputClass} value={fathersName} onChange={(e) => setFathersName(e.target.value)} disabled={lookupStatus !== 'found'} />
+            <input className={inputClass} value={fathersName} onChange={(e) => setFathersName(e.target.value)} disabled={lookupStatus !== 'found' || isTeam} />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input className={inputClass} value={email} onChange={(e) => setEmail(e.target.value)} disabled={lookupStatus !== 'found'} />
+            <input className={inputClass} value={email} onChange={(e) => setEmail(e.target.value)} disabled={lookupStatus !== 'found' || isTeam} />
           </div>
         </div>
+        {isTeam && <p className="text-xs text-gray-400 -mt-3">Team medal: each player&apos;s name and details come from their own registration.</p>}
+
+        {isTeam && registration && (
+          <TeamPlayersField
+            firstPlayer={registration}
+            players={teamPlayers}
+            setPlayers={(p) => { setTeamPlayers(p); setTeamErrors([]); }}
+            lookup={officerCmTrophyApi.lookupRegistrationByCode}
+            serverErrors={teamErrors}
+            inputClass={inputClass}
+          />
+        )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -261,7 +317,7 @@ export default function OfficerCmTrophyPage() {
               <select
                 className={selectClass}
                 value={event}
-                onChange={(e) => setEvent(e.target.value)}
+                onChange={(e) => { setEvent(e.target.value); setTeamPlayers([]); setTeamErrors([]); }}
                 disabled={lookupStatus !== 'found' || registrationEvents.length === 1}
               >
                 {registrationEvents.map((ev) => <option key={ev} value={ev}>{ev}</option>)}
@@ -378,7 +434,7 @@ export default function OfficerCmTrophyPage() {
           disabled={!canSubmit}
           className="text-sm font-semibold bg-[#1e3a8a] text-white px-5 py-2.5 rounded-lg hover:bg-[#1e2f6b] disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          {submitting ? 'Adding…' : 'Add Medal'}
+          {submitting ? 'Adding…' : isTeam ? `Add Team Medal (${teamPlayers.length + 1} players)` : 'Add Medal'}
         </button>
       </form>
     </div>

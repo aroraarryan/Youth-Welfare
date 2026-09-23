@@ -6,7 +6,9 @@ import { useDistricts } from '@/hooks/useInfrastructure';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { adminCmTrophyApi, CmTrophyMedal, CmTrophyMedalLevel, MedalBulkRow, MEDAL_LEVEL_LABEL, RegistrationLookupResult } from '@/lib/api/adminCmTrophyApi';
-import { useCreateMedal, useBulkCreateMedals } from '@/hooks/useAdminCmTrophy';
+import { useCreateMedal, useBulkCreateMedals, useCreateTeamMedal } from '@/hooks/useAdminCmTrophy';
+import { isTeamMedal, TeamMedalError } from '@/lib/cmTrophyTeamMedal';
+import TeamPlayersField, { TeamPlayer } from '@/components/cm-trophy/TeamPlayersField';
 import { Gender } from '@/lib/api/registrations';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 
@@ -22,6 +24,10 @@ const selectClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm bg-whit
 const inputClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm w-full disabled:opacity-50 disabled:bg-gray-50';
 
 export default function AdminAddMedalPage() {
+  // Extra players when the looked-up player's sport/event is a team one (isTeamMedal):
+  // saved as one team medal — every player gets a record, the tally counts it once.
+  const [teamPlayers, setTeamPlayers] = useState<TeamPlayer[]>([]);
+  const [teamErrors, setTeamErrors] = useState<TeamMedalError[]>([]);
   const [applicationCode, setApplicationCode] = useState('');
   const [lookupStatus, setLookupStatus] = useState<'idle' | 'checking' | 'found' | 'not_found'>('idle');
   const [lookupError, setLookupError] = useState('Application code not found. Cannot add medal.');
@@ -49,6 +55,7 @@ export default function AdminAddMedalPage() {
 
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const createMutation = useCreateMedal();
+  const createTeamMutation = useCreateTeamMedal();
   const bulkMutation = useBulkCreateMedals();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [bulkResult, setBulkResult] = useState<{ inserted: number; rejected: { row: number; applicationCode?: string; reason: string }[] } | null>(null);
@@ -100,11 +107,48 @@ export default function AdminAddMedalPage() {
     level === 'NYAY_PANCHAYAT' ? !!nyayPanchayatId :
     false;
 
-  const canSubmit = lookupStatus === 'found' && !!sportId && !!medal && geoSelected && !createMutation.isPending;
+  const isTeam = lookupStatus === 'found' && isTeamMedal(sports.find((s) => s.id === sportId)?.slug, event);
+  const canSubmit =
+    lookupStatus === 'found' && !!sportId && !!medal && geoSelected &&
+    (isTeam ? teamPlayers.length >= 1 && !createTeamMutation.isPending : !createMutation.isPending);
+
+  const handleTeamSubmit = async () => {
+    setMessage(null);
+    setTeamErrors([]);
+    try {
+      if (!registration) return;
+      const res = await createTeamMutation.mutateAsync({
+        applicationCodes: [registration.registrationNo, ...teamPlayers.map((p) => p.code)],
+        sportId,
+        medal: medal as CmTrophyMedal,
+        level: level as CmTrophyMedalLevel,
+        gender,
+        event: event.trim() || undefined,
+        ageCategory: ageCategory || undefined,
+        districtId: level === 'DISTRICT' ? districtId : undefined,
+        sansadId: level === 'SANSAD' ? sansadId : undefined,
+        vidhanSabhaId: level === 'VIDHAN_SABHA' ? vidhanSabhaId : undefined,
+        nyayPanchayatId: level === 'NYAY_PANCHAYAT' ? nyayPanchayatId : undefined,
+      });
+      setMessage({ type: 'success', text: `Team medal added for ${res.data.inserted} players (counts as 1 medal).` });
+      setTeamPlayers([]);
+      setApplicationCode('');
+      setLookupStatus('idle');
+      setRegistration(null);
+      setSportId('');
+      setEvent('');
+      setAgeCategory('');
+    } catch (err) {
+      setTeamErrors((err as { details?: TeamMedalError[] }).details ?? []);
+      setMessage({ type: 'error', text: (err as Error).message ?? 'Failed to add team medal.' });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canSubmit || !registration) return;
+    if (!canSubmit) return;
+    if (isTeam) return handleTeamSubmit();
+    if (!registration) return;
     setMessage(null);
     try {
       await createMutation.mutateAsync({
@@ -160,6 +204,7 @@ export default function AdminAddMedalPage() {
       gender: String(r['Gender'] ?? r['gender'] ?? '').trim(),
       event: String(r['Event'] ?? r['event'] ?? '').trim(),
       ageCategory: String(r['Age Category'] ?? r['ageCategory'] ?? '').trim(),
+      team: String(r['Team'] ?? r['team'] ?? '').trim(),
     }));
 
     try {
@@ -194,7 +239,7 @@ export default function AdminAddMedalPage() {
           <input
             className={inputClass}
             value={applicationCode}
-            onChange={(e) => { setApplicationCode(e.target.value); setLookupStatus('idle'); }}
+            onChange={(e) => { setApplicationCode(e.target.value); setLookupStatus('idle'); setTeamPlayers([]); setTeamErrors([]); }}
             onBlur={() => runLookup(applicationCode)}
             placeholder="CMT-XXXXXXXX"
           />
@@ -210,17 +255,29 @@ export default function AdminAddMedalPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} disabled={lookupStatus !== 'found'} />
+            <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} disabled={lookupStatus !== 'found' || isTeam} />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Father&apos;s Name</label>
-            <input className={inputClass} value={fathersName} onChange={(e) => setFathersName(e.target.value)} disabled={lookupStatus !== 'found'} />
+            <input className={inputClass} value={fathersName} onChange={(e) => setFathersName(e.target.value)} disabled={lookupStatus !== 'found' || isTeam} />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input className={inputClass} value={email} onChange={(e) => setEmail(e.target.value)} disabled={lookupStatus !== 'found'} />
+            <input className={inputClass} value={email} onChange={(e) => setEmail(e.target.value)} disabled={lookupStatus !== 'found' || isTeam} />
           </div>
         </div>
+        {isTeam && <p className="text-xs text-gray-400 -mt-3">Team medal: each player&apos;s name and details come from their own registration.</p>}
+
+        {isTeam && registration && (
+          <TeamPlayersField
+            firstPlayer={registration}
+            players={teamPlayers}
+            setPlayers={(p) => { setTeamPlayers(p); setTeamErrors([]); }}
+            lookup={adminCmTrophyApi.lookupRegistrationByCode}
+            serverErrors={teamErrors}
+            inputClass={inputClass}
+          />
+        )}
 
         {/* Sport, Gender, Event are all derived from the application code — not editable here. */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -253,7 +310,7 @@ export default function AdminAddMedalPage() {
               <select
                 className={selectClass}
                 value={event}
-                onChange={(e) => setEvent(e.target.value)}
+                onChange={(e) => { setEvent(e.target.value); setTeamPlayers([]); setTeamErrors([]); }}
                 disabled={lookupStatus !== 'found' || registrationEvents.length === 1}
               >
                 {registrationEvents.map((ev) => <option key={ev} value={ev}>{ev}</option>)}
@@ -345,7 +402,7 @@ export default function AdminAddMedalPage() {
           disabled={!canSubmit}
           className="text-sm font-semibold bg-[#1e3a8a] text-white px-5 py-2.5 rounded-lg hover:bg-[#1e2f6b] disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          {createMutation.isPending ? 'Adding…' : 'Add Medal'}
+          {createMutation.isPending || createTeamMutation.isPending ? 'Adding…' : isTeam ? `Add Team Medal (${teamPlayers.length + 1} players)` : 'Add Medal'}
         </button>
       </form>
 
@@ -363,8 +420,10 @@ export default function AdminAddMedalPage() {
           </button>
         </div>
         <p className="text-xs text-gray-400">
-          Expected columns: <span className="font-mono">Application Code, Sport, Medal, Level, District/Sansad/Vidhan Sabha/Nyay Panchayat, Gender, Event, Age Category</span>{' '}
+          Expected columns: <span className="font-mono">Application Code, Sport, Medal, Level, District/Sansad/Vidhan Sabha/Nyay Panchayat, Gender, Event, Age Category, Team</span>{' '}
           (fill the one geo column matching Level; Gender, Event and Age Category optional — blank falls back to the registration). Application codes that don&apos;t match an existing registration are rejected, not uploaded.
+          <br />
+          <span className="font-mono">Team</span>: give every player of one team the same value (e.g. <span className="font-mono">Cricket-DDN-U19</span>) — they get the medal but it counts as 1. <b>Required</b> for team sports and Doubles / Relay / Pair events (rows without it are rejected); leave blank for individual medals.
         </p>
 
         {bulkResult && (

@@ -6,6 +6,7 @@
  * geo field at all. Mirrors the relevant slice of lib/api/adminCmTrophyApi.ts.
  */
 
+import { TeamMedalFields, MedalSummary } from '../cmTrophyTeamMedal';
 import { Gender, RegistrationStatus, CmTrophyRegistrationLevel } from './registrations';
 import { CmTrophyAgeCategory } from '../cmTrophyAgeCategory';
 import type { PaginatedResponse } from '../api';
@@ -62,7 +63,7 @@ export interface CreateOfficerMedalInput {
   sansadId?: string;
 }
 
-export interface MedalRecord {
+export interface MedalRecord extends TeamMedalFields {
   id: string;
   applicationCode: string;
   name: string;
@@ -172,7 +173,8 @@ async function officerFetch<T>(path: string, options: RequestInit = {}): Promise
     headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data.error || data.message || 'Request failed');
+  // `details` carries per-item problems (e.g. which application codes blocked a team medal).
+  if (!res.ok) throw Object.assign(new Error(data.error || data.message || 'Request failed'), { details: data.details });
   return data as T;
 }
 
@@ -183,7 +185,11 @@ export const officerCmTrophyApi = {
   createMedal: (data: CreateOfficerMedalInput): Promise<{ success: boolean; data: MedalRecord }> =>
     officerFetch('cm-trophy/medals', { method: 'POST', body: JSON.stringify(data) }),
 
-  listMedals: (params: OfficerMedalListParams = {}): Promise<PaginatedResult<MedalRecord>> =>
+  // Same scope rules as createMedal; every player must pass them. Counts as one medal.
+  createTeamMedal: (data: Omit<CreateOfficerMedalInput, 'applicationCode'> & { applicationCodes: string[] }): Promise<{ success: boolean; data: { teamId: string; inserted: number } }> =>
+    officerFetch('cm-trophy/medals/team', { method: 'POST', body: JSON.stringify(data) }),
+
+  listMedals: (params: OfficerMedalListParams = {}): Promise<PaginatedResult<MedalRecord> & { summary: MedalSummary }> =>
     officerFetch(`cm-trophy/medals${qs(params)}`),
 
   // Block officers only get 'nyay-panchayat'; district officers get all three.

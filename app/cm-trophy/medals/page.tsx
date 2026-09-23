@@ -7,6 +7,7 @@ import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTro
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, CmTrophyMedal, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
 import { usePublicMedals } from '@/hooks/useLeaderboard';
+import { teamLabel } from '@/lib/cmTrophyTeamMedal';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 import { Gender } from '@/lib/api/registrations';
 
@@ -75,17 +76,11 @@ export default function PublicMedalsPage() {
     (a, b) =>
       (a.entityName ?? '').localeCompare(b.entityName ?? '') ||
       MEDAL_RANK[a.medal] - MEDAL_RANK[b.medal] ||
+      (a.teamId ?? '').localeCompare(b.teamId ?? '') ||
       a.name.localeCompare(b.name)
   );
-  const summary = rows.reduce(
-    (acc, r) => {
-      if (r.medal === 'GOLD') acc.gold++;
-      else if (r.medal === 'SILVER') acc.silver++;
-      else acc.bronze++;
-      return acc;
-    },
-    { gold: 0, silver: 0, bronze: 0 }
-  );
+  // Server-side, across all pages, a team counted once.
+  const summary = data?.summary ?? { gold: 0, silver: 0, bronze: 0, total: 0 };
 
   const handleLevelChange = (next: CmTrophyMedalLevel | '') => {
     setLevel(next);
@@ -192,8 +187,8 @@ export default function PublicMedalsPage() {
             <p className="text-2xl font-bold text-gray-900">{summary.bronze}</p>
           </div>
           <div className="bg-white border border-gray-200 rounded-lg px-5 py-3">
-            <p className="text-xs text-gray-400 uppercase tracking-wide">Total (this page)</p>
-            <p className="text-2xl font-bold text-gray-900">{rows.length}</p>
+            <p className="text-xs text-gray-400 uppercase tracking-wide">Total medals</p>
+            <p className="text-2xl font-bold text-gray-900">{summary.total}</p>
           </div>
         </div>
 
@@ -230,7 +225,14 @@ export default function PublicMedalsPage() {
                     rows.map((r) => (
                       <tr key={r.id} className="hover:bg-gray-50">
                         <td className="px-4 py-3 text-gray-900 font-semibold">{MEDAL_RANK[r.medal]}</td>
-                        <td className="px-4 py-3 text-gray-900 font-medium">{r.name}</td>
+                        <td className="px-4 py-3 text-gray-900 font-medium">
+                        {r.name}
+                        {r.teamId && (
+                          <span className="block mt-0.5 w-fit text-[10px] font-semibold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                            {teamLabel(r)} · counts as 1
+                          </span>
+                        )}
+                      </td>
                         <td className="px-4 py-3 text-gray-700">{r.sportName}</td>
                         <td className="px-4 py-3 text-gray-700">{r.gender ? r.gender.charAt(0) + r.gender.slice(1).toLowerCase() : '—'}</td>
                         <td className="px-4 py-3 text-gray-700">{r.event ?? '—'}</td>

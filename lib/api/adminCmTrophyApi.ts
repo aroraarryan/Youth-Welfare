@@ -4,6 +4,7 @@
  * View + export only — no status-changing actions.
  */
 
+import { TeamMedalFields, MedalSummary } from '../cmTrophyTeamMedal';
 import { PaginatedResponse } from '../api';
 import {
   RegistrationStatus,
@@ -18,7 +19,8 @@ async function adminFetch<T>(path: string, options: RequestInit = {}): Promise<T
     headers: { 'Content-Type': 'application/json', ...(options.headers ?? {}) },
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data.error || data.message || 'Request failed');
+  // `details` carries per-item problems (e.g. which application codes blocked a team medal).
+  if (!res.ok) throw Object.assign(new Error(data.error || data.message || 'Request failed'), { details: data.details });
   return data as T;
 }
 
@@ -164,7 +166,7 @@ export interface CreateMedalInput {
   nyayPanchayatId?: string;
 }
 
-export interface MedalRecord extends BankDetails {
+export interface MedalRecord extends BankDetails, TeamMedalFields {
   id: string;
   applicationCode: string;
   name: string;
@@ -223,6 +225,22 @@ export interface MedalBulkRow {
   gender?: string;
   event?: string;
   ageCategory?: string;
+  team?: string; // rows with the same Team value become one team medal
+}
+
+// Team medal: shared fields + the players' application codes (all-or-nothing).
+export interface CreateTeamMedalInput {
+  applicationCodes: string[];
+  sportId: string;
+  medal: CmTrophyMedal;
+  level: CmTrophyMedalLevel;
+  districtId?: string;
+  sansadId?: string;
+  vidhanSabhaId?: string;
+  nyayPanchayatId?: string;
+  event?: string;
+  gender?: Gender;
+  ageCategory?: CmTrophyAgeCategory;
 }
 
 export interface CmTrophyListParams {
@@ -293,7 +311,13 @@ export const adminCmTrophyApi = {
   bulkCreateMedals: (rows: MedalBulkRow[]): Promise<{ success: boolean; inserted: number; rejected: MedalRejectRow[] }> =>
     adminFetch('cm-trophy/medals/bulk', { method: 'POST', body: JSON.stringify(rows) }),
 
-  listMedals: (params: MedalListParams = {}): Promise<{ success: boolean; total: number; page: number; limit: number; data: MedalRecord[] }> => {
+  createTeamMedal: (data: CreateTeamMedalInput): Promise<{ success: boolean; data: { teamId: string; inserted: number } }> =>
+    adminFetch('cm-trophy/medals/team', { method: 'POST', body: JSON.stringify(data) }),
+
+  deleteTeamMedal: (teamId: string): Promise<{ success: boolean; deleted: number }> =>
+    adminFetch(`cm-trophy/medals/team/${teamId}`, { method: 'DELETE' }),
+
+  listMedals: (params: MedalListParams = {}): Promise<{ success: boolean; total: number; page: number; limit: number; data: MedalRecord[]; summary: MedalSummary }> => {
     const qs = new URLSearchParams();
     Object.entries(params).forEach(([k, v]) => {
       if (v !== undefined && v !== '') qs.set(k, String(v));
