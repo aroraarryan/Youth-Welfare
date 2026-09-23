@@ -6,7 +6,7 @@ import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTro
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, CmTrophyMedal, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
 import { Gender } from '@/lib/api/registrations';
-import { useMedals, useDeleteMedal, useUpdateMedal } from '@/hooks/useAdminCmTrophy';
+import { useMedals, useDeleteMedal, useUpdateMedal, useAdminPermissions } from '@/hooks/useAdminCmTrophy';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 import { adminCmTrophyApi, CreateMedalInput, MedalRecord } from '@/lib/api/adminCmTrophyApi';
 import * as XLSX from 'xlsx';
@@ -47,6 +47,7 @@ export default function AdminMedalDashboardPage() {
   }, []);
   const canDelete = username === 'superadmin';
   const canEdit = username === 'superadmin';
+  const { canExportBankDetails } = useAdminPermissions();
 
   const handleDeleteConfirm = () => {
     if (!deleteTarget) return;
@@ -158,6 +159,12 @@ export default function AdminMedalDashboardPage() {
         Level: MEDAL_LEVEL_LABEL[r.level],
         Location: r.entityName ?? '',
         'Application Code': r.applicationCode,
+        ...(canExportBankDetails && {
+          'Bank Name': r.bankName ?? '',
+          'Account Holder Name': r.accountHolderName ?? '',
+          'Account Number': r.accountNumber ?? '',
+          'IFSC Code': r.ifscCode ?? '',
+        }),
       }));
       const ws = XLSX.utils.json_to_sheet(sheetRows);
       const wb = XLSX.utils.book_new();
