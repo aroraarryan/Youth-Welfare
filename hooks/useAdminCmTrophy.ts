@@ -7,6 +7,7 @@ import {
   CmTrophyListParams,
   CmTrophyMedalLevel,
   CreateMedalInput,
+  CreateTeamMedalInput,
   MedalBulkRow,
   MedalListParams,
 } from '@/lib/api/adminCmTrophyApi';
@@ -110,6 +111,22 @@ export function useCreateMedal() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: CreateMedalInput) => adminCmTrophyApi.createMedal(data),
+    onSuccess: () => invalidateMedalQueries(queryClient),
+  });
+}
+
+export function useCreateTeamMedal() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: CreateTeamMedalInput) => adminCmTrophyApi.createTeamMedal(data),
+    onSuccess: () => invalidateMedalQueries(queryClient),
+  });
+}
+
+export function useDeleteTeamMedal() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (teamId: string) => adminCmTrophyApi.deleteTeamMedal(teamId),
     onSuccess: () => invalidateMedalQueries(queryClient),
   });
 }

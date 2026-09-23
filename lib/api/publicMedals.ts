@@ -1,8 +1,9 @@
 import { api } from '../api';
 import { Gender, CmTrophyAgeCategory } from './registrations';
 import { CmTrophyMedalLevel, CmTrophyMedal } from './adminCmTrophyApi';
+import { TeamMedalFields, MedalSummary } from '../cmTrophyTeamMedal';
 
-export interface PublicMedalRecord {
+export interface PublicMedalRecord extends TeamMedalFields {
   id: string;
   name: string;
   sportId: string;
@@ -34,7 +35,7 @@ export interface PublicMedalListParams {
 
 export const publicMedalsApi = {
   list: (params: PublicMedalListParams = {}) =>
-    api.get<{ success: boolean; total: number; page: number; limit: number; data: PublicMedalRecord[] }>(
+    api.get<{ success: boolean; total: number; page: number; limit: number; data: PublicMedalRecord[]; summary: MedalSummary }>(
       '/cm-trophy/medals',
       params as Record<string, string | number | boolean | undefined | null>,
     ),

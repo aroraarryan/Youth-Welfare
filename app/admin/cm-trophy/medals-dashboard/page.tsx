@@ -6,7 +6,8 @@ import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTro
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, CmTrophyMedal, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
 import { Gender } from '@/lib/api/registrations';
-import { useMedals, useDeleteMedal, useUpdateMedal, useAdminPermissions } from '@/hooks/useAdminCmTrophy';
+import { useMedals, useDeleteMedal, useUpdateMedal, useAdminPermissions, useDeleteTeamMedal } from '@/hooks/useAdminCmTrophy';
+import { teamLabel } from '@/lib/cmTrophyTeamMedal';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 import { adminCmTrophyApi, CreateMedalInput, MedalRecord } from '@/lib/api/adminCmTrophyApi';
 import * as XLSX from 'xlsx';
@@ -41,6 +42,7 @@ export default function AdminMedalDashboardPage() {
   const [deleteTarget, setDeleteTarget] = useState<MedalRecord | null>(null);
   const [editTarget, setEditTarget] = useState<MedalRecord | null>(null);
   const deleteMedal = useDeleteMedal();
+  const deleteTeam = useDeleteTeamMedal();
 
   useEffect(() => {
     fetch('/api/admin/me').then((r) => r.json()).then((d) => setUsername(d?.admin?.username ?? '')).catch(() => {});
@@ -52,6 +54,10 @@ export default function AdminMedalDashboardPage() {
   const handleDeleteConfirm = () => {
     if (!deleteTarget) return;
     deleteMedal.mutate(deleteTarget.id, { onSuccess: () => setDeleteTarget(null) });
+  };
+  const handleDeleteTeam = () => {
+    if (!deleteTarget?.teamId) return;
+    deleteTeam.mutate(deleteTarget.teamId, { onSuccess: () => setDeleteTarget(null) });
   };
 
   useEffect(() => {
@@ -103,17 +109,11 @@ export default function AdminMedalDashboardPage() {
     (a, b) =>
       (a.entityName ?? '').localeCompare(b.entityName ?? '') ||
       MEDAL_RANK[a.medal] - MEDAL_RANK[b.medal] ||
+      (a.teamId ?? '').localeCompare(b.teamId ?? '') ||
       a.name.localeCompare(b.name)
   );
-  const summary = rows.reduce(
-    (acc, r) => {
-      if (r.medal === 'GOLD') acc.gold++;
-      else if (r.medal === 'SILVER') acc.silver++;
-      else acc.bronze++;
-      return acc;
-    },
-    { gold: 0, silver: 0, bronze: 0 }
-  );
+  // Server-side, across all pages, a team counted once.
+  const summary = data?.summary ?? { gold: 0, silver: 0, bronze: 0, total: 0 };
 
   const exportFilters = {
     sportId: sportId || undefined,
@@ -146,6 +146,7 @@ export default function AdminMedalDashboardPage() {
         (a, b) =>
           (a.entityName ?? '').localeCompare(b.entityName ?? '') ||
           MEDAL_RANK[a.medal] - MEDAL_RANK[b.medal] ||
+          (a.teamId ?? '').localeCompare(b.teamId ?? '') ||
           a.name.localeCompare(b.name)
       );
       const sheetRows = sorted.map((r) => ({
@@ -159,6 +160,7 @@ export default function AdminMedalDashboardPage() {
         Level: MEDAL_LEVEL_LABEL[r.level],
         Location: r.entityName ?? '',
         'Application Code': r.applicationCode,
+        Team: r.teamId ? teamLabel(r) : '',
         ...(canExportBankDetails && {
           'Bank Name': r.bankName ?? '',
           'Account Holder Name': r.accountHolderName ?? '',
@@ -276,8 +278,8 @@ export default function AdminMedalDashboardPage() {
           <p className="text-2xl font-bold text-gray-900">{summary.bronze}</p>
         </div>
         <div className="bg-white border border-gray-200 rounded-lg px-5 py-3">
-          <p className="text-xs text-gray-400 uppercase tracking-wide">Total (this page)</p>
-          <p className="text-2xl font-bold text-gray-900">{rows.length}</p>
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Total medals</p>
+          <p className="text-2xl font-bold text-gray-900">{summary.total}</p>
         </div>
       </div>
 
@@ -316,7 +318,14 @@ export default function AdminMedalDashboardPage() {
                   rows.map((r) => (
                     <tr key={r.id} className="hover:bg-gray-50">
                       <td className="px-4 py-3 text-gray-900 font-semibold">{MEDAL_RANK[r.medal]}</td>
-                      <td className="px-4 py-3 text-gray-900 font-medium">{r.name}</td>
+                      <td className="px-4 py-3 text-gray-900 font-medium">
+                        {r.name}
+                        {r.teamId && (
+                          <span className="block mt-0.5 w-fit text-[10px] font-semibold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                            {teamLabel(r)} · counts as 1
+                          </span>
+                        )}
+                      </td>
                       <td className="px-4 py-3 text-gray-700">{r.sportName}</td>
                       <td className="px-4 py-3 text-gray-700">{r.gender ? r.gender.charAt(0) + r.gender.slice(1).toLowerCase() : '—'}</td>
                       <td className="px-4 py-3 text-gray-700">{r.event ?? '—'}</td>
@@ -330,7 +339,7 @@ export default function AdminMedalDashboardPage() {
                       {canDelete && (
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-3">
-                            {canEdit && (
+                            {canEdit && !r.teamId && (
                               <button
                                 onClick={() => setEditTarget(r)}
                                 className="text-blue-600 hover:text-blue-800 text-xs font-semibold"
@@ -373,6 +382,11 @@ export default function AdminMedalDashboardPage() {
               This will permanently remove <span className="font-semibold">{deleteTarget.name}</span>&apos;s{' '}
               {deleteTarget.medal.charAt(0) + deleteTarget.medal.slice(1).toLowerCase()} medal ({deleteTarget.applicationCode}). This cannot be undone.
             </p>
+            {deleteTarget.teamId && (
+              <p className="text-xs text-indigo-700 bg-indigo-50 border border-indigo-200 rounded px-3 py-2 mb-5">
+                This player is part of a team medal ({teamLabel(deleteTarget)}). Delete just this player, or the whole team.
+              </p>
+            )}
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setDeleteTarget(null)}
@@ -386,8 +400,17 @@ export default function AdminMedalDashboardPage() {
                 disabled={deleteMedal.isPending}
                 className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md disabled:opacity-50"
               >
-                {deleteMedal.isPending ? 'Deleting…' : 'Delete'}
+                {deleteMedal.isPending ? 'Deleting…' : deleteTarget.teamId ? 'Delete player' : 'Delete'}
               </button>
+              {deleteTarget.teamId && (
+                <button
+                  onClick={handleDeleteTeam}
+                  disabled={deleteTeam.isPending}
+                  className="px-4 py-2 text-sm font-medium text-white bg-red-800 hover:bg-red-900 rounded-md disabled:opacity-50"
+                >
+                  {deleteTeam.isPending ? 'Deleting…' : 'Delete whole team'}
+                </button>
+              )}
             </div>
           </div>
         </div>
