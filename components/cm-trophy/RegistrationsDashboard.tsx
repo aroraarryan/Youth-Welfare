@@ -135,7 +135,7 @@ function calcAge(dob: string): number | null {
 }
 
 const CSV_HEADERS = [
-  'Sr No', 'Name', 'Application Code', 'Email', 'Phone', 'DOB', 'Gender',
+  'Sr No', 'Name', "Father's Name", 'Application Code', 'Email', 'Phone', 'DOB', 'Gender',
   'Sport', 'Events', 'Age Category', 'Registration Level', 'Sansad',
   'Vidhan Sabha', 'Nyay Panchayat', 'District', 'Block',
 ];
@@ -150,6 +150,7 @@ function exportRowsToCsv(rows: AdminKhelMahakumbhExportRow[], offset: number, wi
     .map((r, i) => [
     offset + i + 1,
     r.fullName,
+    r.fathersName ?? '',
     r.registrationNo,
     r.email ?? '',
     r.mobile ?? '',
