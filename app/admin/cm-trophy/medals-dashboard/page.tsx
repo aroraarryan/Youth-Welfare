@@ -153,6 +153,8 @@ export default function AdminMedalDashboardPage() {
           (a.teamId ?? '').localeCompare(b.teamId ?? '') ||
           a.name.localeCompare(b.name)
       );
+      // Server only sends bank fields to permitted accounts, so rows are the source of truth (not the /me hint).
+      const withBank = canExportBankDetails || sorted.some((r) => r.bankName !== undefined);
       const sheetRows = sorted.map((r) => ({
         Rank: MEDAL_RANK[r.medal],
         Name: r.name,
@@ -166,7 +168,7 @@ export default function AdminMedalDashboardPage() {
         Location: r.entityName ?? '',
         'Application Code': r.applicationCode,
         Team: r.teamId ? teamLabel(r) : '',
-        ...(canExportBankDetails && {
+        ...(withBank && {
           'Bank Name': r.bankName ?? '',
           'Account Holder Name': r.accountHolderName ?? '',
           'Account Number': r.accountNumber ?? '',
