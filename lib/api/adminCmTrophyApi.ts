@@ -73,6 +73,7 @@ export interface AdminKhelMahakumbhExportRow extends BankDetails {
   id: string;
   registrationNo: string;
   fullName: string;
+  fathersName: string;
   email: string | null;
   mobile: string | null;
   dob: string;

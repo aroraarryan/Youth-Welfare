@@ -156,6 +156,7 @@ export default function AdminMedalDashboardPage() {
       const sheetRows = sorted.map((r) => ({
         Rank: MEDAL_RANK[r.medal],
         Name: r.name,
+        "Father's Name": r.fathersName ?? '',
         Sport: r.sportName,
         Gender: r.gender ? r.gender.charAt(0) + r.gender.slice(1).toLowerCase() : '',
         Event: r.event ?? '',
