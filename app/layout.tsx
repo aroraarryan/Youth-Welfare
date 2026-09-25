@@ -6,6 +6,7 @@ import "./globals.css";
 import GovHeader from "@/components/GovHeader";
 import MainHeader from "@/components/MainHeader";
 import DigitalYouthFestivalTicker from "@/components/DigitalYouthFestivalTicker";
+import NoticeTicker from "@/components/NoticeTicker";
 import Footer from "@/components/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -44,6 +45,7 @@ export default function RootLayout({
         <GovHeader />
         <MainHeader />
         {!isPortalRoute && <DigitalYouthFestivalTicker />}
+        {!isPortalRoute && <NoticeTicker />}
         <main id="main-content" className="flex-1">{children}</main>
         {!isPortalRoute && <Footer />}
 
