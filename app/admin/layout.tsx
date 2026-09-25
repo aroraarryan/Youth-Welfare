@@ -62,7 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="md:hidden bg-blue-800 text-white p-4 flex items-center justify-between z-[110] shadow-md">
         <div>
           <h1 className="text-base font-bold leading-none">Admin Panel</h1>
-          <p className="text-[10px] text-blue-300 mt-1">Yuva Shakti Portal</p>
+          <p className="text-[10px] text-blue-300 mt-1">Mero Yuva Portal</p>
         </div>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -88,7 +88,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       `}>
         <div className="hidden md:block px-4 py-5 border-b border-blue-700">
           <h1 className="text-lg font-bold leading-tight">Admin Panel</h1>
-          <p className="text-xs text-blue-300 mt-0.5">Yuva Shakti Portal</p>
+          <p className="text-xs text-blue-300 mt-0.5">Mero Yuva Portal</p>
         </div>
         <nav className="flex-1 px-2 py-4 overflow-y-auto pt-20 md:pt-4 space-y-0.5">
           {!isCmTrophyOnly && navLink("/admin/dashboard", "Dashboard")}
