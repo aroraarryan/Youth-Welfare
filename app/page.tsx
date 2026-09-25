@@ -7,6 +7,7 @@ import FaqSection from '@/components/FaqSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
 import NewsNotificationsSection from '@/components/NewsNotificationsSection';
 import CmTrophyLeaderboardSection from '@/components/CmTrophyLeaderboardSection';
+import ImportantNoticeSection from '@/components/ImportantNoticeSection';
 import { getInfraStats } from '@/lib/api/infrastructure';
 import { 
   Building2, 
@@ -76,6 +77,8 @@ export default async function HomePage() {
       <div className="w-full">
         <Carousel />
       </div>
+
+      <ImportantNoticeSection />
 
       {/* ── CM Trophy Leaderboard Teaser ──────────────────────── */}
       <CmTrophyLeaderboardSection />
