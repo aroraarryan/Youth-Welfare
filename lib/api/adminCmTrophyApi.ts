@@ -331,6 +331,9 @@ export const adminCmTrophyApi = {
   updateMedal: (id: string, data: CreateMedalInput): Promise<{ success: boolean; data: MedalRecord }> =>
     adminFetch(`cm-trophy/medals/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
 
+  updateTeamMedal: (teamId: string, data: CreateMedalInput): Promise<{ success: boolean; updated: number }> =>
+    adminFetch(`cm-trophy/medals/team/${teamId}`, { method: 'PATCH', body: JSON.stringify(data) }),
+
   deleteMedal: (id: string): Promise<{ success: boolean }> =>
     adminFetch(`cm-trophy/medals/${id}`, { method: 'DELETE' }),
 

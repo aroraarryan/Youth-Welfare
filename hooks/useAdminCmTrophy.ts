@@ -147,6 +147,14 @@ export function useUpdateMedal() {
   });
 }
 
+export function useUpdateTeamMedal() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ teamId, data }: { teamId: string; data: CreateMedalInput }) => adminCmTrophyApi.updateTeamMedal(teamId, data),
+    onSuccess: () => invalidateMedalQueries(queryClient),
+  });
+}
+
 export function useDeleteMedal() {
   const queryClient = useQueryClient();
   return useMutation({

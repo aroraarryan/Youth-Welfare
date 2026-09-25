@@ -6,7 +6,7 @@ import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTro
 import { sportsApi, Sport } from '@/lib/api/sports';
 import { CmTrophyMedalLevel, CmTrophyMedal, MEDAL_LEVEL_LABEL } from '@/lib/api/adminCmTrophyApi';
 import { Gender } from '@/lib/api/registrations';
-import { useMedals, useDeleteMedal, useUpdateMedal, useAdminPermissions, useDeleteTeamMedal } from '@/hooks/useAdminCmTrophy';
+import { useMedals, useDeleteMedal, useUpdateMedal, useUpdateTeamMedal, useAdminPermissions, useDeleteTeamMedal } from '@/hooks/useAdminCmTrophy';
 import { teamLabel } from '@/lib/cmTrophyTeamMedal';
 import { CmTrophyAgeCategory, CM_TROPHY_AGE_CATEGORY_LABELS } from '@/lib/cmTrophyAgeCategory';
 import { adminCmTrophyApi, CreateMedalInput, MedalRecord } from '@/lib/api/adminCmTrophyApi';
@@ -352,7 +352,7 @@ export default function AdminMedalDashboardPage() {
                       {canDelete && (
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-3">
-                            {canEdit && !r.teamId && (
+                            {canEdit && (
                               <button
                                 onClick={() => setEditTarget(r)}
                                 className="text-blue-600 hover:text-blue-800 text-xs font-semibold"
@@ -456,6 +456,9 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
   const { vidhanSabhas, loading: vidhanSabhasLoading } = useVidhanSabhas(sansadId || undefined);
   const { nyayPanchayats, loading: nyayPanchayatsLoading } = useNyayPanchayats(vidhanSabhaId || undefined);
   const updateMedal = useUpdateMedal();
+  const updateTeamMedal = useUpdateTeamMedal();
+  const isTeam = !!record.teamId;
+  const saving = updateMedal.isPending || updateTeamMedal.isPending;
 
   const handleLevelChange = (next: CmTrophyMedalLevel) => {
     setLevel(next);
@@ -488,20 +491,24 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
       vidhanSabhaId: level === 'VIDHAN_SABHA' ? vidhanSabhaId : undefined,
       nyayPanchayatId: level === 'NYAY_PANCHAYAT' ? nyayPanchayatId : undefined,
     };
-    updateMedal.mutate(
-      { id: record.id, data },
-      {
-        onSuccess: onClose,
-        onError: (e) => setError((e as Error).message ?? 'Failed to save changes.'),
-      }
-    );
+    const opts = {
+      onSuccess: onClose,
+      onError: (e: unknown) => setError((e as Error).message ?? 'Failed to save changes.'),
+    };
+    if (record.teamId) updateTeamMedal.mutate({ teamId: record.teamId, data }, opts);
+    else updateMedal.mutate({ id: record.id, data }, opts);
   };
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6">
-        <h3 className="text-base font-semibold text-gray-900 mb-1">Edit medal record</h3>
+        <h3 className="text-base font-semibold text-gray-900 mb-1">{isTeam ? 'Edit team medal' : 'Edit medal record'}</h3>
         <p className="text-xs text-gray-500 mb-4">{record.name} ({record.applicationCode})</p>
+        {isTeam && (
+          <p className="text-xs text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-md px-3 py-2 mb-4">
+            Changes apply to all {record.teamSize ?? ''} players in this team.
+          </p>
+        )}
 
         {error && <p className="text-xs text-red-600 mb-3">{error}</p>}
 
@@ -523,13 +530,13 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
           </div>
         </div>
 
-        <div className="mb-4">
+        {!isTeam && <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
           <select className={selectClass} value={gender} onChange={(e) => setGender(e.target.value as Gender)}>
             <option value="">—</option>
             {GENDERS.map((g) => <option key={g} value={g}>{GENDER_LABEL[g]}</option>)}
           </select>
-        </div>
+        </div>}
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Age Category</label>
@@ -603,17 +610,17 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
         <div className="flex justify-end gap-3 mt-2">
           <button
             onClick={onClose}
-            disabled={updateMedal.isPending}
+            disabled={saving}
             className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
           >
             Cancel
           </button>
           <button
             onClick={handleSave}
-            disabled={updateMedal.isPending}
+            disabled={saving}
             className="px-4 py-2 text-sm font-semibold bg-[#1e3a8a] text-white rounded-md hover:bg-[#1e2f6b] disabled:opacity-50"
           >
-            {updateMedal.isPending ? 'Saving…' : 'Save Changes'}
+            {saving ? 'Saving…' : 'Save Changes'}
           </button>
         </div>
       </div>
