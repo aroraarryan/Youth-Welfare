@@ -165,6 +165,7 @@ export interface CreateMedalInput {
   sansadId?: string;
   vidhanSabhaId?: string;
   nyayPanchayatId?: string;
+  applicationCodes?: string[]; // team edit: full desired roster (adds/removes players)
 }
 
 export interface MedalRecord extends BankDetails, TeamMedalFields {
@@ -189,6 +190,7 @@ export interface MedalRecord extends BankDetails, TeamMedalFields {
 }
 
 export interface MedalListParams {
+  teamId?: string;
   sportId?: string;
   level?: CmTrophyMedalLevel;
   medal?: CmTrophyMedal;
@@ -331,7 +333,7 @@ export const adminCmTrophyApi = {
   updateMedal: (id: string, data: CreateMedalInput): Promise<{ success: boolean; data: MedalRecord }> =>
     adminFetch(`cm-trophy/medals/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
 
-  updateTeamMedal: (teamId: string, data: CreateMedalInput): Promise<{ success: boolean; updated: number }> =>
+  updateTeamMedal: (teamId: string, data: CreateMedalInput): Promise<{ success: boolean; updated: number; removed?: number; added?: number }> =>
     adminFetch(`cm-trophy/medals/team/${teamId}`, { method: 'PATCH', body: JSON.stringify(data) }),
 
   deleteMedal: (id: string): Promise<{ success: boolean }> =>
