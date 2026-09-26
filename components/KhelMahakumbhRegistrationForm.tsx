@@ -617,7 +617,7 @@ export default function KhelMahakumbhRegistrationForm() {
                         onChange={() => setSelectedEventGroup(g)}
                         className="w-4 h-4 accent-[#1e3a8a]"
                       />
-                      {g}
+                      {/^\d+$/.test(g) ? `+${g}` : g}
                     </label>
                   ))}
                 </div>
@@ -634,7 +634,8 @@ export default function KhelMahakumbhRegistrationForm() {
                   {subEvents.map((ev) => {
                     const checked = selectedEvents.includes(ev.name);
                     const capReached = maxEventsSelectable > 1 && !checked && normalSelectedCount >= maxEventsSelectable;
-                    const label = eventGroups.length > 1 ? ev.name.slice(groupOf(ev.name).length).trim() : ev.name;
+                    const subLabel = eventGroups.length > 1 && selectedEventGroup !== "Individual" ? ev.name.slice(groupOf(ev.name).length).trim() : ev.name;
+                    const label = /^\d/.test(subLabel) ? (selectedEventGroup === "Under" ? "-" : selectedEventGroup === "Over" ? "+" : "") + subLabel : subLabel; // ponytail: karate weight notation (-40 / +40)
                     return (
                       <label
                         key={ev.name}
