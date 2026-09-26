@@ -450,6 +450,23 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
   const [vidhanSabhaId, setVidhanSabhaId] = useState(record.vidhanSabhaId ?? '');
   const [nyayPanchayatId, setNyayPanchayatId] = useState(record.nyayPanchayatId ?? '');
   const [error, setError] = useState('');
+  // Team roster (superadmin edits the full player list): codes, loaded once from the server.
+  const [roster, setRoster] = useState<{ code: string; name?: string }[] | null>(null);
+  const [newCode, setNewCode] = useState('');
+
+  useEffect(() => {
+    if (!record.teamId) return;
+    adminCmTrophyApi.listMedals({ teamId: record.teamId, limit: 200 })
+      .then((res) => setRoster(res.data.map((m) => ({ code: m.applicationCode, name: m.name }))))
+      .catch(() => setError('Could not load team players.'));
+  }, [record.teamId]);
+
+  const addCode = () => {
+    const code = newCode.trim().toUpperCase();
+    if (!code || roster?.some((p) => p.code === code)) { setNewCode(''); return; }
+    setRoster([...(roster ?? []), { code }]);
+    setNewCode('');
+  };
 
   const { districts } = useDistricts();
   const { sansads } = useSansads();
@@ -477,8 +494,10 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
 
   const handleSave = () => {
     if (!geoSelected) { setError('Select a location for this level.'); return; }
+    if (isTeam && (!roster || roster.length < 2)) { setError('A team needs at least 2 players.'); return; }
     setError('');
     const data: CreateMedalInput = {
+      ...(isTeam && roster && { applicationCodes: roster.map((p) => p.code) }),
       applicationCode: record.applicationCode,
       sportId: record.sportId,
       medal,
@@ -501,16 +520,40 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6">
+      <div className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
         <h3 className="text-base font-semibold text-gray-900 mb-1">{isTeam ? 'Edit team medal' : 'Edit medal record'}</h3>
         <p className="text-xs text-gray-500 mb-4">{record.name} ({record.applicationCode})</p>
         {isTeam && (
           <p className="text-xs text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-md px-3 py-2 mb-4">
-            Changes apply to all {record.teamSize ?? ''} players in this team.
+            Medal, event, age category and location apply to every player in this team.
           </p>
         )}
 
         {error && <p className="text-xs text-red-600 mb-3">{error}</p>}
+
+        {isTeam && (
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Players ({roster?.length ?? '…'})</label>
+            <ul className="border border-gray-200 rounded-md divide-y divide-gray-100 max-h-40 overflow-y-auto mb-2">
+              {(roster ?? []).map((p) => (
+                <li key={p.code} className="flex items-center justify-between px-3 py-1.5 text-xs">
+                  <span><span className="font-mono text-gray-500">{p.code}</span>{p.name ? ` · ${p.name}` : ' · (new)'}</span>
+                  <button type="button" onClick={() => setRoster(roster!.filter((x) => x.code !== p.code))} className="text-red-600 hover:underline">Remove</button>
+                </li>
+              ))}
+            </ul>
+            <div className="flex gap-2">
+              <input
+                className="border border-gray-300 rounded-md px-3 py-1.5 text-sm flex-1 font-mono"
+                value={newCode}
+                onChange={(e) => setNewCode(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addCode(); } }}
+                placeholder="Add player by CMT code"
+              />
+              <button type="button" onClick={addCode} className="px-3 py-1.5 border border-gray-300 rounded-md text-sm">Add</button>
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
