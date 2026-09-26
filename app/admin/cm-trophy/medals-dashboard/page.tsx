@@ -461,11 +461,32 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
       .catch(() => setError('Could not load team players.'));
   }, [record.teamId]);
 
-  const addCode = () => {
+  const [adding, setAdding] = useState(false);
+  // Same checks the server runs on save (resolveTeamMembers), shown instantly per code.
+  const addCode = async () => {
     const code = newCode.trim().toUpperCase();
     if (!code || roster?.some((p) => p.code === code)) { setNewCode(''); return; }
-    setRoster([...(roster ?? []), { code }]);
-    setNewCode('');
+    setAdding(true);
+    setError('');
+    try {
+      const res = await adminCmTrophyApi.list({ search: code, limit: 5 });
+      const reg = res.data.find((r) => r.registrationNo.toUpperCase() === code);
+      if (!reg) return setError(`${code}: Application code not found.`);
+      if (reg.status === 'REJECTED') return setError(`${code}: Application was rejected.`);
+      if (reg.sport?.id !== record.sportId) return setError(`${code}: Registered for a different sport.`);
+      const ev = event.trim().toLowerCase();
+      const age = ageCategory || record.ageCategory || reg.ageCategory || null;
+      const medals = await adminCmTrophyApi.listMedals({ search: code, sportId: record.sportId, limit: 50 });
+      const dup = medals.data.some((m) => m.applicationCode === code && m.teamId !== record.teamId
+        && (m.event ?? '').toLowerCase() === ev && (m.ageCategory ?? null) === age);
+      if (dup) return setError(`${code}: Already has a medal for this sport/event/age category.`);
+      setRoster((cur) => [...(cur ?? []), { code, name: reg.fullName }]);
+      setNewCode('');
+    } catch {
+      setError('Could not verify the code. Try again.');
+    } finally {
+      setAdding(false);
+    }
   };
 
   const { districts } = useDistricts();
@@ -550,7 +571,7 @@ function EditMedalModal({ record, onClose }: { record: MedalRecord; onClose: () 
                 onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addCode(); } }}
                 placeholder="Add player by CMT code"
               />
-              <button type="button" onClick={addCode} className="px-3 py-1.5 border border-gray-300 rounded-md text-sm">Add</button>
+              <button type="button" onClick={addCode} disabled={adding} className="px-3 py-1.5 border border-gray-300 rounded-md text-sm disabled:opacity-50">{adding ? 'Checking…' : 'Add'}</button>
             </div>
           </div>
         )}
