@@ -11,7 +11,7 @@ const NO_CATEGORY_REASON =
 // CM Trophy 2026 eligibility windows (fixed, not rolling age-from-today).
 // Inclusive on both ends, 'YYYY-MM-DD'.
 const UNDER_14_RANGE = ['2012-04-01', '2016-03-31'];
-const UNDER_19_RANGE = ['2007-04-01', '2011-03-31'];
+const UNDER_19_RANGE = ['2007-04-01', '2012-03-31'];
 const WOMENS_19_25_RANGE = ['2001-04-01', '2006-03-31'];
 
 function inRange(dob: string, [start, end]: string[]): boolean {
