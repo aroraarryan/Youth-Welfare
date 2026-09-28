@@ -45,7 +45,7 @@ export function teamLabel(r: {
 // Keep in sync with backend src/utils/teamMedal.js (enforces the Team column in bulk upload).
 const TEAM_SPORT_SLUGS = new Set([
   'cricket', 'football', 'hockey', 'kabaddi', 'kho_kho', 'volleyball', 'basketball', 'handball',
-  'netball', 'baseball', 'tug_of_war', 'pitthu', 'goli_block', 'rowing', 'lawn_tennis', 'tennis',
+  'netball', 'baseball', 'tug_of_war', 'pitthu', 'goli_block', 'rowing',
 ]);
 // Pair / relay events inside individual sports (TT & Badminton Doubles, 4x100m Relay, Yogasan Pair).
 const TEAM_EVENT_RE = /doubles?|relay|4\s*x|pair/i;
