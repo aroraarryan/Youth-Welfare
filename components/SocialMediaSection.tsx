@@ -1,6 +1,6 @@
 'use client';
 
-const INSTAGRAM_HANDLE = 'officialukprd';
+const INSTAGRAM_HANDLE = 'yuvakalyanuk';
 const FACEBOOK_PAGE = 'DepartmentofYouthWelfare';
 
 const YOUTUBE_VIDEOS = [
@@ -13,10 +13,10 @@ const PLATFORMS = [
   {
     id: 'instagram',
     label: 'Instagram',
-    handle: '@officialukprd',
+    handle: '@yuvakalyanuk',
     icon: 'fa-brands fa-instagram',
     followLabel: 'Follow',
-    href: 'https://www.instagram.com/officialukprd',
+    href: 'https://www.instagram.com/yuvakalyanuk',
     iconBg: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)',
     color: '#E1306C',
     dotClass: 'bg-pink-500',

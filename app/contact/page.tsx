@@ -81,7 +81,7 @@ export default function ContactPage() {
             {/* Social icons */}
             <div className="flex gap-3 mt-8">
               {[
-                { href: 'https://instagram.com', icon: 'fab fa-instagram',   bg: '#c13584', title: 'Instagram' },
+                { href: 'https://www.instagram.com/yuvakalyanuk/', icon: 'fab fa-instagram',   bg: '#c13584', title: 'Instagram' },
                 { href: 'https://linkedin.com',  icon: 'fab fa-linkedin-in', bg: '#0077b5', title: 'LinkedIn' },
                 { href: 'https://facebook.com',  icon: 'fab fa-facebook-f',  bg: '#1877f2', title: 'Facebook' },
                 { href: 'https://twitter.com',   icon: 'fab fa-twitter',     bg: '#1da1f2', title: 'Twitter' },
