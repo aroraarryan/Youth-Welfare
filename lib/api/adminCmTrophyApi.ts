@@ -138,6 +138,7 @@ export interface MedalLeaderboardRow {
 }
 
 export interface RegistrationLookupResult {
+  medalAdded?: boolean;
   id: string;
   fullName: string;
   fathersName: string;

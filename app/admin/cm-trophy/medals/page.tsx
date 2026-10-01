@@ -109,7 +109,7 @@ export default function AdminAddMedalPage() {
 
   const isTeam = lookupStatus === 'found' && isTeamMedal(sports.find((s) => s.id === sportId)?.slug, event);
   const canSubmit =
-    lookupStatus === 'found' && !!sportId && !!medal && geoSelected &&
+    lookupStatus === 'found' && !registration?.medalAdded && !!sportId && !!medal && geoSelected &&
     (isTeam ? teamPlayers.length >= 1 && !createTeamMutation.isPending : !createMutation.isPending);
 
   const handleTeamSubmit = async () => {
@@ -244,7 +244,10 @@ export default function AdminAddMedalPage() {
             placeholder="CMT-XXXXXXXX"
           />
           {lookupStatus === 'checking' && <p className="text-xs text-gray-400 mt-1">Checking…</p>}
-          {lookupStatus === 'found' && registration && (
+          {lookupStatus === 'found' && registration?.medalAdded && (
+            <p className="text-xs text-red-500 mt-1"><i className="fas fa-times-circle mr-1" />Medal already added.</p>
+          )}
+          {lookupStatus === 'found' && registration && !registration.medalAdded && (
             <p className="text-xs text-green-600 mt-1"><i className="fas fa-check-circle mr-1" />Found: {registration.fullName}</p>
           )}
           {lookupStatus === 'not_found' && (

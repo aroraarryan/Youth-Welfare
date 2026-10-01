@@ -116,7 +116,7 @@ export default function OfficerCmTrophyPage() {
     : level === 'VIDHAN_SABHA' ? !!vidhanSabhaId : !!nyayPanchayatId;
   const isTeam = lookupStatus === 'found' && isTeamMedal(sports.find((s) => s.id === sportId)?.slug, event);
   const canSubmit =
-    lookupStatus === 'found' && !!sportId && !!medal && geoComplete && !submitting && (!isTeam || teamPlayers.length >= 1);
+    lookupStatus === 'found' && !registration?.medalAdded && !!sportId && !!medal && geoComplete && !submitting && (!isTeam || teamPlayers.length >= 1);
 
   // Block officers send nyayPanchayatId (level defaults server-side), or a nodal
   // in-charge's Vidhan Sabha level + seat; district officers send the chosen
@@ -252,7 +252,10 @@ export default function OfficerCmTrophyPage() {
             placeholder="CMT-XXXXXXXX"
           />
           {lookupStatus === 'checking' && <p className="text-xs text-gray-400 mt-1">Checking…</p>}
-          {lookupStatus === 'found' && registration && (
+          {lookupStatus === 'found' && registration?.medalAdded && (
+            <p className="text-xs text-red-500 mt-1"><i className="fas fa-times-circle mr-1" />Medal already added.</p>
+          )}
+          {lookupStatus === 'found' && registration && !registration.medalAdded && (
             <p className="text-xs text-green-600 mt-1"><i className="fas fa-check-circle mr-1" />Found: {registration.fullName}</p>
           )}
           {lookupStatus === 'not_found' && (

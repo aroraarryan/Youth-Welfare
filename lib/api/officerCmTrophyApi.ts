@@ -33,6 +33,7 @@ export const LEVEL_LABEL: Record<string, string> = {
 };
 
 export interface RegistrationLookupResult {
+  medalAdded?: boolean;
   id: string;
   fullName: string;
   fathersName: string;
