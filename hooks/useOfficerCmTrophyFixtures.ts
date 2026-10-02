@@ -56,7 +56,7 @@ export function useEntrantPool(params: {
   });
 }
 
-export function useSearchRegistrations(params: { registrationNo: string; sportId: string; ageCategory: string } | null) {
+export function useSearchRegistrations(params: { registrationNo: string; eventId: string } | null) {
   return useQuery({
     queryKey: ['officer', 'cmTrophyFixtures', 'searchRegistrations', params],
     queryFn: () => officerCmTrophyFixturesApi.searchRegistrations(params!),

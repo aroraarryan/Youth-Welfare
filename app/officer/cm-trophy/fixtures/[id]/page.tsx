@@ -16,6 +16,7 @@ import {
   useSearchRegistrations,
 } from '@/hooks/useOfficerCmTrophyFixtures';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
+import PrintableFixture from '@/components/cm-trophy/PrintableFixture';
 import { FixtureMatch, FixtureTeam, MATCH_STAGE_LABEL, FIXTURE_LEVEL_LABEL } from '@/lib/api/adminCmTrophyFixturesApi';
 
 const selectClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm bg-white w-full disabled:opacity-50 disabled:bg-gray-50';
@@ -49,7 +50,9 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
   const ev = data.data;
 
   return (
-    <div className="p-6">
+    <>
+    <PrintableFixture event={ev} />
+    <div className="p-6 print:hidden">
       <div className="mb-4 text-sm">
         <Link href="/officer/cm-trophy/fixtures" className="text-[#1e3a8a] font-semibold hover:underline">Fixtures</Link>
         <span className="text-gray-400"> / {ev.sportName}</span>
@@ -63,7 +66,10 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
             {ev.entrantType === 'PLAYER' && ` · Individual player${ev.event ? ` · ${ev.event}` : ''}`}
           </p>
         </div>
-        <span className="text-xs font-semibold px-2 py-1 rounded bg-gray-100 text-gray-700">{ev.status}</span>
+        <div className="flex items-center gap-2">
+          <button onClick={() => window.print()} className="text-xs font-semibold px-3 py-1.5 rounded border border-gray-300 text-gray-700 hover:bg-gray-50">Print</button>
+          <span className="text-xs font-semibold px-2 py-1 rounded bg-gray-100 text-gray-700">{ev.status}</span>
+        </div>
       </div>
 
       <div className="flex gap-1 mb-6 border-b border-gray-200">
@@ -86,6 +92,7 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
       {tab === 'Matches' && <MatchesTab event={ev} />}
       {tab === 'Standings' && <StandingsTab event={ev} />}
     </div>
+    </>
   );
 }
 
@@ -96,7 +103,7 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
   const [selectedGeoId, setSelectedGeoId] = useState('');
   const [searchCode, setSearchCode] = useState('');
   const { data: searchRes, isFetching: isSearching } = useSearchRegistrations(
-    isPlayerEntrant ? { registrationNo: searchCode, sportId: event.sportId, ageCategory: event.ageCategory } : null
+    isPlayerEntrant ? { registrationNo: searchCode, eventId: event.id } : null
   );
   const addTeam = useAddTeam(event.id);
   const addAll = useAddAllTeams(event.id);
@@ -166,7 +173,7 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
           {isPlayerEntrant && (
             <div className="space-y-2 border-b border-gray-100 pb-4">
               <label className="block text-xs font-medium text-gray-700">
-                Add any player registered for this sport/age category by application code (e.g. a lower-level winner advancing to this fixture)
+                Add any player registered for this sport/age category by application code (e.g. a lower-level winner advancing to this fixture). Only players marked present can be added.
               </label>
               <input
                 type="text"
@@ -180,18 +187,23 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
                   {isSearching ? (
                     <div className="px-3 py-2 text-xs text-gray-400">Searching…</div>
                   ) : (searchRes?.data ?? []).filter((c) => !addedIds.has(c.id)).length === 0 ? (
-                    <div className="px-3 py-2 text-xs text-gray-400">No matching players for this sport/age category.</div>
+                    <div className="px-3 py-2 text-xs text-gray-400">No player found with this application code.</div>
                   ) : (
                     (searchRes?.data ?? []).filter((c) => !addedIds.has(c.id)).map((c) => (
-                      <div key={c.id} className="flex items-center justify-between px-3 py-2 text-sm">
+                      <div key={c.id} className="px-3 py-2 text-sm">
+                       <div className="flex items-center justify-between">
                         <span className="text-gray-800">{c.label}</span>
                         <button
                           onClick={() => { addTeam.mutate(c.id); setSearchCode(''); }}
-                          disabled={addTeam.isPending}
+                          disabled={addTeam.isPending || !!c.reason}
                           className="text-xs font-semibold text-[#1e3a8a] hover:underline disabled:opacity-40"
                         >
                           Add
                         </button>
+                       </div>
+                       {c.reason && (
+                         <p className="text-xs text-red-600 mt-1">{c.reason}</p>
+                       )}
                       </div>
                     ))
                   )}
@@ -233,6 +245,9 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
               ? 'Adding…'
               : `Add all ${isPlayerEntrant ? 'eligible players' : event.level === 'VIDHAN_SABHA' ? 'Nyay Panchayats' : event.level === 'SANSAD' ? 'Vidhan Sabhas' : 'Sansads'}`}
           </button>
+          {(addTeam.isError || addAll.isError) && (
+            <p className="text-xs text-red-600">{((addTeam.isError ? addTeam.error : addAll.error) as Error).message}</p>
+          )}
         </div>
       )}
     </div>

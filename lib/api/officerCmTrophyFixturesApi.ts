@@ -68,7 +68,7 @@ export const officerCmTrophyFixturesApi = {
     return officerFetch(`cm-trophy/fixtures/entrant-pool?${qs}`);
   },
 
-  searchRegistrations: (params: { registrationNo: string; sportId: string; ageCategory: string }): Promise<{ success: boolean; data: EntrantCandidate[] }> => {
+  searchRegistrations: (params: { registrationNo: string; eventId: string }): Promise<{ success: boolean; data: EntrantCandidate[] }> => {
     const qs = new URLSearchParams(params);
     return officerFetch(`cm-trophy/fixtures/search-registrations?${qs}`);
   },
