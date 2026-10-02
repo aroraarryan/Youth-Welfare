@@ -183,15 +183,24 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
                     <div className="px-3 py-2 text-xs text-gray-400">No matching players for this sport/age category.</div>
                   ) : (
                     (searchRes?.data ?? []).filter((c) => !addedIds.has(c.id)).map((c) => (
-                      <div key={c.id} className="flex items-center justify-between px-3 py-2 text-sm">
+                      <div key={c.id} className="px-3 py-2 text-sm">
+                       <div className="flex items-center justify-between">
                         <span className="text-gray-800">{c.label}</span>
                         <button
                           onClick={() => { addTeam.mutate(c.id); setSearchCode(''); }}
-                          disabled={addTeam.isPending}
+                          disabled={addTeam.isPending || c.attendance !== 'PRESENT'}
                           className="text-xs font-semibold text-[#1e3a8a] hover:underline disabled:opacity-40"
                         >
                           Add
                         </button>
+                       </div>
+                       {c.attendance && c.attendance !== 'PRESENT' && (
+                         <p className="text-xs text-red-600 mt-1">
+                           {c.attendance === 'ABSENT'
+                             ? 'Marked absent — cannot be added to a fixture.'
+                             : 'Attendance has not been marked. Mark attendance as present first.'}
+                         </p>
+                       )}
                       </div>
                     ))
                   )}

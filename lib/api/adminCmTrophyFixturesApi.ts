@@ -64,6 +64,8 @@ export interface FixtureTeam {
 export interface EntrantCandidate {
   id: string;
   label: string;
+  // only set by searchRegistrations
+  attendance?: 'PRESENT' | 'ABSENT' | 'NOT_MARKED';
 }
 
 export interface FixtureVenue {
