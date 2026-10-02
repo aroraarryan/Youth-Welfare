@@ -41,9 +41,11 @@ export default function RootLayout({
         <AuthProvider>
         <LanguageProvider>
         <AccessibilityProvider>
-        <a href="#main-content" className="skip-link">Skip to main content</a>
-        <GovHeader />
-        <MainHeader />
+        <a href="#main-content" className="skip-link print:hidden">Skip to main content</a>
+        <div className="print:hidden">
+          <GovHeader />
+          <MainHeader />
+        </div>
         {!isPortalRoute && <DigitalYouthFestivalTicker />}
         {!isPortalRoute && <NoticePopup />}
         <main id="main-content" className="flex-1">{children}</main>

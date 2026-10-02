@@ -66,6 +66,8 @@ export interface EntrantCandidate {
   label: string;
   // only set by searchRegistrations
   attendance?: 'PRESENT' | 'ABSENT' | 'NOT_MARKED';
+  // why the player cannot be added (wrong sport/age/gender/event, attendance); null = eligible
+  reason?: string | null;
 }
 
 export interface FixtureVenue {
@@ -168,7 +170,7 @@ export const adminCmTrophyFixturesApi = {
   // Manual override for getEntrantPool: finds any approved player by
   // application code (registrationNo), regardless of geo scope — e.g. a
   // Nyay Panchayat-level winner advancing into a Vidhan Sabha fixture.
-  searchRegistrations: (params: { registrationNo: string; sportId: string; ageCategory: string }): Promise<{ success: boolean; data: EntrantCandidate[] }> => {
+  searchRegistrations: (params: { registrationNo: string; eventId: string }): Promise<{ success: boolean; data: EntrantCandidate[] }> => {
     const qs = new URLSearchParams(params);
     return adminFetch(`cm-trophy/fixtures/search-registrations?${qs}`);
   },

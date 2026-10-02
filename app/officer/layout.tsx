@@ -48,7 +48,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Mobile Top Bar */}
-      <div className="md:hidden bg-teal-800 text-white p-4 flex items-center justify-between z-[110] shadow-md">
+      <div className="print:hidden md:hidden bg-teal-800 text-white p-4 flex items-center justify-between z-[110] shadow-md">
         <div>
           <h1 className="text-base font-bold leading-none">Officer Portal</h1>
           <p className="text-[10px] text-teal-300 mt-1">Mero Yuva Portal</p>
@@ -71,7 +71,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
 
       {/* Sidebar */}
       <aside className={`
-        fixed inset-y-0 left-0 w-64 bg-teal-800 text-white flex flex-col z-[130] transform transition-transform duration-300 ease-in-out
+        print:hidden! fixed inset-y-0 left-0 w-64 bg-teal-800 text-white flex flex-col z-[130] transform transition-transform duration-300 ease-in-out
         md:relative md:translate-x-0 md:w-56 md:flex
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
@@ -124,7 +124,7 @@ export default function OfficerLayout({ children }: { children: React.ReactNode 
           </button>
         </div>
       </aside>
-      <main className="flex-1 bg-gray-50 overflow-auto w-full">{children}</main>
+      <main className="flex-1 bg-gray-50 overflow-auto print:overflow-visible w-full">{children}</main>
     </div>
   );
 }
