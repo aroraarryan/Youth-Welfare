@@ -166,7 +166,7 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
           {isPlayerEntrant && (
             <div className="space-y-2 border-b border-gray-100 pb-4">
               <label className="block text-xs font-medium text-gray-700">
-                Add any player registered for this sport/age category by application code (e.g. a lower-level winner advancing to this fixture)
+                Add any player registered for this sport/age category by application code (e.g. a lower-level winner advancing to this fixture). Only players marked present can be added.
               </label>
               <input
                 type="text"
@@ -233,6 +233,9 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
               ? 'Adding…'
               : `Add all ${isPlayerEntrant ? 'eligible players' : event.level === 'VIDHAN_SABHA' ? 'Nyay Panchayats' : event.level === 'SANSAD' ? 'Vidhan Sabhas' : 'Sansads'}`}
           </button>
+          {(addTeam.isError || addAll.isError) && (
+            <p className="text-xs text-red-600">{((addTeam.isError ? addTeam.error : addAll.error) as Error).message}</p>
+          )}
         </div>
       )}
     </div>
