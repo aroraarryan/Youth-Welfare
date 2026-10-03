@@ -12,6 +12,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [role, setRole] = useState<string | null>(null);
+  const [fixturesOnly, setFixturesOnly] = useState(false);
   const isCmTrophyOnly = role === "CM_TROPHY";
 
   useEffect(() => {
@@ -21,7 +22,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       .then((data) => {
         const r = data?.admin?.role ?? null;
         setRole(r);
-        if (r === "CM_TROPHY" && !pathname.startsWith("/admin/cm-trophy")) {
+        const only = !!data?.permissions?.attendanceFixturesOnly;
+        setFixturesOnly(only);
+        if (only && !/^\/admin\/cm-trophy\/(attendance|fixtures)(\/|$)/.test(pathname)) {
+          router.replace("/admin/cm-trophy/attendance");
+        } else if (r === "CM_TROPHY" && !pathname.startsWith("/admin/cm-trophy")) {
           router.replace("/admin/cm-trophy");
         }
       })
@@ -101,14 +106,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <p className="px-4 pt-4 pb-1 text-[10px] font-bold text-blue-300 uppercase tracking-widest">
             CM Trophy
           </p>
-          {navLink("/admin/cm-trophy", "Registrations", true, ["/admin/cm-trophy/leaderboard", "/admin/cm-trophy/grievance", "/admin/cm-trophy/medals", "/admin/cm-trophy/medals-dashboard", "/admin/cm-trophy/attendance", "/admin/cm-trophy/fixtures", "/admin/cm-trophy/media"])}
-          {navLink("/admin/cm-trophy/leaderboard", "Leaderboard", true)}
-          {navLink("/admin/cm-trophy/medals", "Add Medal", true)}
-          {navLink("/admin/cm-trophy/medals-dashboard", "Medal Dashboard", true)}
+          {!fixturesOnly && navLink("/admin/cm-trophy", "Registrations", true, ["/admin/cm-trophy/leaderboard", "/admin/cm-trophy/grievance", "/admin/cm-trophy/medals", "/admin/cm-trophy/medals-dashboard", "/admin/cm-trophy/attendance", "/admin/cm-trophy/fixtures", "/admin/cm-trophy/media"])}
+          {!fixturesOnly && navLink("/admin/cm-trophy/leaderboard", "Leaderboard", true)}
+          {!fixturesOnly && navLink("/admin/cm-trophy/medals", "Add Medal", true)}
+          {!fixturesOnly && navLink("/admin/cm-trophy/medals-dashboard", "Medal Dashboard", true)}
           {navLink("/admin/cm-trophy/attendance", "Attendance", true)}
           {navLink("/admin/cm-trophy/fixtures", "Fixtures", true)}
-          {navLink("/admin/cm-trophy/grievance", "Grievances", true)}
-          {navLink("/admin/cm-trophy/media", "Media", true)}
+          {!fixturesOnly && navLink("/admin/cm-trophy/grievance", "Grievances", true)}
+          {!fixturesOnly && navLink("/admin/cm-trophy/media", "Media", true)}
 
           {/* Content Management */}
           {!isCmTrophyOnly && (

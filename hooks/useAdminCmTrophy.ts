@@ -17,6 +17,7 @@ import {
 export interface AdminPermissions {
   canChangeStatus: boolean;
   canExportBankDetails: boolean;
+  attendanceFixturesOnly?: boolean;
 }
 export function useAdminPermissions(): AdminPermissions {
   const { data } = useQuery({
