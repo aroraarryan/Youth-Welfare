@@ -238,13 +238,25 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
 
           <button
             onClick={() => addAll.mutate()}
-            disabled={addAll.isPending}
+            disabled={addAll.isPending || (isPlayerEntrant && candidates.length === 0)}
             className="text-sm font-medium border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 disabled:opacity-50"
           >
             {addAll.isPending
               ? 'Adding…'
-              : `Add all ${isPlayerEntrant ? 'eligible players' : event.level === 'VIDHAN_SABHA' ? 'Nyay Panchayats' : event.level === 'SANSAD' ? 'Vidhan Sabhas' : 'Sansads'}`}
+              : `Add all ${isPlayerEntrant ? `${candidates.length} present player${candidates.length === 1 ? '' : 's'}` : event.level === 'VIDHAN_SABHA' ? 'Nyay Panchayats' : event.level === 'SANSAD' ? 'Vidhan Sabhas' : 'Sansads'}`}
           </button>
+          {isPlayerEntrant && candidates.length === 0 && (
+            <p className="text-xs text-gray-500">
+              No present players left for this fixture. Mark attendance as present first
+              {event.event ? ` — players must be registered for ${event.event}` : ''}.
+            </p>
+          )}
+          {addAll.isSuccess && (
+            <p className="text-xs text-green-700">
+              Added {addAll.data.data.created} {isPlayerEntrant ? 'player' : 'entrant'}{addAll.data.data.created === 1 ? '' : 's'}
+              {addAll.data.data.skipped ? ` (${addAll.data.data.skipped} already added)` : ''}.
+            </p>
+          )}
           {(addTeam.isError || addAll.isError) && (
             <p className="text-xs text-red-600">{((addTeam.isError ? addTeam.error : addAll.error) as Error).message}</p>
           )}
