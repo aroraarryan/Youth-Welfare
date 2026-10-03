@@ -219,6 +219,7 @@ export default function OfficerAttendancePage() {
                   <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Application Code</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Father&apos;s Name</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Sport</th>
+                  <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Event / Category</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Gender</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Age Category</th>
                   <th className="px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-wider">Level</th>
@@ -238,6 +239,7 @@ export default function OfficerAttendancePage() {
                     <td className="px-4 py-3 text-gray-600 font-mono text-[12px]">{r.registrationNo}</td>
                     <td className="px-4 py-3 text-gray-600">{r.fathersName}</td>
                     <td className="px-4 py-3 text-gray-600">{r.sportName}</td>
+                    <td className="px-4 py-3 text-gray-600">{r.selectedEvents?.length ? r.selectedEvents.join(', ') : '—'}</td>
                     <td className="px-4 py-3 text-gray-600 capitalize">{r.gender?.toLowerCase()}</td>
                     <td className="px-4 py-3 text-gray-600">{r.ageCategory ? CM_TROPHY_AGE_CATEGORY_LABELS[r.ageCategory] : '—'}</td>
                     <td className="px-4 py-3 text-gray-600">{CM_TROPHY_REGISTRATION_LEVEL_LABELS[r.registrationLevel]}</td>
