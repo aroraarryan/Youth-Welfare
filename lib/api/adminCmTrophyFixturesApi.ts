@@ -175,7 +175,7 @@ export const adminCmTrophyFixturesApi = {
     return adminFetch(`cm-trophy/fixtures/search-registrations?${qs}`);
   },
 
-  addAllTeams: (eventId: string): Promise<{ success: boolean; data: { created: number } }> =>
+  addAllTeams: (eventId: string): Promise<{ success: boolean; data: { created: number; skipped?: number } }> =>
     adminFetch(`cm-trophy/fixtures/${eventId}/teams/add-all`, { method: 'POST' }),
 
   removeTeam: (eventId: string, teamId: string): Promise<{ success: boolean }> =>

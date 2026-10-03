@@ -73,7 +73,7 @@ export const officerCmTrophyFixturesApi = {
     return officerFetch(`cm-trophy/fixtures/search-registrations?${qs}`);
   },
 
-  addAllTeams: (eventId: string): Promise<{ success: boolean; data: { created: number } }> =>
+  addAllTeams: (eventId: string): Promise<{ success: boolean; data: { created: number; skipped?: number } }> =>
     officerFetch(`cm-trophy/fixtures/${eventId}/teams/add-all`, { method: 'POST' }),
 
   removeTeam: (eventId: string, teamId: string): Promise<{ success: boolean }> =>
