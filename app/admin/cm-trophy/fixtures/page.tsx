@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useFixtureEvents } from '@/hooks/useAdminCmTrophyFixtures';
+import { useFixtureEvents, useDeleteFixtureEvent, useIsSuperAdmin } from '@/hooks/useAdminCmTrophyFixtures';
 import { CmTrophyFixtureStatus, FIXTURE_LEVEL_LABEL } from '@/lib/api/adminCmTrophyFixturesApi';
 
 const STATUS_BADGE: Record<CmTrophyFixtureStatus, string> = {
@@ -14,6 +14,8 @@ const STATUS_BADGE: Record<CmTrophyFixtureStatus, string> = {
 
 export default function AdminCmTrophyFixturesPage() {
   const { data, isLoading, isError, error } = useFixtureEvents();
+  const isSuperAdmin = useIsSuperAdmin();
+  const deleteMutation = useDeleteFixtureEvent();
 
   return (
     <div className="p-6">
@@ -59,6 +61,7 @@ export default function AdminCmTrophyFixturesPage() {
                 <th className="px-4 py-3 text-left font-medium">Category</th>
                 <th className="px-4 py-3 text-left font-medium">Teams</th>
                 <th className="px-4 py-3 text-left font-medium">Status</th>
+                {isSuperAdmin && <th className="px-4 py-3" />}
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -71,11 +74,25 @@ export default function AdminCmTrophyFixturesPage() {
                   </td>
                   <td className="px-4 py-3 text-gray-600">{FIXTURE_LEVEL_LABEL[ev.level].split(' (')[0]}</td>
                   <td className="px-4 py-3 text-gray-600">{ev.entrantType === 'PLAYER' ? (ev.event || 'Individual players') : ev.scopeName}</td>
-                  <td className="px-4 py-3 text-gray-600">{ev.ageCategory.replace('_', ' ')}</td>
+                  <td className="px-4 py-3 text-gray-600">{[ev.ageCategory.replace('_', ' '), ev.gender, ev.entrantType === 'PLAYER' ? ev.event : null].filter(Boolean).join(' · ')}</td>
                   <td className="px-4 py-3 text-gray-600">{ev.teamCount}</td>
                   <td className="px-4 py-3">
                     <span className={`text-xs font-semibold px-2 py-1 rounded ${STATUS_BADGE[ev.status]}`}>{ev.status}</span>
                   </td>
+                  {isSuperAdmin && (
+                    <td className="px-4 py-3 text-right">
+                      <button
+                        disabled={deleteMutation.isPending}
+                        onClick={() => {
+                          if (!confirm(`Delete ${ev.sportName} (${ev.ageCategory.replace('_', ' ')}${ev.event ? ` · ${ev.event}` : ''}) permanently? Its ${ev.teamCount} entrants and ${ev.matchCount} matches will be removed.`)) return;
+                          deleteMutation.mutate(ev.id, { onError: (e) => alert((e as Error).message) });
+                        }}
+                        className="text-xs font-semibold text-red-600 hover:underline disabled:opacity-50"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

@@ -14,7 +14,6 @@ const ENTRANT_TYPES: { value: CmTrophyFixtureEntrantType; label: string }[] = [
 ];
 const AGE_CATEGORIES = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
 const GENDERS = [
-  { value: '', label: 'Not split by gender' },
   { value: 'MALE', label: 'Boys / Men' },
   { value: 'FEMALE', label: 'Girls / Women' },
 ];
@@ -65,14 +64,20 @@ export default function OfficerNewFixtureEventPage() {
   const eligibleSports = sportOptions.filter((s) => s.registrationLevel === EXPECTED_REGISTRATION_LEVEL);
 
   const selectedSport = sportOptions.find((s) => s.sportId === sportId) ?? null;
-  const eventOptionsForSport = (selectedSport?.events ?? []).filter((e) => !e.gender || !gender || e.gender === gender);
+  const eventOptionsForSport = (selectedSport?.events ?? []).filter((e) => !e.gender || e.gender === gender);
+  const eventRequired = isPlayerEntrant && eventOptionsForSport.length > 0;
 
   const handleSportChange = (next: string) => {
     setSportId(next);
     setEventName('');
   };
 
-  const canSubmit = !!sportId && !!ageCategory && !!vidhanSabhaId && !createMutation.isPending;
+  const handleGenderChange = (next: string) => {
+    setGender(next);
+    setEventName('');
+  };
+
+  const canSubmit = !!sportId && !!ageCategory && !!gender && (!eventRequired || !!eventName) && !!vidhanSabhaId && !createMutation.isPending;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,7 +87,7 @@ export default function OfficerNewFixtureEventPage() {
       const res = await createMutation.mutateAsync({
         sportId,
         ageCategory,
-        gender: gender || undefined,
+        gender,
         vidhanSabhaId,
         entrantType,
         event: isPlayerEntrant ? eventName.trim() || undefined : undefined,
@@ -148,8 +153,9 @@ export default function OfficerNewFixtureEventPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Gender split</label>
-            <select className={selectClass} value={gender} onChange={(e) => setGender(e.target.value)}>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
+            <select className={selectClass} value={gender} onChange={(e) => handleGenderChange(e.target.value)}>
+              <option value="">Select gender</option>
               {GENDERS.map((g) => <option key={g.value} value={g.value}>{g.label}</option>)}
             </select>
           </div>
@@ -168,12 +174,12 @@ export default function OfficerNewFixtureEventPage() {
 
         {isPlayerEntrant && sportId && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Event / Discipline</label>
-            <select className={selectClass} value={eventName} onChange={(e) => setEventName(e.target.value)} disabled={!eventOptionsForSport.length}>
-              <option value="">{eventOptionsForSport.length ? 'All events in this sport' : 'No events configured for this sport'}</option>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Event / Discipline{eventRequired ? ' *' : ''}</label>
+            <select className={selectClass} value={eventName} onChange={(e) => setEventName(e.target.value)} disabled={!eventRequired}>
+              <option value="">{eventRequired ? 'Select event' : ''}</option>
               {eventOptionsForSport.map((ev) => <option key={ev.name} value={ev.name}>{ev.name}</option>)}
             </select>
-            <p className="text-xs text-gray-400 mt-1">Leave unselected to pool every event in this sport.</p>
+            {eventRequired && <p className="text-xs text-gray-400 mt-1">Only players registered for this event can be added.</p>}
           </div>
         )}
 

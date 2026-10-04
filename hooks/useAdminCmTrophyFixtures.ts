@@ -16,6 +16,23 @@ export function useFixtureEvents(filters: { level?: CmTrophyFixtureLevel; status
   });
 }
 
+export function useIsSuperAdmin() {
+  const { data } = useQuery({
+    queryKey: ['admin', 'me'],
+    queryFn: () => fetch('/api/admin/me').then((r) => (r.ok ? r.json() : null)),
+    staleTime: 5 * 60 * 1000,
+  });
+  return data?.admin?.role === 'SUPER_ADMIN';
+}
+
+export function useDeleteFixtureEvent() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => adminCmTrophyFixturesApi.remove(id),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'cmTrophyFixtures'] }),
+  });
+}
+
 export function useFixtureEvent(id: string) {
   return useQuery({
     queryKey: ['admin', 'cmTrophyFixtures', 'detail', id],

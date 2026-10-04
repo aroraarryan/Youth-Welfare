@@ -120,7 +120,7 @@ export interface CreateFixtureEventInput {
   level: CmTrophyFixtureLevel;
   sportId: string;
   ageCategory: string;
-  gender?: string;
+  gender: string;
   vidhanSabhaId?: string;
   sansadId?: string;
   entrantType?: CmTrophyFixtureEntrantType;
@@ -146,6 +146,9 @@ export const adminCmTrophyFixturesApi = {
 
   create: (data: CreateFixtureEventInput): Promise<{ success: boolean; data: FixtureEventSummary }> =>
     adminFetch('cm-trophy/fixtures', { method: 'POST', body: JSON.stringify(data) }),
+
+  remove: (id: string): Promise<{ success: boolean }> =>
+    adminFetch(`cm-trophy/fixtures/${id}`, { method: 'DELETE' }),
 
   addTeam: (eventId: string, entrantId: string): Promise<{ success: boolean; data: FixtureTeam }> =>
     adminFetch(`cm-trophy/fixtures/${eventId}/teams`, { method: 'POST', body: JSON.stringify({ entrantId }) }),

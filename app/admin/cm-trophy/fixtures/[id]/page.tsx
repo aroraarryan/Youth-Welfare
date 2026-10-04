@@ -2,6 +2,7 @@
 
 import { use, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   useFixtureEvent,
   useAddTeam,
@@ -14,6 +15,8 @@ import {
   usePatchMatch,
   useEntrantPool,
   useSearchRegistrations,
+  useDeleteFixtureEvent,
+  useIsSuperAdmin,
 } from '@/hooks/useAdminCmTrophyFixtures';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import PrintableFixture from '@/components/cm-trophy/PrintableFixture';
@@ -34,6 +37,9 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
   const { id } = use(params);
   const [tab, setTab] = useState<Tab>('Teams');
   const { data, isLoading, isError, error } = useFixtureEvent(id);
+  const router = useRouter();
+  const isSuperAdmin = useIsSuperAdmin();
+  const deleteMutation = useDeleteFixtureEvent();
 
   if (isLoading) {
     return (
@@ -69,6 +75,18 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
         <div className="flex items-center gap-2">
           <button onClick={() => window.print()} className="text-xs font-semibold px-3 py-1.5 rounded border border-gray-300 text-gray-700 hover:bg-gray-50">Print</button>
           <span className="text-xs font-semibold px-2 py-1 rounded bg-gray-100 text-gray-700">{ev.status}</span>
+          {isSuperAdmin && (
+            <button
+              disabled={deleteMutation.isPending}
+              onClick={() => {
+                if (!confirm(`Delete this ${ev.sportName} fixture permanently? Its ${ev.teams.length} entrants, venues and all matches/scores will be removed.`)) return;
+                deleteMutation.mutate(id, { onSuccess: () => router.push('/admin/cm-trophy/fixtures'), onError: (e) => alert((e as Error).message) });
+              }}
+              className="text-xs font-semibold px-3 py-1.5 rounded border border-red-300 text-red-600 hover:bg-red-50 disabled:opacity-50"
+            >
+              Delete
+            </button>
+          )}
         </div>
       </div>
 
@@ -115,7 +133,7 @@ function TeamsTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi
 
   const { data: playerPoolRes } = useEntrantPool(
     isPlayerEntrant
-      ? { level: event.level, entrantType: 'PLAYER', sportId: event.sportId, ageCategory: event.ageCategory, gender: event.gender ?? undefined, event: event.event ?? undefined }
+      ? { level: event.level, entrantType: 'PLAYER', vidhanSabhaId: event.vidhanSabhaId ?? undefined, sansadId: event.sansadId ?? undefined, sportId: event.sportId, ageCategory: event.ageCategory, gender: event.gender ?? undefined, event: event.event ?? undefined }
       : null
   );
 
