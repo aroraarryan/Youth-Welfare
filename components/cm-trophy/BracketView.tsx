@@ -1,8 +1,8 @@
 import { FixtureEventDetail, FixtureMatch, FixtureTeam, MATCH_STAGE_LABEL } from '@/lib/api/adminCmTrophyFixturesApi';
 
 const ROW = 44; // vertical space per entrant line
-const COL = 200; // width of one round column
-const LINE = 176; // length of an input line inside a column
+const COL = 280; // width of one round column
+const LINE = 250; // length of an input line inside a column
 const HEAD = 34; // header height
 
 interface Slot {
@@ -75,8 +75,9 @@ export default function BracketView({ event, onSelectMatch }: { event: FixtureEv
         <div className="absolute" style={{ top: HEAD, left: 0 }}>
           {/* bye lines: entrant skips Round I, line runs from column 0 to its first match */}
           {byes.map((b) => (
-            <div key={b.team.id} className="absolute border-b border-gray-500 truncate" style={{ left: 0, top: b.y - 18, width: b.toCol * COL + LINE, height: 18 }}>
-              {label(b.team, false)} <span className="ml-1 rounded bg-gray-100 px-1 text-[10px] text-gray-500 print:border print:border-gray-400">Bye</span>
+            <div key={b.team.id} className="absolute flex items-end gap-1 border-b border-gray-500" style={{ left: 0, top: b.y - 18, width: b.toCol * COL + LINE, height: 18 }}>
+              <span className="truncate" style={{ maxWidth: LINE - 40 }}>{label(b.team, false)}</span>
+              <span className="shrink-0 rounded bg-gray-100 px-1 text-[10px] text-gray-500 print:border print:border-gray-400">Bye</span>
             </div>
           ))}
 
@@ -84,7 +85,7 @@ export default function BracketView({ event, onSelectMatch }: { event: FixtureEv
             const x = col * COL;
             return (
               <div key={m.id}>
-                {[a, b].map((s, i) => (
+                {[a, b].filter((s) => !(s.seated && col > 0)).map((s, i) => (
                   <div
                     key={i}
                     className="absolute border-b border-gray-500 truncate"

@@ -397,7 +397,7 @@ function VenuesTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesAp
 // ─── Matches ────────────────────────────────────────────────────────────────
 function MatchesTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi').FixtureEventDetail }) {
   const [openMatchId, setOpenMatchId] = useState<string | null>(null);
-  const [view, setView] = useState<'bracket' | 'list'>('bracket');
+  const [view, setView] = useState<'bracket' | 'list'>('list');
 
   if (event.status === 'DRAFT' || event.status === 'DRAWN') {
     return <p className="text-sm text-gray-400">No matches yet — run the draw on the Draw tab first.</p>;
@@ -408,7 +408,7 @@ function MatchesTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesA
   return (
     <div className="space-y-6">
       <div className="inline-flex rounded-lg border border-gray-200 overflow-hidden text-xs font-semibold">
-        {(['bracket', 'list'] as const).map((v) => (
+        {(['list', 'bracket'] as const).map((v) => (
           <button key={v} onClick={() => setView(v)} className={`px-3 py-1.5 ${view === v ? 'bg-[#1e3a8a] text-white' : 'bg-white text-gray-600'}`}>
             {v === 'bracket' ? 'Bracket' : 'List'}
           </button>
