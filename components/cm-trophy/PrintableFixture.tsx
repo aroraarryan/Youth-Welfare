@@ -3,7 +3,7 @@ import { FixtureEventDetail, FixtureMatch, FIXTURE_LEVEL_LABEL, MATCH_STAGE_LABE
 
 // Print-only sheet (hidden on screen): entrants, matches by round, podium.
 // Triggered by window.print() from the fixture detail pages.
-export default function PrintableFixture({ event }: { event: FixtureEventDetail }) {
+export default function PrintableFixture({ event, view = 'list' }: { event: FixtureEventDetail; view?: 'bracket' | 'list' }) {
   const rounds = Array.from(new Set(event.matches.map((m) => m.round))).sort((a, b) => a - b);
   const venueName = (m: FixtureMatch) => {
     const v = event.venues.find((x) => x.id === m.venueId);
@@ -31,6 +31,8 @@ export default function PrintableFixture({ event }: { event: FixtureEventDetail 
         {event.entrantType === 'PLAYER' && ` · Individual player${event.event ? ` · ${event.event}` : ''}`} · {event.status}
       </p>
 
+      {view === 'list' && (
+        <>
       <h2 className="font-semibold mb-1">Entrants ({event.teams.length})</h2>
       <table className="w-full border-collapse mb-6">
         <thead><tr><th className={`${th} w-10`}>#</th><th className={th}>Entrant</th></tr></thead>
@@ -40,15 +42,17 @@ export default function PrintableFixture({ event }: { event: FixtureEventDetail 
           ))}
         </tbody>
       </table>
+        </>
+      )}
 
-      {event.matches.length > 0 && (
+      {view === 'bracket' && event.matches.length > 0 && (
         <div className="mb-6 break-inside-avoid">
           <h2 className="font-semibold mb-1">Bracket</h2>
           <BracketView event={event} />
         </div>
       )}
 
-      {rounds.map((r) => {
+      {view === 'list' && rounds.map((r) => {
         const ms = event.matches.filter((m) => m.round === r).sort((a, b) => a.seq - b.seq);
         return (
           <div key={r} className="mb-5 break-inside-avoid">

@@ -37,6 +37,7 @@ async function sha256Hex(input: string): Promise<string> {
 export default function FixtureEventDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const [tab, setTab] = useState<Tab>('Teams');
+  const [matchView, setMatchView] = useState<'bracket' | 'list'>('list'); // also decides what Print outputs
   const { data, isLoading, isError, error } = useFixtureEvent(id);
   const router = useRouter();
   const isSuperAdmin = useIsSuperAdmin();
@@ -58,7 +59,7 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
 
   return (
     <>
-    <PrintableFixture event={ev} />
+    <PrintableFixture event={ev} view={matchView} />
     <div className="p-6 print:hidden">
       <div className="mb-4 text-sm">
         <Link href="/admin/cm-trophy/fixtures" className="text-[#1e3a8a] font-semibold hover:underline">Fixtures</Link>
@@ -108,7 +109,7 @@ export default function FixtureEventDetailPage({ params }: { params: Promise<{ i
       {tab === 'Teams' && <TeamsTab event={ev} />}
       {tab === 'Draw' && <DrawTab event={ev} />}
       {tab === 'Venues' && <VenuesTab event={ev} />}
-      {tab === 'Matches' && <MatchesTab event={ev} />}
+      {tab === 'Matches' && <MatchesTab event={ev} view={matchView} setView={setMatchView} />}
       {tab === 'Standings' && <StandingsTab event={ev} />}
     </div>
     </>
@@ -413,9 +414,8 @@ function VenuesTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesAp
 }
 
 // ─── Matches ────────────────────────────────────────────────────────────────
-function MatchesTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi').FixtureEventDetail }) {
+function MatchesTab({ event, view, setView }: { event: import('@/lib/api/adminCmTrophyFixturesApi').FixtureEventDetail; view: 'bracket' | 'list'; setView: (v: 'bracket' | 'list') => void }) {
   const [openMatchId, setOpenMatchId] = useState<string | null>(null);
-  const [view, setView] = useState<'bracket' | 'list'>('list');
 
   if (event.status === 'DRAFT' || event.status === 'DRAWN') {
     return <p className="text-sm text-gray-400">No matches yet — run the draw on the Draw tab first.</p>;
