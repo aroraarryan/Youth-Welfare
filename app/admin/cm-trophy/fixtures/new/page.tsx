@@ -14,7 +14,6 @@ const ENTRANT_TYPES: { value: CmTrophyFixtureEntrantType; label: string }[] = [
 ];
 const AGE_CATEGORIES = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
 const GENDERS = [
-  { value: '', label: 'Not split by gender' },
   { value: 'MALE', label: 'Boys / Men' },
   { value: 'FEMALE', label: 'Girls / Women' },
 ];
@@ -35,7 +34,7 @@ export default function NewFixtureEventPage() {
   const [entrantType, setEntrantType] = useState<CmTrophyFixtureEntrantType>('PLACE');
   const [level, setLevel] = useState<CmTrophyFixtureLevel>('VIDHAN_SABHA');
   const [ageCategory, setAgeCategory] = useState('UNDER_19');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('');  // required; no default
   const [eventName, setEventName] = useState('');
   const [sportOptions, setSportOptions] = useState<CmTrophySportOption[]>([]);
   const [sportId, setSportId] = useState('');
@@ -66,15 +65,21 @@ export default function NewFixtureEventPage() {
   });
 
   const selectedSport = sportOptions.find((s) => s.sportId === sportId) ?? null;
-  const eventOptionsForSport = (selectedSport?.events ?? []).filter((e) => !e.gender || !gender || e.gender === gender);
+  const eventOptionsForSport = (selectedSport?.events ?? []).filter((e) => !e.gender || e.gender === gender);
+  const eventRequired = isPlayerEntrant && eventOptionsForSport.length > 0;
 
   const handleSportChange = (next: string) => {
     setSportId(next);
     setEventName('');
   };
 
+  const handleGenderChange = (next: string) => {
+    setGender(next);
+    setEventName('');
+  };
+
   const scopeSelected = level === 'VIDHAN_SABHA' ? !!vidhanSabhaId : level === 'SANSAD' ? !!sansadId : true;
-  const canSubmit = !!sportId && !!ageCategory && scopeSelected && !createMutation.isPending;
+  const canSubmit = !!sportId && !!ageCategory && !!gender && (!eventRequired || !!eventName) && scopeSelected && !createMutation.isPending;
 
   const handleLevelChange = (next: CmTrophyFixtureLevel) => {
     setLevel(next);
@@ -93,7 +98,7 @@ export default function NewFixtureEventPage() {
         level,
         sportId,
         ageCategory,
-        gender: gender || undefined,
+        gender,
         vidhanSabhaId: level === 'VIDHAN_SABHA' ? vidhanSabhaId : undefined,
         sansadId: level === 'SANSAD' ? sansadId : undefined,
         entrantType,
@@ -177,8 +182,9 @@ export default function NewFixtureEventPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Gender split</label>
-            <select className={selectClass} value={gender} onChange={(e) => setGender(e.target.value)}>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
+            <select className={selectClass} value={gender} onChange={(e) => handleGenderChange(e.target.value)}>
+              <option value="">Select gender</option>
               {GENDERS.map((g) => <option key={g.value} value={g.value}>{g.label}</option>)}
             </select>
           </div>
@@ -198,12 +204,12 @@ export default function NewFixtureEventPage() {
 
         {isPlayerEntrant && sportId && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Event / Discipline</label>
-            <select className={selectClass} value={eventName} onChange={(e) => setEventName(e.target.value)} disabled={!eventOptionsForSport.length}>
-              <option value="">{eventOptionsForSport.length ? 'All events in this sport' : 'No events configured for this sport'}</option>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Event / Discipline{eventRequired ? ' *' : ''}</label>
+            <select className={selectClass} value={eventName} onChange={(e) => setEventName(e.target.value)} disabled={!eventRequired}>
+              <option value="">{eventRequired ? 'Select event' : ''}</option>
               {eventOptionsForSport.map((ev) => <option key={ev.name} value={ev.name}>{ev.name}</option>)}
             </select>
-            <p className="text-xs text-gray-400 mt-1">Leave unselected to pool every event in this sport.</p>
+            {eventRequired && <p className="text-xs text-gray-400 mt-1">Only players registered for this event can be added.</p>}
           </div>
         )}
 
