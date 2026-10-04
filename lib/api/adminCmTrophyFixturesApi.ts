@@ -99,6 +99,8 @@ export interface FixtureMatch {
   status: CmTrophyFixtureMatchStatus;
   winnerId: string | null;
   winner: FixtureTeam | null;
+  nextMatchId: string | null;
+  nextMatchSlot: 'A' | 'B' | null;
   videoRef: string | null;
   venueId: string | null;
   fieldId: string | null;
