@@ -6,6 +6,8 @@ import { AttendanceRow, CmTrophyAttendanceListParams } from '@/lib/api/adminCmTr
 import { useAttendanceList, useMarkAttendance, useBulkMarkPresent } from '@/hooks/useAdminCmTrophy';
 import { CM_TROPHY_AGE_CATEGORY_LABELS, CM_TROPHY_REGISTRATION_LEVEL_LABELS, CmTrophyAgeCategory } from '@/lib/cmTrophyAgeCategory';
 import { CmTrophyRegistrationLevel } from '@/lib/api/registrations';
+import { adminCmTrophyApi } from '@/lib/api/adminCmTrophyApi';
+import { exportAttendanceXlsx } from '@/lib/exportAttendance';
 
 const AGE_CATEGORIES: CmTrophyAgeCategory[] = ['UNDER_14', 'UNDER_19', 'WOMENS_19_25', 'PARA_OPEN'];
 const REGISTRATION_LEVELS: CmTrophyRegistrationLevel[] = ['NYAY_PANCHAYAT', 'VIDHAN_SABHA', 'SANSAD', 'STATE'];
@@ -35,6 +37,8 @@ export default function CmTrophyAttendancePage() {
   const [registrationLevel, setRegistrationLevel] = useState<CmTrophyRegistrationLevel | ''>('');
   const [gender, setGender] = useState('');
   const [ageCategory, setAgeCategory] = useState<CmTrophyAgeCategory | ''>('');
+  const [status, setStatus] = useState<'present' | 'absent' | 'unmarked' | ''>('');
+  const [exporting, setExporting] = useState(false);
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [page, setPage] = useState(1);
@@ -61,6 +65,7 @@ export default function CmTrophyAttendancePage() {
     registrationLevel: registrationLevel || undefined,
     gender: (gender || undefined) as CmTrophyAttendanceListParams['gender'],
     ageCategory: ageCategory || undefined,
+    status: status || undefined,
     search: search || undefined,
     page,
     limit,
@@ -101,6 +106,20 @@ export default function CmTrophyAttendancePage() {
       if (next.has(id)) next.delete(id); else next.add(id);
       return next;
     });
+  };
+
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      await exportAttendanceXlsx(
+        (p) => adminCmTrophyApi.listAttendance({ ...filters, page: p, limit: 200 }),
+        status || 'all',
+      );
+    } catch (e) {
+      setWarning((e as Error).message || 'Export failed.');
+    } finally {
+      setExporting(false);
+    }
   };
 
   const handleSubmit = () => {
@@ -168,10 +187,25 @@ export default function CmTrophyAttendancePage() {
             {AGE_CATEGORIES.map((c) => <option key={c} value={c}>{CM_TROPHY_AGE_CATEGORY_LABELS[c]}</option>)}
           </select>
 
+          <select className={selectClass} value={status} onChange={(e) => { setStatus(e.target.value as typeof status); resetPage(); }}>
+            <option value="">All Attendance</option>
+            <option value="present">Present</option>
+            <option value="absent">Absent</option>
+            <option value="unmarked">Not Marked</option>
+          </select>
+
+          <button
+            onClick={handleExport}
+            disabled={exporting}
+            className="ml-auto border border-gray-300 bg-white text-gray-700 px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-gray-50 shadow-sm disabled:opacity-40"
+          >
+            {exporting ? 'Exporting…' : 'Export Excel'}
+          </button>
+
           <button
             onClick={() => setConfirming(true)}
             disabled={selected.size === 0}
-            className="ml-auto bg-[#1e3a8a] text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-[#1e2f6b] transition-colors shadow-sm disabled:opacity-40"
+            className="bg-[#1e3a8a] text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-[#1e2f6b] transition-colors shadow-sm disabled:opacity-40"
           >
             Submit Attendance {selected.size > 0 ? `(${selected.size})` : ''}
           </button>

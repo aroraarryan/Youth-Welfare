@@ -375,6 +375,7 @@ export interface CmTrophyAttendanceListParams {
   registrationLevel?: CmTrophyRegistrationLevel;
   gender?: Gender;
   ageCategory?: CmTrophyAgeCategory;
+  status?: 'present' | 'absent' | 'unmarked';
   search?: string;
   page?: number;
   limit?: number;
@@ -391,6 +392,7 @@ export interface AttendanceRow {
   sportName: string;
   registrationLevel: CmTrophyRegistrationLevel;
   selectedEvents: string[];
+  districtName: string | null;
   isPresent: boolean | null;
   markedAt: string | null;
 }
