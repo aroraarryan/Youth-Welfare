@@ -1,3 +1,4 @@
+import BracketView from './BracketView';
 import { FixtureEventDetail, FixtureMatch, FIXTURE_LEVEL_LABEL, MATCH_STAGE_LABEL } from '@/lib/api/adminCmTrophyFixturesApi';
 
 // Print-only sheet (hidden on screen): entrants, matches by round, podium.
@@ -39,6 +40,13 @@ export default function PrintableFixture({ event }: { event: FixtureEventDetail 
           ))}
         </tbody>
       </table>
+
+      {event.matches.length > 0 && (
+        <div className="mb-6 break-inside-avoid">
+          <h2 className="font-semibold mb-1">Bracket</h2>
+          <BracketView event={event} />
+        </div>
+      )}
 
       {rounds.map((r) => {
         const ms = event.matches.filter((m) => m.round === r).sort((a, b) => a.seq - b.seq);

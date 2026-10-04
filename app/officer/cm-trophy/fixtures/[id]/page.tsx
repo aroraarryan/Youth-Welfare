@@ -17,6 +17,7 @@ import {
 } from '@/hooks/useOfficerCmTrophyFixtures';
 import { useSansads, useVidhanSabhas, useNyayPanchayats } from '@/hooks/useCmTrophyGeo';
 import PrintableFixture from '@/components/cm-trophy/PrintableFixture';
+import BracketView from '@/components/cm-trophy/BracketView';
 import { FixtureMatch, FixtureTeam, MATCH_STAGE_LABEL, FIXTURE_LEVEL_LABEL } from '@/lib/api/adminCmTrophyFixturesApi';
 
 const selectClass = 'border border-gray-300 rounded-md px-3 py-2 text-sm bg-white w-full disabled:opacity-50 disabled:bg-gray-50';
@@ -396,6 +397,7 @@ function VenuesTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesAp
 // ─── Matches ────────────────────────────────────────────────────────────────
 function MatchesTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesApi').FixtureEventDetail }) {
   const [openMatchId, setOpenMatchId] = useState<string | null>(null);
+  const [view, setView] = useState<'bracket' | 'list'>('bracket');
 
   if (event.status === 'DRAFT' || event.status === 'DRAWN') {
     return <p className="text-sm text-gray-400">No matches yet — run the draw on the Draw tab first.</p>;
@@ -405,7 +407,17 @@ function MatchesTab({ event }: { event: import('@/lib/api/adminCmTrophyFixturesA
 
   return (
     <div className="space-y-6">
-      {rounds.map((round) => {
+      <div className="inline-flex rounded-lg border border-gray-200 overflow-hidden text-xs font-semibold">
+        {(['bracket', 'list'] as const).map((v) => (
+          <button key={v} onClick={() => setView(v)} className={`px-3 py-1.5 ${view === v ? 'bg-[#1e3a8a] text-white' : 'bg-white text-gray-600'}`}>
+            {v === 'bracket' ? 'Bracket' : 'List'}
+          </button>
+        ))}
+      </div>
+      {view === 'bracket' && (
+        <BracketView event={event} onSelectMatch={(id) => { setOpenMatchId(id); setView('list'); }} />
+      )}
+      {view === 'list' && rounds.map((round) => {
         const matches = event.matches.filter((m) => m.round === round).sort((a, b) => a.seq - b.seq);
         return (
           <div key={round}>
