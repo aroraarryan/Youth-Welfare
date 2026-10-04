@@ -22,7 +22,7 @@ export function useIsSuperAdmin() {
     queryFn: () => fetch('/api/admin/me').then((r) => (r.ok ? r.json() : null)),
     staleTime: 5 * 60 * 1000,
   });
-  return data?.admin?.role === 'SUPER_ADMIN';
+  return data?.admin?.username === 'superadmin'; // same gate as medals/applications
 }
 
 export function useDeleteFixtureEvent() {
